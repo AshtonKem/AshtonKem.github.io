@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | Ashton Kemerling]]></title>
+  <link href="http://AshtonKem.github.io/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2013-04-30T08:17:48-05:00</updated>
+  <id>http://AshtonKem.github.io/</id>
+  <author>
+    <name><![CDATA[Ashton Kemerling]]></name>
+    <email><![CDATA[ashtonkemerling@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Binding vs. Assignment ]]></title>
+    <link href="http://AshtonKem.github.io/blog/2013/04/30/binding-vs-assignment/"/>
+    <updated>2013-04-30T07:23:00-05:00</updated>
+    <id>http://AshtonKem.github.io/blog/2013/04/30/binding-vs-assignment</id>
+    <content type="html"><![CDATA[<p>A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.</p>
+
+<p>``` python Odd Functions
+funs = []
+for i in ["a" "b"]:</p>
+
+<pre><code>def internal_function():
+    return i
+funs.append(internal_function)
+</code></pre>
+
+<p>print funs<a href="">0</a>
+print funs<a href="">1</a>
+```</p>
+
+<p>At first glance, one would expect this to print "a" then "b". But much to my surprise (and my coworkers frustration), it was returning "b" both times.</p>
+
+<p>My first instinct was that Python was closing properly, but was messing up the namespacing. So I asked him to use lambdas instead, creating this:</p>
+
+<p>``` python Lambdas
+funs = []
+for i in ["a", "b"]:</p>
+
+<pre><code>funs.append(lambda : i)
+</code></pre>
+
+<p>print funs<a href="">0</a>
+print funs<a href="">1</a>
+```</p>
+
+<p>Same result! So by this point we know that its not namespacing that is causing the problems, as you can't accidentally assign two lambdas the same name. So I began to suspect that the use of "i" was the issue. Perhaps we're closing around i, which is a mutable variable, and Python can't anticipate that we want a copy instead of the actual reference. Since i is mutable, both closures are having what i means changed from underneath them after closure creation time. (Coincidentally, Python 2.7.3 keeps i around even after the loop is completed, which I think is odd).</p>
+
+<p>So the solution here would be to use a temporary variable. Any variable first created inside a loop should theoretically only have a lifespan of one iteration through the loop. So let's try the following:</p>
+
+<p>``` python Temporary Variables
+funs = []
+for i in ["a", "b"]:</p>
+
+<pre><code>temp = i
+funs.append(lambda : temp)
+</code></pre>
+
+<p>print funs<a href="">0</a>
+print funs<a href="">1</a>
+```</p>
+
+<p>Same result, again! So clearly python is mishandling variables by a large amount. So what's going on here? My fellow functional coworker was finally able to explain: the real problem here is that Python conflates binding and assignment. Binding is used to create a new variable <em>within the current context</em>, while assignment can only change the value of a given variable within the narrowest bound scope.</p>
+
+<p>Why is this an issue? Well, Python uses the same symbol "=", to specify binding and assignment, while most other languages use two syntactic rules. For example Go apparently uses ":=" to bind, and "=" to assign. Java uses type declarations to denote bindings, and Clojure/Haskell more or less only have bindings underneath. Unfortunately there's an upper limit to how intelligent an imperative compiler can get, especially in interpreted languages where the compiler must be fairly quick. So Python doesn't do the leg work to realize that temp is only used inside the loop, and binds it only once <em>outside the loop</em>. The side effect of this is that anyone who closes over any local variable inside the loop will be surprised when it is mutated by further iterations, and said variables will be left laying around <strong>after the loop is done</strong>.</p>
+
+<p>So how do we get out of this? One obvious option is to pick a language that understands the difference. Short of that, use a separate function to force Python's hand.</p>
+
+<p>``` python Ugly Fix
+def create_lambda(x):</p>
+
+<pre><code>return lambda : x
+</code></pre>
+
+<p>funs = []
+for i in ["a", "b"]:</p>
+
+<pre><code>funs.append(create_lambda(i))
+</code></pre>
+
+<p>funs<a href="">0</a>
+funs<a href="">1</a>
+```</p>
+
+<p>Which unfortunately is pretty ugly. Other languages will get you out of this bind though. Clojure has no concept of assigning variables, only binding. So the only way to create mutable state in Clojure is through successive binds, or via the special Software Transactional Memory functions, which are specially designed for concurrency.</p>
+
+<p>``` clojure Nice and Clean
+(def funs</p>
+
+<pre><code> (for [i ["a" "b"]]
+     (fn []
+         i)))
+</code></pre>
+
+<p>(println ((first funs)))
+(println ((second funs))
+```</p>
+
+<p>And according to my Go enthused coworker, this also works:</p>
+
+<p>``` go</p>
+
+<p>func main() {</p>
+
+<pre><code>for i:=0; i&lt;4; i++ {
+    tmp := i
+
+    funs[i] = func () int {
+        return tmp
+
+        }
+}
+fmt.Println(funs[0]())
+fmt.Println(funs[1]())
+fmt.Println(funs[2]())
+</code></pre>
+
+<p>}
+```</p>
+
+<p>If you are currently working on a Python project, or are a Python enthusiast, the only hope is to be careful, and hope that Python 3's compiler might be more intelligent.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Size Matters]]></title>
+    <link href="http://AshtonKem.github.io/blog/2013/04/23/size-matters/"/>
+    <updated>2013-04-23T21:54:00-05:00</updated>
+    <id>http://AshtonKem.github.io/blog/2013/04/23/size-matters</id>
+    <content type="html"><![CDATA[<p>About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:</p>
+
+<ul>
+<li>Functional</li>
+<li>Good community</li>
+<li>Growing acceptance</li>
+</ul>
+
+
+<p>This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM. But while trying out Scala I realized that I had missed a huge criteria: language size.</p>
+
+<p>There's only so much information that a programmer can keep in their mind at a time. Every programmer needs to split their internal memory in at least 4 different ways, if not more. There are language details to remember, library or API interfaces to recall, domain knowledge to retain, and possibly coordination or social issues to be concerned about. Once this internal memory is exceeded details end up being forgotten, and recalling forgotten information involves an expensive round trip to documentation, code, or the internet.</p>
+
+<p>There's no escaping the need to recall language details, at least until someone invents a syntax free programming languages; similarly it's near impossible to write an application of any size without relying on libraries or APIs. Domain knowledge is often expensive to acquire and beneficial to have. And social issues cannot be resolved by programming language choice alone.</p>
+
+<p>So the real question is, what are you going to skimp on? Are you going to pay the price of memory "cache misses"? Are you going to forget portions of your language, or certain libraries? Or are you going to segregate domain knowledge among the team so that everyone knows their bit only?</p>
+
+<p>The real world answer is probably a bit of each. But I contend that reduction of language features in memory is the least damaging of all the outcomes. I doubt it's controversial to say that domain knowledge should be shared widely among developers, and should be as much in memory as possible; programmers who understand what they're programming for tend to program better on average. Similarly it's hard to eliminate a decently written library: that functionality has to come from somewhere, and it'll either be an external library, an internal one, or duplicated code.</p>
+
+<p>But language reduction is an interesting idea. Programmers long ago got away with previous few features, yet managed some amazing things. Don't believe me? Consider how small the Scheme spec is compared to say, Java. It reduces the need for fancy and hard to learn IDEs, allows the programmer to get more done between looking up function or class definitions, and increases the speed with which an engineer can fully understand a piece of code.</p>
+
+<p>It was actually this feature that finally drove me away from Scala to Clojure. After a few hours of Scala work I was turned off by the size of the language, and got tired of saying "Why did it do that?" Clojure on the other hand is relatively small, only a dozen "special forms" which have to be hard coded into the language, and then a 3-4 dozen core functions. This means that I can both keep the entire language in memory, and retain a large amount of library and domain knowledge to get work done.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java Doesn’t Deserve Half the Shit we Give It]]></title>
+    <link href="http://AshtonKem.github.io/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it/"/>
+    <updated>2013-01-22T21:22:00-06:00</updated>
+    <id>http://AshtonKem.github.io/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it</id>
+    <content type="html"><![CDATA[<p>It’s very popular among programmers to diss Java on Reddit and Hacker News. But Java really isn’t that bad of a language, and I really think there are other reasons why people hate it.</p>
+
+<p>While we like to pretend that programming language choice is purely about practicality, there is a very large social aspect to it. Nobody wants to admit to liking Cobol or VBA, and being at the forefront of a new, exciting language can bring a type of prestige in programming circles. Thus to some degree, our choice of programming language reflects on how we wish to see ourselves. Haskell programmers think of themselves as highly skilled mathematicians, python users think of themselves as massively productive, etc.</p>
+
+<p>Personally, I think the easiest way to sum up the design decisions behind Java is thusly: You have a large number of average programmers, how can you get them to design large and complicated systems reliably. This is not the most exciting idea in the world, but it’s thoroughly realistic. Your average programmer is, well, average. While this may be reason enough to not bother with Java in your hobby projects, I don’t really see this as a reason to heap scorn upon it. It may not be exciting, but Java really isn’t that bad.</p>
+]]></content>
+  </entry>
+  
+</feed>

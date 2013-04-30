@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress - Ashton Kemerling</title>
+  <meta name="author" content="Ashton Kemerling">
+
+  
+  <meta name="description" content="I&#8217;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://AshtonKem.github.io/blog/2013/04/22/octopress">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Ashton Kemerling" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32325955-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1>Ashton Kemerling</h1>
+  
+    <h2><a href="/">AK</a></h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation">
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:AshtonKem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T22:16:00-05:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&#8217;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.</p>
+
+<p>Wordpress is fine if you are either a big PHP afficianado, or are afraid of web programming in general. It&#8217;s quite easy to install themes and plugins without any knowledge of what this means. However, this only is true if you&#8217;re self-hosting Wordpress.org (the project) and not using Wordpress.com (the commercial website using Wordpress.org). On Wordpress.org you&#8217;re stuck using a limited number of (mostly for pay) themes and plugins, and are restricted from inserting HTML, JS, or CSS into your website.</p>
+
+<p>So if you want Google Analytics, you&#8217;ll need to use a third party CDN who can inject the Google Analytics JS into the DOM. No thanks. If you want any social networking integration, you better hope that Wordpress.com supports it (sorry, app.net users!). And if you want pictures or other media, you&#8217;ll have to manually control the links to a third party system or hope that you don&#8217;t exceed the cheap data storage tier on wordpress.com.</p>
+
+<p>So what&#8217;s so great about Octopress?</p>
+
+<ol>
+<li>Free or cheap hosting wherever.</li>
+<li>Easy dev preview.</li>
+<li>Version controlling.</li>
+</ol>
+
+
+<p>Octopress uses Jekyll, which makes it really easy to separate content from presentation, and produces purely static webpages that can be tossed onto any webhost. It also has great integration for thid party systems, and adding your own is only a hop, skip, and a bit of JS away. Local development is super straightforward with the <code>rake generate</code> and <code>rake preview</code> commands, which produce static HTML and a testing webserver, respectively. And everything is stored in Git, so upgrading is only a matter of merging (!), and you can host on Github by pushing to the correct repo  (or use <code>rake deploy</code>). And since your side is code, you don&#8217;t have to count on flimsy undo support, merely revert commits as needed to go back in history.</p>
+
+<p>So far the only hiccup is moving all of the comments over from Worpress to Disqus. All of the docs on this I&#8217;ve seen are out of date, I&#8217;ll report if I get this working.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="/about" title="About the author (Ashton Kemerling)" rel="author">Ashton Kemerling</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T22:16:00-05:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/website/'>website</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://AshtonKem.github.io/blog/2013/04/22/octopress/" data-via="ashtonkemerling" data-counturl="http://AshtonKem.github.io/blog/2013/04/22/octopress/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it/" title="Previous Post: Java Doesn’t Deserve Half the Shit we Give It">&laquo; Java Doesn’t Deserve Half the Shit we Give It</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/23/size-matters/" title="next Post: Size Matters">Size Matters &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ashton Kemerling -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ashtonkemerling';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://AshtonKem.github.io/blog/2013/04/22/octopress/';
+        var disqus_url = 'http://AshtonKem.github.io/blog/2013/04/22/octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

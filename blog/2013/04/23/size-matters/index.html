@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Size Matters - Ashton Kemerling</title>
+  <meta name="author" content="Ashton Kemerling">
+
+  
+  <meta name="description" content="About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://AshtonKem.github.io/blog/2013/04/23/size-matters">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Ashton Kemerling" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32325955-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1>Ashton Kemerling</h1>
+  
+    <h2><a href="/">AK</a></h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation">
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:AshtonKem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Size Matters</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-23T21:54:00-05:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:</p>
+
+<ul>
+<li>Functional</li>
+<li>Good community</li>
+<li>Growing acceptance</li>
+</ul>
+
+
+<p>This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM. But while trying out Scala I realized that I had missed a huge criteria: language size.</p>
+
+<p>There&#8217;s only so much information that a programmer can keep in their mind at a time. Every programmer needs to split their internal memory in at least 4 different ways, if not more. There are language details to remember, library or API interfaces to recall, domain knowledge to retain, and possibly coordination or social issues to be concerned about. Once this internal memory is exceeded details end up being forgotten, and recalling forgotten information involves an expensive round trip to documentation, code, or the internet.</p>
+
+<p>There&#8217;s no escaping the need to recall language details, at least until someone invents a syntax free programming languages; similarly it&#8217;s near impossible to write an application of any size without relying on libraries or APIs. Domain knowledge is often expensive to acquire and beneficial to have. And social issues cannot be resolved by programming language choice alone.</p>
+
+<p>So the real question is, what are you going to skimp on? Are you going to pay the price of memory &#8220;cache misses&#8221;? Are you going to forget portions of your language, or certain libraries? Or are you going to segregate domain knowledge among the team so that everyone knows their bit only?</p>
+
+<p>The real world answer is probably a bit of each. But I contend that reduction of language features in memory is the least damaging of all the outcomes. I doubt it&#8217;s controversial to say that domain knowledge should be shared widely among developers, and should be as much in memory as possible; programmers who understand what they&#8217;re programming for tend to program better on average. Similarly it&#8217;s hard to eliminate a decently written library: that functionality has to come from somewhere, and it&#8217;ll either be an external library, an internal one, or duplicated code.</p>
+
+<p>But language reduction is an interesting idea. Programmers long ago got away with previous few features, yet managed some amazing things. Don&#8217;t believe me? Consider how small the Scheme spec is compared to say, Java. It reduces the need for fancy and hard to learn IDEs, allows the programmer to get more done between looking up function or class definitions, and increases the speed with which an engineer can fully understand a piece of code.</p>
+
+<p>It was actually this feature that finally drove me away from Scala to Clojure. After a few hours of Scala work I was turned off by the size of the language, and got tired of saying &#8220;Why did it do that?&#8221; Clojure on the other hand is relatively small, only a dozen &#8220;special forms&#8221; which have to be hard coded into the language, and then a 3-4 dozen core functions. This means that I can both keep the entire language in memory, and retain a large amount of library and domain knowledge to get work done.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="/about" title="About the author (Ashton Kemerling)" rel="author">Ashton Kemerling</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-23T21:54:00-05:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/languages/'>languages</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://AshtonKem.github.io/blog/2013/04/23/size-matters/" data-via="ashtonkemerling" data-counturl="http://AshtonKem.github.io/blog/2013/04/23/size-matters/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/22/octopress/" title="Previous Post: Octopress">&laquo; Octopress</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/30/binding-vs-assignment/" title="next Post: Binding vs. Assignment ">Binding vs. Assignment  &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ashton Kemerling -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ashtonkemerling';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://AshtonKem.github.io/blog/2013/04/23/size-matters/';
+        var disqus_url = 'http://AshtonKem.github.io/blog/2013/04/23/size-matters/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
