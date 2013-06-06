@@ -9,7 +9,7 @@
   <meta name="author" content="Ashton Kemerling">
 
   
-  <meta name="description" content="There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&# &hellip;">
+  <meta name="description" content="In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/05/fast-cheap-good/">Fast Cheap Good</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-05T20:24:00-05:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.</p>
+
+<p>While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive. These differences come from the quality and number (thus cost) of the managers and engineers, the choice of methodologies, scope of features, and internal organizational setups.</p>
+
+<p>What is different is the fact that software engineers aren&#8217;t limited by physics the way that our mechanical brethren are. With few exceptions for high performance computing, the limitation of most software projects is the imagination and effort of its engineers, not hard limits in manufacturing technologies or physics. Combine this with a fad-heavy market for programming methods (scrum! extreme! agile! pair!), and it can be very tempting to assume that we can find the perfect balance with the correct management processes and the right methodology.</p>
+
+<p>This is false, of course. Management and methodology is about dealing with the communication overhead when enough people are working on an project. The pipe dream of management and methodology is for a group of N producers to produce N times more than one person alone. This is of course rubbish, as the <em>Mythical Man Month</em> demonstrated handily, it&#8217;s simply impossible to manage or process your way to good, cheap, and fast.</p>
+
+<p>So what&#8217;s the point of it all then? Why don&#8217;t we just go back to waterfall? Because the point of agile, scrum, pair programming and friends is <strong>not</strong> to get us all the way to good, cheap, and fast. The point is to go from choosing one of three, to choosing two of three. A poorly managed, low discipline team can only choose one of good, cheap, and fast; and this is of course worthless. Cheap software that&#8217;s late will probably still run out of VC and be beaten by the competition. Bad and cheap software will struggle to take over the market, and software that&#8217;s both bad and late probably shouldn&#8217;t be written. However a well managed, well disciplined team can survey the market, measure the competition, and <em>knowingly</em> choose what compromises they wish to make in speed, quality, and cost. Poorly managed teams blunder into one of the choices, usually cheap and bad, and end up having very little control over their own fate.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -624,52 +668,6 @@
 <p>What do I miss from Vim though? While I’m not sold on modality (it’s another thing to track), Vim’s key combinations are truly superior to Emacs’ offering, especially when it comes to repeating and chaining actions. Also, while Vim’s shells are less intuitive than Emacs’, they tend to survive heavy program output better (30+ megs of terminal output to the shell tends to overload Emacs’ poor head). But the most important thing is that I learned what I value most in an editor, so I  will know in the future whether or not a new editor will be right for me.</p>
 
 <p>Now that I look back, I see similar Emacs vs. Vim moments in the past few years. One of the more recent moments was retrying Python, which I had written off in my early college years due to a bad experience. In retrying Python, I discovered that it had a few things that I valued highly in a language, and ended up leaving Ruby for it. And I’d never have made the switch if I hadn’t tried out something I didn’t like.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/01/hands-and-feet/">Hands and Feet</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-01T21:16:00-06:00" pubdate data-updated="true">Dec 1<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When I was a teenager I worked at a large amusement park in the games department, which I guess technically means I was a carnie. One of the more interesting games I worked at was the rope ladder; in order to win the game contestants had to climb up a rope ladder set at a 45 degree angle and attached to swivel points at the bottom. Unsurprisingly I learned to climb it easily (free tries and boredom does wonders for learning), but I witnessed very few winners.</p>
-
-<p>One of the more important lessons I learned was about how to not think about specific tasks. In order to climb the ladder, you need to move opposite limbs: step forward with your right hand and left foot at the same time, etc. This spreads your weight out, and ensures that any movement you make is relatively counter-balanced, reducing the maximum amount you’ll find yourself unbalanced at a given moment. What was particularly interesting to me was the transition from not-making it, to making it. When I first started, I had to concentrate on my hands and feet, and fell constantly. Only once I learned to move my hands and feet without conscious thought, and thus free up my mind to worry about my balance, did I successfully climb the ladder.</p>
-
-<p>This has fairly important implications to my daily work: namely that I cannot concentrate on doing good engineering work without making everything else a subconscious action. Every single non-work related activity breaks concentration for a short period of time, and potentially might take me out of the elusive “zone”. I’ve discovered that If I’m concentrating on your editor, I’m not going to code effectively (if at all). Therefore, It’s absolutely important that every single editor and environment change that you make is judged by balancing how much time/energy it takes to learn and use against its effect. The most powerful Git extension in the world for your editor will do you no good if it takes 2 minutes to commit each time: it would take less time and mindshare to simply type or alias it out on the shell.</p>
-
-<p>For example I use the <a href="http://philjackson.github.com/magit/">Magit</a> extension for Emacs to avoid having to go to a terminal to use git; the gains for moderately complicated tasks such as stash manipulation, reverting files, and partially staging a file are truly tremendous. Similarly I use a pylint &amp; nosetests extension for Emacs to avoid having to remember the (quite long) commands it takes to run each command correctly. This also has the tremendous advantage of not linting or testing code that’s outside of my purview, thus running faster and cluttering my mind less with irrelevant results.</p>
-
-<p>The other important take away is to not overdue it. The point of any given addition to your editing environment is to improve the quality and quantity of your engineering output. So if your editor bothers you every 5 minutes with CI notifications that aren’t related to any of your commits, you aren’t really gaining anything. This is why I ended up turning off the Pyflakes/Flymake extension to Emacs: it improved my coding a bit at the time (although most of the time it highlighted code that I hadn’t finished typing yet), but the additional .flymake files it left laying around tripled the amount of time it took for me to work with Git. It simply wasn’t worth the trouble in the long run.</p>
-
-<p>The easiest way to tell whether or not something is worth it is to read the manual and give it a try. Some tools take a while to learn, like Magit, and others only take some time in the setup, like Flymake. Once you’ve exited the learning stage, you should think heavily about whether or not you’re concentrating on the tool instead of your work, and whether or not this has affected the quality or quantity of your output. Remember, there’s no shame in uninstalling a tool if it really doesn’t make your life easier.</p>
 </div>
   
   
