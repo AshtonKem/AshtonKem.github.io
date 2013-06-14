@@ -9,7 +9,7 @@
   <meta name="author" content="Ashton Kemerling">
 
   
-  <meta name="description" content="In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, &hellip;">
+  <meta name="description" content="Syntactic sugar is any feature in a programming language that aids readability without adding any features to the core language. A classic example &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,84 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/13/syntactic-diabetes/">Syntactic Diabetes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T19:53:00-05:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Syntactic sugar is any feature in a programming language that aids readability without adding any features to the core language. A classic example from the Lisp languages is if vs. cond; both are capable of expressing the exact same logic, but cond is much easier to read when a large number of predicates must be checked.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">if </span><span class="nv">cond-a</span>
+</span><span class='line'>    <span class="mi">1</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="nv">cond-b</span>
+</span><span class='line'>        <span class="mi">2</span>
+</span><span class='line'>        <span class="p">(</span><span class="k">if </span><span class="nv">cond-c</span>
+</span><span class='line'>            <span class="mi">3</span>
+</span><span class='line'>            <span class="mi">4</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond</span>
+</span><span class='line'>    <span class="nv">cond-a</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="nv">cond-b</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="nv">cond-c</span> <span class="mi">3</span>
+</span><span class='line'>    <span class="nv">true</span> <span class="mi">4</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even without knowing Clojure, it&#8217;s pretty obvious what cond does: it helps flatten out deeply nested if structures into a more readable format. But syntactic sugar can hurt more than it helps when misused. Ideally they provide shortcuts to commonly used functionality, thus eliminating boilerplate. But too much sugar can be much more harmful than too little, as it can obscure intention and provide too many ways to perform the most simple tasks.</p>
+
+<p>Syntactic Diabetes is when a language or library goes too far with the syntactic sugar. It&#8217;s most easily identified when programmers ask &#8220;Why did it do that?&#8221;, or have to constantly ask each other and Google what a specific trick does. Teams suffering from syntactic sugar have a hard time porting code from one developer to the next, since each will do even the most trivial of tasks differently, and will struggle to unwind intention from shortcut when changes need to be made.</p>
+
+<p>In Python a lot of operators and system wide methods are just sugar for <em>special</em> method calls. There are quite a few of these methods, like __call__, and __getattr__. These special methods usually underlie some syntax or global method, such as Foo(a,b,c) is just a shortcut for Foo.__call__(a,b,c). __getattr__ affects attribute selection; with an object Foo, Foo.a is just sugar for getattr(Foo, &#8220;a&#8221;),  which in turn is calling __getattribute__, and __getattr__ if __getattribute__ didn&#8217;t find anything. Since these are just regular object methods, it&#8217;s possible to provide your own implementation for them, just like you can do with __init__.</p>
+
+<p>This is very convenient if you need to add attributes to Foo programmatically (just implement __getattr__), or if you wish to override method attribute determination overall (implement __getattribute__). But it can make it fairly complicated to figure out if a is an actual member of Foo, or if someone just completely overrode either of the special methods.</p>
+
+<p>The list of special Python methods goes on and on, each the underlying method for some sort of syntactic sugar. Taken individually, none of them are a bad idea. __getattr__ can help prevent an AttributeError from being raised when you want functions to act like attributes. __eq__ allows for you to provide an object specific notion of equality, and __add__ is for objects where addition makes sense. Together these don&#8217;t automatically cause problems, but it does make it slightly easier to obscure the actual path of execution and cause a big sugary mess.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -622,52 +700,6 @@
 <p>The more astute among you will recognize this as Pascal’s wager (which is also a form of the more general Prisoners Dilemna). Personally Pascal’s wager has never swayed my belief, as I’ve found reasons to disagree with its setup (the wager only works if you assume free will, and a vengeful Abrahamic God. If you disagree with this portrayal of a higher being, Pascal’s wager doesn’t work out the same).</p>
 
 <p>So next time you find yourself thinking about your worldview, try using usefulness as another yardstick to compare your beliefs against.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/10/learn-what-you-dont-like/">Learn What You Don&#8217;t Like</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-10T21:19:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There’s really nothing worse than someone who has lived their life surrounded by people who agree with them fully. People who live this way have confidence that precedes their knowledge, and will treat contradictory knowledge as an attack on their in-group and world view.</p>
-
-<p>While the above mentioned effect is generally most common in religion and politics, it crops up sometimes in engineering in the so called “holy wars”. Linux vs. Mac vs. Windows, Emacs vs. Vim, etc. The more similar the items in question, the more intense the debate.</p>
-
-<p>This is why I think it’s pretty important to try out technologies that you’d formally written off, and re-evaluate your decisions. I’ve been an Emacs user for about 5 years now, and I’d written off learning Vim for anything other than emergency config-editing on a remote server. But at the behest of my colleagues, I tried Vim for a few weeks recently, and I’ve come to a surprising conclusion: I don’t like Vim. But rather than disliking Vim because I’d already invested in Emacs, I’ve learned exactly what I need first and foremost in an editor, and an understanding of the compromises I’m making in order to use Emacs. Basically it toned me down from being a mild Emacs zealot to an Emacs user.</p>
-
-<p>What exactly made me go back? First and foremost, I strongly prefer the way that Emacs uses buffers. The fact that I don’t have to worry about closing a buffer closing Emacs, and the fact that I can purposefully leave buffers unsaved is nice. I also like having multiple shells open to run various programs needed for development purposes, and I found the Vim solution, ConqueTerm, to be insufficient for my needs.</p>
-
-<p>What do I miss from Vim though? While I’m not sold on modality (it’s another thing to track), Vim’s key combinations are truly superior to Emacs’ offering, especially when it comes to repeating and chaining actions. Also, while Vim’s shells are less intuitive than Emacs’, they tend to survive heavy program output better (30+ megs of terminal output to the shell tends to overload Emacs’ poor head). But the most important thing is that I learned what I value most in an editor, so I  will know in the future whether or not a new editor will be right for me.</p>
-
-<p>Now that I look back, I see similar Emacs vs. Vim moments in the past few years. One of the more recent moments was retrying Python, which I had written off in my early college years due to a bad experience. In retrying Python, I discovered that it had a few things that I valued highly in a language, and ended up leaving Ruby for it. And I’d never have made the switch if I hadn’t tried out something I didn’t like.</p>
 </div>
   
   

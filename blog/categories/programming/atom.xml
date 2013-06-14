@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | Ashton Kemerling]]></title>
   <link href="http://AshtonKem.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://AshtonKem.github.io/"/>
-  <updated>2013-06-05T20:47:01-05:00</updated>
+  <updated>2013-06-13T21:52:30-05:00</updated>
   <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Syntactic Diabetes]]></title>
+    <link href="http://AshtonKem.github.io/blog/2013/06/13/syntactic-diabetes/"/>
+    <updated>2013-06-13T19:53:00-05:00</updated>
+    <id>http://AshtonKem.github.io/blog/2013/06/13/syntactic-diabetes</id>
+    <content type="html"><![CDATA[<p>Syntactic sugar is any feature in a programming language that aids readability without adding any features to the core language. A classic example from the Lisp languages is if vs. cond; both are capable of expressing the exact same logic, but cond is much easier to read when a large number of predicates must be checked.</p>
+
+<p>```clojure
+(if cond-a</p>
+
+<pre><code>1
+(if cond-b
+    2
+    (if cond-c
+        3
+        4)))
+</code></pre>
+
+<p>```</p>
+
+<p>vs.</p>
+
+<p>```clojure
+(cond</p>
+
+<pre><code>cond-a 1
+cond-b 2
+cond-c 3
+true 4)
+</code></pre>
+
+<p>```</p>
+
+<p>Even without knowing Clojure, it's pretty obvious what cond does: it helps flatten out deeply nested if structures into a more readable format. But syntactic sugar can hurt more than it helps when misused. Ideally they provide shortcuts to commonly used functionality, thus eliminating boilerplate. But too much sugar can be much more harmful than too little, as it can obscure intention and provide too many ways to perform the most simple tasks.</p>
+
+<p>Syntactic Diabetes is when a language or library goes too far with the syntactic sugar. It's most easily identified when programmers ask "Why did it do that?", or have to constantly ask each other and Google what a specific trick does. Teams suffering from syntactic sugar have a hard time porting code from one developer to the next, since each will do even the most trivial of tasks differently, and will struggle to unwind intention from shortcut when changes need to be made.</p>
+
+<p>In Python a lot of operators and system wide methods are just sugar for <em>special</em> method calls. There are quite a few of these methods, like __call__, and __getattr__. These special methods usually underlie some syntax or global method, such as Foo(a,b,c) is just a shortcut for Foo.__call__(a,b,c). __getattr__ affects attribute selection; with an object Foo, Foo.a is just sugar for getattr(Foo, "a"),  which in turn is calling __getattribute__, and __getattr__ if __getattribute__ didn't find anything. Since these are just regular object methods, it's possible to provide your own implementation for them, just like you can do with __init__.</p>
+
+<p>This is very convenient if you need to add attributes to Foo programmatically (just implement __getattr__), or if you wish to override method attribute determination overall (implement __getattribute__). But it can make it fairly complicated to figure out if a is an actual member of Foo, or if someone just completely overrode either of the special methods.</p>
+
+<p>The list of special Python methods goes on and on, each the underlying method for some sort of syntactic sugar. Taken individually, none of them are a bad idea. __getattr__ can help prevent an AttributeError from being raised when you want functions to act like attributes. __eq__ allows for you to provide an object specific notion of equality, and __add__ is for objects where addition makes sense. Together these don't automatically cause problems, but it does make it slightly easier to obscure the actual path of execution and cause a big sugary mess.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fast Cheap Good]]></title>
@@ -185,19 +230,6 @@ fmt.Println(funs[2]())
 <p>But language reduction is an interesting idea. Programmers long ago got away with previous few features, yet managed some amazing things. Don't believe me? Consider how small the Scheme spec is compared to say, Java. It reduces the need for fancy and hard to learn IDEs, allows the programmer to get more done between looking up function or class definitions, and increases the speed with which an engineer can fully understand a piece of code.</p>
 
 <p>It was actually this feature that finally drove me away from Scala to Clojure. After a few hours of Scala work I was turned off by the size of the language, and got tired of saying "Why did it do that?" Clojure on the other hand is relatively small, only a dozen "special forms" which have to be hard coded into the language, and then a 3-4 dozen core functions. This means that I can both keep the entire language in memory, and retain a large amount of library and domain knowledge to get work done.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java Doesn’t Deserve Half the Shit we Give It]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it/"/>
-    <updated>2013-01-22T21:22:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it</id>
-    <content type="html"><![CDATA[<p>It’s very popular among programmers to diss Java on Reddit and Hacker News. But Java really isn’t that bad of a language, and I really think there are other reasons why people hate it.</p>
-
-<p>While we like to pretend that programming language choice is purely about practicality, there is a very large social aspect to it. Nobody wants to admit to liking Cobol or VBA, and being at the forefront of a new, exciting language can bring a type of prestige in programming circles. Thus to some degree, our choice of programming language reflects on how we wish to see ourselves. Haskell programmers think of themselves as highly skilled mathematicians, python users think of themselves as massively productive, etc.</p>
-
-<p>Personally, I think the easiest way to sum up the design decisions behind Java is thusly: You have a large number of average programmers, how can you get them to design large and complicated systems reliably. This is not the most exciting idea in the world, but it’s thoroughly realistic. Your average programmer is, well, average. While this may be reason enough to not bother with Java in your hobby projects, I don’t really see this as a reason to heap scorn upon it. It may not be exciting, but Java really isn’t that bad.</p>
 ]]></content>
   </entry>
   

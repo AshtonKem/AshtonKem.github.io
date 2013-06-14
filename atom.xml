@@ -4,7 +4,7 @@
   <title><![CDATA[Ashton Kemerling]]></title>
   <link href="http://AshtonKem.github.io/atom.xml" rel="self"/>
   <link href="http://AshtonKem.github.io/"/>
-  <updated>2013-06-05T20:47:01-05:00</updated>
+  <updated>2013-06-13T21:52:30-05:00</updated>
   <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Syntactic Diabetes]]></title>
+    <link href="http://AshtonKem.github.io/blog/2013/06/13/syntactic-diabetes/"/>
+    <updated>2013-06-13T19:53:00-05:00</updated>
+    <id>http://AshtonKem.github.io/blog/2013/06/13/syntactic-diabetes</id>
+    <content type="html"><![CDATA[<p>Syntactic sugar is any feature in a programming language that aids readability without adding any features to the core language. A classic example from the Lisp languages is if vs. cond; both are capable of expressing the exact same logic, but cond is much easier to read when a large number of predicates must be checked.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">if </span><span class="nv">cond-a</span>
+</span><span class='line'>    <span class="mi">1</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="nv">cond-b</span>
+</span><span class='line'>        <span class="mi">2</span>
+</span><span class='line'>        <span class="p">(</span><span class="k">if </span><span class="nv">cond-c</span>
+</span><span class='line'>            <span class="mi">3</span>
+</span><span class='line'>            <span class="mi">4</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond</span>
+</span><span class='line'>    <span class="nv">cond-a</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="nv">cond-b</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="nv">cond-c</span> <span class="mi">3</span>
+</span><span class='line'>    <span class="nv">true</span> <span class="mi">4</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even without knowing Clojure, it&#8217;s pretty obvious what cond does: it helps flatten out deeply nested if structures into a more readable format. But syntactic sugar can hurt more than it helps when misused. Ideally they provide shortcuts to commonly used functionality, thus eliminating boilerplate. But too much sugar can be much more harmful than too little, as it can obscure intention and provide too many ways to perform the most simple tasks.</p>
+
+<p>Syntactic Diabetes is when a language or library goes too far with the syntactic sugar. It&#8217;s most easily identified when programmers ask &#8220;Why did it do that?&#8221;, or have to constantly ask each other and Google what a specific trick does. Teams suffering from syntactic sugar have a hard time porting code from one developer to the next, since each will do even the most trivial of tasks differently, and will struggle to unwind intention from shortcut when changes need to be made.</p>
+
+<p>In Python a lot of operators and system wide methods are just sugar for <em>special</em> method calls. There are quite a few of these methods, like __call__, and __getattr__. These special methods usually underlie some syntax or global method, such as Foo(a,b,c) is just a shortcut for Foo.__call__(a,b,c). __getattr__ affects attribute selection; with an object Foo, Foo.a is just sugar for getattr(Foo, &#8220;a&#8221;),  which in turn is calling __getattribute__, and __getattr__ if __getattribute__ didn&#8217;t find anything. Since these are just regular object methods, it&#8217;s possible to provide your own implementation for them, just like you can do with __init__.</p>
+
+<p>This is very convenient if you need to add attributes to Foo programmatically (just implement __getattr__), or if you wish to override method attribute determination overall (implement __getattribute__). But it can make it fairly complicated to figure out if a is an actual member of Foo, or if someone just completely overrode either of the special methods.</p>
+
+<p>The list of special Python methods goes on and on, each the underlying method for some sort of syntactic sugar. Taken individually, none of them are a bad idea. __getattr__ can help prevent an AttributeError from being raised when you want functions to act like attributes. __eq__ allows for you to provide an object specific notion of equality, and __add__ is for objects where addition makes sense. Together these don&#8217;t automatically cause problems, but it does make it slightly easier to obscure the actual path of execution and cause a big sugary mess.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fast Cheap Good]]></title>
