@@ -25,7 +25,7 @@ functional programming, and I'm really excited to try it out.
 
 On the side I work on a few open source projects, including
 [Butler](https://github.com/AshtonKem/Butler), my Emacs plugin for
-Jenkins and friends. This project was started after a short attempt at
+Jenkins and friends. This project was started after a short stint
 using Eclipse, which made me realize how much I needed CI information
 brought directly to me in my editor. Butler works by using Jenkins JSON
 API to check on the status of jobs, view progress, and trigger new ones.
