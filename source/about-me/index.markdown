@@ -34,7 +34,7 @@ food pantry in Ruby on Rails.
 
 Outside of programming I'm a bicyclist and amateur photographer. More
 uniquely (at least for a programmer) I'm a big fan of anything
-historical; I can make my own chainmaille (yes, the ancient armor), and
+historical; I can make my own chainmaille, both armor and jewelry, and
 am currently taking classes in midieval swordsmanship. I also really
 enjoy hiking, which unfortunately doesn't work out so well for me in
 Illinois.
