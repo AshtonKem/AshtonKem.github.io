@@ -29,6 +29,8 @@ Jenkins and friends. This project was started after a short attempt at
 using Eclipse, which made me realize how much I needed CI information
 brought directly to me in my editor. Butler works by using Jenkins JSON
 API to check on the status of jobs, view progress, and trigger new ones.
+I'm also currently rewriting the client management software for the local
+food pantry in Ruby on Rails.
 
 Outside of programming I'm a bicyclist and amateur photographer. More
 uniquely (at least for a programmer) I'm a big fan of anything
