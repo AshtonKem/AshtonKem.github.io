@@ -12,9 +12,9 @@ Illinois. I currently work for Narrative Science, a AI based startup
 specializing in natural language generation. Basically we take data in,
 analyze it, and turn it into English. I'm part of our data team, which
 means that it's my job to ingest, clean, and analyze any data that we
-need. My biggest project is managing the backend and frontend for the
-[Quill for Google Analytics](http://quillga.narrativescience.com)
-project, which generates a narrative for users based on their websites
+need. My biggest project is managing the backend and frontend for
+[Quill for Google Analytics](http://quillga.narrativescience.com),
+which generates a narrative for users based on their websites
 Google Analytics data.
 
 While I currently work in Python, I'm really a functional programmer at
