@@ -15,7 +15,9 @@ means that it's my job to ingest, clean, and analyze any data that we
 need. My biggest project is managing the backend and frontend for
 [Quill for Google Analytics](http://quillga.narrativescience.com),
 which generates a narrative for users based on their websites
-Google Analytics data.
+Google Analytics data. It's my responsibility to add new data to the
+project, add features to the website that displays reports to the users,
+and make sure that both are bug free.
 
 While I currently work in Python, I'm really a functional programmer at
 heart. I have professional experience in Common Lisp, and have played
