@@ -13,8 +13,9 @@ specializing in natural language generation. Basically we take data in,
 analyze it, and turn it into English. I'm part of our data team, which
 means that it's my job to ingest, clean, and analyze any data that we
 need. My biggest project is managing the backend and frontend for the
-"Quill for Google Analytics" project, which generates a narrative for
-users based on their websites Google Analytics data.
+[Quill for Google Analytics](http://quillga.narrativescience.com)
+project, which generates a narrative for users based on their websites
+Google Analytics data.
 
 While I currently work in Python, I'm really a functional programmer at
 heart. I have professional experience in Common Lisp, and have played
