@@ -16,7 +16,7 @@ need. My biggest project is managing the backend and frontend for the
 "Quill for Google Analytics" project, which generates a narrative for
 users based on their websites Google Analytics data.
 
-I currently work in Python, but I'm really a functional programmer at
+While I currently work in Python, I'm really a functional programmer at
 heart. I have professional experience in Common Lisp, and have played
 with every functional language I've come across. I'm particularly
 interested in Clojure, Haskell, and Erlang. I think Clojure +
