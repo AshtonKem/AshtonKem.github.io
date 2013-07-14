@@ -41,3 +41,8 @@ historical; I can make my own chainmaille, both armor and jewelry, and
 am currently taking classes in medieval swordsmanship. I also really
 enjoy hiking, which unfortunately doesn't work out so well for me in
 Illinois.
+
+My [fiance](http://about.me/lcbarren) introduced me into hiking and camping. She is also a writer, a
+productivity expert, and the Chicago Market Director for
+[UrbanBuddy](http://www.urbanbuddy.com). We have two cats, Abe and Woz,
+who are brothers and co-conspirators in all our household mischief.
