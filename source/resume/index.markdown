@@ -45,6 +45,7 @@ footer: true
 - Python
 - Ruby
 - Java
+- SQL
 
 ## Familiar with
 - Haskell
