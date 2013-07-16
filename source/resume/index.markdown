@@ -38,3 +38,22 @@ footer: true
 - B.S. in Computer Science
 - B.S. in Mathematics
 - Honors
+
+# Languages and Tools
+## Profficient in
+- Clojure
+- Python
+- Ruby
+- Java
+
+## Familiar with
+- Haskell
+- Erlang
+- F#
+
+## Tools
+- Git
+- Jenkins
+- Chef
+- Logstash
+- Riemann
