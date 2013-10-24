@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: theory | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/theory/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2013-06-13T21:52:30-05:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/theory/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2013-10-23T21:45:35-06:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fast Cheap Good]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/06/05/fast-cheap-good/"/>
-    <updated>2013-06-05T20:24:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/06/05/fast-cheap-good</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good/"/>
+    <updated>2013-06-05T20:24:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good</id>
     <content type="html"><![CDATA[<p>In the distant past (1950's or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.</p>
 
 <p>While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive. These differences come from the quality and number (thus cost) of the managers and engineers, the choice of methodologies, scope of features, and internal organizational setups.</p>
@@ -32,9 +32,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learn What You Don't Like]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/12/10/learn-what-you-dont-like/"/>
-    <updated>2012-12-10T21:19:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/12/10/learn-what-you-dont-like</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/12/10/learn-what-you-dont-like/"/>
+    <updated>2012-12-10T21:19:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/12/10/learn-what-you-dont-like</id>
     <content type="html"><![CDATA[<p>There’s really nothing worse than someone who has lived their life surrounded by people who agree with them fully. People who live this way have confidence that precedes their knowledge, and will treat contradictory knowledge as an attack on their in-group and world view.</p>
 
 <p>While the above mentioned effect is generally most common in religion and politics, it crops up sometimes in engineering in the so called “holy wars”. Linux vs. Mac vs. Windows, Emacs vs. Vim, etc. The more similar the items in question, the more intense the debate.</p>
@@ -51,9 +51,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hands and Feet]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/12/01/hands-and-feet/"/>
-    <updated>2012-12-01T21:16:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/12/01/hands-and-feet</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/12/01/hands-and-feet/"/>
+    <updated>2012-12-01T21:16:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/12/01/hands-and-feet</id>
     <content type="html"><![CDATA[<p>When I was a teenager I worked at a large amusement park in the games department, which I guess technically means I was a carnie. One of the more interesting games I worked at was the rope ladder; in order to win the game contestants had to climb up a rope ladder set at a 45 degree angle and attached to swivel points at the bottom. Unsurprisingly I learned to climb it easily (free tries and boredom does wonders for learning), but I witnessed very few winners.</p>
 
 <p>One of the more important lessons I learned was about how to not think about specific tasks. In order to climb the ladder, you need to move opposite limbs: step forward with your right hand and left foot at the same time, etc. This spreads your weight out, and ensures that any movement you make is relatively counter-balanced, reducing the maximum amount you’ll find yourself unbalanced at a given moment. What was particularly interesting to me was the transition from not-making it, to making it. When I first started, I had to concentrate on my hands and feet, and fell constantly. Only once I learned to move my hands and feet without conscious thought, and thus free up my mind to worry about my balance, did I successfully climb the ladder.</p>
@@ -70,9 +70,9 @@
   
   <entry>
     <title type="html"><![CDATA[Reaction to Kill Your Heroes (and Comments)]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments/"/>
-    <updated>2012-11-29T00:00:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments/"/>
+    <updated>2012-11-29T00:00:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments</id>
     <content type="html"><![CDATA[<p>Will Larsen had a nice post about what he calls <a href="http://lethain.com/doing-it-harder-and-hero-programming/">Hero Programmers</a>. Put simply, his theory is that some projects end up in a state where they count on massive effort by a select few heroes on the team. The problem is that this upsets those who aren’t heroes, burns out the heroes, and still won’t save an ailing project.</p>
 
 <p>What was particularly interesting to me was some of the responses on Reddit. In particular one quote from “name_was_taken” stands out to me: “Fire the developers who are useless.”</p>
@@ -91,9 +91,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Myth of the Lone Hacker]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/11/22/the-myth-of-the-lone-hacker/"/>
-    <updated>2012-11-22T20:07:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/11/22/the-myth-of-the-lone-hacker</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/11/22/the-myth-of-the-lone-hacker/"/>
+    <updated>2012-11-22T20:07:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/11/22/the-myth-of-the-lone-hacker</id>
     <content type="html"><![CDATA[<p>Most programmers start off their career relatively idealistic, and often marvel at the power of little used programming languages. For me, this language was Common Lisp, which I got to work with professionally. At first I believed that Lisp still had the power to revolutionize programming, but after a few years of work I realized exactly why Lisp ended up in the position it is now: community. Every programming community has a few core beliefs, both explicit and implicit, that shape the language, the libraries, and its users. The Haskell community believes that errors should be caught by the compiler as often as possible, and Ruby believes in the principle of least astonishment. The Lisp community suffers from a belief that I call the Myth of the Lone Hacker.</p>
 
 <p>Most simply put, the myth of the lone hacker is a strong faith in the power of individual hackers to affect large scale change. Most programmers hold this belief to some degree, but the more closely held the belief, the more dangerous to the community it becomes.</p>

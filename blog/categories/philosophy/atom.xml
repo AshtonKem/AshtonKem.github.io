@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: philosophy | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/philosophy/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2013-06-13T21:52:30-05:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/philosophy/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2013-10-23T21:45:35-06:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Right vs. Useful]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/01/03/right-vs-useful/"/>
-    <updated>2013-01-03T21:21:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/01/03/right-vs-useful</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/01/03/right-vs-useful/"/>
+    <updated>2013-01-03T21:21:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/01/03/right-vs-useful</id>
     <content type="html"><![CDATA[<p>I spend a fairly decent amount of my time thinking about how my mindset and world view affects my decisions and actions. In the past few months I’ve found that how I evaluate these mindsets has begun to change; I used to be mostly concerned with whether or not a mindset was correct, but now I’ve started to think about whether or not it’s useful.</p>
 
 <p>Determining whether or not a mindset is correct is rather tricky philosophical ground, as it requires some sort of platonic “reality” to compare it against. But for the sake of argument, let us say that a “correct” mindset matches the most unbiased observations of the world we can make, or logically follows from a set of axioms that are relatively well accepted. Good examples of correct mindsets are “Not lying on my taxes reduces the chance of getting in trouble”, and “driving according to traffic laws means I won’t get a ticket”.</p>

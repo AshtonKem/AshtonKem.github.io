@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://AshtonKem.github.io/sitemap.xml 
+Sitemap: http://www.ashtonkemerling.com/sitemap.xml 

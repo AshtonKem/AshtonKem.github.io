@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2013-06-13T21:52:30-05:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2013-10-23T21:45:35-06:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -14,61 +14,40 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Syntactic Diabetes]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/06/13/syntactic-diabetes/"/>
-    <updated>2013-06-13T19:53:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/06/13/syntactic-diabetes</id>
-    <content type="html"><![CDATA[<p>Syntactic sugar is any feature in a programming language that aids readability without adding any features to the core language. A classic example from the Lisp languages is if vs. cond; both are capable of expressing the exact same logic, but cond is much easier to read when a large number of predicates must be checked.</p>
+    <title type="html"><![CDATA[The Dangers of Partisanship]]></title>
+    <link href="http://www.ashtonkemerling.com/blog/2013/07/15/the-dangers-of-partisanship/"/>
+    <updated>2013-07-15T21:01:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/07/15/the-dangers-of-partisanship</id>
+    <content type="html"><![CDATA[<p>Anyone who knows me personally knows that I am a huge Clojure fan. I could go on and on about why it&#8217;s the best; the regularity, the macros, ClojureScript, core.logic, etc. etc.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">if </span><span class="nv">cond-a</span>
-</span><span class='line'>    <span class="mi">1</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="nv">cond-b</span>
-</span><span class='line'>        <span class="mi">2</span>
-</span><span class='line'>        <span class="p">(</span><span class="k">if </span><span class="nv">cond-c</span>
-</span><span class='line'>            <span class="mi">3</span>
-</span><span class='line'>            <span class="mi">4</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>But last week I attended <a href="http://lambdajam.com">LambdaJam</a>, which was awesome by the way, and I came back with a different opinion. No, I don&#8217;t think Haskell or Erlang tops out Clojure, I&#8217;m still probably going to reach for Leiningen for all my personal projects. But I learned that it&#8217;s a good idea to keep an eye on other languages, since no language will ever be so good that you never need to touch anything else.</p>
 
+<p>In particular I learned the joy of the APL based languages, especially J. I learned that the F# people have a novel way of dealing with statically typing external resources via type providers, and I learned that Haskell can indeed be tight and clean despite what all those monad tutorials imply. I will probably take each of these subjects apart in separate posts in the future, I&#8217;m still trying to pick up bits and pieces of my thoughts after several intense key notes overloaded my brain.</p>
 
-<p>vs.</p>
+<p>What&#8217;s the take away? That functional languages are a lot more diverse than most OOP/procedural languages, and that there&#8217;s a lot that can be learned from them. So instead of picking your favorite and only learning that, you really should try to learn several to cover your bases.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Stealing Terminology]]></title>
+    <link href="http://www.ashtonkemerling.com/blog/2013/07/02/stealing-terminology/"/>
+    <updated>2013-07-02T22:37:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/07/02/stealing-terminology</id>
+    <content type="html"><![CDATA[<p>One of my favorite tricks is to borrow terminology from other walks in life. This is particularly important for me, since it&#8217;s all too easy for engineers to end up living and talking in pure engineering speak. Looking to other careers for the correct words to describe something allows one to express ideas that might not be easily communicated otherwise.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond</span>
-</span><span class='line'>    <span class="nv">cond-a</span> <span class="mi">1</span>
-</span><span class='line'>    <span class="nv">cond-b</span> <span class="mi">2</span>
-</span><span class='line'>    <span class="nv">cond-c</span> <span class="mi">3</span>
-</span><span class='line'>    <span class="nv">true</span> <span class="mi">4</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>If you look carefully, you can see examples of this in engineering blog posts. People talk about fighting entropy, or the metaphysics of data. These are terms that did not originally have any engineering context whatsoever, being brought in to express ideas and concepts about another subject.</p>
 
+<p>My most recent borrowed term is <em>Force Multiplier</em>. A force multiplier is anything that allows an group or individual to be more effective without an increase in effort. It&#8217;s normally a military term referencing how better weather forecasts, equipment, or intelligence can allow a unit to accomplish much more without increasing effort/losses. I like to use it in reference to things like unit tests and automation, that make me more effective as an engineer without costing me more time. If I don&#8217;t have to babysit a build waiting to type in the next step, then I can get back to work while a CI server works for me. I&#8217;m instantly more effective without actually spending more time at work. With a comprehensive suite of unit tests I can spend less time worrying and validating that my refactoring has damaged the quality of the system, thus I can get more work done in the same period of time.</p>
 
-<p>Even without knowing Clojure, it&#8217;s pretty obvious what cond does: it helps flatten out deeply nested if structures into a more readable format. But syntactic sugar can hurt more than it helps when misused. Ideally they provide shortcuts to commonly used functionality, thus eliminating boilerplate. But too much sugar can be much more harmful than too little, as it can obscure intention and provide too many ways to perform the most simple tasks.</p>
-
-<p>Syntactic Diabetes is when a language or library goes too far with the syntactic sugar. It&#8217;s most easily identified when programmers ask &#8220;Why did it do that?&#8221;, or have to constantly ask each other and Google what a specific trick does. Teams suffering from syntactic sugar have a hard time porting code from one developer to the next, since each will do even the most trivial of tasks differently, and will struggle to unwind intention from shortcut when changes need to be made.</p>
-
-<p>In Python a lot of operators and system wide methods are just sugar for <em>special</em> method calls. There are quite a few of these methods, like __call__, and __getattr__. These special methods usually underlie some syntax or global method, such as Foo(a,b,c) is just a shortcut for Foo.__call__(a,b,c). __getattr__ affects attribute selection; with an object Foo, Foo.a is just sugar for getattr(Foo, &#8220;a&#8221;),  which in turn is calling __getattribute__, and __getattr__ if __getattribute__ didn&#8217;t find anything. Since these are just regular object methods, it&#8217;s possible to provide your own implementation for them, just like you can do with __init__.</p>
-
-<p>This is very convenient if you need to add attributes to Foo programmatically (just implement __getattr__), or if you wish to override method attribute determination overall (implement __getattribute__). But it can make it fairly complicated to figure out if a is an actual member of Foo, or if someone just completely overrode either of the special methods.</p>
-
-<p>The list of special Python methods goes on and on, each the underlying method for some sort of syntactic sugar. Taken individually, none of them are a bad idea. __getattr__ can help prevent an AttributeError from being raised when you want functions to act like attributes. __eq__ allows for you to provide an object specific notion of equality, and __add__ is for objects where addition makes sense. Together these don&#8217;t automatically cause problems, but it does make it slightly easier to obscure the actual path of execution and cause a big sugary mess.</p>
+<p>I&#8217;m sure there are far more examples of this than I&#8217;ve listed, but they&#8217;re always fun to find and analyze.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Fast Cheap Good]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/06/05/fast-cheap-good/"/>
-    <updated>2013-06-05T20:24:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/06/05/fast-cheap-good</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good/"/>
+    <updated>2013-06-05T20:24:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good</id>
     <content type="html"><![CDATA[<p>In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.</p>
 
 <p>While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive. These differences come from the quality and number (thus cost) of the managers and engineers, the choice of methodologies, scope of features, and internal organizational setups.</p>
@@ -83,9 +62,9 @@
   
   <entry>
     <title type="html"><![CDATA[Stop Surprising Me Ubuntu]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/06/04/stop-surprising-me-ubuntu/"/>
-    <updated>2013-06-04T23:19:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/06/04/stop-surprising-me-ubuntu</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/06/04/stop-surprising-me-ubuntu/"/>
+    <updated>2013-06-04T23:19:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/06/04/stop-surprising-me-ubuntu</id>
     <content type="html"><![CDATA[<p>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&#8217;t Gonna Need It.</p>
 
 <p>The Principle of Least Surprise, is one of the design principles of the language Ruby, specifically in the context of &#8220;the principle of least surprise after you learn Ruby very well.&#8221; And all good systems have the property that they do not surprise experienced users, but great systems do not even surprise inexperienced users. This is what Apple has been doing for years, trying to make their products mimic familiar scenarios and objects from the real world, so that users can simply pick up the product and use it.</p>
@@ -104,9 +83,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introducing Butler.el]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/05/03/introducing-butler-dot-el/"/>
-    <updated>2013-05-03T20:00:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/05/03/introducing-butler-dot-el</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/05/03/introducing-butler-dot-el/"/>
+    <updated>2013-05-03T20:00:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/05/03/introducing-butler-dot-el</id>
     <content type="html"><![CDATA[<p>I&#8217;m a big fan of reducing barriers to increase adoption and compliance. One of the largest examples for me in the past few months was when I tried out Eclipse for Python Development. The most important plugins for me (other than Python and Git) were the Jenkins and Jira plugins. Quick access to my tasks and instantaneous in-editor feedback about job status increased the likelihood that I would respond to failed builds or fill out tickets correctly.</p>
 
 <p>I eventually decided that Eclipse was overkill for Python development, and way too heavy for a Macbook Air. But in my switch back to Emacs I particularly missed my Jira and Jenkins plugins. This is why I&#8217;m writing to announce the 0.1.0 release of <a href="https://github.com/AshtonKem/Butler">Butler</a>. Butler allows for you to view the jobs on your Jenkins servers, and trigger new jobs without switching out of Emacs.</p>
@@ -119,9 +98,9 @@
   
   <entry>
     <title type="html"><![CDATA[A New Addiction]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/04/30/a-new-addiction/"/>
-    <updated>2013-04-30T19:53:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/04/30/a-new-addiction</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/04/30/a-new-addiction/"/>
+    <updated>2013-04-30T19:53:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/04/30/a-new-addiction</id>
     <content type="html"><![CDATA[<p>Well, I have officially started collecting watches. My first decent purchase was a few months ago, but I&#8217;m counting it as a collection now because I have more pieces than is functionally required, which arguably is 1 in the cell phone era.</p>
 
 <p>Why collect watches? Well, first of all they&#8217;re modern Mens jewelry. Mens fashion has changed remarkably little in the century, especially compared to Womens&#8217;. So with suits that may stay &#8220;in style&#8221; for 2-6 years depending on the cut, men only have a few places to go to express their style: shoes, watches, ties, and cuff links.</p>
@@ -146,9 +125,9 @@
   
   <entry>
     <title type="html"><![CDATA[Binding vs. Assignment ]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/04/30/binding-vs-assignment/"/>
-    <updated>2013-04-30T07:23:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/04/30/binding-vs-assignment</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/04/30/binding-vs-assignment/"/>
+    <updated>2013-04-30T07:23:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/04/30/binding-vs-assignment</id>
     <content type="html"><![CDATA[<p>A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.</p>
 
 <figure class='code'><figcaption><span>Odd Functions</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -287,9 +266,9 @@
   
   <entry>
     <title type="html"><![CDATA[Size Matters]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/04/23/size-matters/"/>
-    <updated>2013-04-23T21:54:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/04/23/size-matters</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/04/23/size-matters/"/>
+    <updated>2013-04-23T21:54:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/04/23/size-matters</id>
     <content type="html"><![CDATA[<p>About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:</p>
 
 <ul>
@@ -317,9 +296,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/04/22/octopress/"/>
-    <updated>2013-04-22T22:16:00-05:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/04/22/octopress</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/04/22/octopress/"/>
+    <updated>2013-04-22T22:16:00-06:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/04/22/octopress</id>
     <content type="html"><![CDATA[<p>I&#8217;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.</p>
 
 <p>Wordpress is fine if you are either a big PHP afficianado, or are afraid of web programming in general. It&#8217;s quite easy to install themes and plugins without any knowledge of what this means. However, this only is true if you&#8217;re self-hosting Wordpress.org (the project) and not using Wordpress.com (the commercial website using Wordpress.org). On Wordpress.org you&#8217;re stuck using a limited number of (mostly for pay) themes and plugins, and are restricted from inserting HTML, JS, or CSS into your website.</p>
@@ -343,9 +322,9 @@
   
   <entry>
     <title type="html"><![CDATA[Java Doesn’t Deserve Half the Shit we Give It]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it/"/>
-    <updated>2013-01-22T21:22:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it/"/>
+    <updated>2013-01-22T21:22:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/01/22/java-doesnt-deserve-half-the-shit-we-give-it</id>
     <content type="html"><![CDATA[<p>It’s very popular among programmers to diss Java on Reddit and Hacker News. But Java really isn’t that bad of a language, and I really think there are other reasons why people hate it.</p>
 
 <p>While we like to pretend that programming language choice is purely about practicality, there is a very large social aspect to it. Nobody wants to admit to liking Cobol or VBA, and being at the forefront of a new, exciting language can bring a type of prestige in programming circles. Thus to some degree, our choice of programming language reflects on how we wish to see ourselves. Haskell programmers think of themselves as highly skilled mathematicians, python users think of themselves as massively productive, etc.</p>
@@ -356,9 +335,9 @@
   
   <entry>
     <title type="html"><![CDATA[Right vs. Useful]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/01/03/right-vs-useful/"/>
-    <updated>2013-01-03T21:21:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/01/03/right-vs-useful</id>
+    <link href="http://www.ashtonkemerling.com/blog/2013/01/03/right-vs-useful/"/>
+    <updated>2013-01-03T21:21:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2013/01/03/right-vs-useful</id>
     <content type="html"><![CDATA[<p>I spend a fairly decent amount of my time thinking about how my mindset and world view affects my decisions and actions. In the past few months I’ve found that how I evaluate these mindsets has begun to change; I used to be mostly concerned with whether or not a mindset was correct, but now I’ve started to think about whether or not it’s useful.</p>
 
 <p>Determining whether or not a mindset is correct is rather tricky philosophical ground, as it requires some sort of platonic “reality” to compare it against. But for the sake of argument, let us say that a “correct” mindset matches the most unbiased observations of the world we can make, or logically follows from a set of axioms that are relatively well accepted. Good examples of correct mindsets are “Not lying on my taxes reduces the chance of getting in trouble”, and “driving according to traffic laws means I won’t get a ticket”.</p>
@@ -377,9 +356,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learn What You Don't Like]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/12/10/learn-what-you-dont-like/"/>
-    <updated>2012-12-10T21:19:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/12/10/learn-what-you-dont-like</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/12/10/learn-what-you-dont-like/"/>
+    <updated>2012-12-10T21:19:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/12/10/learn-what-you-dont-like</id>
     <content type="html"><![CDATA[<p>There’s really nothing worse than someone who has lived their life surrounded by people who agree with them fully. People who live this way have confidence that precedes their knowledge, and will treat contradictory knowledge as an attack on their in-group and world view.</p>
 
 <p>While the above mentioned effect is generally most common in religion and politics, it crops up sometimes in engineering in the so called “holy wars”. Linux vs. Mac vs. Windows, Emacs vs. Vim, etc. The more similar the items in question, the more intense the debate.</p>
@@ -396,9 +375,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hands and Feet]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/12/01/hands-and-feet/"/>
-    <updated>2012-12-01T21:16:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/12/01/hands-and-feet</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/12/01/hands-and-feet/"/>
+    <updated>2012-12-01T21:16:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/12/01/hands-and-feet</id>
     <content type="html"><![CDATA[<p>When I was a teenager I worked at a large amusement park in the games department, which I guess technically means I was a carnie. One of the more interesting games I worked at was the rope ladder; in order to win the game contestants had to climb up a rope ladder set at a 45 degree angle and attached to swivel points at the bottom. Unsurprisingly I learned to climb it easily (free tries and boredom does wonders for learning), but I witnessed very few winners.</p>
 
 <p>One of the more important lessons I learned was about how to not think about specific tasks. In order to climb the ladder, you need to move opposite limbs: step forward with your right hand and left foot at the same time, etc. This spreads your weight out, and ensures that any movement you make is relatively counter-balanced, reducing the maximum amount you’ll find yourself unbalanced at a given moment. What was particularly interesting to me was the transition from not-making it, to making it. When I first started, I had to concentrate on my hands and feet, and fell constantly. Only once I learned to move my hands and feet without conscious thought, and thus free up my mind to worry about my balance, did I successfully climb the ladder.</p>
@@ -415,9 +394,9 @@
   
   <entry>
     <title type="html"><![CDATA[Reaction to Kill Your Heroes (and Comments)]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments/"/>
-    <updated>2012-11-29T00:00:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments/"/>
+    <updated>2012-11-29T00:00:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/11/29/reaction-to-kill-your-heroes-and-comments</id>
     <content type="html"><![CDATA[<p>Will Larsen had a nice post about what he calls <a href="http://lethain.com/doing-it-harder-and-hero-programming/">Hero Programmers</a>. Put simply, his theory is that some projects end up in a state where they count on massive effort by a select few heroes on the team. The problem is that this upsets those who aren’t heroes, burns out the heroes, and still won’t save an ailing project.</p>
 
 <p>What was particularly interesting to me was some of the responses on Reddit. In particular one quote from “name_was_taken” stands out to me: “Fire the developers who are useless.”</p>
@@ -436,9 +415,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Myth of the Lone Hacker]]></title>
-    <link href="http://AshtonKem.github.io/blog/2012/11/22/the-myth-of-the-lone-hacker/"/>
-    <updated>2012-11-22T20:07:00-06:00</updated>
-    <id>http://AshtonKem.github.io/blog/2012/11/22/the-myth-of-the-lone-hacker</id>
+    <link href="http://www.ashtonkemerling.com/blog/2012/11/22/the-myth-of-the-lone-hacker/"/>
+    <updated>2012-11-22T20:07:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2012/11/22/the-myth-of-the-lone-hacker</id>
     <content type="html"><![CDATA[<p>Most programmers start off their career relatively idealistic, and often marvel at the power of little used programming languages. For me, this language was Common Lisp, which I got to work with professionally. At first I believed that Lisp still had the power to revolutionize programming, but after a few years of work I realized exactly why Lisp ended up in the position it is now: community. Every programming community has a few core beliefs, both explicit and implicit, that shape the language, the libraries, and its users. The Haskell community believes that errors should be caught by the compiler as often as possible, and Ruby believes in the principle of least astonishment. The Lisp community suffers from a belief that I call the Myth of the Lone Hacker.</p>
 
 <p>Most simply put, the myth of the lone hacker is a strong faith in the power of individual hackers to affect large scale change. Most programmers hold this belief to some degree, but the more closely held the belief, the more dangerous to the community it becomes.</p>
