@@ -7,19 +7,13 @@ sharing: true
 footer: true
 ---
 
-Hi! I'm Ashton. I'm a polyglot programmer based out of Chicago
-Illinois. I currently work for Narrative Science, a AI based startup
-specializing in natural language generation. Basically we take data in,
-analyze it, and turn it into English. I'm part of our data team, which
-means that it's my job to ingest, clean, and analyze any data that we
-need. My biggest project is managing the backend and frontend for
-[Quill for Google Analytics](http://quillga.narrativescience.com),
-which generates a narrative for users based on their websites
-Google Analytics data. It's my responsibility to add new data to the
-project, add features to the website that displays reports to the users,
-and make sure that both are bug free.
+Hi! I'm Ashton. I'm a polyglot programmer based out of Denver
+Colorado. I work for [Pivotal Labs](http://www.pivotallabs.com) on the
+[Tracker](http://www.pivotaltracker.com) team. Technically I work on the
+"Platform" side, which means I'm responsible most of the non-Javascript
+stuff that goes on with Tracker.
 
-While I currently work in Python, I'm really a functional programmer at
+While I currently work in Ruby, I'm really a functional programmer at
 heart. I have professional experience in Common Lisp, and have played
 with every functional language I've come across. I'm particularly
 interested in Clojure, Haskell, and Erlang. I think Clojure +
@@ -42,7 +36,8 @@ am currently taking classes in medieval swordsmanship. I also really
 enjoy hiking, which unfortunately doesn't work out so well for me in
 Illinois.
 
-My [fiance](http://about.me/lcbarren) introduced me into hiking and camping. She is also a writer, a
-productivity expert, and the Chicago Market Director for
-[UrbanBuddy](http://www.urbanbuddy.com). We have two cats, Abe and Woz,
-who are brothers and co-conspirators in all our household mischief.
+My [fiance](http://about.me/lcbarren) introduced me into hiking and
+camping. She is also a writer, a productivity expert, and a Customer
+Support Representative for [Gnip](http://www.gnip.com). We have two cats, Abe
+and Woz, who are brothers and co-conspirators in all our household
+mischief.
