@@ -9,7 +9,12 @@ footer: true
 
 # Experience
 
-## Narrative Science (2012 - Current)
+## Pivotal Labs (2013 - Current)
+ - Add features to Pivotal Tracker
+ - Triage, test, and eliminate bugs
+ - Run deploys for Tracker to various environments
+
+## Narrative Science (2012 - 2013)
  - Determine clients' data needs
  - Design, implement, and test data ingestion
  - Manage and improve Jenkins testing and CI setup
