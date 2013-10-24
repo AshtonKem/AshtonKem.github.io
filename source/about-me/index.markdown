@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 
-Hi! I'm Ashton. I'm a polyglot programmer based out of Denver
+Hi! I'm Ashton. I'm a polyglot programmer based out of Denver,
 Colorado. I work for [Pivotal Labs](http://www.pivotallabs.com) on the
 [Tracker](http://www.pivotaltracker.com) team. Technically I work on the
 "Platform" side, which means I'm responsible most of the non-Javascript
@@ -33,8 +33,7 @@ Outside of programming I'm a bicyclist and amateur photographer. More
 uniquely (at least for a programmer) I'm a big fan of anything
 historical; I can make my own chainmaille, both armor and jewelry, and
 am currently taking classes in medieval swordsmanship. I also really
-enjoy hiking, which unfortunately doesn't work out so well for me in
-Illinois.
+enjoy hiking, which is one of the reasons why we live in Colorado.
 
 My [fiance](http://about.me/lcbarren) introduced me into hiking and
 camping. She is also a writer, a productivity expert, and a Customer
