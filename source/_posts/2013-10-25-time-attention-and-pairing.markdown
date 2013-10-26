@@ -32,4 +32,11 @@ because each member is tasked with one role, and it's obvious when that
 role is not being fulfilled. The non-driving member can't goof off on
 Reddit or Wikipedia for the sake of "research" because it will prevent
 the driving member from working. And the driving member can't slow down
-too much without the other member taking over typing from them.
+too much without the other member taking over typing from them. This
+helps ensure that the pair produces better code faster.
+
+I'm not sure if the creators of pair programming are familiar with
+Merlin's model of work, but accidentally or not they've made it much
+easier for programmers to follow his advice. I'd recommend any
+company to give pairing a try and see what it does for the quality and
+quantity of work that their teams produce.
