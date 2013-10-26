@@ -16,7 +16,7 @@ wasn't an elaborate prank.
 
 The main difference for us is that I've not decided to give up software
 engineering for comedy. Instead I've accepted a role as an engineer at
-[Pivotal Tracker](www.pivotaltracker.com), which I personally think is a
+[Pivotal Tracker](http://www.pivotaltracker.com), which I personally think is a
 better deal. Pivotal is a great company with a unique and productive
 style, and I'm thrilled to be working with them.
 
