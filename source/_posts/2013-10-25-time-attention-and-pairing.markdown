@@ -23,6 +23,12 @@ Merlin's talk. The person who is typing is responsible for producing,
 while the person who isn't is responsible for ensuring that the pair is
 headed in the right direction.
 
-Blah blah blah. This works better because there's an overt marker for
-when to switch between time + attention, e.g. when someone switches from
-watching to driving. Figure out better wording here.
+It's hard to alternate between time and attention effectively when
+working alone. There's no overt signal to when one is using time or
+attention, making it easy to mistake "research" (reading Wikipedia) as
+using your attention. As a pair this balance is much easier to achieve,
+because each member is tasked with one role, and it's obvious when that
+role is not being fulfilled. The non-driving member can't goof off on
+Reddit or Wikipedia for the sake of "research" because it will prevent
+the driving member from working. And the driving member can't slow down
+too much without the other member taking over typing from them.
