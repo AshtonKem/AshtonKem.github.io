@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Time, Attention, and Pairing"
-date: 2013-10-25 21:36
+date: 2013-10-26 21:36
 comments: true
-categories:
+categories: [programming, theory, pairing]
 ---
 
 [Merlin Mann](http://www.merlinmann.com) gives a great talk about Time
