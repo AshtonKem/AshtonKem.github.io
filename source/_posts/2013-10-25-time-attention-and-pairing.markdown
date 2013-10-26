@@ -18,10 +18,11 @@ involves pair programming. While a lot of my programming friends express
 doubt about pairing, I'm very impressed with both how productive I am
 pairing, and how quickly I'm learning the code base while pairing.
 
-The way that a good pair switches between who is "driving" reminds me of
-Merlin's talk. The person who is typing is responsible for producing,
-while the person who isn't is responsible for ensuring that the pair is
-headed in the right direction.
+The way that a good pair switches between who is "driving" is very
+similar to Merlin's talk. The person who is typing is responsible for
+producing, while the person who isn't is responsible for ensuring that
+the pair is headed in the right direction. Pairs have a much easier time
+finding this balance and staying on track than individual workers do.
 
 It's hard to alternate between time and attention effectively when
 working alone. There's no overt signal to when one is using time or
