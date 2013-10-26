@@ -7,7 +7,7 @@ categories:
 ---
 
 You know those hilarious "pranks" where someone posts something
-embarassing someone else's Facebook account? Apparently in the improv
+embarrassing someone else's Facebook account? Apparently in the improv
 community of Chicago the standard prank is to post something saying that
 they've accepted a lead role, and that they're moving to Denver,
 Colorado. We found this out when some improv actors at our going away
