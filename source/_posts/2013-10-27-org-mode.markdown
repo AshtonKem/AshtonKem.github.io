@@ -13,39 +13,16 @@ partly to a new (to me) organization system.
 
 I know there are literally thousands of posts related to productivity
 and organization systems, but there are shockingly few related to my
-system of choice, Emacs. In this post I'll cover the typical path a task
-takes from creation all the way to completion (or abandonment). I'll
-also toss in some relevant code & configuration snippets for my fellow
-Emacs user.
+system of choice, Emacs. I'll be covering the basics of org-mode, with
+more configuration and workflow information in a future post.
 
-TODO: Overview of org-mode & terminology.
+Org-mode is both an Emacs library, and a file format. The org form is
+designed to be both human readable, and powerful when parsed; it
+resembles a markdown designed for outlines.
 
-TODO: Explain where all my org files are stored/symlinked.
-
-By and far, the most important part of my system is the capture phase. I
-use [MobileOrg](TODO: find link) to capture ideas as I have them on my
-phone, and capture mode itself in Emacs when I'm at my
-computer. MobileOrg is hooked up to the Apps/MobileOrg folder in my drop
-box. The following variables ensure that Emacs can push to Dropbox
-correctly, and that it knows where to find tasks created in MobileOrg
-
-``` scheme
-(setq org-mobile-inbox-for-pull "~/org/flagged.org"
-      org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-```
-
-After a task is created, it's time to review and organize. From Emacs
- <code>M-x org-mobile-pull</code> pulls values in from Dropbox, and
- opens up the flagged.org file. The command <code>C-x C-w</code> will
- allow us to "refile" this item to the relevant org file. Normally
- refile only allows us to make this item a child of another heading in
- another file, but the following snippet allows us to refile as a base
- level item
-
-``` scheme
-(setq org-refile-targets '((nil :maxlevel . 2)
-                           (org-agenda-files :maxlevel . 2)))
-
-(setq org-refile-allow-creating-parent-nodes 'confirm
-      org-refile-use-outline-path 'file)
-```
+The basic element is the headline, which is prefixed with a number of
+asteriks. The number of asteriks controls which lines are children of
+which. Each headline can optionally have a todo state, which by default
+is one of "TODO", "IN-PROGRESS", and "DONE". You can configure multiple
+types of todo states that flow from one to another in whichever way you
+want.
