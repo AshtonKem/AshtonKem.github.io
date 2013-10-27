@@ -18,11 +18,18 @@ more configuration and workflow information in a future post.
 
 Org-mode is both an Emacs library, and a file format. The org form is
 designed to be both human readable, and powerful when parsed; it
-resembles a markdown designed for outlines.
+resembles a markdown designed for outlines. Like many other Emacs
+features, org-mode doesn't enforce one usage style or another. Instead
+it provides a goodie bag of functions designed to maniuplate org files.
 
 The basic element is the headline, which is prefixed with a number of
 asteriks. The number of asteriks controls which lines are children of
-which. Each headline can optionally have a todo state, which by default
-is one of "TODO", "IN-PROGRESS", and "DONE". You can configure multiple
+which. While headlines can remain with their title alone, there are also
+a number of optional features that can be set.
+
+The most common headline feature is a todo state, which by default is
+one of "TODO", "IN-PROGRESS", and "DONE". You can configure multiple
 types of todo states that flow from one to another in whichever way you
-want.
+want. I personally use the defaults, along with the values of "TICKLE",
+"REFERENCE", and "ABANDONED". A lot of org-mode features are sensitive
+to TODO state, for example "TODO" items won't go in the daily agenda.
