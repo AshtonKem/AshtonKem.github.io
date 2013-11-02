@@ -11,25 +11,87 @@ least so far it's going well. I personally attribute part of my current
 productivity to a new "shut up and get back to work" mentality, and
 partly to a new (to me) organization system.
 
-I know there are literally thousands of posts related to productivity
-and organization systems, but there are shockingly few related to my
-system of choice, Emacs. I'll be covering the basics of org-mode, with
-more configuration and workflow information in a future post.
+The problem I've had is that every single organization app is broken in
+some way. The only truely flexible system uses paper and pen, and I
+don't really want to deal with that.
 
-Org-mode is both an Emacs library, and a file format. The org form is
-designed to be both human readable, and powerful when parsed; it
-resembles a markdown designed for outlines. Like many other Emacs
-features, org-mode doesn't enforce one usage style or another. Instead
-it provides a goodie bag of functions designed to maniuplate org files.
+The solution appears to be org-files. Think of them as a close cousin to
+Markdown, but for organization instead of HTML. The systems that use
+org-files support basically any kind of work flow imagineable because
+the storage mechanism is just text, so in the worst case scenario you
+can always just edit the file manually.
 
-The basic element is the headline, which is prefixed with a number of
-asteriks. The number of asteriks controls which lines are children of
-which. While headlines can remain with their title alone, there are also
-a number of optional features that can be set.
+## Example File.
 
-The most common headline feature is a todo state, which by default is
-one of "TODO", "IN-PROGRESS", and "DONE". You can configure multiple
-types of todo states that flow from one to another in whichever way you
-want. I personally use the defaults, along with the values of "TICKLE",
-"REFERENCE", and "ABANDONED". A lot of org-mode features are sensitive
-to TODO state, for example "TODO" items won't go in the daily agenda.
+<pre>
+#+LAST_MOBILE_CHANGE: 2013-10-01 19:59:54
+#+TODO: TODO IN-PROGRESS DONE
+
+
+* Butler
+Butler is an Emacs plugin for Jenkins/Hudson use. Currently it supports:
++ Viewing jobs.
++ Encrypted authentication info.
++ Triggering non-parameterized jobs.
+** Wish List.
+*** Paramtererized jobs
+Possible to get the parameter information along with the job status in one query.
+*** DONE Better formatting.
+DEADLINE: <2013-11-02 Sat>
+CLOCK: [2013-05-06 Mon 20:21]--[2013-05-06 Mon 20:40] =>  0:19
+:PROPERTIES:
+:ID:       6A634BFA-F18E-4C92-A48D-DC3254A67CAE
+:END:
+Tabular mode?
+*** DONE COMPLETED Job Progress
+*** TODO Improved HTTP
+:PROPERTIES:
+:ORDERED:  t
+:ID:       F720BD2F-4966-455B-8F14-5530393340CD
+:END:
+**** DONE Avoid roundtrip to encrypted auth file
+**** TODO Silence message output
+:PROPERTIES:
+:ID:       DE9913E9-AC68-42D3-B7D2-613BB775A16B
+:END:
+**** TODO Auto refresh
+ :PROPERTIES:
+:ID:       01EC3DB8-ABCA-4063-8999-AA68D8D05528
+:END:
+**** TODO Console output
+:PROPERTIES:
+:ID:       112F3FD6-7D23-485F-8B5E-43F0B0BA839E
+:END:
+</pre>
+
+## Okay Ashton, What the Hell is That?
+
+Let's break this down bit by bit. Any line starting with <code>#+</code>
+is used to tell the org-mode reader something. In this case it lets us
+know the last time we synced this to our mobile device, and the possible
+TODO states that an item can be in. It's not unsual to see formatting
+directives at the top of the file to control color, indentation, and
+simmilar issues.
+
+Next we have the individual headings. Each heading starts with a number
+of asteriks. The number of asteriks indicates the level. So
+<code>&#42;&#42; Wish List.</code> is a child of <code>&#42;
+Butler</code>. Most editors allow you to fold headings to show or hide
+their children, for convenience.
+
+Each heading can optionally have a TODO state. The default is one of
+blank, TODO, IN-PROGRESS, and DONE. A simple keystroke in most editors
+cycles from one state to the next. It's also possible to support
+multiple paths that a project can flow through. I personally use the
+default along with REFERENCE and ABANDONED, which allows for me to
+easily filter for abandoned projects, along with notes that aren't
+actionable yet.
+
+Org-mode supports 3 different kinds of tiem reporting. Each heading can
+have up to one deadline, one scheduled, and multiple clock
+entries. Deadlines are for when an item should be finished, and
+scheduled is for when a project should be started. Clocks are for
+recording the amount of time used for an item. You can see an example of
+both the deadline and clock under the "Better formatting." header. Org
+also supports 3 different kinds of [repeating tasks](TODO: LINK), which
+is nice.
