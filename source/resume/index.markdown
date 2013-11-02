@@ -11,20 +11,22 @@ footer: true
 
 ## Pivotal Labs (2013 - Current)
  - Add features to Pivotal Tracker
+ - Work on metadata driven API
+ - Use TDD principles
  - Triage, test, and eliminate bugs
- - Run deploys for Tracker to various environments
 
 ## Narrative Science (2012 - 2013)
- - Determine clients' data needs
+ - Interact with clients to determine data needs
  - Design, implement, and test data ingestion
  - Manage and improve Jenkins testing and CI setup
- - Manage Quill for Google Analytics frontend
+ - Sole developer and designer for Quill for Google Analytics product
 
 ## OnShore Development (2011 - 2012)
  - Develop onShore's flagship product, WebCheckout
- - Helped refactor core algorithm to produce asymptotic increase
+ - Refactor core algorithm to produce asymptotic increase
+ - Write Maven plugin for SBCL compilation
+ - Create Chef scripts to replace outdated manual deployment system
  - Design, test, and implement internationalization and localization library
- - Triage and fix bugs
 
 # Open Source and Volunteering
 ## Care For Real (2012 - Current)
@@ -43,23 +45,3 @@ footer: true
 - B.S. in Computer Science
 - B.S. in Mathematics
 - Honors
-
-# Languages and Tools
-## Profficient in
-- Clojure
-- Python
-- Ruby
-- Java
-- SQL
-
-## Familiar with
-- Haskell
-- Erlang
-- F#
-
-## Tools
-- Git
-- Jenkins
-- Chef
-- Logstash
-- Riemann
