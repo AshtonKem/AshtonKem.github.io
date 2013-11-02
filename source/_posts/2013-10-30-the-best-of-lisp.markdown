@@ -106,7 +106,7 @@ good a competing runtime might be.
 ## The Takeaway
 
 I love Ruby. It's a good language. But if you want truly mind opening
-programming moments, Lisp is the only way to go. No other langauge can
+programming moments, Lisp is the only way to go. No other language can
 give you the sense of "I can do *anything*" quite like it. I highly
 recommend every Rubyist at least try Common Lisp for a bit, to at least
 understand where their language of choice came from.
