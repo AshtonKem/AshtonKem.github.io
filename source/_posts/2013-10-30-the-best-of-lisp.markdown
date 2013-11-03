@@ -7,7 +7,8 @@ categories: [programming]
 ---
 
 Edit: Dan Benjamin himself informed me that I missed the sarcasm boat
-here. I'm leaving the relevant bits.
+here. I'm leaving the relevant bits, and cutting out the now irrelevant
+criticism.
 
 I'm slowly working my way through the [Back to Work](http://5by5.tv/b2w)
 podcast. I'm way behind, so please excuse that this post references an
