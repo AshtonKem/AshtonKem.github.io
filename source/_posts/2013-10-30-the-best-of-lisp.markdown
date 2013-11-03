@@ -6,6 +6,9 @@ comments: true
 categories: [programming]
 ---
 
+Edit: Dan Benjamin himself informed me that I missed the sarcasm boat
+here. I'm leaving the relevant bits.
+
 I'm slowly working my way through the [Back to Work](http://5by5.tv/b2w)
 podcast. I'm way behind, so please excuse that this post references an
 episode over 2 years old at this point.
@@ -14,20 +17,17 @@ episode over 2 years old at this point.
 passion", among other things. In it, Merlin mentions that one thing you
 can do as a low risk investment in a programming career is to maintain
 current on new languages. He mentions Scala, Erlang, and Lisp as a
-few. With an uncharacteristic lack of self-awareness, Dan expresses
-pretty much disdain and lack of interest in anything other than Ruby,
-even going as far as saying "Ruby took the best of Lisp".
+few. With an <del>uncharacteristic lack of self-awareness</del> unusual
+amount of sarcasm, Dan expresses pretty much disdain and lack of
+interest in anything other than Ruby, even going as far as saying "Ruby
+took the best of Lisp".
 
-As someone who has worked in Ruby and Lisp professionally, that's
-false. While there are a ton of cases where Ruby clearly learned and
-copied from Lisp, there is also a laundry list of areas where Ruby
-failed to learn from Lisp's successes and failures.
-
-Now don't get me wrong, I rather like Ruby. I think it's a perfectly
-passable object-oriented language, and it's one of my go-to
-languages. But implying that there's no reason to look at the Lisp
-family of languages because Ruby took some of the good bits is
-dangerously close-minded.
+While Dan may have been joking, it is probably worth examining the
+relationship between Ruby and Lisp. As someone who has worked in Ruby
+and Lisp professionally, I feel uniquely qualified to talk about their
+relative strengths. While there are a ton of cases where Ruby clearly
+learned and copied from Lisp, there is also a laundry list of areas
+where Ruby failed to learn from Lisp's successes and failures.
 
 ## Functions
 
