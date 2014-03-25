@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Disdain"
+date: 2014-03-24 20:19
+comments: true
+categories: [fencing, programming]
+---
+
+One of my hobbies is fencing. Not modern Olympic fencing, but 14th
+century longsword fencing in the Italian school. In every class the
+instructor reminds us that we should act "like haughty Italian nobles,
+tall and relaxed" in the way that we stand, move, and handle the weapon.
+
+The word "Sprezzatura" crops up a lot in these discussions. The simplest
+translation is literally "disdain", but a more careful translation would
+be "studied carelessness". To act with Sprezzatura means to make learned
+actions look easy and natural.
+
+It turns out there is a really good reason for a fencer to act this
+way. A relaxed and calm fencer can move more rapidly and adjust their
+actions depending on whether they are winning or losing the bind. Their
+actions happen without any tell, catching their opponent by surprise and
+allowing them to act within their opponents tempo. In sword fighting the
+ultimate goal is to strike your opponent without being hit. Thus the
+shortest and simplest actions are favored, as large embellished actions
+only increase personal risk.
+
+There is a similar grace in programming. While programming is not
+usually a competitive or dangerous hobby, there are practical benefits
+to acting quickly and gracefully. The most effective engineer completes
+their task with the minimal amount of time and added complexity. Showing
+off in the code only increases the risk of regressions and makes the
+code harder to modify later. The ultimate goal is a maintainable
+application that meets requirements in the minimal amount of time, and
+an accomplished engineer will take the shortest route to that goal.
+
+Sword fighting is not about strength. It is never effective to swing a
+sword with all of your strength. Even if this wasn't unsafe and an
+obvious tell, it isn't a good way to cut with an edged weapon. Swords
+depend on a cutting edge to do damage, and thus a smooth arc that draws
+the weapon through the target will always cut more effectively than a
+ham-fisted baseball swing.
+
+Similarly, the accomplished engineer knows that completing a task is not
+about the number of hours spent, but the quality. The mind is a tool
+that can be both sharpened and dulled with both work and rest, and
+programming is a task of the mind. Thus the quality engineer avoids
+excessive hours, as they are unhealthy and ineffective. Instead the
+engineer makes their limited productive hours as effective as possible
+without excessive strain.
+
+It may not be the connection you expected, but humans haven't changed in
+a very long time. Even if our circumstances have changed, there is
+always something to be learned from even the most esoteric sources.
