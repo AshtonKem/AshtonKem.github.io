@@ -1,0 +1,23 @@
+---
+layout: post
+title: "The Swordsman and the Software Engineer"
+date: 2014-06-09 22:31
+comments: true
+categories: [programming, philosophy, fencing]
+---
+
+One of the largest mistakes you can make as a knowledge worker is to focus 100% of your time on your craft. It's easy to believe that specializing and focusing will make you better than your peers, but I do not think that is the case. Not only will specializing cause you to plateau earlier than your peers who diversify, you will be less happy and healthy than your diversified peers.
+
+A bit of background at this point would probably be helpful. I'm a software engineer and I've coded both professionally and on a hobbyist basis for nearly a decade. After a particularly stressful few months at a previous job, my fiancé forced me to join a local gym to de-stress. The gym focused on various European martial arts and I ended up in a class for the Italian longsword circa 1409. 
+
+A few years ago I would have suspected that choosing to surrender 2-8 hours a week to swinging steel around instead of programming on hobbyist projects would slow down my growth. Now I believe that I owe a lot of my growth, professionally and as a human being to this practice. A lot of what I'm going to cover here will probably be old news to anyone who was heavily involved in sports, nor is it particularly unique to fencing. That being said I'm fairly confident that a lot of knowledge workers have lost the involvement with physical activities they might have had, or never were all that "athletic" even in school.
+
+The biggest modern challenge is that humans are not wired for the type of work that we now do. We are a fairly clever species by nature, which is why we have been making art for hundreds of thousands of years. But we are still more or less genetically and mentally hunter gatherers from 100,000+ years ago who largely worked for their survival. Our bodies, genes, and minds are wired to expect a specific ratio of play and physical activity to signal that all is well. Unfortunately we work a lot longer than our ancestors did, who couldn't work to get ahead in a time when excess meat and fruits went rotten quickly. 
+
+This high level of nothing but work, physical or mental, indicates to our bodies that times are tough and that it should release stress hormones to help us survive the coming hard times; these stress hormones tend to have serious detrimental effects on mental performance and long term health. The phrase "all work and no play" may be over-used, but it does have some truth to it. All work and no play leaves Jack pumped full of cortisol, short on sleep, and low on testosterone.
+
+Secondly, most knowledge workers spend their entire time thinking only with their frontal cortex, or the analytical portion of the brain. This is very helpful if your job involves concentrating on difficult problems all day, but it is incredibly easy to let that portion of your brain become the only driving factor on your day to day life. The brain, like your muscles, should have ample opportunity to exercise all of its faculties and have recovery time between each heavy bout. Expecting it to be able to focus deeply on your work day in and day out without giving it time to relax is simply asking for lowered performance and burnout, and only working on one aspect of your mental performance is akin to only doing curls at the gym; the result is an odd shape with very little practical strength.
+
+Thankfully exercise and hobbies help other parts of the brain. This is one of the things I love about fencing: it isn't very analytical once you actually start using it. There are a ton of cuts and guards to be memorized, but you never have time to think about it when you are actually fencing. All of the drills are designed so that your mind and body learn to move with instinctual grace from one guard to another. There is very little conscious thought that happens mid-move in a match; there simply is not enough time to stop and think. Instead you learn to have an internalized notion of time and measure, and an ability to make new decisions as the fight progresses quickly and correctly.
+
+And while none of this directly relates to software engineering, it has a positive effect on my daily work. The ability to move with a fight and think with my toes and fingertips have given me a greater appreciation to the importance of gut instinct in more situations. And the constant practice of excluding my analytical mind in a fast moving match have improved my ability to enter a flow state more easily. Combine these things with the general good effects of mental down time and exercise, and I think it's hard to argue that my time would have been better spent working on hobbyist projects.
