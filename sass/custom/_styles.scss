@@ -18,4 +18,12 @@ and (max-width : 480px) {
         padding-right: 0;
     }
 
+    .main-navigation>li {
+        display: inline-block;
+    }
+
+    body>nav ul {
+        padding-top: 0;
+    }
+
 }
