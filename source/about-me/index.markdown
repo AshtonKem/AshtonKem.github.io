@@ -9,16 +9,19 @@ footer: true
 
 Hi! I'm Ashton. I'm a polyglot programmer based out of Denver,
 Colorado. I work for [Pivotal Labs](http://www.pivotallabs.com) on the
-[Tracker](http://www.pivotaltracker.com) team. Technically I work on the
-"Platform" side, which means I'm responsible most of the non-Javascript
-stuff that goes on with Tracker.
+[Tracker](http://www.pivotaltracker.com) team. Originally I worked on
+the Ruby end of things, but since then I have been switched to a 100%
+Javascript and Backbone.js role.
 
-While I currently work in Ruby, I'm really a functional programmer at
-heart. I have professional experience in Common Lisp, and have played
-with every functional language I've come across. I'm particularly
-interested in Clojure, Haskell, and Erlang. I think Clojure +
-ClojureScript is a particularly compelling combination for the future of
-functional programming, and I'm really excited to try it out.
+While I currently work in Ruby and Javascript, I'm really a functional
+programmer at heart. I have professional experience in Common Lisp, and
+have played with every functional language I've come across. Previously
+I played around with Lisp, Haskell, and Erlaing, but these days I mostly
+work with Clojure. I think Clojure
++ ClojureScript is a particularly compelling combination for the future
+of functional programming, and I really love working with it. I even
+snuck a bit of each into the Tracker codebase when nobody was looking
+because it's just so good for testing.
 
 On the side I work on a few open source projects, including
 [Butler](https://github.com/AshtonKem/Butler), my Emacs plugin for
@@ -35,8 +38,8 @@ historical; I can make my own chainmaille, both armor and jewelry, and
 am currently taking classes in medieval swordsmanship. I also really
 enjoy hiking, which is one of the reasons why we live in Colorado.
 
-My [fiance](http://about.me/lcbarren) introduced me into hiking and
-camping. She is also a writer, a productivity expert, and a Customer
-Support Representative for [Gnip](http://www.gnip.com). We have two cats, Abe
-and Woz, who are brothers and co-conspirators in all our household
+My fiance introduced me into hiking and camping. She is also a writer, a
+productivity expert, and a Customer Support Representative for
+[Gnip](http://www.gnip.com) (now owned by Twitter). We have two cats,
+Abe and Woz, who are brothers and co-conspirators in all our household
 mischief.
