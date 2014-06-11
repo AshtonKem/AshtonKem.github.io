@@ -4,3 +4,11 @@
 header[role="banner"] {
     width: 300px;
 }
+
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+    body>header {
+        border-right: none;
+    }
+}
