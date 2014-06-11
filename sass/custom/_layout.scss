@@ -19,3 +19,11 @@
 //$sidebar-pad-medium: 15px;
 //$sidebar-pad-wide: 20px;
 //$sidebar-width-wide: 300px;
+
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+    .search {
+        display: none;
+    }
+}
