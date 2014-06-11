@@ -10,23 +10,23 @@ footer: true
 # Experience
 
 ## Pivotal Labs (2013 - Current)
- - Add features to Pivotal Tracker
- - Work on metadata driven API
- - Use TDD principles
- - Triage, test, and eliminate bugs
+ - Add features to [Pivotal Tracker](http://www.pivotaltracker.com)
+ - Manage two very large Backbone.js applications
+ - Spearhead efforts in using experimental testing techniqes
+ - Co-maintain CI environments
 
 ## Narrative Science (2012 - 2013)
  - Interact with clients to determine data needs
  - Design, implement, and test data ingestion
  - Manage and improve Jenkins testing and CI setup
- - Sole developer and designer for Quill for Google Analytics product
+ - Sole developer for [Quill for Google Analytics](https://quillengage.narrativescience.com/) (now QuillEngage)
 
 ## OnShore Development (2011 - 2012)
  - Develop onShore's flagship product, WebCheckout
- - Refactor core algorithm to produce asymptotic increase
- - Write Maven plugin for SBCL compilation
- - Create Chef scripts to replace outdated manual deployment system
- - Design, test, and implement internationalization and localization library
+ - Help complete performance overhaul of product
+ - Rewrote in-house MVC framework
+ - Automate deployments to new environments
+ - Create and integrate new internationalization and localization library
 
 # Open Source and Volunteering
 ## Care For Real (2012 - Current)
@@ -36,9 +36,9 @@ footer: true
  - Train desk workers in new application
 
 ## Butler
-- Emacs plugin to interact with Jenkins CI server
-- Allow users to view all jobs, and see which are running
-- Allow users to start jobs without switching from editor to browser
+- [Emacs plugin](https://github.com/AshtonKem/Butler) to interact with Jenkins CI server
+- Allow users to view all jobs, and monitor progress
+- Enables users to start CI jobs without a context switch
 
 # Education
 ## Loyola University Chicago (2008 - 2012)
