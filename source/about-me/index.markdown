@@ -38,8 +38,7 @@ historical; I can make my own chainmaille, both armor and jewelry, and
 am currently taking classes in medieval swordsmanship. I also really
 enjoy hiking, which is one of the reasons why we live in Colorado.
 
-My fiance introduced me into hiking and camping. She is also a writer, a
-productivity expert, and a Customer Support Representative for
-[Gnip](http://www.gnip.com) (now owned by Twitter). We have two cats,
-Abe and Woz, who are brothers and co-conspirators in all our household
-mischief.
+My fiance introduced me into hiking and camping. She is also a writer
+and a Partner Engineer for [Twitter](http://www.twitter.com). We have
+two cats, Abe and Woz, who are brothers and co-conspirators in all our
+household mischief.
