@@ -9,10 +9,15 @@ footer: true
 
 # Experience
 
-## Pivotal Labs (2013 - Current)
+## DRW Trading (2015 - Current)
+ - Work in Clojure, Jruby, and JS on back office applications
+ - Support real time back office risk and position tracking software
+ - Maintain a mixture of green field and legacy code working together
+
+## Pivotal Labs (2013 - 2015)
  - Add features to [Pivotal Tracker](http://www.pivotaltracker.com)
  - Manage two very large Backbone.js applications
- - Spearhead efforts in using experimental testing techniqes
+ - Spearhead efforts in using experimental testing techniques
  - Co-maintain CI environments
 
 ## Narrative Science (2012 - 2013)
