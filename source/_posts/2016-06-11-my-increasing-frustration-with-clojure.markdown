@@ -6,6 +6,8 @@ comments: true
 categories: [programming, clojure, ruby]
 ---
 
+**Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I've seen.**
+
 First off, this is not a "I'm quiting in disgust" post. Those are childish and a waste of everyone's time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.
 
 First off, some history. My first job out of College was in Common Lisp, and I love/hated it. The power it brought and the pain it brought were both one and the same. No modern libraries, no modern build tools (this was before [QuickLisp](https://www.quicklisp.org/beta/)). One on hand, I *loved* working with paredit and Emacs, being able to quickly fly about my code and manipulate it in blocks rather than line by line. On the other, I couldn't help but be envious of those who could actually ask for help from a functioning open source community.
