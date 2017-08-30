@@ -9,7 +9,12 @@ footer: true
 
 # Experience
 
-## DRW Trading (2015 - Current)
+## Edmunds (2017 - Current)
+ - Technical Lead for Lead Systems
+ - Support multiple Java & Spring projects
+ - Redesign outdated architecture to improve stability and simplicity
+
+## DRW Trading (2015 - 2017)
  - Work in Clojure, Jruby, and JS on back office applications
  - Support real time back office risk and position tracking software
  - Maintain a mixture of green field and legacy code working together
