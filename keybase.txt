@@ -1,0 +1,80 @@
+==================================================================
+https://keybase.io/ashton
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ashtonkemerling.com
+  * I am ashton (https://keybase.io/ashton) on keybase.
+  * I have a public key with fingerprint 4762 CEAB 008B A1A2 CB5C  DE10 8914 A885 B4DB 1D39
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "4762ceab008ba1a2cb5cde108914a885b4db1d39",
+            "host": "keybase.io",
+            "key_id": "8914a885b4db1d39",
+            "uid": "ad8af85fa180a6090af02e099911db00",
+            "username": "ashton"
+        },
+        "service": {
+            "hostname": "ashtonkemerling.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1412082926,
+    "expire_in": 157680000,
+    "prev": "8cd23d49b0f58b7eb86017a6579b675abcf55042419bedc7e9abcc82dc0346ab",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owGbwMvMwMTYKbKidcttWUvG0we+JzGEaK1VqFZKyk+pVLKqVspOBVNpmXnpqUUF
+RZl5JUpWSibmZkbJqYlJBgYWSYmGiUbJSabJKamGBhaWhiaJFhamSSYpSYYpxpZK
+OkoZ+cUgHUBjkhKLU/Uy84FiQE58ZgpQFIv6UrBEYopFYpqFaVqioYVBopmBpUFi
+moFRqoGlpaWhYQrQWpDC4tSivMTcVJDq4oyS/DylWh0loFhZZnIqyMUgi1Hks1Nz
+U4tygP7QS87PBRpQUJRfkp+cnwNUkFFSUmAF0l9SWQDSUJ6aFA81Kj4pMy8FqAmo
+oSy1qDgTaI+VIVBlckkmyGxDE0MjAwsjSyMzHaXUioLMotT4TJAKU3MzCwMgAFmT
+WgbyanKKkXGKiWWSQZqpRZJ5apKFmYGheaKZqbllkpm5aWJScpqpqYGJkYmhZVJq
+SrJ5qiVQKNnCKCXZwNjELDFJCeS5wrx8JStjoDMT04FGFmem5yWWlBalKtVydTLJ
+sDAwMjGwsTKB4o+Bi1MAFqtPVwkwrJzQbvJF7ZFK+Pbflw4HfsqILcrnZTR9Gjwn
+5/bKh1YNG089/R6p97xdUvmvcxRLXRj3neaVK5tz8h/beQi8y0ydEX+79c8e9zSr
+PJ9AxknCJ/LNkjYcy+6I/JS9Wi3Y9wfL3ZkvIr77flh2Jy6b4WhqUPex1c9eTrST
+29X8PDQ8atXPezbnF91t0VnV6pfBd3Wme4c5w86CY6t8/mV6TnhVk5vrdcUjUoAz
+vG+P4/uAP0c6/DgdOxv74vyc6iO28f801viedGeKwveQ4u1fY46m75kbfK3yf8dx
+O+b0uwyqq67NfMv5v6wj5QCb7inHpF8T33zi6N7zKL5w9YdyPobdk33f2jG9avaz
+eitabtR/U+PXlqsRml2X77/ZtUWw7oHp+gWPBHd8yXhZ6HvG80jGuZaHx+v385h9
+mqnM23V7iYj7cy6bD0VH14T8kFEXnbo7/NTWiz9Wr9x2QW8uzwxZte1//z+dE79u
+eeuMiQUyT5bxOveoVd7acHVr6tUJ+oq5Rf/Lnd88m3hlnV2M0JGtMTIMr7R/pC/e
+cfR3t4rZj+kywsYJqzQOfVycnXrib3TuxuZH5uvNftXMnNBpZXZl930P9xtmS46s
+Z8wz6XJJOTftdccf2bJ/QkypITVWSZc3/+C7KNHJ+qnl04l7+99sbuwXPy7yh2XW
+4UucGc/vbN1Xa7M3QN0q3s3b/JbhnbT+/Y4dtkFLryqVHgIA
+=JZJB
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ashton
+
+==================================================================
+
+A
+A
+A
+A
+A
+A
+A
+A
+A
+

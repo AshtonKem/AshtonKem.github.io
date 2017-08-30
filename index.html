@@ -1,1 +1,1430 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ashton Kemerling</title>
+  <meta name="author" content="Ashton Kemerling">
+
+  
+  <meta name="description" content="Over the past year my team has been doing something shocking to a lot of
+engineers: we&#8217;re favoring pure Java over Clojure. We aren&#8217;t &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ashtonkemerling.com">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Ashton Kemerling" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32325955-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1>Ashton Kemerling</h1>
+  
+    <h2><a href="/">AK</a></h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation">
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+  <li><a href="/resume">Resume</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/26/java-without-if/">Java Without If</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-26T19:54:00-08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the past year my team has been doing something shocking to a lot of
+engineers: we&#8217;re favoring pure Java over Clojure. We aren&#8217;t rewriting all our
+Clojure code, but we definitely prefer Java for green field projects.</p>
+
+<p>This post is not going to be a compare and contrast between the two, nor am I
+going to bash Clojure. Language compare and contrast posts always descend into
+flame wars, and it&#8217;s very easy to confuse the result of hard lessons learned
+with the benefits of a new language.</p>
+
+<p>Instead I&#8217;d like to highlight a very strange aspect of our new Java development,
+and I hope that you&#8217;re sitting down for this. Except tests, I have fewer than a
+dozen <code>if</code> statements currently committed in our Java codebase.</p>
+
+<p>It would be easy to assume that we&#8217;re just using Java&#8217;s method dispatch to
+replace if statements; rather than inspecting data and calling if/else on it,
+you can use interfaces and count on the implementation to provide the difference
+in behavior. But such an explanation is insufficient: objects don&#8217;t magically
+construct themselves from unstructured data, and Clojure is not without its own
+dynamic dispatch <a href="https://clojure.org/reference/multimethods">facilities</a>.</p>
+
+<p>Ultimately the real explanation for this strange code design lies in my
+colleague&#8217;s extremely exceptional <a href="https://github.com/palatable/lambda">Lambda</a>
+library. It contains a lot of things that a Haskell/Scala developer would
+recognize such as Either types, function utilities, coproducts, etc. etc.</p>
+
+<p>In particular I&#8217;d like to draw your eye to the Either type, which has replaced
+the vast majority of our explicit <code>if</code> calls. Either is the logical
+successor to the Java
+8 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">Optional</a>
+type. Optional represents the presence of a value of type <code>T</code> with
+ <code>Optional::of</code>, or it&#8217;s absence with <code>Optional::empty</code>. Either on the
+other hand is parameterized to two values, L and R, and represents the presence
+of either a value of type L, <em>or</em> a value of type R.</p>
+
+<p>Why is this a logical extension of <code>Optional</code>? Because while Optional is
+used to represent a result that may have no value (replacing a null), Either is
+used to represent a result that might have been a failure, replacing a thrown
+exception, with convention being that left side values represent failure and
+right side values representing success.</p>
+
+<p>So, what does that buy us? Well, consider what Optional gets us in the following code snippets.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Helper</span><span class="o">.</span><span class="na">functionOne</span><span class="o">();</span>
+</span><span class='line'><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="n">Helper</span><span class="o">.</span><span class="na">functionTwo</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="n">Helper</span><span class="o">.</span><span class="na">functionThree</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Helper</span><span class="o">.</span><span class="na">functionOne</span><span class="o">()</span>
+</span><span class='line'>                           <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Helper:</span><span class="o">:</span><span class="n">functionTwo</span><span class="o">)</span>
+</span><span class='line'>                           <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="nl">Helper:</span><span class="o">:</span><span class="n">functionThree</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Optional gives us the ability to say &#8220;if a value exists, apply this function to
+it&#8221; repeatedly. It also gives us the ability to chain successive calls that
+return Optionals together with the <code>flatMap</code> function, eliminating the need
+for unsightly and error prone manual null checks. It&#8217;s also safe for <code>map</code>
+and <code>flatMap</code> to go from <code>Optional&lt;A&gt;</code> to <code>Optional&lt;B&gt;</code>, which might
+eliminate the need for intermediate variables in your code.</p>
+
+<p>Either give us much of the same, but with the ability to represent <strong>why</strong> the
+computation failed with left values, along with the ability to chain together
+functions working on an Either type. All of the greatest hits of functional
+programming are provided for Either, including <code>map</code>, <code>flatMap</code>, and <code>filter</code>.</p>
+
+<p>As a concrete example, imagine a hypothetical JSON parsing library. Parsing is
+tricky business, you&#8217;re all but guaranteed that a failure will happen at
+runtime. So how do you handle it? Previously you had 4 choices.</p>
+
+<ul>
+<li>return null</li>
+<li>return Optional&lt;ParsedType></li>
+<li>checked exception</li>
+<li>unchecked exception</li>
+</ul>
+
+
+<p>Null is obviously bad, and unchecked exceptions are also risky. Checked
+exceptions guarantee that someone will deal with the issue, but they are
+extremely annoying, and might result in disparate and different exception
+handlers all over the place. Optional is nice, it&#8217;s safer than null and marks in
+the type signature that failure is an option, but it&#8217;s a bit lacking on
+explaining <strong>why</strong> a failure occurred.</p>
+
+<p>What if instead this library returned <code>Either&lt;Exception, JsonNode&gt;</code>, or even
+ <code>Either&lt;Set&lt;String&gt;, JsonNode&gt;</code>? The potential for failure is in the type
+signature again, we don&#8217;t need a try/catch, but if we want the unwrapped
+JsonNode we have to deal with the potential for a left value. And any functions
+we have that operate only on JsonNode can be passed in using the <code>map</code>
+function, making chaining a breeze.</p>
+
+<p>Better still we can write other functions that might fail in this form, such as
+JSON validation, so that we can chain them together using <code>flatMap</code>. If the
+json parsing has failed, flatMap does nothing (it only works on right values),
+replacing the need for successive null checks, nested try/catch blocks, or
+complicated state checking during exception handling to return the correct
+value.</p>
+
+<p>As a result of all this, you can easily imagine a JSON API endpoint looking
+something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">HttpResponse</span> <span class="nf">handle</span><span class="o">(</span><span class="n">HttpRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">JsonParser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">getBody</span><span class="o">())</span>
+</span><span class='line'>                     <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="nl">Validator:</span><span class="o">:</span><span class="n">validate</span><span class="o">)</span>
+</span><span class='line'>                     <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">ServiceObject:</span><span class="o">:</span><span class="n">businessLogic</span><span class="o">)</span>
+</span><span class='line'>                     <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="nl">JsonGenerator:</span><span class="o">:</span><span class="n">generate</span><span class="o">)</span>
+</span><span class='line'>                     <span class="o">.</span><span class="na">match</span><span class="o">(</span><span class="n">l</span> <span class="o">-&gt;</span> <span class="n">HttpResponse</span><span class="o">.</span><span class="na">internalServerError</span><span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
+</span><span class='line'>                            <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">HttpResponse</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">l</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All the potential failure cases are covered by returning an Either rather than
+throwing an exception. The very last step is <code>match</code>, which takes two
+functions to unify a potential left or right value to the exact same type, which
+in this case is <code>HttpResponse</code>.</p>
+
+<h3>What does this get me?</h3>
+
+<p>Well, first off I think it&#8217;s beautiful. I know that&#8217;s a subjective call, but the
+data flowing neatly from top to bottom without huge nesting if cases and early
+return values is very aesthetically pleasing to me.</p>
+
+<p>More functionally it&#8217;s easier to refactor with the help of the compiler. If I
+want to add different return status codes to match different scenarios, the
+compiler helps me out a lot more than if I&#8217;m adding an extra return case. If I
+convert the left side to a HttpResponse early, the compiler will helpfully
+remind me that the later flatMap calls cannot change <code>Either&lt;HttpResponse,
+JsonNode&gt;</code> to <code>Either&lt;Exception, BusinessObject&gt;</code>. Such changes are easily
+fixed once the compiler has pointed it out, but extremely hard to find on your
+own.</p>
+
+<p>But most fundamentally is that we&#8217;ve encoded our code&#8217;s states in the type
+system, not variable states. The potential for JSON parsing to fail is encoded
+in its type, not in the potential for a variable to null, or false, or for an
+exception to have been thrown. You&#8217;re leaning on the compiler to tell you if
+you&#8217;ve handled the failure cases properly, as the code won&#8217;t compile otherwise.
+Now instead of testing for runtime exceptions you only test to make sure that
+your business logic is correct.</p>
+
+<p>If you&#8217;ve ever been interested in what the Haskell or Scala developers have been
+talking about with functional type safety, I&#8217;d highly recommend taking a look at
+Lambda to get a taste of it in Java.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/06/11/my-increasing-frustration-with-clojure/">My Increasing Frustration With Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-11T06:24:00-07:00" pubdate data-updated="true">Jun 11<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&#8217;ve seen.</strong></p>
+
+<p>First off, this is not a &#8220;I&#8217;m quiting in disgust&#8221; post. Those are childish and a waste of everyone&#8217;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.</p>
+
+<p>First off, some history. My first job out of College was in Common Lisp, and I love/hated it. The power it brought and the pain it brought were both one and the same. No modern libraries, no modern build tools (this was before <a href="https://www.quicklisp.org/beta/">QuickLisp</a>). One on hand, I <em>loved</em> working with paredit and Emacs, being able to quickly fly about my code and manipulate it in blocks rather than line by line. On the other, I couldn&#8217;t help but be envious of those who could actually ask for help from a functioning open source community.</p>
+
+<p>A few years of Python, Ruby, and Javascript later, I found Clojure. And I thought I&#8217;d found the solution to literally all of the things. Paredit works again? Check. A thriving open source community? You got it. Deploy as a Jar rather than CL&#8217;s hilarious &#8220;dump the state of a running program and call it good&#8221; setup? Fuck. Yes.</p>
+
+<p>And beyond the superficial things, there was a lot to love, especially coming from a more recent brush with Ruby on Rails. Clojure makes it very easy to make things <a href="https://en.wikipedia.org/wiki/Referential_transparency">referentially transparent</a>, and it tends to favor explicit calling semantics over convention (or more derisively, &#8220;magic&#8221;). This means that a Clojure code base will require more plumbing code, but that also means it&#8217;s possible to navigate to the code that does routing and understand how it works, no more having to search through your framework&#8217;s codebase just because they do dynamic method creation and method_missing magic.</p>
+
+<p> As far as I was concerned, the editor was the only weak point for Clojure. Back when I got into Clojure Cursive was still brand new, Emacs really was the only editor that was worth using and even it had some stability and usability issues. But I assumed that continued interest would stabilize Emacs, bring Vim up to speed, and improve Cursive to the point where it would be competitive with Emacs/Vim.</p>
+
+<p> But all was not well, and if I&#8217;d paid attention I might have noticed a few places where the core Clojure&#8217;s teams priorities didn&#8217;t seem to make much sense to me. And now that I work in Clojure professionally, I really cannot ignore them or remain silent about them any more.</p>
+
+<p> The core Clojure team prefers green field development over improvements and bug fixes to existing code to a degree that deeply worries me. I no longer trust that any issues I find stand a chance of getting fixed, as all the bugs we&#8217;ve posted are either in limbo, or flat out rejected. Multiple members of my team have given up on posting new bugs because they have no faith that it&#8217;ll help anyone.</p>
+
+<p> These are pretty heavy and vague accusations, so I&#8217;m gonna break this down a bit to make it clearer and easier to digest.</p>
+
+<h2>Ignorance or Apathy of Underlying Principles</h2>
+
+<p> Programming isn&#8217;t math per-se, especially in a language that&#8217;s not explicitly based on Category or Type theory. That said a lot of the things that we do are backed or defined by mathematics, and to ignore that is to guarantee bugs. This is most clear in clojure.set which contains functions that are supposed to mirror the definitions created by Set Theory like <code>union</code>, <code>difference</code>, <code>intersection</code>, etc.</p>
+
+<p> And the namespace is completely riddled with bugs. <code>union</code> returns duplicates if some of the inputs are lists instead of sets <em>depending on their length</em>. <code>intersection</code> will either return nonsense values or throw a ClassCastException if you provide it anything other than sets, again dependent on data.</p>
+
+<p>On their own, this is no big deal. Bugs happen, there&#8217;s really no point in berating people just because they made a mistake. Instead the bug gets fixed as best and as soon as reality allows and we all move on. In fact, for the above bugs there are two possible fixes: raise an IllegalArgumentException if anything other than sets are provided, or coerce lists and vectors to sets before continuing. Both of these approaches are valid due to the fact that this is a dynamic language that defaults to immutable collection semantics; which one you pick is then a matter of how you want to affect your downstream users.</p>
+
+<p>Oh wait, some of these bugs were filed in <em>2009</em>, 7 fucking years ago! Here comes the berating. These functions are <strong>tiny</strong>, a simple implementation of <code>union</code> is one line. And while they&#8217;re heavily used, they&#8217;re simple in usage and signature; no need to change a lot of call sites to fix this bug. There are only two reasons to explain why these bugs have not been fix; they either do not understand that this is an issue, or they do not care.</p>
+
+<p>Actually, their comments on the issues lets us know that they do not understand that this is an issue. Rich Hickey said in 2009 &#8220;the fact that these functions happen to work when the second argument is not a set is an implementation artifact and not a promise of the interface&#8221;. How you define getting the wrong type with nonsense values counts as &#8220;working&#8221; is beyond me. Is it just because it doesn&#8217;t throw an Exception? Anyone here prefer bad data instead of exceptions when dealing with functions like this? I doubt it.</p>
+
+<h2>Inconsistency Between Best Practices and Clojure Implementation</h2>
+
+<p>Clojure includes a pretty powerful concept called protocols. Basically a protocol is an interface that can be added to classes after the fact, and lets you dispatch to different behavior silently at run time.</p>
+
+<p>This is pretty neat, it lets you abstract over multiple data types and include Java classes in the fun. For example ISeq provides all the methods needed to iterate over a collection and it works with all the Clojure and Java data types. So you can use Clojure&#8217;s <code>map</code> function over its own data types and Java&#8217;s because it depends on the seq interface.</p>
+
+<p>As you can imagine, this is the recommended way to work with things. Rather than having to do <code>cond</code> or <code>if</code> logic on various classes, define and use an appropriate protocol and you&#8217;re good to go!</p>
+
+<p>It sounds like a good theory doesn&#8217;t it? But Clojure itself doesn&#8217;t actually do this. Clojure.core contains 89 calls to <code>instance?</code> in order to check runtime type, instead of the helper methods to check for protocol implementation.</p>
+
+<p><a href="http://dev.clojure.org/jira/browse/CLJ-1944">Here</a> is a bug found by my colleague that highlights this issue. List and Vector are both seqs, but <code>into</code> for a map only accepts vectors, lists causes a ClassCastException. This is kind of nuts because an IllegalArgumentException makes more sense, and there&#8217;s no practical reason to differentiate between a list of two elements and a vector of two elements. Actually, Clojure considers <code>[1 2]</code> and <code>(list 1 2)</code> to be equal, so this really makes no sense</p>
+
+<p>Even more obnoxious, it was closed as wontfix. Apparently a single sentence in the docs is good enough for the Clojure team, as well as a paper-thin argument about performance on a 2 element list. So not only is this just broken in a barely documented and very surprising way, Clojure itself ends up programmed in a way that isn&#8217;t recommended by the Clojure docs.</p>
+
+<p>This has spread to other projects. <a href="https://github.com/omcljs/om">Om</a> has a bug where lists aren&#8217;t acceptable in its data structures, only maps sets and vectors. To say that I was treated pretty <a href="https://github.com/omcljs/om/issues/246">shabbily</a> by David Nolen on this issue almost goes without saying. Naturally the intro <a href="https://github.com/omcljs/om/wiki/Basic-Tutorial">docs</a> barely call this out, and the docs <a href="https://github.com/omcljs/om/wiki/Cursors">dedicated</a> to the troubled component does not mention this at all. To be fair, the <a href="https://github.com/omcljs/om/wiki/Troubleshooting">troubleshooting guide</a> explains this, but in my opinion that&#8217;s probably a clue that the bug is common enough that you should find a fix for it.</p>
+
+<h2>Show Stopping Bugs Remain Untouched</h2>
+
+<p>There are a shocking number of big, bad bugs hiding in the Clojure Jira, some really old</p>
+
+<ul>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-308">This one</a> about fixing with-open for Clojure defined stuff provided a patch 5 years ago.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-440">Calling VarArgs Successfully</a> from 6 years ago.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-700">Contains? broken for transient collections</a> from 5 years ago. But it&#8217;s due for this version, so cross your fingers!</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-1463">Bizarrely Defensive Response</a> for a minor code review.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-1741">Duelling ClassLoaders</a> first discovered last year. This one breaks our editors constantly. Not even assigned.</li>
+</ul>
+
+
+<p>I could go on, but I feel that I&#8217;ve made my point. Bugs, even major ones are either closed as &#8220;wontfix&#8221;, or are ignored for years despite the pain felt by users. That&#8217;s not even covering the dismissive and distrustful attitude given in some of the replies.</p>
+
+<h2>Strange Priorities</h2>
+
+<p>The Clojure team appears to be super focused on new features, at the exclusion of existing namespaces. The big highlights from the past year or so have been Transit, Transducers, and Spec.</p>
+
+<p>These are okay, I guess. We use transit a bit, and it&#8217;s kinda cool. But we really don&#8217;t use 90% of its features, it&#8217;s basically JSON for us that can convert numbers to BigDecimals.</p>
+
+<p>We have yet to find a place that Transducers would help us. They&#8217;re neat enough, but the built in lazy sequences are working A-OK for us, so we don&#8217;t really feel the need to change over.</p>
+
+<p>I&#8217;m not holding my breath for Spec. It doesn&#8217;t fix anything for me that other libraries aren&#8217;t already providing.</p>
+
+<p>Know what hasn&#8217;t seen any major improvements in forever? Clojure.test. Clojure.Test is frankly sad. Fixtures are done via some global state, and you can&#8217;t even setup fixtures to work across the entire test suite. Need a database to run functional tests? Well either you need to override the main test runner (good luck running individual tests now!) or you have to setup each namespace to open and close its own database connection (don&#8217;t forget, or your DBA will wonder why Emacs has 1000+ database connections). I&#8217;m 100% behind the idea that I&#8217;ll have to write a bit of glue code, but without anywhere to <em>put</em> that code I&#8217;m kind of screwed.</p>
+
+<p>And then there is the <code>is</code> function. It&#8217;s literally the only assertion provided by clojure.test. It&#8217;s this fancy little macro that grabs its body, evaluates it, then uses the body to produce a human readable message about the failure.</p>
+
+<p>And it&#8217;s garbage. The fact that <a href="https://github.com/pjstadig/humane-test-output">plugins</a> exist to make this easier on the eyes should tell you everything you need to know. Oh but don&#8217;t use that with Emacs/Cider! It&#8217;ll crash the Cider plugin, which is trying to parse the default output.</p>
+
+<p>Back when I used Emacs, I had a stash on my box that disabled AOT, pedantic checking, and the humane-test-output plugin from my project.clj in order to use Cider. Without that stash applied Cider wouldn&#8217;t start, couldn&#8217;t reload code, and would crash when running tests. Now that I use Cursive that&#8217;s less of an issue, but it&#8217;s still kind of nuts I had to decide between a working editor and readable output when I ran <code>lein test</code></p>
+
+<p>Sorry, I didn&#8217;t even highlight the craziest bit of that last paragraph, did you catch it? I had to disable humane-test-output from my <em>project.clj</em>. That&#8217;s because you install it by injecting some code in project.clj that <strong>redefines</strong> some multi-methods, because there&#8217;s no plugin architecture. How nuts is that?</p>
+
+<p>Now I might hear you say &#8220;You don&#8217;t have to use clojure.test!&#8221;, and you&#8217;re right. But clojure.test has clearly won in the Clojure testing namespace. The only real competitors for clojure.test are <a href="https://github.com/slagyr/speclj">Speclj</a> and <a href="https://github.com/marick/Midje">Midje</a>. I&#8217;ve literally never met someone in person that&#8217;s used Speclj, and Midje is super polarizing because it&#8217;s basically a collection of magic macros. The fact that the second entry for Midje is about CircleCI rewriting from Midje to clojure.test should tell you a lot.</p>
+
+<p>So why don&#8217;t we have more creature comforts for clojure.test? I&#8217;m not really sure. As far as I can tell the change to it was the inclusion of <a href="https://github.com/clojure/test.check">test.check</a>, but that really was nothing more than simple-check getting renamed and transferred to Clojure ownership.</p>
+
+<h1>Okay, Now What?</h1>
+
+<p>As I stated before, this isn&#8217;t a &#8220;I&#8217;m quitting Clojure!&#8221; post. Partly this is because I work in Clojure on a daily basis, and I both like my job and am professional enough to keep working despite my complaints. And partly this is because I do not have a replacement for Clojure in mind for my own personal projects. But off the top of my head, there are the things I&#8217;d like to see fixed in the Clojure areas.</p>
+
+<ul>
+<li>More love for clojure.test.</li>
+<li>No tolerance for bugs that result in bad-data. Built in functions should either work, or throw an understandable exception.</li>
+<li>Friendlier responses in Jira. Someone who has gone to the work to sign up and try to help out should be treated with more respect.</li>
+<li>Fix underlying compiler bugs before adding features. The other way only codifies bad behavior and guarantees that it cannot be fixed.</li>
+<li>Understand that if enough people have the same issue, it&#8217;s the codes fault and a FAQ entry is <strong>not</strong> good enough.</li>
+</ul>
+
+
+<p>Basically I want Clojure to be a simple to use language backed by a friendly and active community. What I see now is drifting in the wrong direction, and I&#8217;d like to see that corrected.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/25/integrating-test-dot-check-and-javascript/">Integrating Test.Check and Javascript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-25T08:41:00-07:00" pubdate data-updated="true">Sep 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Introduction</h1>
+
+<p>I was recently on
+<a href="http://blog.cognitect.com/cognicast/ashton-kemerling-064">The Cognicast</a>
+with Craig Andera where we discussed using Generative Testing on a large
+non-Clojure(script) codebase, in particular Ruby on Rails and
+Backbonejs. If you haven&#8217;t listened to the show yet I highly recommend
+it first.</p>
+
+<p>As I promised on the show, I&#8217;d like to share how we used Test.Check to
+test our Backbone.js code base. Our overall strategy for testing
+Javascript is going to be:</p>
+
+<ol>
+<li>Compile JS into one file (just like prod).</li>
+<li>Compile tests into a single file.</li>
+<li>Combine them in a PhantomJS process.</li>
+<li>Let the tests do their thing.</li>
+</ol>
+
+
+<p>While we have been super pleased with the results of Generative Testing,
+there have been some hurdles for getting it to work for us. In this post
+I&#8217;m going to go over how to setup Test.Check to work with your
+Javascript app, and how to dodge all the pitfalls I found.</p>
+
+<p>Here are the challenges that lie between us and Generative Testing bliss.</p>
+
+<ol>
+<li>Picking the right library</li>
+<li>Setting up Leiningen &amp; Cljsbuild</li>
+<li>Dodge PhantomJS issues</li>
+<li>Avoid mangling your app, and defeating dueling dependencies</li>
+</ol>
+
+
+<h1>Picking the Right Library</h1>
+
+<p>First of all, there are two libraries that exist,
+<a href="https://github.com/clojure/test.check">Test.Check</a> and
+<a href="https://github.com/cemerick/double-check">DoubleCheck</a>. Because
+Test.Check is an official Clojure library it is Clojure (JVM) only, so I
+recommend DoubleCheck (maintained by Chas Emerick) which is capable of
+cross compiling to Clojure and Clojurescript.</p>
+
+<p>The only catch with DoubleCheck is that it&#8217;s not currently possible to
+segregate tests via metadata for running in groups. But with the way we
+will be running these tests that won&#8217;t be an issue.</p>
+
+<h1>Setting up Leiningen</h1>
+
+<p>First step, install <a href="http://leiningen.org/">Leiningen</a> and create a
+project.clj wherever you Javascript code is. We&#8217;re going to use
+<a href="https://github.com/emezeske/lein-cljsbuild">Cljsbuild</a> to compile our
+testing code for execution. I in put my test code in test/cljs (because
+I have clj and cljs based tests), and send the compiled output to
+tmp/tracker-cljs.js. Note: this guide <em>only works for Clojurescript
+0.0-2234</em>, I need to figure out why the latest build of Clojurescript
+doesn&#8217;t work.</p>
+
+<p>I highly recommend you send the output of the compilation process to
+either a temporary or gitignored location. The output will be fairly
+large, and it will bog down your repository with its size.</p>
+
+<p>I don&#8217;t want to duplicate the Cljsbuild how-to, so if you don&#8217;t know how
+to make it work, you should check their docs. Our project.clj is
+reproduced at the bottom of this post if you have issues.</p>
+
+<p>At this point, we can write the simplest test possible:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">tracker-cljs.simple-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test.check</span> <span class="ss">:as</span> <span class="nv">core</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.test.check.generators</span> <span class="ss">:as</span> <span class="nv">gen</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.test.check.properties</span> <span class="ss">:as</span> <span class="nv">prop</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">cemerick.cljs.test</span> <span class="ss">:as</span> <span class="nv">t</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require-macros</span> <span class="p">[</span><span class="nv">clojure.test.check.clojure-test</span> <span class="ss">:refer</span> <span class="p">(</span><span class="nf">defspec</span><span class="p">)]</span>
+</span><span class='line'>                   <span class="p">[</span><span class="nv">clojure.test.check.properties</span> <span class="ss">:refer</span> <span class="p">(</span><span class="nf">for-all</span><span class="p">)]</span>
+</span><span class='line'>                   <span class="p">[</span><span class="nv">cemerick.cljs.test</span> <span class="ss">:refer</span> <span class="p">(</span><span class="nf">is</span><span class="p">)]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defspec</span> <span class="nv">simple-test</span> <span class="mi">10</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">for-all</span> <span class="p">[</span><span class="nv">v</span> <span class="p">(</span><span class="nf">gen/such-that</span> <span class="nv">gen/not-empty</span> <span class="p">(</span><span class="nf">gen/vector</span> <span class="nv">gen/int</span><span class="p">))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="nv">v</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">true</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h1>PhantomJS issues.</h1>
+
+<p>In order to run the tests, you would typically have a :tests section in
+:cljsbuild that looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-commands</span> <span class="p">{</span><span class="s">&quot;unit-tests&quot;</span> <span class="p">[</span><span class="s">&quot;phantomjs&quot;</span> <span class="ss">:runner</span>
+</span><span class='line'>                                          <span class="s">&quot;compiled-application.js&quot;</span>
+</span><span class='line'>                                          <span class="s">&quot;tmp/compiled-tests.js&quot;</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will load our JS into the app, along with the tests, and then run
+them. But you might notice errors that look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">SECURITY_ERR</span><span class="err">:</span> <span class="nv">DOM</span> <span class="nv">Exception</span> <span class="mi">18</span><span class="err">:</span> <span class="nv">An</span> <span class="nv">attempt</span> <span class="nv">was</span> <span class="nv">made</span> <span class="nv">to</span> <span class="nv">break</span> <span class="nv">through</span> <span class="nv">the</span> <span class="nv">security</span> <span class="nv">policy</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">user</span> <span class="nv">agent.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That means that your app code is trying to access local storage, and
+PhantomJS does not like it when you do that without loading a
+webpage. The solution for this is to start a server so we have a page to
+visit, and visit it via PhantomJS. So on Tracker we use the following
+two bits of code.</p>
+
+<p>generative_runner.js, to visit the actual page:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">//</span> <span class="nv">reusable</span> <span class="nv">PhantomJS</span> <span class="nv">script</span> <span class="nb">for </span><span class="nv">running</span> <span class="nv">clojurescript.test</span> <span class="nv">tests</span>
+</span><span class='line'><span class="nv">//</span> <span class="nv">see</span> <span class="nv">http</span><span class="ss">://github.com/cemerick/clojurescript.test</span> <span class="nb">for </span><span class="nv">more</span> <span class="nv">info</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">var </span><span class="nv">page</span> <span class="nb">= </span><span class="nv">require</span><span class="p">(</span><span class="ss">&#39;webpage</span><span class="o">&#39;</span><span class="p">)</span><span class="nv">.create</span><span class="p">()</span><span class="c1">;</span>
+</span><span class='line'><span class="nv">page.onResourceError</span> <span class="nb">= </span><span class="nv">function</span><span class="p">(</span><span class="nf">resourceError</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">page.reason</span> <span class="nb">= </span><span class="nv">resourceError.errorString</span><span class="c1">;</span>
+</span><span class='line'>    <span class="nv">page.reason_url</span> <span class="nb">= </span><span class="nv">resourceError.url</span><span class="c1">;</span>
+</span><span class='line'><span class="p">}</span><span class="c1">;</span>
+</span><span class='line'><span class="k">var </span><span class="nv">fs</span> <span class="nb">= </span><span class="nv">require</span><span class="p">(</span><span class="ss">&#39;fs</span><span class="o">&#39;</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'><span class="k">var </span><span class="nv">sys</span> <span class="nb">= </span><span class="nv">require</span><span class="p">(</span><span class="ss">&#39;system</span><span class="o">&#39;</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'><span class="k">var </span><span class="nv">success</span><span class="c1">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">page.onConsoleMessage</span> <span class="nb">= </span><span class="nv">function</span> <span class="p">(</span><span class="nf">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">var </span><span class="nv">line</span> <span class="nb">= </span><span class="nv">x.toString</span><span class="p">()</span><span class="c1">;</span>
+</span><span class='line'>    <span class="k">if </span><span class="p">(</span><span class="nf">line</span> <span class="nv">!==</span> <span class="s">&quot;[NEWLINE]&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">sys.stdout.writeLine</span><span class="p">(</span><span class="nf">line.replace</span><span class="p">(</span><span class="nf">/</span><span class="sc">\[</span><span class="nv">NEWLINE</span><span class="sc">\]</span><span class="nv">/g</span>, <span class="s">&quot;\n&quot;</span><span class="p">))</span><span class="c1">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="c1">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">page.open</span><span class="p">(</span><span class="ss">&#39;http://localhost:4500</span><span class="o">&#39;</span>, <span class="nv">function</span><span class="p">(</span><span class="nf">status</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if </span><span class="p">(</span><span class="nf">status</span> <span class="nv">!==</span> <span class="s">&quot;success&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">console.log</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t load page&quot;</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'>        <span class="nv">phantom.exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nb">for </span><span class="p">(</span><span class="k">var </span><span class="nv">i</span> <span class="nb">= </span><span class="mi">1</span><span class="c1">; i &lt; sys.args.length; i++) {</span>
+</span><span class='line'>        <span class="k">if </span><span class="p">(</span><span class="nf">fs.exists</span><span class="p">(</span><span class="nf">sys.args</span><span class="p">[</span><span class="nv">i</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if </span><span class="p">(</span><span class="nf">!page.injectJs</span><span class="p">(</span><span class="nf">sys.args</span><span class="p">[</span><span class="nv">i</span><span class="p">]))</span> <span class="nv">throw</span> <span class="k">new </span><span class="nv">Error</span><span class="p">(</span><span class="s">&quot;Failed to inject &quot;</span> <span class="nb">+ </span><span class="nv">sys.args</span><span class="p">[</span><span class="nv">i</span><span class="p">])</span><span class="c1">;</span>
+</span><span class='line'>        <span class="p">}</span> <span class="nv">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">page.evaluateJavaScript</span><span class="p">(</span><span class="s">&quot;(function () { &quot;</span> <span class="nb">+ </span><span class="nv">sys.args</span><span class="p">[</span><span class="nv">i</span><span class="p">]</span> <span class="nb">+ </span><span class="s">&quot;;&quot;</span> <span class="nb">+ </span><span class="s">&quot; })&quot;</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">page.evaluate</span><span class="p">(</span><span class="nf">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">cemerick.cljs.test.set_print_fn_BANG_</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="nf">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">console.log</span><span class="p">(</span><span class="nf">x.replace</span><span class="p">(</span><span class="nf">/</span><span class="sc">\n</span><span class="nv">/g</span>, <span class="s">&quot;[NEWLINE]&quot;</span><span class="p">))</span><span class="c1">; // since console.log *itself* adds a newline</span>
+</span><span class='line'>        <span class="p">})</span><span class="c1">;</span>
+</span><span class='line'>    <span class="p">})</span><span class="c1">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">success</span> <span class="nb">= </span><span class="nv">page.evaluate</span><span class="p">(</span><span class="nf">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">var </span><span class="nv">results</span> <span class="nb">= </span><span class="nv">cemerick.cljs.test.run_all_tests</span><span class="p">()</span><span class="c1">;</span>
+</span><span class='line'>        <span class="nv">console.log</span><span class="p">(</span><span class="nf">results</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'>        <span class="nv">return</span> <span class="nv">cemerick.cljs.test.successful_QMARK_</span><span class="p">(</span><span class="nf">results</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'>    <span class="p">})</span><span class="c1">;</span>
+</span><span class='line'>    <span class="nv">phantom.exit</span><span class="p">(</span><span class="nf">success</span> <span class="nv">?</span> <span class="mi">0</span> <span class="err">:</span> <span class="mi">1</span><span class="p">)</span><span class="c1">;</span>
+</span><span class='line'><span class="p">})</span><span class="c1">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And a rake task to stand up a server and run everything. If you don&#8217;t
+use Rails for your Javascript code you might need to use different
+commands to compile, but the intention remains. The WEBrick server
+provides a blank page for us to visit and run our tests on, which
+prevents PhantomJS from raising security errors.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">require</span> <span class="ss">&#39;fileutils</span><span class="o">&#39;</span>
+</span><span class='line'><span class="nv">require</span> <span class="ss">&#39;webrick</span><span class="o">&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">namespace </span><span class="ss">:test</span> <span class="nv">do</span>
+</span><span class='line'>  <span class="nv">desc</span> <span class="s">&quot;Run ClojureScript generative tests&quot;</span>
+</span><span class='line'>  <span class="nv">task</span> <span class="ss">:generative</span> <span class="nv">do</span>
+</span><span class='line'>    <span class="nv">server</span> <span class="nb">= </span><span class="nv">WEBrick</span><span class="ss">::HTTPServer.new</span><span class="p">({</span><span class="ss">:Port</span> <span class="nv">=&gt;</span> <span class="mi">4500</span>, <span class="ss">:DocumentRoot</span> <span class="nv">=&gt;</span> <span class="s">&quot;.&quot;</span>, <span class="ss">:BindAddress</span> <span class="nv">=&gt;</span> <span class="s">&quot;0.0.0.0&quot;</span><span class="p">})</span>
+</span><span class='line'>    <span class="nv">Thread.new</span> <span class="nv">do</span>
+</span><span class='line'>      <span class="nv">server.start</span>
+</span><span class='line'>    <span class="nv">end</span>
+</span><span class='line'>    <span class="nv">exitCode</span> <span class="nb">= </span><span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">begin</span>
+</span><span class='line'>      <span class="nv">Rake</span><span class="ss">::Task</span><span class="p">[</span><span class="ss">&#39;assets:clean</span><span class="o">&#39;</span><span class="p">]</span><span class="nv">.invoke</span>
+</span><span class='line'>      <span class="nv">Rake</span><span class="ss">::Task</span><span class="p">[</span><span class="ss">&#39;assets:precompile</span><span class="o">&#39;</span><span class="p">]</span><span class="nv">.invoke</span>
+</span><span class='line'>      <span class="nv">exitCode</span> <span class="nb">= </span><span class="nv">system</span> <span class="s">&quot;lein cljsbuild test&quot;</span>
+</span><span class='line'>    <span class="nv">ensure</span>
+</span><span class='line'>      <span class="nv">server.shutdown</span>
+</span><span class='line'>    <span class="nv">end</span>
+</span><span class='line'>    <span class="nv">exit</span> <span class="nv">exitCode</span>
+</span><span class='line'>  <span class="nv">end</span>
+</span><span class='line'><span class="nv">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To make all this work together, update project.clj to reference the
+generative_runner.js file instead of :runner, and use <code>rake
+test:generative</code> to kick off the run.</p>
+
+<h1>Don&#8217;t Mangle Your Code</h1>
+
+<p>If your application is anything like Tracker, you might use some Google
+Closure dependencies without using the entire Closure compiler. And even
+if you don&#8217;t need use Closure, you certainly have functions and classes
+in the global namespace that you don&#8217;t want mangled.</p>
+
+<p>To get around this, I recommend the following settings:</p>
+
+<p>Add <code>:libs [ "compiled-application.js" ""]</code> to the cljsbuild section
+in project.clj. This prevents DoubleCheck compiler errors due to
+classpath issues, and it allows the Closure compiler to see everything
+that your application provides. So if your tests and applications have
+overlapping Closure dependencies you won&#8217;t get double provide errors.</p>
+
+<p>Secondly I recommend that you only use the simple compilation mode. This
+will prevent Closure from mangling global names, which will make
+debugging easier and prevent your tests from being able to find the
+production code. The space saving and code elimination that advanced
+mode provides is more of a problem than a benefit for testing, so it&#8217;s
+not worth fighting to get advanced to work.</p>
+
+<p>You can fiddle with source maps if you wish, but I
+haven&#8217;t had much luck or use for them; simple compiled Clojurescript is
+easy to read, and most of the serious errors have come from the 43k
+application javascript file, not the test file.</p>
+
+<h1>Have Fun and Make More Tests</h1>
+
+<p>Once you have that going, it should be possible to open up and create
+increasingly complicated tests. As a teaser and a good example, the
+following code caught a tricky JS ordering bug.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">tracker-cljs.panel-items-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test.check</span> <span class="ss">:as</span> <span class="nv">core</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.test.check.generators</span> <span class="ss">:as</span> <span class="nv">gen</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.test.check.properties</span> <span class="ss">:as</span> <span class="nv">prop</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">cemerick.cljs.test</span> <span class="ss">:as</span> <span class="nv">t</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require-macros</span> <span class="p">[</span><span class="nv">clojure.test.check.clojure-test</span> <span class="ss">:refer</span> <span class="p">(</span><span class="nf">defspec</span><span class="p">)]</span>
+</span><span class='line'>                   <span class="p">[</span><span class="nv">clojure.test.check.properties</span> <span class="ss">:refer</span> <span class="p">(</span><span class="nf">for-all</span><span class="p">)]</span>
+</span><span class='line'>                   <span class="p">[</span><span class="nv">cemerick.cljs.test</span> <span class="ss">:refer</span> <span class="p">(</span><span class="nf">is</span><span class="p">)]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">ids</span> <span class="p">[</span><span class="nv">items</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq? </span><span class="nv">items</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">item</span><span class="p">]</span> <span class="p">(</span><span class="nf">.get</span> <span class="nv">item</span> <span class="ss">:id</span><span class="p">))</span>
+</span><span class='line'>         <span class="nv">items</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">item</span><span class="p">]</span> <span class="p">(</span><span class="nf">.get</span> <span class="nv">item</span> <span class="ss">:id</span><span class="p">))</span>
+</span><span class='line'>         <span class="p">(</span><span class="nf">.-models</span> <span class="nv">items</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">create-models</span> <span class="p">[</span><span class="nv">ids</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nf">Backbone.Model.</span> <span class="p">(</span><span class="nf">js-obj</span> <span class="ss">:id</span> <span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'>       <span class="nv">ids</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defspec</span> <span class="nv">sort-check</span> <span class="mi">100</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">for-all</span> <span class="p">[</span><span class="nv">v</span> <span class="p">(</span><span class="nf">gen/such-that</span> <span class="nv">gen/not-empty</span> <span class="p">(</span><span class="nf">gen/vector</span> <span class="nv">gen/int</span><span class="p">))]</span>
+</span><span class='line'>           <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">models</span> <span class="p">(</span><span class="nf">create-models</span> <span class="nv">v</span><span class="p">)</span>
+</span><span class='line'>                 <span class="nv">sorted</span> <span class="p">(</span><span class="nb">sort </span><span class="nv">v</span><span class="p">)</span>
+</span><span class='line'>                 <span class="nv">subject</span> <span class="p">(</span><span class="nf">tracker.PanelItems.</span><span class="p">)]</span>
+</span><span class='line'>             <span class="p">(</span><span class="nf">.reset</span> <span class="nv">subject</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">array</span> <span class="nv">models</span><span class="p">))</span>
+</span><span class='line'>             <span class="p">(</span><span class="nf">.refresh</span> <span class="nv">subject</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">array</span> <span class="p">(</span><span class="nb">sort-by </span><span class="o">#</span><span class="p">(</span><span class="nf">.get</span> <span class="nv">%</span> <span class="ss">:id</span><span class="p">)</span> <span class="nv">models</span><span class="p">)))</span>
+</span><span class='line'>             <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="nv">sorted</span>
+</span><span class='line'>                    <span class="p">(</span><span class="nf">ids</span> <span class="nv">subject</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the following is our project.clj, with unnecessary details elided
+for readability.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">generative-testing</span> <span class="s">&quot;0.0.1-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">lein-cljsbuild</span> <span class="s">&quot;1.0.3&quot;</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">com.cemerick/clojurescript.test</span> <span class="s">&quot;0.2.2&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojurescript</span> <span class="s">&quot;0.0-2234&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">com.cemerick/clojurescript.test</span> <span class="s">&quot;0.3.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">com.cemerick/double-check</span> <span class="s">&quot;0.5.8-SNAPSHOT&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:cljsbuild</span> <span class="p">{</span><span class="ss">:builds</span> <span class="p">[{</span><span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;test/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'>                        <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span> <span class="s">&quot;tmp/tracker-cljs.js&quot;</span>
+</span><span class='line'>                                   <span class="ss">:libs</span> <span class="p">[</span> <span class="s">&quot;public/web/assets/application.js&quot;</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+</span><span class='line'>                                   <span class="ss">:optimizations</span> <span class="ss">:simple</span>
+</span><span class='line'>                                   <span class="ss">:pretty-print</span> <span class="nv">true</span><span class="p">}}]</span>
+</span><span class='line'>              <span class="ss">:test-commands</span> <span class="p">{</span><span class="s">&quot;unit-tests&quot;</span> <span class="p">[</span><span class="s">&quot;phantomjs&quot;</span> <span class="s">&quot;lib/generative_runner.js&quot;</span>
+</span><span class='line'>                                            <span class="s">&quot;public/next/assets/next/next.js&quot;</span>
+</span><span class='line'>                                            <span class="s">&quot;tmp/tracker-cljs.js&quot;</span><span class="p">]}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also, the following function is helpful for converting from Cljs data
+structures to pure Javascript ones. It causes some compiler warnings,
+but they appear to be harmless.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">clj-&gt;js</span>
+</span><span class='line'>  <span class="s">&quot;Recursively transforms ClojureScript maps into Javascript objects,</span>
+</span><span class='line'><span class="s">   other ClojureScript colls into JavaScript arrays, and ClojureScript</span>
+</span><span class='line'><span class="s">   keywords into JavaScript strings.&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">cond</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">string? </span><span class="nv">x</span><span class="p">)</span> <span class="nv">x</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">keyword? </span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">name </span><span class="nv">x</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map? </span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">js-obj</span> <span class="p">(</span><span class="nf">flatten</span> <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nb">key </span><span class="nv">val</span><span class="p">]]</span> <span class="p">[(</span><span class="nf">clj-&gt;js</span> <span class="nv">key</span><span class="p">)</span> <span class="p">(</span><span class="nf">clj-&gt;js</span> <span class="nv">val</span><span class="p">)])</span> <span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">coll?</span> <span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">array</span> <span class="p">(</span><span class="nb">map </span><span class="nv">clj-&gt;js</span> <span class="nv">x</span><span class="p">))</span>
+</span><span class='line'>    <span class="ss">:else</span> <span class="nv">x</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Good luck, and don&#8217;t hesitate to reach out to me on Twitter if you have
+any questions!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/19/unusual-productivity-hacks/">Unusual Productivity Hacks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-19T07:37:00-07:00" pubdate data-updated="true">Jun 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The internet is lousy with productivity ideas, mostly about how to work harder or longer. I personally believe that good productivity is about maximizing per hour results, not working harder. And the fastest way to improve your productivity is to eliminate some of the things slowing you down. So rather than going over the usual suspects, let&#8217;s take a look at eliminating some of the low hanging fruit.</p>
+
+<h2>1. Conquer Your Diet.</h2>
+
+<p>What you eat is the cornerstone of who you are and what you do. The proteins in your muscle, the fats in your cell walls and your brain, and the amino acids used throughout your body must all come from, or be synthesized from your food. Low quality food products like trans fats have been connected with apathy, depression, and might be related to ADD. In order for your brain and body to perform at peak levels you need to give it high quality food to repair and refuel.</p>
+
+<h2>2. Sleep</h2>
+
+<p>Sleep is massively underrated. Everyone knows at this point that Americans are typically not getting enough sleep on a nightly basis, but distressingly few people consider it to be an issue. After all, hours spent asleep aren&#8217;t hours spent working right? Unfortunately it isn&#8217;t that simple. Insufficient or low quality sleep is one of the fastest ways that we know of to destroy per hour productivity. Get sleep or waste your precious waking hours in a mind fog.</p>
+
+<h2>3. Know when to stop.</h2>
+
+<p>Athletes regularly destroy their bodies by &#8220;over training&#8221;; exercising to the point of injury or chronic fatigue. The results of over training are often slow growth or even frustrating setbacks despite hundreds of hours at the gym or on the track.</p>
+
+<p>Mental workers regularly do the exact same thing to their mind by working well past the point of mental burnout. There is very little use in working when you are not going to be putting out at least average results, and you risk ruining your morale after hours of low-results work. Instead of ritualistically working even when you are spent gain an intuitive sense for when you will accomplish little and instead go recharge and try again later.</p>
+
+<h2>4. You must come out unharmed 1 time or 1000 times.</h2>
+
+<p>No productivity regime is worthwhile if you can only maintain it for 2 weeks at the start of each year. To be successful, you must find a pattern that you can maintain years. Whether that is a small amount per day or a cycle between intense work and relaxation, you must find a balance between work and play or you will be plagued by failures to meet your goals.</p>
+
+<h2>5. Know thyself.</h2>
+
+<p>Everyone wants to be successful, but most people overestimate how much money motivates them. Find ways to motivate yourself with something other than riches, or better yet find something that you love to do. Love of the work will make it easier to get up, or home, every day and work rather than abstract future financial rewards.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/09/the-swordsman-and-the-software-engineer/">The Swordsman and the Software Engineer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-09T22:31:00-07:00" pubdate data-updated="true">Jun 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the largest mistakes you can make as a knowledge worker is to focus 100% of your time on your craft. It&#8217;s easy to believe that specializing and focusing will make you better than your peers, but I do not think that is the case. Not only will specializing cause you to plateau earlier than your peers, it will cause you to be less happy and healthy than your diversified peers.</p>
+
+<p>A bit of background at this point would probably be helpful. I&#8217;m a software engineer and I&#8217;ve coded both professionally and on a hobbyist basis for nearly a decade. After a particularly stressful few months at a previous job, my fiancé forced me to join a local gym to de-stress. The gym focused on various European martial arts and I ended up in a class for the Italian longsword circa 1409.</p>
+
+<p>A few years ago I would have suspected that choosing to surrender 2-8 hours a week to swinging steel around instead of programming on hobbyist projects would slow down my growth. Now I believe that I owe a lot of my growth, professionally and as a human being to this practice. A lot of what I&#8217;m going to cover here will probably be old news to anyone who was heavily involved in sports, nor is it particularly unique to fencing. That being said I&#8217;m fairly confident that a lot of knowledge workers have lost the involvement with physical activities they might have had, or never were all that &#8220;athletic&#8221; even in school.</p>
+
+<p>The biggest modern challenge is that humans are not wired for the type of work that we now do. We are a fairly clever species by nature, which is why we have been making art for hundreds of thousands of years. But we are still more or less genetically and mentally hunter gatherers from 100,000+ years ago who largely worked for their survival. Our bodies, genes, and minds are wired to expect a specific ratio of play and physical activity to signal that all is well. Unfortunately we work a lot longer than our ancestors did, and under very different conditions.</p>
+
+<p>This high level of nothing but work, physical or mental, indicates to our bodies that times are tough and that it should release stress hormones to help us survive the coming hard times; these stress hormones tend to have serious detrimental effects on mental performance and long term health. The phrase &#8220;all work and no play&#8221; may be over-used, but it does have some truth. All work and no play leaves Jack pumped full of cortisol, short on sleep, and low on testosterone.</p>
+
+<p>Secondly, most knowledge workers spend their entire time thinking only with their frontal cortex, or the analytical portion of the brain. This is very helpful if your job involves concentrating on difficult problems all day, but it is incredibly easy to let that portion of your brain become the only driving factor on your day to day life. The brain, like your muscles, should have ample opportunity to exercise all of its faculties and have recovery time between each heavy usage. Expecting it to be able to focus deeply on your work day in and day out without giving it time to relax is simply asking for lowered performance and burnout, and only working on one aspect of your mental performance is akin to only doing curls at the gym; the result is an odd shape with very little practical strength.</p>
+
+<p>Thankfully exercise and hobbies help other parts of the brain. This is one of the things I love about fencing: it isn&#8217;t very analytical once you actually start using it. There are a ton of cuts and guards to be memorized, but you never have time to think about it when you are actually fencing. All of the drills are designed so that your mind and body learn to move with instinctual grace from one guard to another. There is very little conscious thought that happens mid-move in a match; there simply is not enough time to stop and think. Instead you learn to have an internalized notion of time and measure, and an ability to make new decisions as the fight progresses quickly and correctly.</p>
+
+<p>And while none of this directly relates to software engineering, it has a positive effect on my daily work. The ability to move with a fight and think with my toes and fingertips have given me a greater appreciation to the importance of gut instinct in more situations. And the constant practice of excluding my analytical mind in a fast moving match have improved my ability to enter a flow state more easily. Combine these things with the general good effects of mental down time and exercise, and I think it&#8217;s hard to argue that my time would have been better spent working on hobbyist projects.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/28/confessions-of-a-language-snob/">Confessions of a Language Snob</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-28T22:29:00-07:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am a language snob. In particular I fall head over heels for most functional languages, especially MLs and Lisps. Show me the latest and greatest Javascript framework and I will just wish I had immutable data types and a saner method dispatch system. I try to keep quiet about it at work with varying degrees of success, but it&#8217;s frustrating to work around one language&#8217;s problems when you know of other solutions.</p>
+
+<p>The difficult reality that few admit is that every language has a weak point. Ruby is slow and the lack of import semantics and proper namespaces makes it difficult to determine what code will run. Python lacks a good lambda and whitespace sensitivity brings new difficulties. Javascript is just pure insanity. Lisp is poorly standardized and tends to have subpar documentation. The list goes on and on. No language is perfect, but it&#8217;s very easy to focus on the high points of one language while working through the low points of another.</p>
+
+<p>The real bummer about being a language snob is that there&#8217;s really nothing to be done about it. For any given issue there will always be another language that exceeds in that area, but it&#8217;s almost always insane and impractical to convert your entire company over to it. So even if you think Go would solve every problem that your Python codebase has, and you know that the downsides wouldn&#8217;t be insurmountable, the simple reality is that convincing the organization to throw away their perfectly good Python code on a whim is insane at best. And that&#8217;s assuming that converting to your language wouldn&#8217;t come with downsides worse than the language you are coming from.</p>
+
+<p>Thankfully, there is an upside to being a language snob. Polyglots have a far more flexible understanding of what a program should do, especially when they&#8217;re used to a wide range of paradigms. Someone who has done nothing but C or Java programming might have very little context into why mutable state can be so problematic, but someone who knows Clojure or Haskell will know the tradeoffs of mutable vs. immutable state intimately. Each new paradigm a programmer embraces means that they have more internal views on how a particular problem could be solved, a bit like having an experienced team in your head to discuss the merits of various techniques at lightning speed.</p>
+
+<p>While it may be very frustrating to know of better solutions in other languages, there is a benefit to knowing about them. Being a language snob can help you evaluate your choices more effectively and discover solutions and strategies that might not be immediately obvious if you only knew one language. And between being a bit of a snob and attempting to shoe-horn every problem into a one-size fits all paradigm, I&#8217;ll take being a snob.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/31/the-primacy-of-the-build-tool/">The Primacy of the Build Tool</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-31T13:55:00-07:00" pubdate data-updated="true">Mar 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No programming language stands alone. Besides the compiler, every
+programming language includes an ecosystem of libraries, build tools,
+analyzers, debuggers, and other utilities. Languages often rise and fall
+depending on the quality of these tools and libraries.</p>
+
+<p>For every language there needs to be one central item upon which every
+other tool depends. In most languages, this is the compiler or
+interpreter. Your Rails project is entirely dependent on the version of
+Ruby provided by the current environment, and similarly Maven depends on
+the version of javac and java available on the path.</p>
+
+<p>Unfortunately, this makes our code more fragile and dependent on the
+machine it was first created on. Someone cloning your code from a
+different machine must take care to ensure that their development
+environment is close to the original authors, and deployment must ship
+the correct compilers and interpeters for production to work well. We
+have created tools to help enforce the requirements of the code, but
+they are fragile and make upgrading dependencies a pain, as anyone who
+has had to fight with RVM can attest.</p>
+
+<p>The one exception to this I have found is Clojure. Clojure inverts the
+normal order making the build tool the central item, with the compiler
+provided by the project definition file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">foo</span> <span class="s">&quot;0.1.0-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:description</span> <span class="s">&quot;FIXME: write description&quot;</span>
+</span><span class='line'>  <span class="ss">:url</span> <span class="s">&quot;http://example.com/FIXME&quot;</span>
+</span><span class='line'>  <span class="ss">:license</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;All Rights Reserved.&quot;</span><span class="p">}</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure-contrib</span> <span class="s">&quot;1.2.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">clj-time</span> <span class="s">&quot;0.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">midje</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]]}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The beauty of this change is that it makes setup trivial for another
+developer. All they need is the same build tool, and it will deal with
+the correct versions of both the compiler and any libraries for the
+project. Have other projects that depend on different versions of the
+compiler? The build tool only cares about the dependencies in front of
+it, and will call the correct version from the correct project.</p>
+
+<p>This also makes upgrading trivial. Want to try Clojure 1.6.0? Change
+&#8220;1.5.1&#8221; to &#8220;1.6.0&#8221; in the above snippet. Want to write a library that
+supports multiple versions of the compiler? The build tool supports
+profiles which allow you to swap out compilers trivially because it&#8217;s
+just a dependency.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:1.3</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.3.0&quot;</span><span class="p">]]}</span>
+</span><span class='line'>           <span class="ss">:1.4</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.4.0-beta1&quot;</span><span class="p">]]}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Deployment gets easier as well. If you&#8217;re deploying an uberjar, the core
+libraries you tested against are also shipped to production in the same
+jar. No need to upgrade your deployment scripts when a new version of
+Clojure comes out, as everything is included automatically.</p>
+
+<p>There is one catch to this wonderfulness, which is that Clojure depends
+on the JVM, and the build tool cannot change the JVM around. But Clojure
+has very simple requirements, Java 1.6 or greater, which
+makes it simple to deploy anywhere.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/24/disdain/">Disdain</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T20:19:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of my hobbies is fencing. Not modern Olympic fencing, but 14th
+century longsword fencing in the Italian school. In every class the
+instructor reminds us that we should act &#8220;like haughty Italian nobles,
+tall and relaxed&#8221; in the way that we stand, move, and handle the weapon.</p>
+
+<p>The word &#8220;Sprezzatura&#8221; crops up a lot in these discussions. The simplest
+translation is literally &#8220;disdain&#8221;, but a more careful translation would
+be &#8220;studied carelessness&#8221;. To act with Sprezzatura means to make learned
+actions look easy and natural.</p>
+
+<p>It turns out there is a really good reason for a fencer to act this
+way. A relaxed and calm fencer can move more rapidly and adjust their
+actions depending on whether they are winning or losing the bind. Their
+actions happen without any tell, catching their opponent by surprise and
+allowing them to act within their opponents tempo. In sword fighting the
+ultimate goal is to strike your opponent without being hit. Thus the
+shortest and simplest actions are favored, as large embellished actions
+only increase personal risk.</p>
+
+<p>There is a similar grace in programming. While programming is not
+usually a competitive or dangerous hobby, there are practical benefits
+to acting quickly and gracefully. The most effective engineer completes
+their task with the minimal amount of time and added complexity. Showing
+off in the code only increases the risk of regressions and makes the
+code harder to modify later. The ultimate goal is a maintainable
+application that meets requirements in the minimal amount of time, and
+an accomplished engineer will take the shortest route to that goal.</p>
+
+<p>Sword fighting is not about strength. It is never effective to swing a
+sword with all of your strength. Even if this wasn&#8217;t unsafe and an
+obvious tell, it isn&#8217;t a good way to cut with an edged weapon. Swords
+depend on a cutting edge to do damage, and thus a smooth arc that draws
+the weapon through the target will always cut more effectively than a
+ham-fisted baseball swing.</p>
+
+<p>Similarly, the accomplished engineer knows that completing a task is not
+about the number of hours spent, but the quality. The mind is a tool
+that can be both sharpened and dulled with both work and rest, and
+programming is a task of the mind. Thus the quality engineer avoids
+excessive hours, as they are unhealthy and ineffective. Instead the
+engineer makes their limited productive hours as effective as possible
+without excessive strain.</p>
+
+<p>It may not be the connection you expected, but humans haven&#8217;t changed in
+a very long time. Even if our circumstances have changed, there is
+always something to be learned from even the most esoteric sources.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/14/managing-is-a-craft-too/">Managing Is a Craft Too</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-14T22:45:00-08:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m getting a little tired of seeing posts saying that the best managers
+must be an ex-engineer or a current one. I think coding skill is a very
+narrow minded way to judge both a human and a professional, and a
+terrible way to run a business.</p>
+
+<p>Here&#8217;s the simple truth, a manager is a craftsperson just like a
+designer or engineer. The only difference is that their craft is
+organizing people, not designs or code. In their trade the best tools
+are flexibility, communication, empathy, and comprehension. My personal
+opinion is that a good manager is at least as hard to find as a good
+engineer, if not harder.</p>
+
+<p>To say that a manager of engineers needs to know how code and needs to
+code daily is like saying that you have to be a doctor to manage a
+doctor&#8217;s office, and that you need to be practicing right now. While a
+bit of knowledge aids in communication, there are a wide range of tasks
+that need to be performed that are <em>not</em> coding. And to ignore these
+tasks would be just as disastrous as not writing the software that the
+company sells.</p>
+
+<p>We&#8217;ve all heard the horror stories of non-engineer managers not knowing
+or caring what engineers do, or the ex-engineer manager thinking that
+they&#8217;re still on the team when their knowledge is 20 years out of
+date. Clearly both of these people are being ineffective managers, but
+not because of whether or not they can code. These people are being bad
+managers because they are not <em>listening</em> to their staff. Anyone, coder
+or not, will be a terrible manager without the requisite people skills.</p>
+
+<p>So hire and keep managers that listen and communicate well. Managers
+that manage expectations of those uphill and divert shit rolling
+downhill. The best manager is the one that helps their team be the best,
+whether or not there are any commits with their name on it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/06/internationalization-golf/">Internationalization Golf</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-06T22:48:00-08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Martin Grüner had a <a href="http://martingryner.com/software-localization-is-tricky/">fun</a> article about his experience writing an internationalized app. I thought it would be fun to share my own experiences.</p>
+
+<p>My first job out of college was working on a Common Lisp (CL) web application. The application was only a few years younger than me, and had originally written in CL due to a particularly good HTML/XML library available in CL at the time. Unfortunately in the intervening years the HTML library stopped being state of the art, and the whims of enterprise software engineering had left CL behind for web development, resulting in a serious lack of common programming conveniences.</p>
+
+<p>Right after joining the company, I was informed that the sales person had a potential lead with clients in a Spanish speaking country. The application at this point was English only, but the QA engineer was married to a native Spanish speaker who was willing to help translate the application. All we needed to do was wire the application up for internationalization and localization. I was tasked with picking or creating a library and interspersing it throughout the application. The only criteria was that it both looked good and was capable of displaying different languages to different users depending on their browser&#8217;s &#8220;accept-language&#8221; header. So compiling or packaging up a new application with hard-coded languages was not an option.</p>
+
+<p>I eventually decided that all the existing libraries were insufficient and we needed to make our own. I&#8217;m still not sure if that was the right choice or not. CL doesn&#8217;t have the strongest library ecosystem around, but I was also a very young engineer and more susceptible to the &#8220;Not Invented Here&#8221; syndrome than I am now. Although a quick perusal through the current offerings involves libraries whose home pages are 404s, libraries who are nothing but FFI bindings to a GNU C library, and those whose list of defects includes &#8220;no documentation&#8221;, &#8220;undocumented code&#8221; and &#8220;slow PO parser&#8221;.</p>
+
+<p>Compounding the issue was CL&#8217;s format function. CL has an exceedingly powerful formatter that is capable of unwrapping loops and interspersing the correct combination of &#8220;,&#8221; and &#8220;and&#8221; for a list of strings. This function was used with (reckless) abandon throughout the codebase, something for which I deserve some blame. The lack of dedicated template files compounded the issues; it&#8217;s a lot easier to reach for format when you&#8217;re producing HTML the handler-function itself.</p>
+
+<p>There was no way I was going to explain the (non-technical) translator how to deal with format directives like this: &#8220;~#[NONE~;~a~;~a and ~a~:;~a, ~a~]~#[~; and ~a~:;, ~a, etc~].&#8221;, and I didn&#8217;t want to dig through 500kloc and unroll all the directives. So any translation system I made would need to support at least a subset of the CL formatting directives while hiding them for the translator&#8217;s sanity.</p>
+
+<p>Worse still, CL&#8217;s formatter accepts positional arguments only, to my knowledge. Thus there&#8217;s no particular way to convince the formatter to modify the order of the parameters if the target language has different language structure than English. So my system would need to deal with that.</p>
+
+<p>The final format I settled on would look something like this. The programmer (me) would change (format nil &#8220;~a&#8221; var) to (jibberish:format &#8220;&lt;~a:variable-name&gt;&#8221; &#8220;Descriptive sentence for translator&#8221; :variable-name var). We could then convince our code to print out a file for a language like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>####################################
+</span><span class='line'>File: filename.cl
+</span><span class='line'>####################################
+</span><span class='line'>
+</span><span class='line'>Original: &lt;variable-name&gt;
+</span><span class='line'>Translation: Translation goes here
+</span><span class='line'>Note for translator: Descriptive sentence for translator
+</span><span class='line'>Original Argument Order: [variable-name]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And so on. At runtime the language file would be parsed into a in-memory hash map, which would allow us to replace the format-string with the new one, re-order the argument list according to the translator&#8217;s needs, and strip the identifiers from the formatting string leaving the raw format directives.</p>
+
+<p>So, how&#8217;d I do? Mixed results. The conversion was long and painful, requiring that each format directive and raw string be touched. A huge portion of the &#8220;Notes for translator&#8221; were either blank due to difficulty and fatigue, or were something along the line &#8220;Description, part 1/n&#8221; due to multiple calls being joined together in HTML. Changes in formatting calls required that the matching translation entry be hunted down <em>in every translation file</em> for the translation to still work.</p>
+
+<p>But technical challenges are usually not a big deal, after all that&#8217;s a fairly large portion of what engineers do. Probably the worst problem with my system was how it worked for non-technical folk. The first attempt at giving this file to a translator resulted in her helpfully translating all the variable names into spanish, changing &#8220;It is &lt;today&gt;&#8221; to &#8220;que es &lt;hoy&gt;&#8221;, which resulted in some rather exciting errors. I think my own design sabotaged me in this particular instance, as it required way too much careful explanation to be usable. It was my first encounter with the major difference between using a program whose internals you are familiar and explaining its use to someone else who has never seen anything similar.</p>
+
+<p>I think if I had to do it again, I would&#8217;ve probably spent more time and modified the way the program generated strings instead. I suspect that my custom library avoiding refactoring everything was a case of <a href="http://en.wikipedia.org/wiki/False_economy">false economy</a>, as the time saved up front would have been lost in the time required to train translators and maintain overly fragile translation files. I also learned that if you plan on selling an application in another language market, you need to think about that <em>before</em> you start writing code. Internationalization limits some of the choices you can make with your software and design, and it&#8217;s a lot easier to use that restricted set up front than it is to unwind them after the fact.</p>
+
+<p>As a final irony, while attempting to write this post in Octopress (which uses Jekyll), it crashed several times because the SASS files in Octopress use unicode, which Octopress appears to hate out of the box. You have to change a few environment variables to convince it that Unicode is ok.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Ashton Kemerling -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ashtonkemerling';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

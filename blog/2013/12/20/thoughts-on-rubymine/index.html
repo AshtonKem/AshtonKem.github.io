@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Thoughts on RubyMine - Ashton Kemerling</title>
+  <meta name="author" content="Ashton Kemerling">
+
+  
+  <meta name="description" content="As part of my new job at Pivotal Labs I&#8217;ve been pair programming almost
+every day. The obvious challenge with pair programming, especially in a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Ashton Kemerling" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32325955-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1>Ashton Kemerling</h1>
+  
+    <h2><a href="/">AK</a></h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation">
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+  <li><a href="/resume">Resume</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Thoughts on RubyMine</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T21:38:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As part of my new job at Pivotal Labs I&#8217;ve been pair programming almost
+every day. The obvious challenge with pair programming, especially in a
+popular language like ruby, is in choosing what tools to work with. Vim,
+Emacs, RubyMine, TextMate, the choices are various and divisive.</p>
+
+<p>To make peace among the engineers, it makes sense to dictate one set of
+tools to make peace among all your employees, and to make provisioning
+the machines easier. Pivotal has decided to standardize on RubyMine with
+a dark color scheme and a few custom configurations.</p>
+
+<h1>The Good</h1>
+
+<p>RubyMine, being set up for ruby in particular, works very well with
+navigating, indenting, and colorizing ruby code. With the exception of
+setting a variable as the result of an if expression, I have never seen
+RubyMine indent code incorrectly or get confused on coloration.</p>
+
+<p>It also does a decent job of navigating to ruby classes and functions,
+something that is quite hard since ruby lacks explicit import
+semantics. It definitely makes hunting down odd test harness functions
+down a breeze, and has saved me in the past. It also is good at
+identifying the view that cooresponds to a controller method, but due to
+the way that tracker is laid out, I haven&#8217;t had a chance to use this
+feature often.</p>
+
+<p>And as the cherry on top RubyMine includes a &#8220;Textmate like&#8221; quick find
+feature. In large code bases this will save you about a minute trying to
+find a particular file, so ling as you have an idea of what it&#8217;s called!</p>
+
+<h1>The Bad</h1>
+
+<p>If you only have unique controllers and models, you will absolutely love
+the ability to jump to a class definition. Since we use a lot of
+similarly named controllers inside namespaces to control API versions,
+it often gets confused about what version I want. The quick find feature
+sometimes ignores the path if you provide it, which makes copying files
+from stacktraces occasionally unreliable.</p>
+
+<p>Javascript and less support is mediocre. No real complaints, but nothing
+to set it apart from other environments in my opinion. Maybe my
+colleagues who work on the front end would have a more nuanced opinion.</p>
+
+<p>Also sometimes with large files the coloring or error checking can lag
+behind. This usually kicks in at files longer than 3000 lines, which is
+not unusual for test files. For the most part this is just an annoyance
+which doesn&#8217;t affect editing in any serious way.</p>
+
+<p>It has git integration, which lags behind the offerings from Emacs, Vim,
+and Eclipse in my opinion. I end up using the command line instead of
+the built in tools.</p>
+
+<h1>The Ugly</h1>
+
+<p>RubyMine is incredibly dim witted when it comes to parenthesis and
+quotes. If you wish to put an escaped quote at the end of a string,
+RubyMine will let you escape your ending quote, then insert a matching
+pair right afterwords when you try and fix the mistake! To add insult to
+injury, you must move the cursor before fixing the issue lest RubyMine
+delete both of the extra quotes. Very frustrating.</p>
+
+<p>RubyMine is also one of the most memory consuming programs I use. At
+least once a week it will grind my machine to a halt due to memory
+usage, which is impressive on a machine with 16G in memory.</p>
+
+<h1>Conclusions</h1>
+
+<p>Out of the box, RubyMine works very well. I think it is a good
+compromise for large teams. But if you have time to learn some more
+complicated tools, I believe you would be way better off learning a more
+customizable editor like Emacs or Vim. It might take some effort, but
+these editors can do just as much as their commercial cousins and will
+continue to do well no matter what language you decide to use in the
+future.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="/about" title="About the author (Ashton Kemerling)" rel="author">Ashton Kemerling</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T21:38:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/programming/'>Programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine/" data-via="ashtonkemerling" data-counturl="http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/04/org-mode/" title="Previous Post: Org Mode">&laquo; Org Mode</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/06/internationalization-golf/" title="next Post: Internationalization Golf">Internationalization Golf &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Ashton Kemerling -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ashtonkemerling';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine/';
+        var disqus_url = 'http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

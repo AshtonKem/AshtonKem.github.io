@@ -1,0 +1,911 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ashton Kemerling</title>
+  <meta name="author" content="Ashton Kemerling">
+
+  
+  <meta name="description" content="As part of my new job at Pivotal Labs I&#8217;ve been pair programming almost
+every day. The obvious challenge with pair programming, especially in a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.ashtonkemerling.com/blog/page/2">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Ashton Kemerling" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32325955-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1>Ashton Kemerling</h1>
+  
+    <h2><a href="/">AK</a></h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation">
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+  <li><a href="/resume">Resume</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/20/thoughts-on-rubymine/">Thoughts on RubyMine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T21:38:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As part of my new job at Pivotal Labs I&#8217;ve been pair programming almost
+every day. The obvious challenge with pair programming, especially in a
+popular language like ruby, is in choosing what tools to work with. Vim,
+Emacs, RubyMine, TextMate, the choices are various and divisive.</p>
+
+<p>To make peace among the engineers, it makes sense to dictate one set of
+tools to make peace among all your employees, and to make provisioning
+the machines easier. Pivotal has decided to standardize on RubyMine with
+a dark color scheme and a few custom configurations.</p>
+
+<h1>The Good</h1>
+
+<p>RubyMine, being set up for ruby in particular, works very well with
+navigating, indenting, and colorizing ruby code. With the exception of
+setting a variable as the result of an if expression, I have never seen
+RubyMine indent code incorrectly or get confused on coloration.</p>
+
+<p>It also does a decent job of navigating to ruby classes and functions,
+something that is quite hard since ruby lacks explicit import
+semantics. It definitely makes hunting down odd test harness functions
+down a breeze, and has saved me in the past. It also is good at
+identifying the view that cooresponds to a controller method, but due to
+the way that tracker is laid out, I haven&#8217;t had a chance to use this
+feature often.</p>
+
+<p>And as the cherry on top RubyMine includes a &#8220;Textmate like&#8221; quick find
+feature. In large code bases this will save you about a minute trying to
+find a particular file, so ling as you have an idea of what it&#8217;s called!</p>
+
+<h1>The Bad</h1>
+
+<p>If you only have unique controllers and models, you will absolutely love
+the ability to jump to a class definition. Since we use a lot of
+similarly named controllers inside namespaces to control API versions,
+it often gets confused about what version I want. The quick find feature
+sometimes ignores the path if you provide it, which makes copying files
+from stacktraces occasionally unreliable.</p>
+
+<p>Javascript and less support is mediocre. No real complaints, but nothing
+to set it apart from other environments in my opinion. Maybe my
+colleagues who work on the front end would have a more nuanced opinion.</p>
+
+<p>Also sometimes with large files the coloring or error checking can lag
+behind. This usually kicks in at files longer than 3000 lines, which is
+not unusual for test files. For the most part this is just an annoyance
+which doesn&#8217;t affect editing in any serious way.</p>
+
+<p>It has git integration, which lags behind the offerings from Emacs, Vim,
+and Eclipse in my opinion. I end up using the command line instead of
+the built in tools.</p>
+
+<h1>The Ugly</h1>
+
+<p>RubyMine is incredibly dim witted when it comes to parenthesis and
+quotes. If you wish to put an escaped quote at the end of a string,
+RubyMine will let you escape your ending quote, then insert a matching
+pair right afterwords when you try and fix the mistake! To add insult to
+injury, you must move the cursor before fixing the issue lest RubyMine
+delete both of the extra quotes. Very frustrating.</p>
+
+<p>RubyMine is also one of the most memory consuming programs I use. At
+least once a week it will grind my machine to a halt due to memory
+usage, which is impressive on a machine with 16G in memory.</p>
+
+<h1>Conclusions</h1>
+
+<p>Out of the box, RubyMine works very well. I think it is a good
+compromise for large teams. But if you have time to learn some more
+complicated tools, I believe you would be way better off learning a more
+customizable editor like Emacs or Vim. It might take some effort, but
+these editors can do just as much as their commercial cousins and will
+continue to do well no matter what language you decide to use in the
+future.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/04/org-mode/">Org Mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T18:55:00-08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I&#8217;ve taken interest in making myself more productive, and at
+least so far it&#8217;s going well. I personally attribute part of my current
+productivity to a new &#8220;shut up and get back to work&#8221; mentality, and
+partly to a new (to me) organization system.</p>
+
+<p>The problem I&#8217;ve had is that every single organization app is broken in
+some way. The only truly flexible system uses paper and pen, and I
+don&#8217;t really want to deal with that.</p>
+
+<p>The solution appears to be org-files. Think of them as a close cousin to
+Markdown, but for organization instead of HTML. The systems that use
+org-files support basically any kind of work flow imaginable because
+the storage mechanism is just text, so in the worst case scenario you
+can always just edit the file manually.</p>
+
+<p>Org-files are originally from the Emacs plugin org-mode, but there are
+now org-file readers for Vim, iPhone, and Android.</p>
+
+<h2>Example File.</h2>
+
+<pre>
+#+LAST_MOBILE_CHANGE: 2013-10-01 19:59:54
+#+TODO: TODO IN-PROGRESS DONE
+
+
+* Butler                                                           :projects:
+Butler is an Emacs plugin for Jenkins/Hudson use. Currently it supports:
++ Viewing jobs.
++ Encrypted authentication info.
++ Triggering non-parameterized jobs.
+** Wish List.
+*** Paramtererized jobs
+Possible to get the parameter information along with the job status in one query.
+*** DONE Better formatting.
+DEADLINE: <2013-11-02 Sat>
+CLOCK: [2013-05-06 Mon 20:21]--[2013-05-06 Mon 20:40] =>  0:19
+:PROPERTIES:
+:ID:       6A634BFA-F18E-4C92-A48D-DC3254A67CAE
+:END:
+Tabular mode?
+*** DONE COMPLETED Job Progress
+*** TODO Improved HTTP
+:PROPERTIES:
+:ORDERED:  t
+:ID:       F720BD2F-4966-455B-8F14-5530393340CD
+:END:
+**** DONE Avoid roundtrip to encrypted auth file
+**** TODO Silence message output
+:PROPERTIES:
+:ID:       DE9913E9-AC68-42D3-B7D2-613BB775A16B
+:END:
+**** TODO Auto refresh
+ :PROPERTIES:
+:ID:       01EC3DB8-ABCA-4063-8999-AA68D8D05528
+:END:
+**** TODO Console output
+:PROPERTIES:
+:ID:       112F3FD6-7D23-485F-8B5E-43F0B0BA839E
+:END:
+</pre>
+
+
+<h2>Okay Ashton, What the Hell is That?</h2>
+
+<p>Let&#8217;s break this down bit by bit. Any line starting with <code>#+</code>
+is used to tell the org-mode reader something. In this case it lets us
+know the last time we synced this to our mobile device, and the possible
+TODO states that an item can be in. It&#8217;s not unusual to see formatting
+directives at the top of the file to control color, indentation, and
+similar settings. A lot of settings can either be set globally, or on a
+per-file basis.</p>
+
+<p>Next we have the individual headings. Each heading starts with a number
+of asterisks. The number of asterisks indicates the level. So
+<code>&#42;&#42; Wish List.</code> is a child of <code>&#42;
+Butler</code>. Most editors allow you to fold headings to show or hide
+their children, for convenience.</p>
+
+<p>Each heading can optionally have a TODO state, which is displayed in
+front of the heading title.. The default is one of blank, TODO,
+IN-PROGRESS, and DONE. A simple keystroke in most editors cycles from
+one state to the next. It&#8217;s also possible to support multiple paths that
+a project can flow through. I personally use the default along with
+REFERENCE and ABANDONED, which allows for me to easily filter for
+abandoned projects, along with notes that aren&#8217;t actionable yet.</p>
+
+<p>Org-mode supports 3 different kinds of time tracking and
+scheduling. Each heading can have up to one deadline entry, one
+scheduled entry, and multiple clock entries. Deadlines are for when an
+item should be finished, and scheduled is for when a project should be
+started. Clocks are for recording the amount of time used for an
+item. You can see an example of both the deadline and clock under the
+&#8220;Better formatting.&#8221;  header. Org-mode also supports a very flexible
+type of repeat scheduling.</p>
+
+<p>With any good organization system you&#8217;ll need the ability to tag and
+filter items. Org provides two ways to do this, properties and
+tags. Tags are generally shared across multiple entries, with values
+like &#8220;work&#8221; and &#8220;home&#8221;. They are displayed on the far right of the
+tagged line, such as &#8220;:projects:&#8221; on the Butler line above. You can tag
+a line with as many tags as you want.</p>
+
+<p>Unlike tags, properties are composed of keys and values, many of which
+are unique to a specific entry. If you use any kind of syncing system,
+each item will get an ID property used to enforce uniqueness. A lot of
+systems will also respect the LOCATION property if you sync to a system
+that understands this, such as iCal.</p>
+
+<p>And finally you can have notes and text underneath each entry. Most
+org-mode readers understand free text, unordered lists (<code>-</code>
+or <code>+</code>), numbered lists, and check boxes (<code>- [ ]</code>
+and <code>- [X]</code>). Many of these can be easily manipulated with
+simple keyboard macros, such as the check boxes.</p>
+
+<p>As you can see, org-mode basically provides a super set of all the
+organizational features available. It&#8217;s up to you how you wish to nest
+these, mark them due, and prioritize. That&#8217;s why I love it, I&#8217;m not
+locked into one particular layout that may or may not fit me, instead I
+can slowly evolve it as my systems mature. Expect more posts in the
+future about Emacs specific configuration settings to make org-mode
+easier to use.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/01/the-best-of-lisp/">The Best of Lisp™</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-01T20:04:00-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Edit: Dan Benjamin himself informed me that I missed the sarcasm boat
+here. I&#8217;m leaving the relevant bits, and cutting out the now irrelevant
+criticism.</p>
+
+<p>I&#8217;m slowly working my way through the <a href="http://5by5.tv/b2w">Back to Work</a>
+podcast. I&#8217;m way behind, so please excuse that this post references an
+episode over 2 years old at this point.</p>
+
+<p><a href="http://5by5.tv/b2w/11">Episode 11</a> was about &#8220;future proofing your
+passion&#8221;, among other things. In it, Merlin mentions that one thing you
+can do as a low risk investment in a programming career is to maintain
+current on new languages. He mentions Scala, Erlang, and Lisp as a
+few. With an <del>uncharacteristic lack of self-awareness</del> unusual
+amount of sarcasm, Dan expresses pretty much disdain and lack of
+interest in anything other than Ruby, even going as far as saying &#8220;Ruby
+took the best of Lisp&#8221;.</p>
+
+<p>While Dan may have been joking, it is probably worth examining the
+relationship between Ruby and Lisp. As someone who has worked in Ruby
+and Lisp professionally, I feel uniquely qualified to talk about their
+relative strengths. While there are a ton of cases where Ruby clearly
+learned and copied from Lisp, there is also a laundry list of areas
+where Ruby failed to learn from Lisp&#8217;s successes and failures.</p>
+
+<h2>Functions</h2>
+
+<p>Being a functional language, functions are pretty important to Common
+Lisp. Ruby thankfully took some of the highlights from CL during its
+development, like a heavy emphasis on using map &amp; filter over iterative
+loops, but it missed some important things.</p>
+
+<p>CL only has one kind of function, the function. There are some nice
+syntax features for the way you define them, and a few extra features
+for how they&#8217;re called, but they&#8217;re all just functions. Some might be
+anonymous, while others might be bound to a symbol. Sometimes you call
+them by name, or with funcall or apply if you need to pass them
+around. Sometimes they&#8217;re a multimethod from CLOS which dispatches
+depending on the class of the argument, but at the end of the day
+they&#8217;re all just functions which behave the same. Ruby picked up on the
+idea of using different syntax for some functions (think Blocks), but
+for some reason included Procs and Lambdas as well. Most Rubyists I&#8217;ve
+met express confusion over what the exact differences are, and always
+say &#8220;Just use one kind and one kind only&#8221;.</p>
+
+<p>Common Lisp also has much better syntax for parameters. In particular it
+provides for required and optional positional parameters, enumerated
+keyword parameters, and extra parameters to be collected into a
+list. Ruby learned well by also allowing default parameters to be
+evaluated at call time, but it ended up with a way worse
+syntax. Particularly bad is the way Ruby handles extra keyword
+arguments, simply dumping them into a lisp, optionally merging it on top
+of your default arguments hash if needed. CL provides a way for default
+values to be defined for keyword arguments in the method header, which
+is far cleaner than the Ruby way.</p>
+
+<h2>DSLs</h2>
+
+<p>Ruby often gets compared to Common Lisp in its ability to produce Domain
+Specific Languages, or DSLs. Both blocks and Ruby&#8217;s special dispatch
+mechanisms are used and abused by programs such as Chef to create an
+easy interface between high level concepts and low level details.</p>
+
+<p>And Ruby is pretty good at DSLs, I would estimate that it can hit a good
+60-80% of the DSL cases fairly easily. But especially once you step
+outside the bounds of configuration DSLs like Chef, Common Lisp truly
+shines. In Ruby you can&#8217;t really add new syntax or special characters,
+and you can&#8217;t easily force it to recompile a given section of code to
+behave in a specific way.</p>
+
+<p>But you can do that in Lisp. Lisp&#8217;s macros are so powerful, many
+languages are first prototyped as a large section of Lisp
+macros. Clojure was originally implemented in a few hundred lines of
+Lisp macros. This involved adding new meanings to symbols that don&#8217;t
+exist in CL, like { and }. But with Lisp&#8217;s reader and regular macros,
+this is perfectly reasonable.</p>
+
+<h2>Fragmentation</h2>
+
+<p>One of the biggest weaknesses of Common Lisp was its weak standard. The
+standard did not specify a lot of common behavior, such as
+threading. The result was a proliferation of both libraries that were
+implementation specific, and libraries designed to bridge the gap, like
+<a href="http://common-lisp.net/project/bordeaux-threads/">Bordeaux Threads</a>. At
+this point every library and application is so set in its ways, the
+chances of the standard being unified and fixed is almost none.</p>
+
+<p>Yet somehow Ruby ended up with no spec at all, only a reference
+implementation. It&#8217;s so bad that the Rubinius people proudly proclaim
+that they created 20,000 specifications to as closely as possible match
+MRI, the reference implementation.  While this is a laudable effort, I
+think the general opinion is that only the reference implementation is
+to be trusted, so most libraries assume that you&#8217;re not using Rubinius,
+MacRuby, or anything else. This is sad, because it means that the Ruby
+community is very unlikely to use anything other than MRI, no matter how
+good a competing runtime might be.</p>
+
+<h2>The Takeaway</h2>
+
+<p>I love Ruby. It&#8217;s a good language. But if you want truly mind opening
+programming moments, Lisp is the only way to go. No other language can
+give you the sense of &#8220;I can do <em>anything</em>&#8221; quite like it. I highly
+recommend every Rubyist at least try Common Lisp for a bit, to at least
+understand where their language of choice came from.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/30/advanced-existential-dread/">Advanced Fear</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-30T19:50:00-07:00" pubdate data-updated="true">Oct 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the most scary moments in most young adults&#8217; life is the
+realization of mortality. Teenagers and younger children often
+understand on an intellectual level that people die, but emotionally
+that&#8217;s something that happens to other people. There&#8217;s very few things
+quite like the moment when an adult realizes that they must die, there&#8217;s
+nothing they can do to stop it, and there&#8217;s not a lot they can do to
+delay it.</p>
+
+<p>Most people stop there. But if you move beyond the &#8220;go to work, make
+money, enjoy weekend&#8221; stage of your life, you&#8217;ll get to experience what
+I call &#8220;Opportunity Cost Fear&#8221;.</p>
+
+<p>Every action you take prevents you from taking another. Spending $10 on
+a lunch means you can&#8217;t spend that $10 on anything else. This is called
+opportunity cost. It applies to every limited resource in the
+world. Your time, attention, money, emotions, energy, and physical
+strength are all subject to opportunity cost, even though many people
+and organizations do not think about it.</p>
+
+<p>Those who wish to accomplish many things can suffer a crippling fear
+because of it. Spending time on this blog post means I&#8217;m spending time
+not reading blogs, writing software, or talking with Leah. It also means
+I&#8217;m not spending my time going to the gym to be healthy, or trying to
+make friends in a new city. And the fact that I can&#8217;t have everything I
+want, just like the fact that I can&#8217;t live forever, can be deeply
+terrifying if you care about doing multiple things.</p>
+
+<p>Just like the fear of death, the best way out of opportunity cost fear
+is to press forward. The big risk with both is that the fear will
+cripple you to the point where the worst might as well have
+happened. Are you really living if you spend every moment terrified of
+your own end? What&#8217;s the point worrying about opportunity cost if the
+fear prevents you from executing on any of your plans? In both these
+cases, the fear alone can be just as bad as the actual outcome.</p>
+
+<p>Now, I&#8217;m not saying that the rational choice is disregard for the
+objects of your fear. If you&#8217;re afraid of death, riding a motorcycle
+without a helmet on will neither eliminate your fear or increase your
+lifespan. You should be aware of why you feared a thing, and take the
+most rational steps to reduce it. Nothing you will do can ever eliminate
+opportunity cost, but you can make sure that you&#8217;re spending your time
+as best you can. You&#8217;ll never do it perfectly, but it&#8217;s better than
+nothing at all.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/26/time-attention-and-pairing/">Time, Attention, and Pairing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-26T21:36:00-07:00" pubdate data-updated="true">Oct 26<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.merlinmann.com">Merlin Mann</a> gives a great talk about Time
+and Attention. The gist of his talk is that in order to create great
+work, you need to balance time vs. attention. Without using your time,
+you&#8217;ll never create. But you must use your attention to determine if
+you&#8217;re creating something great. Great producers balance between these
+two to both produce, and produce good work.</p>
+
+<p>Part of my new job at <a href="http://www.pivotaltracker.com">Pivotal Tracker</a>
+involves pair programming. While a lot of my programming friends express
+doubt about pairing, I&#8217;m very impressed with both how productive I am
+pairing, and how quickly I&#8217;m learning the code base while pairing.</p>
+
+<p>The way that a good pair switches between who is &#8220;driving&#8221; is very
+similar to Merlin&#8217;s talk. The person who is typing is responsible for
+producing, while the person who isn&#8217;t is responsible for ensuring that
+the pair is headed in the right direction. Pairs have a much easier time
+finding this balance and staying on track than individual workers do.</p>
+
+<p>It&#8217;s hard to alternate between time and attention effectively when
+working alone. There&#8217;s no overt signal to when one is using time or
+attention, making it easy to mistake &#8220;research&#8221; (reading Wikipedia) as
+using your attention. As a pair this balance is much easier to achieve,
+because each member is tasked with one role, and it&#8217;s obvious when that
+role is not being fulfilled. The non-driving member can&#8217;t goof off on
+Reddit or Wikipedia for the sake of &#8220;research&#8221; because it will prevent
+the driving member from working. And the driving member can&#8217;t slow down
+too much without the other member taking over typing from them. This
+helps ensure that the pair produces better code faster.</p>
+
+<p>I&#8217;m not sure if the creators of pair programming are familiar with
+Merlin&#8217;s model of work, but accidentally or not they&#8217;ve made it much
+easier for programmers to follow his advice. I&#8217;d recommend any
+company to give pairing a try and see what it does for the quality and
+quantity of work that their teams produce.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/25/moving-to-denver/">Moving to Denver</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-25T21:28:00-07:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You know those hilarious &#8220;pranks&#8221; where someone posts something
+embarrassing someone else&#8217;s Facebook account? Apparently in the improv
+community of Chicago the standard prank is to post something saying that
+they&#8217;ve accepted a lead role, and that they&#8217;re moving to Denver,
+Colorado. We found this out when some improv actors at our going away
+party took some convincing that we were actually moving, and that it
+wasn&#8217;t an elaborate prank.</p>
+
+<p>The main difference for us is that I&#8217;ve not decided to give up software
+engineering for comedy. Instead I&#8217;ve accepted a role as an engineer at
+<a href="http://www.pivotaltracker.com">Pivotal Tracker</a>, which I personally think is a
+better deal. Pivotal is a great company with a unique and productive
+style, and I&#8217;m thrilled to be working with them.</p>
+
+<p>While there&#8217;ll always be a special place in my heart for Chicago, I&#8217;m
+rather glad we&#8217;ve made the move. It was stressful and very expensive,
+but living in Colorado has already been a very pleasant experience. The
+weather is shockingly nice, apartments are a nicer for the price, and I
+can safely walk to work.</p>
+
+<p>Expect photos from the mountains and trails above Denver in the coming
+months.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/15/the-dangers-of-partisanship/">The Dangers of Partisanship</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T21:01:00-07:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Anyone who knows me personally knows that I am a huge Clojure fan. I could go on and on about why it&#8217;s the best; the regularity, the macros, ClojureScript, core.logic, etc. etc.</p>
+
+<p>But last week I attended <a href="http://lambdajam.com">LambdaJam</a>, which was awesome by the way, and I came back with a different opinion. No, I don&#8217;t think Haskell or Erlang tops out Clojure, I&#8217;m still probably going to reach for Leiningen for all my personal projects. But I learned that it&#8217;s a good idea to keep an eye on other languages, since no language will ever be so good that you never need to touch anything else.</p>
+
+<p>In particular I learned the joy of the APL based languages, especially J. I learned that the F# people have a novel way of dealing with statically typing external resources via type providers, and I learned that Haskell can indeed be tight and clean despite what all those monad tutorials imply. I will probably take each of these subjects apart in separate posts in the future, I&#8217;m still trying to pick up bits and pieces of my thoughts after several intense key notes overloaded my brain.</p>
+
+<p>What&#8217;s the take away? That functional languages are a lot more diverse than most OOP/procedural languages, and that there&#8217;s a lot that can be learned from them. So instead of picking your favorite and only learning that, you really should try to learn several to cover your bases.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/02/stealing-terminology/">Stealing Terminology</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-02T22:37:00-07:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of my favorite tricks is to borrow terminology from other walks in life. This is particularly important for me, since it&#8217;s all too easy for engineers to end up living and talking in pure engineering speak. Looking to other careers for the correct words to describe something allows one to express ideas that might not be easily communicated otherwise.</p>
+
+<p>If you look carefully, you can see examples of this in engineering blog posts. People talk about fighting entropy, or the metaphysics of data. These are terms that did not originally have any engineering context whatsoever, being brought in to express ideas and concepts about another subject.</p>
+
+<p>My most recent borrowed term is <em>Force Multiplier</em>. A force multiplier is anything that allows an group or individual to be more effective without an increase in effort. It&#8217;s normally a military term referencing how better weather forecasts, equipment, or intelligence can allow a unit to accomplish much more without increasing effort/losses. I like to use it in reference to things like unit tests and automation, that make me more effective as an engineer without costing me more time. If I don&#8217;t have to babysit a build waiting to type in the next step, then I can get back to work while a CI server works for me. I&#8217;m instantly more effective without actually spending more time at work. With a comprehensive suite of unit tests I can spend less time worrying and validating that my refactoring has damaged the quality of the system, thus I can get more work done in the same period of time.</p>
+
+<p>I&#8217;m sure there are far more examples of this than I&#8217;ve listed, but they&#8217;re always fun to find and analyze.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/05/fast-cheap-good/">Fast Cheap Good</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-05T20:24:00-07:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.</p>
+
+<p>While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive. These differences come from the quality and number (thus cost) of the managers and engineers, the choice of methodologies, scope of features, and internal organizational setups.</p>
+
+<p>What is different is the fact that software engineers aren&#8217;t limited by physics the way that our mechanical brethren are. With few exceptions for high performance computing, the limitation of most software projects is the imagination and effort of its engineers, not hard limits in manufacturing technologies or physics. Combine this with a fad-heavy market for programming methods (scrum! extreme! agile! pair!), and it can be very tempting to assume that we can find the perfect balance with the correct management processes and the right methodology.</p>
+
+<p>This is false, of course. Management and methodology is about dealing with the communication overhead when enough people are working on an project. The pipe dream of management and methodology is for a group of N producers to produce N times more than one person alone. This is of course rubbish, as the <em>Mythical Man Month</em> demonstrated handily, it&#8217;s simply impossible to manage or process your way to good, cheap, and fast.</p>
+
+<p>So what&#8217;s the point of it all then? Why don&#8217;t we just go back to waterfall? Because the point of agile, scrum, pair programming and friends is <strong>not</strong> to get us all the way to good, cheap, and fast. The point is to go from choosing one of three, to choosing two of three. A poorly managed, low discipline team can only choose one of good, cheap, and fast; and this is of course worthless. Cheap software that&#8217;s late will probably still run out of VC and be beaten by the competition. Bad and cheap software will struggle to take over the market, and software that&#8217;s both bad and late probably shouldn&#8217;t be written. However a well managed, well disciplined team can survey the market, measure the competition, and <em>knowingly</em> choose what compromises they wish to make in speed, quality, and cost. Poorly managed teams blunder into one of the choices, usually cheap and bad, and end up having very little control over their own fate.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/04/stop-surprising-me-ubuntu/">Stop Surprising Me Ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-04T23:19:00-07:00" pubdate data-updated="true">Jun 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&#8217;t Gonna Need It.</p>
+
+<p>The Principle of Least Surprise, is one of the design principles of the language Ruby, specifically in the context of &#8220;the principle of least surprise after you learn Ruby very well.&#8221; And all good systems have the property that they do not surprise experienced users, but great systems do not even surprise inexperienced users. This is what Apple has been doing for years, trying to make their products mimic familiar scenarios and objects from the real world, so that users can simply pick up the product and use it.</p>
+
+<p>You Ain&#8217;t Gonna Need It is actually a programming principle, stating that you should never add features under the assumption that someone might need it someday. Chances are that users either won&#8217;t need it, won&#8217;t want it, or will end up preferring something significantly different than what you provided. But I think this principle can be simplified down to &#8220;provide the minimum set of options and features to allow users to complete the task&#8221;. Simpler products are easier to learn, easier to master, and easier to create and test. The only extra work is in designing it properly.</p>
+
+<p>With this in mind, let&#8217;s turn towards Ubuntu. I&#8217;m hardly a Linux novice, having used Gentoo, Fedora, Ubuntu, Debian, Mint, openSuse, and others before eventually converting to Mac OSX. I had to upgrade my spare Ubuntu box this week from 12.04 all the way to 13.04, and found a few gripes.</p>
+
+<p>First of all, there&#8217;s the Amazon search feature they added sometime in the 11.X releases. It slows the search box down, which is the main way that applications are opened, and clutters up the results. Besides being a transparent money grab, I have a hard time imagining someone trying to open up their music client and suddenly deciding that they need to buy some cheese crackers <em>right now</em>. It all seems like quite a bit of distraction in order to enable a few users that want to order from Amazon without having to fire up Chrome first.</p>
+
+<p>But the part that really angered me was when I tried to turn this &#8220;feature&#8221; off. I couldn&#8217;t find any settings within the dock itself (right clicking does nothing, it seems), and I couldn&#8217;t find any reference to it in the system settings panel either. A quick trip to Google, which I feel shouldn&#8217;t have been necessary, told me that I could turn this search off in the Privacy settings, for some reason. As annoying as this was, all would be well if the upgrade to 12.10 didn&#8217;t <strong>turn it back on again</strong>. Why would you do that to me, Ubuntu? I clearly stated that I had no interest in this mis-feature by hunting it down and disabling it, what purpose does re-enabling it have other than grab a bit more money from Amazon and anger me?</p>
+
+<p>It&#8217;s these little mis-steps and more that make or break the user experience of a product. I&#8217;m fairly tech savvy, and am comfortable digging through StackExchange and various forums to find some solutions to my problems, but that&#8217;s not the way that the average customer works. For those who aren&#8217;t comfortable looking up answers or editing configuration files, these little details will quickly scare them away to an operating system that&#8217;s less surprising and simpler. And these are the users that Canonical must attract if they&#8217;re hoping to turn Ubuntu into a mainstream Operating System.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Ashton Kemerling -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ashtonkemerling';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
