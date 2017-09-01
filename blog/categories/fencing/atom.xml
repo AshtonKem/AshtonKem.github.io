@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: fencing | Ashton Kemerling]]></title>
-  <link href="http://www.ashtonkemerling.com/blog/categories/fencing/atom.xml" rel="self"/>
-  <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-09-01T14:59:42-07:00</updated>
-  <id>http://www.ashtonkemerling.com/</id>
+  <link href="http://AshtonKem.github.io/blog/categories/fencing/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2017-09-01T15:03:14-07:00</updated>
+  <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Swordsman and the Software Engineer]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/06/09/the-swordsman-and-the-software-engineer/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/06/09/the-swordsman-and-the-software-engineer/"/>
     <updated>2014-06-09T22:31:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/06/09/the-swordsman-and-the-software-engineer</id>
+    <id>http://AshtonKem.github.io/blog/2014/06/09/the-swordsman-and-the-software-engineer</id>
     <content type="html"><![CDATA[<p>One of the largest mistakes you can make as a knowledge worker is to focus 100% of your time on your craft. It's easy to believe that specializing and focusing will make you better than your peers, but I do not think that is the case. Not only will specializing cause you to plateau earlier than your peers, it will cause you to be less happy and healthy than your diversified peers.</p>
 
 <p>A bit of background at this point would probably be helpful. I'm a software engineer and I've coded both professionally and on a hobbyist basis for nearly a decade. After a particularly stressful few months at a previous job, my fiancé forced me to join a local gym to de-stress. The gym focused on various European martial arts and I ended up in a class for the Italian longsword circa 1409.</p>
@@ -38,9 +38,9 @@
   
   <entry>
     <title type="html"><![CDATA[Disdain]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/03/24/disdain/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/03/24/disdain/"/>
     <updated>2014-03-24T20:19:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/03/24/disdain</id>
+    <id>http://AshtonKem.github.io/blog/2014/03/24/disdain</id>
     <content type="html"><![CDATA[<p>One of my hobbies is fencing. Not modern Olympic fencing, but 14th
 century longsword fencing in the Italian school. In every class the
 instructor reminds us that we should act "like haughty Italian nobles,

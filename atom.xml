@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Ashton Kemerling]]></title>
-  <link href="http://www.ashtonkemerling.com/atom.xml" rel="self"/>
-  <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-09-01T14:59:42-07:00</updated>
-  <id>http://www.ashtonkemerling.com/</id>
+  <link href="http://AshtonKem.github.io/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2017-09-01T15:03:14-07:00</updated>
+  <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MDC and Thread Pools: a Bad Combination]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2017/08/30/mdc-not-thread-safe/"/>
-    <updated>2017-08-30T06:17:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2017/08/30/mdc-not-thread-safe</id>
+    <link href="http://AshtonKem.github.io/blog/2017/09/01/mdc-and-threadpools/"/>
+    <updated>2017-09-01T15:01:00-07:00</updated>
+    <id>http://AshtonKem.github.io/blog/2017/09/01/mdc-and-threadpools</id>
     <content type="html"><![CDATA[<p>Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems that might arise. And while many systems will keep logs in their reverse proxy like Nginx, a well written system will also have application/domain specific logs written within the application itself.</p>
 
 <p>A common goal of application logs is to tie a given log line to a specific request. Because modern servers are multi-threaded, it is possible for multiple requests to be serviced at the same time, resulting in log messages from different requests being intermingled in the log output.</p>
@@ -160,9 +160,9 @@
   
   <entry>
     <title type="html"><![CDATA[Java Without If]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2017/01/26/java-without-if/"/>
+    <link href="http://AshtonKem.github.io/blog/2017/01/26/java-without-if/"/>
     <updated>2017-01-26T19:54:00-08:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2017/01/26/java-without-if</id>
+    <id>http://AshtonKem.github.io/blog/2017/01/26/java-without-if</id>
     <content type="html"><![CDATA[<p>Over the past year my team has been doing something shocking to a lot of
 engineers: we&#8217;re favoring pure Java over Clojure. We aren&#8217;t rewriting all our
 Clojure code, but we definitely prefer Java for green field projects.</p>
@@ -338,9 +338,9 @@ Lambda to get a taste of it in Java.</p>
   
   <entry>
     <title type="html"><![CDATA[My Increasing Frustration With Clojure]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure/"/>
+    <link href="http://AshtonKem.github.io/blog/2016/06/11/my-increasing-frustration-with-clojure/"/>
     <updated>2016-06-11T06:24:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure</id>
+    <id>http://AshtonKem.github.io/blog/2016/06/11/my-increasing-frustration-with-clojure</id>
     <content type="html"><![CDATA[<p><strong>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&#8217;ve seen.</strong></p>
 
 <p>First off, this is not a &#8220;I&#8217;m quiting in disgust&#8221; post. Those are childish and a waste of everyone&#8217;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.</p>
@@ -445,9 +445,9 @@ Lambda to get a taste of it in Java.</p>
   
   <entry>
     <title type="html"><![CDATA[Integrating Test.Check and Javascript]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/09/25/integrating-test-dot-check-and-javascript/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/09/25/integrating-test-dot-check-and-javascript/"/>
     <updated>2014-09-25T08:41:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/09/25/integrating-test-dot-check-and-javascript</id>
+    <id>http://AshtonKem.github.io/blog/2014/09/25/integrating-test-dot-check-and-javascript</id>
     <content type="html"><![CDATA[<h1>Introduction</h1>
 
 <p>I was recently on
@@ -897,9 +897,9 @@ any questions!</p>
   
   <entry>
     <title type="html"><![CDATA[Unusual Productivity Hacks]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/06/19/unusual-productivity-hacks/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/06/19/unusual-productivity-hacks/"/>
     <updated>2014-06-19T07:37:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/06/19/unusual-productivity-hacks</id>
+    <id>http://AshtonKem.github.io/blog/2014/06/19/unusual-productivity-hacks</id>
     <content type="html"><![CDATA[<p>The internet is lousy with productivity ideas, mostly about how to work harder or longer. I personally believe that good productivity is about maximizing per hour results, not working harder. And the fastest way to improve your productivity is to eliminate some of the things slowing you down. So rather than going over the usual suspects, let&#8217;s take a look at eliminating some of the low hanging fruit.</p>
 
 <h2>1. Conquer Your Diet.</h2>
@@ -928,9 +928,9 @@ any questions!</p>
   
   <entry>
     <title type="html"><![CDATA[The Swordsman and the Software Engineer]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/06/09/the-swordsman-and-the-software-engineer/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/06/09/the-swordsman-and-the-software-engineer/"/>
     <updated>2014-06-09T22:31:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/06/09/the-swordsman-and-the-software-engineer</id>
+    <id>http://AshtonKem.github.io/blog/2014/06/09/the-swordsman-and-the-software-engineer</id>
     <content type="html"><![CDATA[<p>One of the largest mistakes you can make as a knowledge worker is to focus 100% of your time on your craft. It&#8217;s easy to believe that specializing and focusing will make you better than your peers, but I do not think that is the case. Not only will specializing cause you to plateau earlier than your peers, it will cause you to be less happy and healthy than your diversified peers.</p>
 
 <p>A bit of background at this point would probably be helpful. I&#8217;m a software engineer and I&#8217;ve coded both professionally and on a hobbyist basis for nearly a decade. After a particularly stressful few months at a previous job, my fiancé forced me to join a local gym to de-stress. The gym focused on various European martial arts and I ended up in a class for the Italian longsword circa 1409.</p>
@@ -951,9 +951,9 @@ any questions!</p>
   
   <entry>
     <title type="html"><![CDATA[Confessions of a Language Snob]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/05/28/confessions-of-a-language-snob/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/05/28/confessions-of-a-language-snob/"/>
     <updated>2014-05-28T22:29:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/05/28/confessions-of-a-language-snob</id>
+    <id>http://AshtonKem.github.io/blog/2014/05/28/confessions-of-a-language-snob</id>
     <content type="html"><![CDATA[<p>I am a language snob. In particular I fall head over heels for most functional languages, especially MLs and Lisps. Show me the latest and greatest Javascript framework and I will just wish I had immutable data types and a saner method dispatch system. I try to keep quiet about it at work with varying degrees of success, but it&#8217;s frustrating to work around one language&#8217;s problems when you know of other solutions.</p>
 
 <p>The difficult reality that few admit is that every language has a weak point. Ruby is slow and the lack of import semantics and proper namespaces makes it difficult to determine what code will run. Python lacks a good lambda and whitespace sensitivity brings new difficulties. Javascript is just pure insanity. Lisp is poorly standardized and tends to have subpar documentation. The list goes on and on. No language is perfect, but it&#8217;s very easy to focus on the high points of one language while working through the low points of another.</p>
@@ -968,9 +968,9 @@ any questions!</p>
   
   <entry>
     <title type="html"><![CDATA[The Primacy of the Build Tool]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/03/31/the-primacy-of-the-build-tool/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/03/31/the-primacy-of-the-build-tool/"/>
     <updated>2014-03-31T13:55:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/03/31/the-primacy-of-the-build-tool</id>
+    <id>http://AshtonKem.github.io/blog/2014/03/31/the-primacy-of-the-build-tool</id>
     <content type="html"><![CDATA[<p>No programming language stands alone. Besides the compiler, every
 programming language includes an ecosystem of libraries, build tools,
 analyzers, debuggers, and other utilities. Languages often rise and fall
@@ -1048,9 +1048,9 @@ makes it simple to deploy anywhere.</p>
   
   <entry>
     <title type="html"><![CDATA[Disdain]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/03/24/disdain/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/03/24/disdain/"/>
     <updated>2014-03-24T20:19:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/03/24/disdain</id>
+    <id>http://AshtonKem.github.io/blog/2014/03/24/disdain</id>
     <content type="html"><![CDATA[<p>One of my hobbies is fencing. Not modern Olympic fencing, but 14th
 century longsword fencing in the Italian school. In every class the
 instructor reminds us that we should act &#8220;like haughty Italian nobles,
@@ -1102,9 +1102,9 @@ always something to be learned from even the most esoteric sources.</p>
   
   <entry>
     <title type="html"><![CDATA[Managing is a Craft Too]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/01/14/managing-is-a-craft-too/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/01/14/managing-is-a-craft-too/"/>
     <updated>2014-01-14T22:45:00-08:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/01/14/managing-is-a-craft-too</id>
+    <id>http://AshtonKem.github.io/blog/2014/01/14/managing-is-a-craft-too</id>
     <content type="html"><![CDATA[<p>I&#8217;m getting a little tired of seeing posts saying that the best managers
 must be an ex-engineer or a current one. I think coding skill is a very
 narrow minded way to judge both a human and a professional, and a
@@ -1142,9 +1142,9 @@ whether or not there are any commits with their name on it.</p>
   
   <entry>
     <title type="html"><![CDATA[Internationalization Golf]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2014/01/06/internationalization-golf/"/>
+    <link href="http://AshtonKem.github.io/blog/2014/01/06/internationalization-golf/"/>
     <updated>2014-01-06T22:48:00-08:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2014/01/06/internationalization-golf</id>
+    <id>http://AshtonKem.github.io/blog/2014/01/06/internationalization-golf</id>
     <content type="html"><![CDATA[<p>Martin Grüner had a <a href="http://martingryner.com/software-localization-is-tricky/">fun</a> article about his experience writing an internationalized app. I thought it would be fun to share my own experiences.</p>
 
 <p>My first job out of college was working on a Common Lisp (CL) web application. The application was only a few years younger than me, and had originally written in CL due to a particularly good HTML/XML library available in CL at the time. Unfortunately in the intervening years the HTML library stopped being state of the art, and the whims of enterprise software engineering had left CL behind for web development, resulting in a serious lack of common programming conveniences.</p>
@@ -1193,9 +1193,9 @@ whether or not there are any commits with their name on it.</p>
   
   <entry>
     <title type="html"><![CDATA[Thoughts on RubyMine]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/12/20/thoughts-on-rubymine/"/>
     <updated>2013-12-20T21:38:00-08:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/12/20/thoughts-on-rubymine</id>
+    <id>http://AshtonKem.github.io/blog/2013/12/20/thoughts-on-rubymine</id>
     <content type="html"><![CDATA[<p>As part of my new job at Pivotal Labs I&#8217;ve been pair programming almost
 every day. The obvious challenge with pair programming, especially in a
 popular language like ruby, is in choosing what tools to work with. Vim,
@@ -1274,9 +1274,9 @@ future.</p>
   
   <entry>
     <title type="html"><![CDATA[Org Mode]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/11/04/org-mode/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/11/04/org-mode/"/>
     <updated>2013-11-04T18:55:00-08:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/11/04/org-mode</id>
+    <id>http://AshtonKem.github.io/blog/2013/11/04/org-mode</id>
     <content type="html"><![CDATA[<p>Recently I&#8217;ve taken interest in making myself more productive, and at
 least so far it&#8217;s going well. I personally attribute part of my current
 productivity to a new &#8220;shut up and get back to work&#8221; mentality, and
@@ -1403,9 +1403,9 @@ easier to use.</p>
   
   <entry>
     <title type="html"><![CDATA[The Best of Lisp™]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/11/01/the-best-of-lisp/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/11/01/the-best-of-lisp/"/>
     <updated>2013-11-01T20:04:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/11/01/the-best-of-lisp</id>
+    <id>http://AshtonKem.github.io/blog/2013/11/01/the-best-of-lisp</id>
     <content type="html"><![CDATA[<p>Edit: Dan Benjamin himself informed me that I missed the sarcasm boat
 here. I&#8217;m leaving the relevant bits, and cutting out the now irrelevant
 criticism.</p>
@@ -1514,9 +1514,9 @@ understand where their language of choice came from.</p>
   
   <entry>
     <title type="html"><![CDATA[Advanced Fear]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/10/30/advanced-existential-dread/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/10/30/advanced-existential-dread/"/>
     <updated>2013-10-30T19:50:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/10/30/advanced-existential-dread</id>
+    <id>http://AshtonKem.github.io/blog/2013/10/30/advanced-existential-dread</id>
     <content type="html"><![CDATA[<p>One of the most scary moments in most young adults&#8217; life is the
 realization of mortality. Teenagers and younger children often
 understand on an intellectual level that people die, but emotionally
@@ -1565,9 +1565,9 @@ nothing at all.</p>
   
   <entry>
     <title type="html"><![CDATA[Time, Attention, and Pairing]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/10/26/time-attention-and-pairing/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/10/26/time-attention-and-pairing/"/>
     <updated>2013-10-26T21:36:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/10/26/time-attention-and-pairing</id>
+    <id>http://AshtonKem.github.io/blog/2013/10/26/time-attention-and-pairing</id>
     <content type="html"><![CDATA[<p><a href="http://www.merlinmann.com">Merlin Mann</a> gives a great talk about Time
 and Attention. The gist of his talk is that in order to create great
 work, you need to balance time vs. attention. Without using your time,
@@ -1607,9 +1607,9 @@ quantity of work that their teams produce.</p>
   
   <entry>
     <title type="html"><![CDATA[Moving to Denver]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/10/25/moving-to-denver/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/10/25/moving-to-denver/"/>
     <updated>2013-10-25T21:28:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/10/25/moving-to-denver</id>
+    <id>http://AshtonKem.github.io/blog/2013/10/25/moving-to-denver</id>
     <content type="html"><![CDATA[<p>You know those hilarious &#8220;pranks&#8221; where someone posts something
 embarrassing someone else&#8217;s Facebook account? Apparently in the improv
 community of Chicago the standard prank is to post something saying that
@@ -1637,9 +1637,9 @@ months.</p>
   
   <entry>
     <title type="html"><![CDATA[The Dangers of Partisanship]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/07/15/the-dangers-of-partisanship/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/07/15/the-dangers-of-partisanship/"/>
     <updated>2013-07-15T21:01:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/07/15/the-dangers-of-partisanship</id>
+    <id>http://AshtonKem.github.io/blog/2013/07/15/the-dangers-of-partisanship</id>
     <content type="html"><![CDATA[<p>Anyone who knows me personally knows that I am a huge Clojure fan. I could go on and on about why it&#8217;s the best; the regularity, the macros, ClojureScript, core.logic, etc. etc.</p>
 
 <p>But last week I attended <a href="http://lambdajam.com">LambdaJam</a>, which was awesome by the way, and I came back with a different opinion. No, I don&#8217;t think Haskell or Erlang tops out Clojure, I&#8217;m still probably going to reach for Leiningen for all my personal projects. But I learned that it&#8217;s a good idea to keep an eye on other languages, since no language will ever be so good that you never need to touch anything else.</p>
@@ -1652,9 +1652,9 @@ months.</p>
   
   <entry>
     <title type="html"><![CDATA[Stealing Terminology]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/07/02/stealing-terminology/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/07/02/stealing-terminology/"/>
     <updated>2013-07-02T22:37:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/07/02/stealing-terminology</id>
+    <id>http://AshtonKem.github.io/blog/2013/07/02/stealing-terminology</id>
     <content type="html"><![CDATA[<p>One of my favorite tricks is to borrow terminology from other walks in life. This is particularly important for me, since it&#8217;s all too easy for engineers to end up living and talking in pure engineering speak. Looking to other careers for the correct words to describe something allows one to express ideas that might not be easily communicated otherwise.</p>
 
 <p>If you look carefully, you can see examples of this in engineering blog posts. People talk about fighting entropy, or the metaphysics of data. These are terms that did not originally have any engineering context whatsoever, being brought in to express ideas and concepts about another subject.</p>
@@ -1667,9 +1667,9 @@ months.</p>
   
   <entry>
     <title type="html"><![CDATA[Fast Cheap Good]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/06/05/fast-cheap-good/"/>
     <updated>2013-06-05T20:24:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good</id>
+    <id>http://AshtonKem.github.io/blog/2013/06/05/fast-cheap-good</id>
     <content type="html"><![CDATA[<p>In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.</p>
 
 <p>While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive. These differences come from the quality and number (thus cost) of the managers and engineers, the choice of methodologies, scope of features, and internal organizational setups.</p>

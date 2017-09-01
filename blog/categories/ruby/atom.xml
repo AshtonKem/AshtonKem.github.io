@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | Ashton Kemerling]]></title>
-  <link href="http://www.ashtonkemerling.com/blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-09-01T14:59:42-07:00</updated>
-  <id>http://www.ashtonkemerling.com/</id>
+  <link href="http://AshtonKem.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2017-09-01T15:03:14-07:00</updated>
+  <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[My Increasing Frustration With Clojure]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure/"/>
+    <link href="http://AshtonKem.github.io/blog/2016/06/11/my-increasing-frustration-with-clojure/"/>
     <updated>2016-06-11T06:24:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure</id>
+    <id>http://AshtonKem.github.io/blog/2016/06/11/my-increasing-frustration-with-clojure</id>
     <content type="html"><![CDATA[<p><strong>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I've seen.</strong></p>
 
 <p>First off, this is not a "I'm quiting in disgust" post. Those are childish and a waste of everyone's time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.</p>

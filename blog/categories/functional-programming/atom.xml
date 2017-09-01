@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: functional-programming | Ashton Kemerling]]></title>
-  <link href="http://www.ashtonkemerling.com/blog/categories/functional-programming/atom.xml" rel="self"/>
-  <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-09-01T14:59:42-07:00</updated>
-  <id>http://www.ashtonkemerling.com/</id>
+  <link href="http://AshtonKem.github.io/blog/categories/functional-programming/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2017-09-01T15:03:14-07:00</updated>
+  <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Dangers of Partisanship]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/07/15/the-dangers-of-partisanship/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/07/15/the-dangers-of-partisanship/"/>
     <updated>2013-07-15T21:01:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/07/15/the-dangers-of-partisanship</id>
+    <id>http://AshtonKem.github.io/blog/2013/07/15/the-dangers-of-partisanship</id>
     <content type="html"><![CDATA[<p>Anyone who knows me personally knows that I am a huge Clojure fan. I could go on and on about why it's the best; the regularity, the macros, ClojureScript, core.logic, etc. etc.</p>
 
 <p>But last week I attended <a href="http://lambdajam.com">LambdaJam</a>, which was awesome by the way, and I came back with a different opinion. No, I don't think Haskell or Erlang tops out Clojure, I'm still probably going to reach for Leiningen for all my personal projects. But I learned that it's a good idea to keep an eye on other languages, since no language will ever be so good that you never need to touch anything else.</p>

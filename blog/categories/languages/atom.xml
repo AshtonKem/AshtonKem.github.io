@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: languages | Ashton Kemerling]]></title>
-  <link href="http://www.ashtonkemerling.com/blog/categories/languages/atom.xml" rel="self"/>
-  <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-09-01T14:59:42-07:00</updated>
-  <id>http://www.ashtonkemerling.com/</id>
+  <link href="http://AshtonKem.github.io/blog/categories/languages/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2017-09-01T15:03:14-07:00</updated>
+  <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Size Matters]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/04/23/size-matters/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/04/23/size-matters/"/>
     <updated>2013-04-23T21:54:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/04/23/size-matters</id>
+    <id>http://AshtonKem.github.io/blog/2013/04/23/size-matters</id>
     <content type="html"><![CDATA[<p>About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:</p>
 
 <ul>

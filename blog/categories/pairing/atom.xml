@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: pairing | Ashton Kemerling]]></title>
-  <link href="http://www.ashtonkemerling.com/blog/categories/pairing/atom.xml" rel="self"/>
-  <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-09-01T14:59:42-07:00</updated>
-  <id>http://www.ashtonkemerling.com/</id>
+  <link href="http://AshtonKem.github.io/blog/categories/pairing/atom.xml" rel="self"/>
+  <link href="http://AshtonKem.github.io/"/>
+  <updated>2017-09-01T15:03:14-07:00</updated>
+  <id>http://AshtonKem.github.io/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Time, Attention, and Pairing]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/10/26/time-attention-and-pairing/"/>
+    <link href="http://AshtonKem.github.io/blog/2013/10/26/time-attention-and-pairing/"/>
     <updated>2013-10-26T21:36:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/10/26/time-attention-and-pairing</id>
+    <id>http://AshtonKem.github.io/blog/2013/10/26/time-attention-and-pairing</id>
     <content type="html"><![CDATA[<p><a href="http://www.merlinmann.com">Merlin Mann</a> gives a great talk about Time
 and Attention. The gist of his talk is that in order to create great
 work, you need to balance time vs. attention. Without using your time,
