@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MDC and Thread Pools: a Bad Combination"
-date: 2017-08-30 06:17
+date: 2017-09-01 15:01
 comments: true
 categories: java programming logging debugging
 ---
