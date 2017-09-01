@@ -9,8 +9,7 @@
   <meta name="author" content="Ashton Kemerling">
 
   
-  <meta name="description" content="As part of my new job at Pivotal Labs I&#8217;ve been pair programming almost
-every day. The obvious challenge with pair programming, especially in a &hellip;">
+  <meta name="description" content="Martin Grüner had a fun article about his experience writing an internationalized app. I thought it would be fun to share my own experiences. My &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +70,84 @@ every day. The obvious challenge with pair programming, especially in a &hellip;
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/06/internationalization-golf/">Internationalization Golf</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-06T22:48:00-08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Martin Grüner had a <a href="http://martingryner.com/software-localization-is-tricky/">fun</a> article about his experience writing an internationalized app. I thought it would be fun to share my own experiences.</p>
+
+<p>My first job out of college was working on a Common Lisp (CL) web application. The application was only a few years younger than me, and had originally written in CL due to a particularly good HTML/XML library available in CL at the time. Unfortunately in the intervening years the HTML library stopped being state of the art, and the whims of enterprise software engineering had left CL behind for web development, resulting in a serious lack of common programming conveniences.</p>
+
+<p>Right after joining the company, I was informed that the sales person had a potential lead with clients in a Spanish speaking country. The application at this point was English only, but the QA engineer was married to a native Spanish speaker who was willing to help translate the application. All we needed to do was wire the application up for internationalization and localization. I was tasked with picking or creating a library and interspersing it throughout the application. The only criteria was that it both looked good and was capable of displaying different languages to different users depending on their browser&#8217;s &#8220;accept-language&#8221; header. So compiling or packaging up a new application with hard-coded languages was not an option.</p>
+
+<p>I eventually decided that all the existing libraries were insufficient and we needed to make our own. I&#8217;m still not sure if that was the right choice or not. CL doesn&#8217;t have the strongest library ecosystem around, but I was also a very young engineer and more susceptible to the &#8220;Not Invented Here&#8221; syndrome than I am now. Although a quick perusal through the current offerings involves libraries whose home pages are 404s, libraries who are nothing but FFI bindings to a GNU C library, and those whose list of defects includes &#8220;no documentation&#8221;, &#8220;undocumented code&#8221; and &#8220;slow PO parser&#8221;.</p>
+
+<p>Compounding the issue was CL&#8217;s format function. CL has an exceedingly powerful formatter that is capable of unwrapping loops and interspersing the correct combination of &#8220;,&#8221; and &#8220;and&#8221; for a list of strings. This function was used with (reckless) abandon throughout the codebase, something for which I deserve some blame. The lack of dedicated template files compounded the issues; it&#8217;s a lot easier to reach for format when you&#8217;re producing HTML the handler-function itself.</p>
+
+<p>There was no way I was going to explain the (non-technical) translator how to deal with format directives like this: &#8220;~#[NONE~;~a~;~a and ~a~:;~a, ~a~]~#[~; and ~a~:;, ~a, etc~].&#8221;, and I didn&#8217;t want to dig through 500kloc and unroll all the directives. So any translation system I made would need to support at least a subset of the CL formatting directives while hiding them for the translator&#8217;s sanity.</p>
+
+<p>Worse still, CL&#8217;s formatter accepts positional arguments only, to my knowledge. Thus there&#8217;s no particular way to convince the formatter to modify the order of the parameters if the target language has different language structure than English. So my system would need to deal with that.</p>
+
+<p>The final format I settled on would look something like this. The programmer (me) would change (format nil &#8220;~a&#8221; var) to (jibberish:format &#8220;&lt;~a:variable-name&gt;&#8221; &#8220;Descriptive sentence for translator&#8221; :variable-name var). We could then convince our code to print out a file for a language like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>####################################
+</span><span class='line'>File: filename.cl
+</span><span class='line'>####################################
+</span><span class='line'>
+</span><span class='line'>Original: &lt;variable-name&gt;
+</span><span class='line'>Translation: Translation goes here
+</span><span class='line'>Note for translator: Descriptive sentence for translator
+</span><span class='line'>Original Argument Order: [variable-name]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And so on. At runtime the language file would be parsed into a in-memory hash map, which would allow us to replace the format-string with the new one, re-order the argument list according to the translator&#8217;s needs, and strip the identifiers from the formatting string leaving the raw format directives.</p>
+
+<p>So, how&#8217;d I do? Mixed results. The conversion was long and painful, requiring that each format directive and raw string be touched. A huge portion of the &#8220;Notes for translator&#8221; were either blank due to difficulty and fatigue, or were something along the line &#8220;Description, part 1/n&#8221; due to multiple calls being joined together in HTML. Changes in formatting calls required that the matching translation entry be hunted down <em>in every translation file</em> for the translation to still work.</p>
+
+<p>But technical challenges are usually not a big deal, after all that&#8217;s a fairly large portion of what engineers do. Probably the worst problem with my system was how it worked for non-technical folk. The first attempt at giving this file to a translator resulted in her helpfully translating all the variable names into spanish, changing &#8220;It is &lt;today&gt;&#8221; to &#8220;que es &lt;hoy&gt;&#8221;, which resulted in some rather exciting errors. I think my own design sabotaged me in this particular instance, as it required way too much careful explanation to be usable. It was my first encounter with the major difference between using a program whose internals you are familiar and explaining its use to someone else who has never seen anything similar.</p>
+
+<p>I think if I had to do it again, I would&#8217;ve probably spent more time and modified the way the program generated strings instead. I suspect that my custom library avoiding refactoring everything was a case of <a href="http://en.wikipedia.org/wiki/False_economy">false economy</a>, as the time saved up front would have been lost in the time required to train translators and maintain overly fragile translation files. I also learned that if you plan on selling an application in another language market, you need to think about that <em>before</em> you start writing code. Internationalization limits some of the choices you can make with your software and design, and it&#8217;s a lot easier to use that restricted set up front than it is to unwind them after the fact.</p>
+
+<p>As a final irony, while attempting to write this post in Octopress (which uses Jekyll), it crashed several times because the SASS files in Octopress use unicode, which Octopress appears to hate out of the box. You have to change a few environment variables to convince it that Unicode is ok.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -799,54 +876,6 @@ months.</p>
 <p>This is false, of course. Management and methodology is about dealing with the communication overhead when enough people are working on an project. The pipe dream of management and methodology is for a group of N producers to produce N times more than one person alone. This is of course rubbish, as the <em>Mythical Man Month</em> demonstrated handily, it&#8217;s simply impossible to manage or process your way to good, cheap, and fast.</p>
 
 <p>So what&#8217;s the point of it all then? Why don&#8217;t we just go back to waterfall? Because the point of agile, scrum, pair programming and friends is <strong>not</strong> to get us all the way to good, cheap, and fast. The point is to go from choosing one of three, to choosing two of three. A poorly managed, low discipline team can only choose one of good, cheap, and fast; and this is of course worthless. Cheap software that&#8217;s late will probably still run out of VC and be beaten by the competition. Bad and cheap software will struggle to take over the market, and software that&#8217;s both bad and late probably shouldn&#8217;t be written. However a well managed, well disciplined team can survey the market, measure the competition, and <em>knowingly</em> choose what compromises they wish to make in speed, quality, and cost. Poorly managed teams blunder into one of the choices, usually cheap and bad, and end up having very little control over their own fate.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/04/stop-surprising-me-ubuntu/">Stop Surprising Me Ubuntu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-04T23:19:00-07:00" pubdate data-updated="true">Jun 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&#8217;t Gonna Need It.</p>
-
-<p>The Principle of Least Surprise, is one of the design principles of the language Ruby, specifically in the context of &#8220;the principle of least surprise after you learn Ruby very well.&#8221; And all good systems have the property that they do not surprise experienced users, but great systems do not even surprise inexperienced users. This is what Apple has been doing for years, trying to make their products mimic familiar scenarios and objects from the real world, so that users can simply pick up the product and use it.</p>
-
-<p>You Ain&#8217;t Gonna Need It is actually a programming principle, stating that you should never add features under the assumption that someone might need it someday. Chances are that users either won&#8217;t need it, won&#8217;t want it, or will end up preferring something significantly different than what you provided. But I think this principle can be simplified down to &#8220;provide the minimum set of options and features to allow users to complete the task&#8221;. Simpler products are easier to learn, easier to master, and easier to create and test. The only extra work is in designing it properly.</p>
-
-<p>With this in mind, let&#8217;s turn towards Ubuntu. I&#8217;m hardly a Linux novice, having used Gentoo, Fedora, Ubuntu, Debian, Mint, openSuse, and others before eventually converting to Mac OSX. I had to upgrade my spare Ubuntu box this week from 12.04 all the way to 13.04, and found a few gripes.</p>
-
-<p>First of all, there&#8217;s the Amazon search feature they added sometime in the 11.X releases. It slows the search box down, which is the main way that applications are opened, and clutters up the results. Besides being a transparent money grab, I have a hard time imagining someone trying to open up their music client and suddenly deciding that they need to buy some cheese crackers <em>right now</em>. It all seems like quite a bit of distraction in order to enable a few users that want to order from Amazon without having to fire up Chrome first.</p>
-
-<p>But the part that really angered me was when I tried to turn this &#8220;feature&#8221; off. I couldn&#8217;t find any settings within the dock itself (right clicking does nothing, it seems), and I couldn&#8217;t find any reference to it in the system settings panel either. A quick trip to Google, which I feel shouldn&#8217;t have been necessary, told me that I could turn this search off in the Privacy settings, for some reason. As annoying as this was, all would be well if the upgrade to 12.10 didn&#8217;t <strong>turn it back on again</strong>. Why would you do that to me, Ubuntu? I clearly stated that I had no interest in this mis-feature by hunting it down and disabling it, what purpose does re-enabling it have other than grab a bit more money from Amazon and anger me?</p>
-
-<p>It&#8217;s these little mis-steps and more that make or break the user experience of a product. I&#8217;m fairly tech savvy, and am comfortable digging through StackExchange and various forums to find some solutions to my problems, but that&#8217;s not the way that the average customer works. For those who aren&#8217;t comfortable looking up answers or editing configuration files, these little details will quickly scare them away to an operating system that&#8217;s less surprising and simpler. And these are the users that Canonical must attract if they&#8217;re hoping to turn Ubuntu into a mainstream Operating System.</p>
 </div>
   
   

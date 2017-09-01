@@ -4,7 +4,7 @@
   <title><![CDATA[Ashton Kemerling]]></title>
   <link href="http://www.ashtonkemerling.com/atom.xml" rel="self"/>
   <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2017-08-30T07:59:37-07:00</updated>
+  <updated>2017-09-01T14:59:42-07:00</updated>
   <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MDC and Thread Pools: a Bad Combination]]></title>
+    <link href="http://www.ashtonkemerling.com/blog/2017/08/30/mdc-not-thread-safe/"/>
+    <updated>2017-08-30T06:17:00-07:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2017/08/30/mdc-not-thread-safe</id>
+    <content type="html"><![CDATA[<p>Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems that might arise. And while many systems will keep logs in their reverse proxy like Nginx, a well written system will also have application/domain specific logs written within the application itself.</p>
+
+<p>A common goal of application logs is to tie a given log line to a specific request. Because modern servers are multi-threaded, it is possible for multiple requests to be serviced at the same time, resulting in log messages from different requests being intermingled in the log output.</p>
+
+<p>According to all the documentation I have found, the standard way to resolve this is to use the Mapped Diagnostic Context, or <a href="https://logback.qos.ch/manual/mdc.html">MDC</a>. The MDC wraps a thread local hashmap, whose values can be used in your log patterns. On paper you could generate a UUID per request, insert it into the MDC and presto you have a UUID per request in each log line! Since threads are created per request, the MDC will be empty each time.</p>
+
+<p>Except, that&#8217;s not really how Java programming works these days. Threads are expensive, and so for the sake of efficiency modern Java aims to minimize the number of threads created. This means using non-blocking IO (NIO), or reusing threads via Thread Pools where possible, which avoids creating new threads. As such there are quite a few number of APIs in Java 8 and some modern web servers that make it trivial to make your code non-blocking and use a common thread pool.</p>
+
+<p>So, what happens to our MDC when we reuse threads? Well, we end up with the wrong MDC! Here&#8217;s some code for Java 8 that shows the problem:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.slf4j.MDC</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.concurrent.CompletableFuture</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CORRELATION_ID</span> <span class="o">=</span> <span class="s">&quot;correlation-id&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="n">logger</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">stepOne</span><span class="o">(</span><span class="n">String</span> <span class="n">correlationId</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">CompletableFuture</span><span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">MDC</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CORRELATION_ID</span><span class="o">,</span> <span class="n">correlationId</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;Step One&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="s">&quot;Foo&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">stepTwo</span><span class="o">(</span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">previous</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">previous</span><span class="o">.</span><span class="na">thenApplyAsync</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;Step Two&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&quot;Bar&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">stepThree</span><span class="o">(</span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">previous</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">previous</span><span class="o">.</span><span class="na">thenApplyAsync</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;Step Three&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&quot;Baz&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">doAll</span><span class="o">(</span><span class="n">String</span> <span class="n">correlationId</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">stepThree</span><span class="o">(</span><span class="n">stepTwo</span><span class="o">(</span><span class="n">stepOne</span><span class="o">(</span><span class="n">correlationId</span><span class="o">))).</span><span class="na">join</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">Main</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">doAll</span><span class="o">(</span><span class="s">&quot;correlation-id-one&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">doAll</span><span class="o">(</span><span class="s">&quot;correlation-id-two&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This code is using the new <code>CompletableFuture</code> class from Java 8, which is <em>roughly</em> analogous to Javascript promises. What we do is set the correlation-id, then execute a sequence of asynchronous actions and log the output. If you run this code enough times, you will eventually get the output below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.465</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">One</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.466</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Two</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.466</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Three</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.467</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">two</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">One</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.467</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">two</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Two</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.467</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Three</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pay attention to the last line, which should have a correlation-id of correlation-id-two. Instead we have an earlier correlation-id because we happened to reuse a thread from earlier. This is an unmitigated disaster, as now you don&#8217;t have missing logs, you have misleading logs. In a less-simple scenario it would be absolutely impossible to tell whether or not that correlation-id was correct, and you might end up diagnosing bugs that don&#8217;t exist within your system because of this.</p>
+
+<p>Java 8 and <code>CompletableFuture</code> make this much more plausible by making it very easy to use the <code>ForkJoinPool</code>. <code>CompletableFuture</code> provides a number of methods to create a new <code>CompletableFuture</code>, or to take one <code>CompletableFuture</code> and transform it into another. Most of these methods have at least two signatures: <code>x</code> and <code>xAsync</code>. The former will do all the work on the current thread, the latter will automatically use the <code>ForkJoinPool</code> to execute asynchronously. Optionally you can provide your own <code>Executor</code>, which might be backed by your own managed thread pool.</p>
+
+<p>From a performance standpoint, this is amazing. I can separate the business logic from the execution strategies completely. With very minor code changes, sometimes only a method name, I can turn synchronous code to asynchronous or back again. But from a logging stand point this is very fragile. Correctly using the MDC depends on staying on the current thread, and Java 8 makes it very easy to hop threads by design. Worse, the above incorrectness is subtle, so your logs could be left incorrect for years without any immediate impact.</p>
+
+<h2>Recommendations</h2>
+
+<p>Don&#8217;t use the MDC, it&#8217;s too unsafe. Every time you change threads, you will either get an empty MDC (best case scenario), or MDC values from an older request (worst case scenario). At every single point where you might hop threads, it will be necessary to copy the current MDC settings to a local variable, close over it in your next lambda, and set the new thread&#8217;s MDC to the correct value before logging on the new thread. If any new asynchronous step is introduced without doing the above work, the correct values are lost for the rest of the request resulting in malformed or incorrect logs. Considering that adding &#8220;Async&#8221; to the end of a method name is enough to hop threads, this is a lot of work.</p>
+
+<p>The easiest solution is to forgo logging request specific identifiers. Remove any reference to the MDC from your code and log configuration, and move on. If your request volume is relatively low, this might be a perfectly reasonable solution for you.</p>
+
+<p>If you must track every single action down to a single request, you will need to pass around an object for each request which will contain any request specific information you want to log. You can setup logging interfaces that require the <code>Request</code> object to ensure log uniformity, which means that failing to pass this object will be a compilation error. As a side benefit, these custom logging interfaces would be extremely useful in enforcing consistent log messages, and a good place to inject statistics gathering.</p>
+
+<h2>Addendum</h2>
+
+<p>The MDC docs are incorrect, with sections of the documentation explicitly referencing out of date information. I draw your attention to the section titled &#8220;MDC and Managed Threads&#8221; which says the following:</p>
+
+<blockquote><p>A copy of the mapped diagnostic context can not always be inherited by worker threads from the initiating thread. This is the case when java.util.concurrent.Executors is used for thread management. For instance, newCachedThreadPool method creates a ThreadPoolExecutor and like other thread pooling code, it has intricate thread creation logic.</p></blockquote>
+
+<p>As it turns out, a copy of the mapped diagnostic context will <strong>never</strong> be inherited by a worker thread. <a href="https://github.com/qos-ch/logback/commit/aa7d584ecdb1638bfc4c7223f4a5ff92d5ee6273">This</a> change guarantees that each thread gets a new, empty MDC. This documentation is correct for older version of logback, but it is not correct anymore. I&#8217;m sure the quote above was accidentally left in place, as the correct behavior is mentioned at the top of the document. It&#8217;s just a good reminder to read documentation carefully, and understand that humans can make mistakes in the docs too.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Java Without If]]></title>
@@ -1534,27 +1679,6 @@ months.</p>
 <p>This is false, of course. Management and methodology is about dealing with the communication overhead when enough people are working on an project. The pipe dream of management and methodology is for a group of N producers to produce N times more than one person alone. This is of course rubbish, as the <em>Mythical Man Month</em> demonstrated handily, it&#8217;s simply impossible to manage or process your way to good, cheap, and fast.</p>
 
 <p>So what&#8217;s the point of it all then? Why don&#8217;t we just go back to waterfall? Because the point of agile, scrum, pair programming and friends is <strong>not</strong> to get us all the way to good, cheap, and fast. The point is to go from choosing one of three, to choosing two of three. A poorly managed, low discipline team can only choose one of good, cheap, and fast; and this is of course worthless. Cheap software that&#8217;s late will probably still run out of VC and be beaten by the competition. Bad and cheap software will struggle to take over the market, and software that&#8217;s both bad and late probably shouldn&#8217;t be written. However a well managed, well disciplined team can survey the market, measure the competition, and <em>knowingly</em> choose what compromises they wish to make in speed, quality, and cost. Poorly managed teams blunder into one of the choices, usually cheap and bad, and end up having very little control over their own fate.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stop Surprising Me Ubuntu]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/06/04/stop-surprising-me-ubuntu/"/>
-    <updated>2013-06-04T23:19:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/06/04/stop-surprising-me-ubuntu</id>
-    <content type="html"><![CDATA[<p>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&#8217;t Gonna Need It.</p>
-
-<p>The Principle of Least Surprise, is one of the design principles of the language Ruby, specifically in the context of &#8220;the principle of least surprise after you learn Ruby very well.&#8221; And all good systems have the property that they do not surprise experienced users, but great systems do not even surprise inexperienced users. This is what Apple has been doing for years, trying to make their products mimic familiar scenarios and objects from the real world, so that users can simply pick up the product and use it.</p>
-
-<p>You Ain&#8217;t Gonna Need It is actually a programming principle, stating that you should never add features under the assumption that someone might need it someday. Chances are that users either won&#8217;t need it, won&#8217;t want it, or will end up preferring something significantly different than what you provided. But I think this principle can be simplified down to &#8220;provide the minimum set of options and features to allow users to complete the task&#8221;. Simpler products are easier to learn, easier to master, and easier to create and test. The only extra work is in designing it properly.</p>
-
-<p>With this in mind, let&#8217;s turn towards Ubuntu. I&#8217;m hardly a Linux novice, having used Gentoo, Fedora, Ubuntu, Debian, Mint, openSuse, and others before eventually converting to Mac OSX. I had to upgrade my spare Ubuntu box this week from 12.04 all the way to 13.04, and found a few gripes.</p>
-
-<p>First of all, there&#8217;s the Amazon search feature they added sometime in the 11.X releases. It slows the search box down, which is the main way that applications are opened, and clutters up the results. Besides being a transparent money grab, I have a hard time imagining someone trying to open up their music client and suddenly deciding that they need to buy some cheese crackers <em>right now</em>. It all seems like quite a bit of distraction in order to enable a few users that want to order from Amazon without having to fire up Chrome first.</p>
-
-<p>But the part that really angered me was when I tried to turn this &#8220;feature&#8221; off. I couldn&#8217;t find any settings within the dock itself (right clicking does nothing, it seems), and I couldn&#8217;t find any reference to it in the system settings panel either. A quick trip to Google, which I feel shouldn&#8217;t have been necessary, told me that I could turn this search off in the Privacy settings, for some reason. As annoying as this was, all would be well if the upgrade to 12.10 didn&#8217;t <strong>turn it back on again</strong>. Why would you do that to me, Ubuntu? I clearly stated that I had no interest in this mis-feature by hunting it down and disabling it, what purpose does re-enabling it have other than grab a bit more money from Amazon and anger me?</p>
-
-<p>It&#8217;s these little mis-steps and more that make or break the user experience of a product. I&#8217;m fairly tech savvy, and am comfortable digging through StackExchange and various forums to find some solutions to my problems, but that&#8217;s not the way that the average customer works. For those who aren&#8217;t comfortable looking up answers or editing configuration files, these little details will quickly scare them away to an operating system that&#8217;s less surprising and simpler. And these are the users that Canonical must attract if they&#8217;re hoping to turn Ubuntu into a mainstream Operating System.</p>
 ]]></content>
   </entry>
   

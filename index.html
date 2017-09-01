@@ -9,8 +9,7 @@
   <meta name="author" content="Ashton Kemerling">
 
   
-  <meta name="description" content="Over the past year my team has been doing something shocking to a lot of
-engineers: we&#8217;re favoring pure Java over Clojure. We aren&#8217;t &hellip;">
+  <meta name="description" content="Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +70,178 @@ engineers: we&#8217;re favoring pure Java over Clojure. We aren&#8217;t &hellip;
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/08/30/mdc-not-thread-safe/">MDC and Thread Pools: A Bad Combination</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-08-30T06:17:00-07:00" pubdate data-updated="true">Aug 30<span>th</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems that might arise. And while many systems will keep logs in their reverse proxy like Nginx, a well written system will also have application/domain specific logs written within the application itself.</p>
+
+<p>A common goal of application logs is to tie a given log line to a specific request. Because modern servers are multi-threaded, it is possible for multiple requests to be serviced at the same time, resulting in log messages from different requests being intermingled in the log output.</p>
+
+<p>According to all the documentation I have found, the standard way to resolve this is to use the Mapped Diagnostic Context, or <a href="https://logback.qos.ch/manual/mdc.html">MDC</a>. The MDC wraps a thread local hashmap, whose values can be used in your log patterns. On paper you could generate a UUID per request, insert it into the MDC and presto you have a UUID per request in each log line! Since threads are created per request, the MDC will be empty each time.</p>
+
+<p>Except, that&#8217;s not really how Java programming works these days. Threads are expensive, and so for the sake of efficiency modern Java aims to minimize the number of threads created. This means using non-blocking IO (NIO), or reusing threads via Thread Pools where possible, which avoids creating new threads. As such there are quite a few number of APIs in Java 8 and some modern web servers that make it trivial to make your code non-blocking and use a common thread pool.</p>
+
+<p>So, what happens to our MDC when we reuse threads? Well, we end up with the wrong MDC! Here&#8217;s some code for Java 8 that shows the problem:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.slf4j.MDC</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.concurrent.CompletableFuture</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CORRELATION_ID</span> <span class="o">=</span> <span class="s">&quot;correlation-id&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="n">logger</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">stepOne</span><span class="o">(</span><span class="n">String</span> <span class="n">correlationId</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">CompletableFuture</span><span class="o">.</span><span class="na">supplyAsync</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">MDC</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CORRELATION_ID</span><span class="o">,</span> <span class="n">correlationId</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;Step One&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="s">&quot;Foo&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">stepTwo</span><span class="o">(</span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">previous</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">previous</span><span class="o">.</span><span class="na">thenApplyAsync</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;Step Two&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&quot;Bar&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">stepThree</span><span class="o">(</span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">previous</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">previous</span><span class="o">.</span><span class="na">thenApplyAsync</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;Step Three&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&quot;Baz&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">doAll</span><span class="o">(</span><span class="n">String</span> <span class="n">correlationId</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">stepThree</span><span class="o">(</span><span class="n">stepTwo</span><span class="o">(</span><span class="n">stepOne</span><span class="o">(</span><span class="n">correlationId</span><span class="o">))).</span><span class="na">join</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">Main</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">doAll</span><span class="o">(</span><span class="s">&quot;correlation-id-one&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">doAll</span><span class="o">(</span><span class="s">&quot;correlation-id-two&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This code is using the new <code>CompletableFuture</code> class from Java 8, which is <em>roughly</em> analogous to Javascript promises. What we do is set the correlation-id, then execute a sequence of asynchronous actions and log the output. If you run this code enough times, you will eventually get the output below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.465</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">One</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.466</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Two</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.466</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Three</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.467</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">two</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">One</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.467</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">two</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Two</span>
+</span><span class='line'><span class="mi">12</span><span class="o">:</span><span class="mi">13</span><span class="o">:</span><span class="mf">55.467</span> <span class="o">[</span><span class="n">ForkJoinPool</span><span class="o">.</span><span class="na">commonPool</span><span class="o">-</span><span class="n">worker</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="n">correlation</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="n">one</span> <span class="o">-</span> <span class="n">Step</span> <span class="n">Three</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pay attention to the last line, which should have a correlation-id of correlation-id-two. Instead we have an earlier correlation-id because we happened to reuse a thread from earlier. This is an unmitigated disaster, as now you don&#8217;t have missing logs, you have misleading logs. In a less-simple scenario it would be absolutely impossible to tell whether or not that correlation-id was correct, and you might end up diagnosing bugs that don&#8217;t exist within your system because of this.</p>
+
+<p>Java 8 and <code>CompletableFuture</code> make this much more plausible by making it very easy to use the <code>ForkJoinPool</code>. <code>CompletableFuture</code> provides a number of methods to create a new <code>CompletableFuture</code>, or to take one <code>CompletableFuture</code> and transform it into another. Most of these methods have at least two signatures: <code>x</code> and <code>xAsync</code>. The former will do all the work on the current thread, the latter will automatically use the <code>ForkJoinPool</code> to execute asynchronously. Optionally you can provide your own <code>Executor</code>, which might be backed by your own managed thread pool.</p>
+
+<p>From a performance standpoint, this is amazing. I can separate the business logic from the execution strategies completely. With very minor code changes, sometimes only a method name, I can turn synchronous code to asynchronous or back again. But from a logging stand point this is very fragile. Correctly using the MDC depends on staying on the current thread, and Java 8 makes it very easy to hop threads by design. Worse, the above incorrectness is subtle, so your logs could be left incorrect for years without any immediate impact.</p>
+
+<h2>Recommendations</h2>
+
+<p>Don&#8217;t use the MDC, it&#8217;s too unsafe. Every time you change threads, you will either get an empty MDC (best case scenario), or MDC values from an older request (worst case scenario). At every single point where you might hop threads, it will be necessary to copy the current MDC settings to a local variable, close over it in your next lambda, and set the new thread&#8217;s MDC to the correct value before logging on the new thread. If any new asynchronous step is introduced without doing the above work, the correct values are lost for the rest of the request resulting in malformed or incorrect logs. Considering that adding &#8220;Async&#8221; to the end of a method name is enough to hop threads, this is a lot of work.</p>
+
+<p>The easiest solution is to forgo logging request specific identifiers. Remove any reference to the MDC from your code and log configuration, and move on. If your request volume is relatively low, this might be a perfectly reasonable solution for you.</p>
+
+<p>If you must track every single action down to a single request, you will need to pass around an object for each request which will contain any request specific information you want to log. You can setup logging interfaces that require the <code>Request</code> object to ensure log uniformity, which means that failing to pass this object will be a compilation error. As a side benefit, these custom logging interfaces would be extremely useful in enforcing consistent log messages, and a good place to inject statistics gathering.</p>
+
+<h2>Addendum</h2>
+
+<p>The MDC docs are incorrect, with sections of the documentation explicitly referencing out of date information. I draw your attention to the section titled &#8220;MDC and Managed Threads&#8221; which says the following:</p>
+
+<blockquote><p>A copy of the mapped diagnostic context can not always be inherited by worker threads from the initiating thread. This is the case when java.util.concurrent.Executors is used for thread management. For instance, newCachedThreadPool method creates a ThreadPoolExecutor and like other thread pooling code, it has intricate thread creation logic.</p></blockquote>
+
+<p>As it turns out, a copy of the mapped diagnostic context will <strong>never</strong> be inherited by a worker thread. <a href="https://github.com/qos-ch/logback/commit/aa7d584ecdb1638bfc4c7223f4a5ff92d5ee6273">This</a> change guarantees that each thread gets a new, empty MDC. This documentation is correct for older version of logback, but it is not correct anymore. I&#8217;m sure the quote above was accidentally left in place, as the correct behavior is mentioned at the top of the document. It&#8217;s just a good reminder to read documentation carefully, and understand that humans can make mistakes in the docs too.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1290,84 +1461,6 @@ or not, will be a terrible manager without the requisite people skills.</p>
 that manage expectations of those uphill and divert shit rolling
 downhill. The best manager is the one that helps their team be the best,
 whether or not there are any commits with their name on it.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/06/internationalization-golf/">Internationalization Golf</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-06T22:48:00-08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Martin Grüner had a <a href="http://martingryner.com/software-localization-is-tricky/">fun</a> article about his experience writing an internationalized app. I thought it would be fun to share my own experiences.</p>
-
-<p>My first job out of college was working on a Common Lisp (CL) web application. The application was only a few years younger than me, and had originally written in CL due to a particularly good HTML/XML library available in CL at the time. Unfortunately in the intervening years the HTML library stopped being state of the art, and the whims of enterprise software engineering had left CL behind for web development, resulting in a serious lack of common programming conveniences.</p>
-
-<p>Right after joining the company, I was informed that the sales person had a potential lead with clients in a Spanish speaking country. The application at this point was English only, but the QA engineer was married to a native Spanish speaker who was willing to help translate the application. All we needed to do was wire the application up for internationalization and localization. I was tasked with picking or creating a library and interspersing it throughout the application. The only criteria was that it both looked good and was capable of displaying different languages to different users depending on their browser&#8217;s &#8220;accept-language&#8221; header. So compiling or packaging up a new application with hard-coded languages was not an option.</p>
-
-<p>I eventually decided that all the existing libraries were insufficient and we needed to make our own. I&#8217;m still not sure if that was the right choice or not. CL doesn&#8217;t have the strongest library ecosystem around, but I was also a very young engineer and more susceptible to the &#8220;Not Invented Here&#8221; syndrome than I am now. Although a quick perusal through the current offerings involves libraries whose home pages are 404s, libraries who are nothing but FFI bindings to a GNU C library, and those whose list of defects includes &#8220;no documentation&#8221;, &#8220;undocumented code&#8221; and &#8220;slow PO parser&#8221;.</p>
-
-<p>Compounding the issue was CL&#8217;s format function. CL has an exceedingly powerful formatter that is capable of unwrapping loops and interspersing the correct combination of &#8220;,&#8221; and &#8220;and&#8221; for a list of strings. This function was used with (reckless) abandon throughout the codebase, something for which I deserve some blame. The lack of dedicated template files compounded the issues; it&#8217;s a lot easier to reach for format when you&#8217;re producing HTML the handler-function itself.</p>
-
-<p>There was no way I was going to explain the (non-technical) translator how to deal with format directives like this: &#8220;~#[NONE~;~a~;~a and ~a~:;~a, ~a~]~#[~; and ~a~:;, ~a, etc~].&#8221;, and I didn&#8217;t want to dig through 500kloc and unroll all the directives. So any translation system I made would need to support at least a subset of the CL formatting directives while hiding them for the translator&#8217;s sanity.</p>
-
-<p>Worse still, CL&#8217;s formatter accepts positional arguments only, to my knowledge. Thus there&#8217;s no particular way to convince the formatter to modify the order of the parameters if the target language has different language structure than English. So my system would need to deal with that.</p>
-
-<p>The final format I settled on would look something like this. The programmer (me) would change (format nil &#8220;~a&#8221; var) to (jibberish:format &#8220;&lt;~a:variable-name&gt;&#8221; &#8220;Descriptive sentence for translator&#8221; :variable-name var). We could then convince our code to print out a file for a language like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>####################################
-</span><span class='line'>File: filename.cl
-</span><span class='line'>####################################
-</span><span class='line'>
-</span><span class='line'>Original: &lt;variable-name&gt;
-</span><span class='line'>Translation: Translation goes here
-</span><span class='line'>Note for translator: Descriptive sentence for translator
-</span><span class='line'>Original Argument Order: [variable-name]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And so on. At runtime the language file would be parsed into a in-memory hash map, which would allow us to replace the format-string with the new one, re-order the argument list according to the translator&#8217;s needs, and strip the identifiers from the formatting string leaving the raw format directives.</p>
-
-<p>So, how&#8217;d I do? Mixed results. The conversion was long and painful, requiring that each format directive and raw string be touched. A huge portion of the &#8220;Notes for translator&#8221; were either blank due to difficulty and fatigue, or were something along the line &#8220;Description, part 1/n&#8221; due to multiple calls being joined together in HTML. Changes in formatting calls required that the matching translation entry be hunted down <em>in every translation file</em> for the translation to still work.</p>
-
-<p>But technical challenges are usually not a big deal, after all that&#8217;s a fairly large portion of what engineers do. Probably the worst problem with my system was how it worked for non-technical folk. The first attempt at giving this file to a translator resulted in her helpfully translating all the variable names into spanish, changing &#8220;It is &lt;today&gt;&#8221; to &#8220;que es &lt;hoy&gt;&#8221;, which resulted in some rather exciting errors. I think my own design sabotaged me in this particular instance, as it required way too much careful explanation to be usable. It was my first encounter with the major difference between using a program whose internals you are familiar and explaining its use to someone else who has never seen anything similar.</p>
-
-<p>I think if I had to do it again, I would&#8217;ve probably spent more time and modified the way the program generated strings instead. I suspect that my custom library avoiding refactoring everything was a case of <a href="http://en.wikipedia.org/wiki/False_economy">false economy</a>, as the time saved up front would have been lost in the time required to train translators and maintain overly fragile translation files. I also learned that if you plan on selling an application in another language market, you need to think about that <em>before</em> you start writing code. Internationalization limits some of the choices you can make with your software and design, and it&#8217;s a lot easier to use that restricted set up front than it is to unwind them after the fact.</p>
-
-<p>As a final irony, while attempting to write this post in Octopress (which uses Jekyll), it crashed several times because the SASS files in Octopress use unicode, which Octopress appears to hate out of the box. You have to change a few environment variables to convince it that Unicode is ok.</p>
 </div>
   
   

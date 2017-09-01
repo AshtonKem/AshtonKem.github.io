@@ -135,6 +135,10 @@
         <lastmod>2017-08-29T21:22:10-07:00</lastmod>
     </url>
     <url>
+        <loc>http://www.ashtonkemerling.com/blog/2017/08/30/mdc-not-thread-safe/</loc>
+        <lastmod>2017-09-01T14:59:41-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://www.ashtonkemerling.com/404.html</loc>
         <lastmod>2017-08-29T21:22:10-07:00</lastmod>
     </url>
@@ -148,7 +152,7 @@
     </url>
     <url>
         <loc>http://www.ashtonkemerling.com/blog/archives/</loc>
-        <lastmod>2017-08-29T21:22:10-07:00</lastmod>
+        <lastmod>2017-09-01T14:59:41-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.ashtonkemerling.com/about-me/</loc>
@@ -156,7 +160,7 @@
     </url>
     <url>
         <loc>http://www.ashtonkemerling.com/archives/</loc>
-        <lastmod>2017-08-29T21:22:10-07:00</lastmod>
+        <lastmod>2017-09-01T14:59:41-07:00</lastmod>
     </url>
     <url>
         <loc>http://www.ashtonkemerling.com/robots.txt</loc>
@@ -168,6 +172,6 @@
     </url>
     <url>
         <loc>http://www.ashtonkemerling.com/</loc>
-        <lastmod>2017-08-29T21:22:10-07:00</lastmod>
+        <lastmod>2017-09-01T14:59:41-07:00</lastmod>
     </url>
 </urlset>
