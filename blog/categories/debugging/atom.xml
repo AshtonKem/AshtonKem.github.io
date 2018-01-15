@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: debugging | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/debugging/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/debugging/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MDC and Thread Pools: a Bad Combination]]></title>
-    <link href="http://AshtonKem.github.io/blog/2017/09/01/mdc-and-threadpools/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2017/09/01/mdc-and-threadpools/"/>
     <updated>2017-09-01T15:01:00-07:00</updated>
-    <id>http://AshtonKem.github.io/blog/2017/09/01/mdc-and-threadpools</id>
+    <id>http://www.ashtonkemerling.com/blog/2017/09/01/mdc-and-threadpools</id>
     <content type="html"><![CDATA[<p>Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems that might arise. And while many systems will keep logs in their reverse proxy like Nginx, a well written system will also have application/domain specific logs written within the application itself.</p>
 
 <p>A common goal of application logs is to tie a given log line to a specific request. Because modern servers are multi-threaded, it is possible for multiple requests to be serviced at the same time, resulting in log messages from different requests being intermingled in the log output.</p>

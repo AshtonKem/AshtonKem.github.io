@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: website | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/website/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/website/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/04/22/octopress/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2013/04/22/octopress/"/>
     <updated>2013-04-22T22:16:00-07:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/04/22/octopress</id>
+    <id>http://www.ashtonkemerling.com/blog/2013/04/22/octopress</id>
     <content type="html"><![CDATA[<p>I'm currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.</p>
 
 <p>Wordpress is fine if you are either a big PHP afficianado, or are afraid of web programming in general. It's quite easy to install themes and plugins without any knowledge of what this means. However, this only is true if you're self-hosting Wordpress.org (the project) and not using Wordpress.com (the commercial website using Wordpress.org). On Wordpress.org you're stuck using a limited number of (mostly for pay) themes and plugins, and are restricted from inserting HTML, JS, or CSS into your website.</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: clojure | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/clojure/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Java Without If]]></title>
-    <link href="http://AshtonKem.github.io/blog/2017/01/26/java-without-if/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2017/01/26/java-without-if/"/>
     <updated>2017-01-26T19:54:00-08:00</updated>
-    <id>http://AshtonKem.github.io/blog/2017/01/26/java-without-if</id>
+    <id>http://www.ashtonkemerling.com/blog/2017/01/26/java-without-if</id>
     <content type="html"><![CDATA[<p>Over the past year my team has been doing something shocking to a lot of
 engineers: we're favoring pure Java over Clojure. We aren't rewriting all our
 Clojure code, but we definitely prefer Java for green field projects.</p>
@@ -182,9 +182,9 @@ Lambda to get a taste of it in Java.</p>
   
   <entry>
     <title type="html"><![CDATA[My Increasing Frustration With Clojure]]></title>
-    <link href="http://AshtonKem.github.io/blog/2016/06/11/my-increasing-frustration-with-clojure/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure/"/>
     <updated>2016-06-11T06:24:00-07:00</updated>
-    <id>http://AshtonKem.github.io/blog/2016/06/11/my-increasing-frustration-with-clojure</id>
+    <id>http://www.ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure</id>
     <content type="html"><![CDATA[<p><strong>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I've seen.</strong></p>
 
 <p>First off, this is not a "I'm quiting in disgust" post. Those are childish and a waste of everyone's time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.</p>

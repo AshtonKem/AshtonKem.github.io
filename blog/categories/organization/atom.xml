@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: organization | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/organization/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/organization/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Org Mode]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/11/04/org-mode/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2013/11/04/org-mode/"/>
     <updated>2013-11-04T18:55:00-08:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/11/04/org-mode</id>
+    <id>http://www.ashtonkemerling.com/blog/2013/11/04/org-mode</id>
     <content type="html"><![CDATA[<p>Recently I've taken interest in making myself more productive, and at
 least so far it's going well. I personally attribute part of my current
 productivity to a new "shut up and get back to work" mentality, and

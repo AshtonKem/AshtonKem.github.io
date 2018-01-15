@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: python | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/python/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Binding vs. Assignment ]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/04/30/binding-vs-assignment/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2013/04/30/binding-vs-assignment/"/>
     <updated>2013-04-30T07:23:00-07:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/04/30/binding-vs-assignment</id>
+    <id>http://www.ashtonkemerling.com/blog/2013/04/30/binding-vs-assignment</id>
     <content type="html"><![CDATA[<p>A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.</p>
 
 <p>``` python Odd Functions

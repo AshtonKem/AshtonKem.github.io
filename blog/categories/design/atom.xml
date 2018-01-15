@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: design | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/design/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/design/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Stop Surprising Me Ubuntu]]></title>
-    <link href="http://AshtonKem.github.io/blog/2013/06/04/stop-surprising-me-ubuntu/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2013/06/04/stop-surprising-me-ubuntu/"/>
     <updated>2013-06-04T23:19:00-07:00</updated>
-    <id>http://AshtonKem.github.io/blog/2013/06/04/stop-surprising-me-ubuntu</id>
+    <id>http://www.ashtonkemerling.com/blog/2013/06/04/stop-surprising-me-ubuntu</id>
     <content type="html"><![CDATA[<p>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain't Gonna Need It.</p>
 
 <p>The Principle of Least Surprise, is one of the design principles of the language Ruby, specifically in the context of "the principle of least surprise after you learn Ruby very well." And all good systems have the property that they do not surprise experienced users, but great systems do not even surprise inexperienced users. This is what Apple has been doing for years, trying to make their products mimic familiar scenarios and objects from the real world, so that users can simply pick up the product and use it.</p>

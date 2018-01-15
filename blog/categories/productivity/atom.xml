@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: productivity | Ashton Kemerling]]></title>
-  <link href="http://AshtonKem.github.io/blog/categories/productivity/atom.xml" rel="self"/>
-  <link href="http://AshtonKem.github.io/"/>
-  <updated>2017-09-01T15:03:14-07:00</updated>
-  <id>http://AshtonKem.github.io/</id>
+  <link href="http://www.ashtonkemerling.com/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://www.ashtonkemerling.com/"/>
+  <updated>2018-01-15T11:35:47-08:00</updated>
+  <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
     <email><![CDATA[ashtonkemerling@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Unusual Productivity Hacks]]></title>
-    <link href="http://AshtonKem.github.io/blog/2014/06/19/unusual-productivity-hacks/"/>
+    <link href="http://www.ashtonkemerling.com/blog/2014/06/19/unusual-productivity-hacks/"/>
     <updated>2014-06-19T07:37:00-07:00</updated>
-    <id>http://AshtonKem.github.io/blog/2014/06/19/unusual-productivity-hacks</id>
+    <id>http://www.ashtonkemerling.com/blog/2014/06/19/unusual-productivity-hacks</id>
     <content type="html"><![CDATA[<p>The internet is lousy with productivity ideas, mostly about how to work harder or longer. I personally believe that good productivity is about maximizing per hour results, not working harder. And the fastest way to improve your productivity is to eliminate some of the things slowing you down. So rather than going over the usual suspects, let's take a look at eliminating some of the low hanging fruit.</p>
 
 <h2>1. Conquer Your Diet.</h2>
