@@ -9,9 +9,7 @@
   <meta name="author" content="Ashton Kemerling">
 
   
-  <meta name="description" content="Experience Edmunds (2017 - Current) Technical Lead for Lead Systems
-Support multiple Java &amp; Spring projects
-Redesign outdated architecture to &hellip;">
+  <meta name="description" content="Experience Edmunds (2017 - Current) Edmunds.com is one of the world&#8217;s premier car research and buying websites. First created in 1966, Edmunds &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,84 +78,73 @@ Redesign outdated architecture to &hellip;">
 
 <h2>Edmunds (2017 - Current)</h2>
 
-<ul>
-<li>Technical Lead for Lead Systems</li>
-<li>Support multiple Java &amp; Spring projects</li>
-<li>Redesign outdated architecture to improve stability and simplicity</li>
-</ul>
+<p>Edmunds.com is one of the world&#8217;s premier car research and buying websites. First created in 1966, Edmunds&#8217; main goal has been making the car buying process easier for the consumer. Based out of beautiful Santa Monica California, Edmunds has consistently been rated one of the best places to work in LA. It also has an <a href="https://www.youtube.com/watch?v=1aq5T1GCyOA">amazing office</a> which we are proud of.</p>
 
+<p>At Edmunds I am a tech lead, which means that I lead a small team of 5. I am responsible for the mission critical leads system, which allows Edmunds to take customers interested in a vehicle and transmit this information to the dealeships to start the sales process. The leads system is a critical part of our Tier 3 portfolio, which directly connects Edmunds.com users with dealerships.</p>
+
+<p>Currently we maintain a small suite of Java &amp; Spring based web applications. Our primary goal is to reduce technical debt, and modernize the system with better techniques, tools, and architectures.</p>
 
 <h2>DRW Trading (2015 - 2017)</h2>
 
-<ul>
-<li>Work in Clojure, Jruby, and JS on back office applications</li>
-<li>Support real time back office risk and position tracking software</li>
-<li>Maintain a mixture of green field and legacy code working together</li>
-</ul>
+<p>DRW trading is one of America&#8217;s largest principle trading firms. DRW participates in a very wide range of market activities including market making, investment, crypto currency exchange, VC investment, and real estate.</p>
 
+<p>At DRW I was a senior engineer on the Trading Infrastructure team. TI was responsible for maintaining two mission critical tools: the reference data store and the position store.</p>
+
+<p>The reference data store contained all relevant details of every single instrument that DRW had ever traded, and then some. This work involved both understanding a wide range of financial products as well as being able to capture the commonalities of instruments offered by different exchanges. We also supported a large number of applications to provide instrument specific calculations, such as option expiration, bond accrued interest calculation, as well as batch jobs to regularly import and process exchange instrument data.</p>
+
+<p>The trade and position data store involved tracking every single trade made in the organization, and keeping an up to the date record of every single trader&#8217;s position. This involved verifying every trade, providing a way for errors to be easily corrected, as well as providing the ability for desks to search for and view their trades/positions in a real time format. This data had to be accumulated firm wide for regulatory reasons, as well as segregated out so that nominally competitive desks could not see each other&#8217;s positions.</p>
 
 <h2>Pivotal Labs (2013 - 2015)</h2>
 
-<ul>
-<li>Add features to <a href="http://www.pivotaltracker.com">Pivotal Tracker</a></li>
-<li>Manage two very large Backbone.js applications</li>
-<li>Spearhead efforts in using experimental testing techniques</li>
-<li>Co-maintain CI environments</li>
-</ul>
+<p>Pivotal Labs is a consultancy firm primarily based out of San Francisco, with satellite offices in a large number of major metropolitan hubs world wide. They offer consultancy services to established companies and startups alike, using techniques like pair programming, agile project management, and TDD to show firms how to work better.</p>
 
+<p>At Pivotal I worked in a satellite office on their <a href="http://www.pivotaltracker.com">Pivotal Tracker</a> product. Pivotal Tracker is an agile project management tool beloved for its opinionated simplicity. Tracker is used universally inside Pivotal and with Pivotal clients, as well as a large number of companies large and small in order to easily track their project&#8217;s progress.</p>
+
+<p>At Pivotal I basically fulfilled two roles: backend engineer and frontend engineer.</p>
+
+<p>The backend of Pivotal Tracker was a heavily customized Ruby on Rails app providing both static management pages, APIs, a rich event log &amp; caching infrastructure, and a heavily customized documentation system. I was involved in adding features, fixing bugs, and overhauling the search system for the backend.</p>
+
+<p>The frontend of Pivotal Tracker was a Single Page Application (SPA) written in Backbone.js. Well, it is one now, back when I worked there were actually two: classic and next. Another engineer and I spearheaded the project to completely separate the then conjoined classic &amp; next code, fix a large number of show stopping bugs, and eventually release the next codebase out into the wild.</p>
+
+<p>While at Pivotal I also maintained our CI solutions in Jenkins &amp; CircleCI, and also ran an experiment in using generative based testing to search for hard to reproduce bugs. The latter eventually produced a <a href="https://www.youtube.com/watch?v=HXGpBrmR70U">Clojure Conj</a> talk in 2014.</p>
 
 <h2>Narrative Science (2012 - 2013)</h2>
 
-<ul>
-<li>Interact with clients to determine data needs</li>
-<li>Design, implement, and test data ingestion</li>
-<li>Manage and improve Jenkins testing and CI setup</li>
-<li>Sole developer for <a href="https://quillengage.narrativescience.com/">Quill for Google Analytics</a> (now QuillEngage)</li>
-</ul>
+<p>Narrative Science is an AI &amp; Natural Language processing startup based in Chicago Illinois. Their primary product is an algorithm that combines structured data and configuration to produce natural sounding text. There is a high probability that you have read some work from Narrative Science, especially if you are into baseball, stock markets, or sales reports.</p>
 
+<p>Narrative Science was effectively divided into three sections: product, editorial, and data. Product worked on internal tools, editorial provided the configuration required to make the product work, and data provided the structured data required by editorial. I worked on the data team.</p>
+
+<p>While on data, I was responsible for maintaining the ELTV processes for a number of external clients. This would involve downloading files from FTP, extracting any data, cleaning it up automatically, and storing it for future use. We also maintained the monitoring for all of these processes, including alerting when the client had not posted files within the expected time period.</p>
+
+<p>Aside from data, I was involved in Narrative Science&#8217;s one customer facing product: <a href="https://quillengage.narrativescience.com/">Quill for Google Analytics</a>, which is now called QuillEngage. Quill was a tool that allowed any user to sign in with their Google account, authorize us to view their Google Analytics data, and produce a weekly report summarizing their current trends in natural language. Since Quill was our only user facing product, it had a completely unique front end web application, run using Python in the Google Compute Engine.</p>
 
 <h2>OnShore Development (2011 - 2012)</h2>
 
-<ul>
-<li>Develop onShore&#8217;s flagship product, WebCheckout</li>
-<li>Help complete performance overhaul of product</li>
-<li>Rewrote in-house MVC framework</li>
-<li>Automate deployments to new environments</li>
-<li>Create and integrate new internationalization and localization library</li>
-</ul>
+<p>OnShore is a very small web shop that produces and maintains one product: WebCheckout. WebCheckout is designed to allow arts schools to easily loan out their equipment to their students, track the status of their inventory, and assess fees on students for late returns or damaged equipment.</p>
 
+<p>WebCheckout is interesting in that it&#8217;s written in Common Lisp. Large sections of the stack are either completely custom, or heavily customized from what is available in the Open Source community. This meant that when issues arose, often the only people capable of helping us were already debugging the problem. I assume that I must have been one of maybe 1,000 professional Common Lisp developers in the world when I worked at OnShore.</p>
 
-<h1>Open Source and Volunteering</h1>
+<p>During my time there I was involved in three major projects. The first was to create an internationalization and localization library to prepare the product for sale in the international market. The second was a rewrite of the core scheduling algorithm, reducing some complicated scheduling requests down from an 18 minute average to a 30 second average. And the final was an attempt to rewrite the overly complicated web object based framework to something based on MVC.</p>
 
-<h2>Care For Real (2012 - Current)</h2>
+<h1>Volunteering</h1>
 
-<ul>
-<li>Determine food pantry&#8217;s needs for client tracking</li>
-<li>Write Ruby on Rails application to serve needs</li>
-<li>Migrate data from legacy database to MySQL</li>
-<li>Train desk workers in new application</li>
-</ul>
+<h2>Care For Real (2012 - 2014)</h2>
 
+<p>Loyola University Chicago has a large focus on social justice, and required that most students do volunteering of some sort. I ended up volunteering at a food pantry a quarter mile from campus called Care For Real.</p>
 
-<h2>Butler</h2>
+<p>Originally I was going to involved in moving heavy items and handing out food, two activities that ideally happen often at a food pantry. But once they found out I knew computers, plans quickly changed to me overhauling their records system.</p>
 
-<ul>
-<li><a href="https://github.com/AshtonKem/Butler">Emacs plugin</a> to interact with Jenkins CI server</li>
-<li>Allow users to view all jobs, and monitor progress</li>
-<li>Enables users to start CI jobs without a context switch</li>
-</ul>
+<p>Food pantries need to keep track of their clients and what they give out with a ton of paperwork. Making sure that every client is sufficiently fed, that resources are equitably used, and that the pantry is properly supplied by the city&#8217;s food depository is a task that produces a ton of paperwork. Add on top of that regular interviews to check up on the client&#8217;s health and to refer people to specialist services, all of which produced even more paperwork.</p>
 
+<p>I was tasked with digitizing this system. First we created an Access 2007 system backed by ODBC and MySQL, since there already were volunteers in the system who knew how to use that. Once this system eventually hit its limit, I ended up creating a completely custom Ruby on Rails web application that could be hosted internally to help streamline the client check in process. We even integrated a receipt printer, so that we could hand clients a receipt for what items they should receive in the back. This helped a <em>lot</em> with clients who were not fluent in English.</p>
+
+<p>While I think the system that we created was great, it is sadly no longer in use. The Greater Chicago Food Depository ended up forcing pantries to use their system in order to receive food from the depository. And while I think this is unfortunate, at least the clients of Care For Real are still getting the critical food &amp; services they need.</p>
 
 <h1>Education</h1>
 
 <h2>Loyola University Chicago (2008 - 2012)</h2>
 
-<ul>
-<li>B.S. in Computer Science</li>
-<li>B.S. in Mathematics</li>
-<li>Honors</li>
-</ul>
-
+<p>I graduated with a B.S. in Computer Science and a B.S. in Mathematics, magna cum laude.</p>
 
   
 </article>
