@@ -4,7 +4,7 @@
   <title><![CDATA[Ashton Kemerling]]></title>
   <link href="http://www.ashtonkemerling.com/atom.xml" rel="self"/>
   <link href="http://www.ashtonkemerling.com/"/>
-  <updated>2018-02-21T18:48:22-08:00</updated>
+  <updated>2018-02-21T21:12:02-08:00</updated>
   <id>http://www.ashtonkemerling.com/</id>
   <author>
     <name><![CDATA[Ashton Kemerling]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[No, You Probably Don't Need a Blockchain]]></title>
+    <link href="http://www.ashtonkemerling.com/blog/2018/02/21/no-you-probably-dont-need-a-blockchain/"/>
+    <updated>2018-02-21T18:39:00-08:00</updated>
+    <id>http://www.ashtonkemerling.com/blog/2018/02/21/no-you-probably-dont-need-a-blockchain</id>
+    <content type="html"><![CDATA[<h1>On Bitcoins and Blockchains</h1>
+
+<p>Oh Bitcoin, the darling of everyone&#8217;s economic dreams. Some think it&#8217;ll destroy the fed, others hope it&#8217;ll kill off the big banks. Some just think it&#8217;s going to make them rich, others go as far as hoping it&#8217;ll kill off governments completely. Whatever you happen to hate, Bitcoin is coming to destroy it!</p>
+
+<p>All of this is complete nonsense, of course. There are enough mutually exclusive dreams about Bitcoin that it&#8217;s clear that not all of them can come true, possibly even the hopes of easy riches given its unpredictable volatility.</p>
+
+<p>But even if you don&#8217;t buy into the dream of buying bitcoins to turn them into Lambos or whatever, chances are you are hearing from every single corner that Bitcoin isn&#8217;t the future, it&#8217;s the blockchain! This refrain has been said so many times that even Bitcoin skeptics feel the need to mention that the blockchain will change the world, even if they don&#8217;t think that Bitcoin itself will. That this refrain becomes louder whenever Bitcoin is dropping vs. USD doesn&#8217;t seem to worry that many people.</p>
+
+<p>I personally think all of this blockchain stuff is bunk. I am extremely skeptical that the blockchain is indeed the future, and if there will be any future uses for it I don&#8217;t think we&#8217;ve seen it yet. What we have seen instead is a ton of hype and not a small amount of straight up fraud, which I find worrying.</p>
+
+<h2>A Pesky Disclaimer.</h2>
+
+<p>First of all, I am not a financial adviser. If you take any of this as advice as far as what to buy or sell, both of us will be very sad. Well, you probably will be sad, I will be annoyed if you bug me about it. If you want legit financial advise, go find an actual financial adviser and <em>pay them</em>.</p>
+
+<p>Secondly, predicting the future is <em>hard</em>. While I am confident that I have not seen any uses for the technologies discussed yet, I am not foolish enough to think that there is a 0% chance that one ever will. I will lay out why I think it&#8217;s unlikely, but only time will tell.</p>
+
+<h1>So, What <em>is</em> a Blockchain Anyways?</h1>
+
+<p>A blockchain is a way of recording a series of transactions in a publicly visible and immutable way. Individual transactions are created with private encryption keys, and then bundled into blocks. Each block is then publicly verified against some sort of algorithm, typically one that involves a lot of computational power to get done. Each verified block contains a reference to the previous block, thus creating a chain of blocks, or a blockchain. The idea is that blocks are very expensive to create, but very cheap to check. If you wish to check the balance or history of a given bitcoin address (&#8220;wallet&#8221;), then you merely need to scroll backwards through all the blocks and check for any transaction that references that address.</p>
+
+<p>The basic idea is that the verification of any transaction is essentially trustless, there doesn&#8217;t need to be any central authority to provide the record of any transaction. All you need is a copy of the blockchain in order to verify any past transaction, should you wish to do so. If you wish to do any transaction on the blockchain, all you need is a copy of the private key for a given wallet. These can be stored in a variety of ways in software or hardware. The people verifying blocks will facilitate your transaction without you or them knowing who each other is.</p>
+
+<h2>So, Why the Talk of Blockchains Instead of Bitcoin?</h2>
+
+<p>Because Bitcoin uses <em>a</em> blockchain, but it isn&#8217;t <em>the</em> blockchain. A blockchain effectively consists of the rules of the chain, the current chain, and all the participants in it. The chain itself is the combination of the starting block, and the longest accepted chain of transactions. This is why there are so-called altcoins, which are blockchain currencies that use slightly different rules or a different initial starting block from the blockchain.</p>
+
+<p>More interestingly still are cases where sections of a blockchain decide that a specific block was invalid, either for security or political reasons. These create a so-called hard fork, where two competing blockchains exist that share a large section of their history. A good example of this is the ever controversial <a href="https://en.wikipedia.org/wiki/Bitcoin_Cash">Bitcoin Cash</a>, which was created to overcome perceived deficiencies in Bitcoin itself. If you owned Bitcoin before the fork in August of 2017, then you now own an equal amount of Bitcoin and Bitcoin Cash. Whether or not you think this is economically sound is up to you.</p>
+
+<h1>So, Why Don&#8217;t You Like Blockchains?</h1>
+
+<p>I think blockchains are a novel combination of existing technologies, what I am not convinced of is their long term utility. While it&#8217;s been fun to watch a speculative bubble from around cryptocurrencies and their related companies, to my eyes most attempts to expand the blockchain beyond that bubble strike me as foolish at best.</p>
+
+<h2>Immutability Woes</h2>
+
+<p>Blockchains are by their very design immutable. Barring extreme measures, any transaction entered into them is permanent and irreversible. For financial systems this has a lot of obvious drawbacks: fraudulent or mistaken transactions cannot be undone. Ebay purchaser did not deliver? Tough. Someone held you <a href="https://www.ccn.com/man-held-gunpoint-bitcoin-comes-forward/">hostage</a> until you sent them bitcoin? Tough. Private key hacked, or hard drive destroyed? That&#8217;s unfortunate for you. The only way to recover bad bitcoin transactions is to convince everyone to do a hard fork, and needless to say that the bar for that is very very high.</p>
+
+<p>But that&#8217;s just finance, what about industry? It turns out, that there&#8217;s very few systems that truly benefit from an inability to amend or update transactions. Humans bungle input into computers all the time, there&#8217;s a whole sector of the economy (customer service) designed to help deal with that. But in an immutable system, it is literally impossible to undo anything written to the blocks. The only possible way to somewhat reverse a bad transaction is to literally make the inverse transaction the next time around, which would involve convincing the opposite party to cooperate. This would rapidly clutter up the chain full of &#8220;oops&#8221; transactions, which would pretty quickly make you wonder why you&#8217;re bothering at all.</p>
+
+<h2>That Pesky Real World Thing</h2>
+
+<p>One of the most common proposed usages of blockchain is to track the shipment of real world goods, including everything from food to diamonds. On the surface this sounds great, you could easily and trustlessly prove that the shiny rock in your beloved&#8217;s ring wasn&#8217;t mined by children in a war torn region, fantastic!</p>
+
+<p>The problem is that computers are not the real world. Currently blockchains have a very hard time affecting even digital systems that are not on the blockchain, which is why centralized exchanges exist to facilitate buying bitcoin with USD/EUR/etc. Actually trying to make computers in general reflect the real world is a very hard task, and the blockchain does nothing to solve this issue.</p>
+
+<p>Imagine that you are a blood diamond distributor. You know that rich westerners love diamonds, but feel a bit bad about children being hurt and killed to mine these conflict diamonds. You have a huge incentive to simply lie to the computer to create a fraudulent paper trail for these diamonds, thus generating a higher market value for them. There&#8217;s nothing about the blockchain that prevents humans from lying or mistakenly entering the wrong values, and the immutable nature of blockchains makes the cost of mistakes oh so much higher.</p>
+
+<p>Don&#8217;t bother thinking about secure hardware at verified locations. At its heart blockchains only require a password to operate, as once you have the private key you can create transactions trivially. If media pirates can extract decryption keys from BluRay players, I guarantee you that diamond smugglers will be able to figure this out too. Once the hardware is in the attackers hands, it is only a matter of time until they strip it down to extract the keys.</p>
+
+<p>The only way around this is to have a trusted neutral party verifying that goods come from exactly where they claim to be from. Not only does this fly in the face of the &#8220;trustless&#8221; idea above, but handing said employee the ability to create immutable &#8220;this diamond is legit&#8221; records puts that employee in way more danger than need be. There&#8217;s literally nothing about this system that&#8217;s superior to what we already have.</p>
+
+<h2>Power &amp; Motivation</h2>
+
+<p>Blockchains typically use the &#8220;Proof of Work&#8221; system, where multiple participants try to solve a difficult problem in order to certify a block to be valid. The problem is hard to prevent one person from controlling too much of the mining (computational) pool. This is one of the reasons why Bitcoin itself currently consumes roughly as much power as Delaware while processing about 4 transactions a second.</p>
+
+<p>Problem: that much electricity is very expensive, as is all of the specialized hardware required to do it. Those that do the work, miners, are commercial operations and expect to be rewarded for their effort. With Bitcoin and other currencies, this reward is the currency itself. The first miner that solves the problem is rewarded with a few Bitcoins, hence the unkind comparisons to Ponzi or MLM schemes. In any non-monetary application, these miners will need to be compensated to do the work running the blockchain. Given the inefficiency of Proof of Work, this will be orders of magnitude more expensive than a similarly sized centralized solution.</p>
+
+<p>There are two solutions to this. Offer miners a token of some sort for their work, or run all the hardware yourself. The former is the basis of many ICOs, and most have more than a whiff of fraud about them. The latter is basically just a really crappy traditional system with some fancy terminology and a very expensive power bill.</p>
+
+<h3>Proof of Stake</h3>
+
+<p>There&#8217;s an alternative system to Proof of Work, which is Proof of Stake. In Proof of Stake the person holding the most old currency is selected as the person who will validate the latest block. Rather than each validator getting paid a set amount of new coins, they are paid a fee by everyone hoping to transact in order to validate the block. Rather than keeping the longest chain as the most valid, since the longest chain in Proof of Work is the most mined, the chain with the most old money in it is determined to be valid in Proof of Stake.</p>
+
+<p>Proof of Stake solves some, but not all, of the most egregious problems with the current Proof of Work system. The power and silicon bill would be significantly lower, but not necessarily free. You&#8217;d still need to pay people to use their phone/computer/whatever to run transactions on it. The chain would also run more transactions, better than the miserable 4/s on bitcoin, but this would only increase the size of the overall chain. Remember, every transaction <em>ever</em> stays on the blockchain permanently. The Bitcoin blockchain is currently 157GB in size, and that&#8217;s at a very low transaction speed. The idea of everyone mining on their phone is just laughable.</p>
+
+<p>Also, Proof of Stake doesn&#8217;t improve the real world interface or immutability problems above.</p>
+
+<h2>Scale</h2>
+
+<p>To be blunt, the performance of basically all blockchain systems today is garbage. The limited number of transactions that can fit into a block, and the amount of work it takes to prove a block means that blockchain systems using Proof of Work limits their maximum throughput to very low numbers. Bitcoin for example can handle on average 3-4 transactions a second, tops. Ethereum does better in the 15-20 a second range. Both pale in comparison to the average 1,667 transactions a second Visa handles per second based on their reported daily volume, with their peak volume probably being higher. To simplify, Visa can handle the transactions of an good sized nation state, bitcoin can handle the transactions of a few Costcos.</p>
+
+<p>I question how many industrial systems are worth spending the electricity on and need a transaction volume in the single digits a second range. Probably not many.</p>
+
+<p>Note: There are some plans to improve Bitcoin&#8217;s transaction speed, mostly by ditching the blockchain itself for all but the rarest of cases. Given that these solutions will appear <em>any day now</em> makes me doubt that they&#8217;re actually viable. These also include a lot of serious safety drawbacks that are not worth getting into here.</p>
+
+<h2>ICOs, Also Fraud</h2>
+
+<p>An interesting sub-genre of the cryptocurrency space are Initial Coin Offerings. This is where someone creates a new cryptographic coin representing a stake in some new venture. These coins are sold off to the highest bidder in order to raise funds, and then eventually the coins will be useful and valuable because magic. Needless to say, there is a <em>ton</em> of fraud in the ICO space.</p>
+
+<p>First of all, ICOs are designed to look a lot like Initial Public Offerings (IPOs), except without all those pesky regulations. The fact that many ICOs confer no voting or dividend rights upon the purchaser, and sometimes aren&#8217;t allowed to be sold according to the contract has yet to dissuade the market. Even the most up and up ICO typically doesn&#8217;t provide any particular reason why these tokens should be worth anything in future.</p>
+
+<p>Second, did I mention fraud? It&#8217;s estimated that up to 10% of the funds put into ICOs has been straight up stolen. Sometimes this is the creator of the ICO collecting bitcoin or whatever for the ICO and never delivering the token, simply replacing their website with <a href="http://nymag.com/selectall/2018/01/prodeum-scam-cryptocurrency-for-produce-disappears.html">a the word &#8220;penis&#8221;</a> and laundering the currency. Other times its trivial integer underflow bugs letting someone steal <a href="https://blog.goodaudience.com/how-800k-evaporated-from-the-powh-coin-ponzi-scheme-overnight-1b025c33b530">$800k</a> from a 4chan backed ICO. Half the time the funds are &#8220;stolen&#8221;, it is unclear whether or not a third party took it, or whether or not it&#8217;s an exit scam disguised as a hack.</p>
+
+<p>Third, very few of these ICOs have even the slightest hint at being related to crypto or valuable in any meaningful way. I&#8217;ve covered the issue with supply chain blockchains above, but &#8220;dating on the blockchain&#8221; and &#8220;porn on the blockchain&#8221; is all meaningless bullshit, especially now that nobody really cares what you view in the privacy of your own home anymore. And that&#8217;s not even considering the insanity that is backing an ICO with <a href="https://bananacoin.io/">bananas</a>. No, I am not kidding. They claim that they they&#8217;ve raised $3,038,361.90, by the way.</p>
+
+<p>For a good example of the nonsense of ICOs, look into the <a href="https://www.kerrisdalecap.com/wp-content/uploads/2018/02/Eastman-Kodak-Company-KODK.pdf">pre-mortem</a> of Kodak&#8217;s ICO. The whole plan is bullshit from top to bottom, and includes a non-trivial amount of insider trading. If the Kodak board isn&#8217;t arrested within the next year for insider trading I will be genuinely shocked.</p>
+
+<h1>But What About Smart Contracts?</h1>
+
+<p>Ethereum is the one interesting outlier of all of the crypto currencies and blockchain technologies. Ethereum provides the user with a simple, if not problematic, programming language. You can generate programs, or &#8220;smart contracts&#8221; (let it not be said that crypto fans are bad at marketing), and run them on the Ethereum blockchain. You have to pay a small fee in ETH, called &#8220;gas&#8221; based on the complexity of your program, and the result of the program must be some sort of Ethereum transaction. Thus the value of ETH is nominally backed by the utility of running programs on the Ethereum blockchain itself.</p>
+
+<p>On the face of it, smart contracts are an interesting idea. You could cut a lot of legal and human complexity/overhead out by making contracts that self execute. Most smart contract fans repeat the phrase &#8220;code is law&#8221; in reference to the above idea. Of course, writing programs that produce permanent financial consequences gives me some pretty serious anxiety, and I would hope that most senior engineers would feel the same. And given the number of high profile and high value hacks on Ethereum contracts over the years, it seems like my fears are well founded. That one of the <a href="https://www.coindesk.com/understanding-dao-hack-journalists/">hacks</a> was serious enough to trigger a hard fork in Ethereum implies that I&#8217;m onto something. It turns out that &#8220;code is law&#8221; is a popular idea right up until enough people lose their money.</p>
+
+<p>On top of that, as best I can tell a <em>large</em> percentage of Ethereum contracts are literal Ponzi schemes and ICO tokens, the later being easy to bootstrap on top of Ethereum using a protocol called ERC20. This calls into question the long term viability of &#8220;smart contracts&#8221;, given that the main usage for this system so far appears to be fraud and refreshingly honest fraud.</p>
+
+<h1>Conclusion</h1>
+
+<p>No, you probably don&#8217;t need a blockchain.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MDC and Thread Pools: a Bad Combination]]></title>
@@ -1662,23 +1767,6 @@ months.</p>
 <p>My most recent borrowed term is <em>Force Multiplier</em>. A force multiplier is anything that allows an group or individual to be more effective without an increase in effort. It&#8217;s normally a military term referencing how better weather forecasts, equipment, or intelligence can allow a unit to accomplish much more without increasing effort/losses. I like to use it in reference to things like unit tests and automation, that make me more effective as an engineer without costing me more time. If I don&#8217;t have to babysit a build waiting to type in the next step, then I can get back to work while a CI server works for me. I&#8217;m instantly more effective without actually spending more time at work. With a comprehensive suite of unit tests I can spend less time worrying and validating that my refactoring has damaged the quality of the system, thus I can get more work done in the same period of time.</p>
 
 <p>I&#8217;m sure there are far more examples of this than I&#8217;ve listed, but they&#8217;re always fun to find and analyze.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Fast Cheap Good]]></title>
-    <link href="http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good/"/>
-    <updated>2013-06-05T20:24:00-07:00</updated>
-    <id>http://www.ashtonkemerling.com/blog/2013/06/05/fast-cheap-good</id>
-    <content type="html"><![CDATA[<p>In the distant past (1950&#8217;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.</p>
-
-<p>While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive. These differences come from the quality and number (thus cost) of the managers and engineers, the choice of methodologies, scope of features, and internal organizational setups.</p>
-
-<p>What is different is the fact that software engineers aren&#8217;t limited by physics the way that our mechanical brethren are. With few exceptions for high performance computing, the limitation of most software projects is the imagination and effort of its engineers, not hard limits in manufacturing technologies or physics. Combine this with a fad-heavy market for programming methods (scrum! extreme! agile! pair!), and it can be very tempting to assume that we can find the perfect balance with the correct management processes and the right methodology.</p>
-
-<p>This is false, of course. Management and methodology is about dealing with the communication overhead when enough people are working on an project. The pipe dream of management and methodology is for a group of N producers to produce N times more than one person alone. This is of course rubbish, as the <em>Mythical Man Month</em> demonstrated handily, it&#8217;s simply impossible to manage or process your way to good, cheap, and fast.</p>
-
-<p>So what&#8217;s the point of it all then? Why don&#8217;t we just go back to waterfall? Because the point of agile, scrum, pair programming and friends is <strong>not</strong> to get us all the way to good, cheap, and fast. The point is to go from choosing one of three, to choosing two of three. A poorly managed, low discipline team can only choose one of good, cheap, and fast; and this is of course worthless. Cheap software that&#8217;s late will probably still run out of VC and be beaten by the competition. Bad and cheap software will struggle to take over the market, and software that&#8217;s both bad and late probably shouldn&#8217;t be written. However a well managed, well disciplined team can survey the market, measure the competition, and <em>knowingly</em> choose what compromises they wish to make in speed, quality, and cost. Poorly managed teams blunder into one of the choices, usually cheap and bad, and end up having very little control over their own fate.</p>
 ]]></content>
   </entry>
   
