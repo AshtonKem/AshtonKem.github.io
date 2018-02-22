@@ -7,24 +7,11 @@ sharing: true
 footer: true
 ---
 
-Hi! I'm Ashton. I'm a polyglot programmer based out of Southern California. I
-work for [Edmunds](http://www.edmunds.com).
+Programmer, podcaster, fisherman, and nerd extraordinaire. By day I'm an engineer, and by night I'm a nerd, or is that redundant?
 
-While I've worked in a lot of OOP languages, I'm really a functional programmer
-at heart. I have professional experience in Common Lisp, Clojure, Javascript,
-and Java. My hobby projects tend to be written in Haskell and Ruby.
+At my day job I am a manager and engineer working for [Edmunds](https://www.edmunds.com) in beautiful Santa Monica California. By night I work for my wife at her company [Hawkwood Group](https://www.hawkwood.group) and cohost [CounterSteer](https://www.countersteer.co), a car podcast.
 
-On the side I work on a few open source projects,
-including [Butler](https://github.com/AshtonKem/Butler), my Emacs plugin for
-Jenkins and friends. This project was started after a short stint using Eclipse,
-which made me realize how much I needed CI information brought directly to me in
-my editor. Butler works by using Jenkins JSON API to check on the status of
-jobs, view progress, and trigger new ones.
+Professionally, my experience is all over the place. I've worked in old small companies, startups, Dell backed consultancies, and finance. In the mean time I've written code in Java, C\#, Ruby, Javascript, Clojure, Python, and even Common Lisp! And that's only counting the languages that I've been paid to write in.
 
-Outside of programming I'm a bicyclist and fly fisherman. I take an interest in
-all things historical and mechanical. I am currently writing a podcast to cover
-all the things that I know.
+Outside of work my wife and I enjoy getting out in to nature as much as possible. You are as likely to find us hiking or fishing the Sierra Nevadas as you are to find us laying out on a beautiful SoCal beach. We are also a large fan of the fantastic wine and seafood that coastal living has to offer.
 
-My wife introduced me into hiking and camping. She is also a writer and a
-comedian. We have two cats, Abe and Woz, who are brothers and co-conspirators in
-all our household mischief.
