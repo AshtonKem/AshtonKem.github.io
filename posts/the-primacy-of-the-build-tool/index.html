@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Ashton Kemerling">
+    <meta name="description" content="Ashton Kemerling&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="the primacy of the build tool"/>
+<meta name="twitter:description" content="No programming language stands alone. Besides the compiler, every programming language includes an ecosystem of libraries, build tools, analyzers, debuggers, and other utilities. Languages often rise and fall depending on the quality of these tools and libraries.
+For every language there needs to be one central item upon which every other tool depends. In most languages, this is the compiler or interpreter. Your Rails project is entirely dependent on the version of Ruby provided by the current environment, and similarly Maven depends on the version of javac and java available on the path."/>
+
+    <meta property="og:title" content="the primacy of the build tool" />
+<meta property="og:description" content="No programming language stands alone. Besides the compiler, every programming language includes an ecosystem of libraries, build tools, analyzers, debuggers, and other utilities. Languages often rise and fall depending on the quality of these tools and libraries.
+For every language there needs to be one central item upon which every other tool depends. In most languages, this is the compiler or interpreter. Your Rails project is entirely dependent on the version of Ruby provided by the current environment, and similarly Maven depends on the version of javac and java available on the path." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://ashtonkemerling.com/posts/the-primacy-of-the-build-tool/" />
+<meta property="article:published_time" content="2014-03-31T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-09T16:26:37-08:00"/>
+
+
+    <base href="http://ashtonkemerling.com/posts/the-primacy-of-the-build-tool/">
+    <title>
+  the primacy of the build tool · Ashton Kemerling
+</title>
+
+    <link rel="canonical" href="http://ashtonkemerling.com/posts/the-primacy-of-the-build-tool/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.8881182b3ec36ffd9c735306f7e16ce9b1129ebc650e069e7c4114827e9d9b23.css" integrity="sha256-iIEYKz7Db/2cc1MG9&#43;Fs6bESnrxlDgaefEEUgn6dmyM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.54.0" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://ashtonkemerling.com/">
+      Ashton Kemerling
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://countersteer.co">Podcast</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/resume/">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">the primacy of the build tool</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2014-03-31T00:00:00Z'>
+                March 31, 2014
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              3 minutes read
+            </span>
+          </div>
+          
+          
+        </div>
+      </header>
+
+      <div>
+        <p>No programming language stands alone. Besides the compiler, every
+programming language includes an ecosystem of libraries, build tools,
+analyzers, debuggers, and other utilities. Languages often rise and fall
+depending on the quality of these tools and libraries.</p>
+
+<p>For every language there needs to be one central item upon which every
+other tool depends. In most languages, this is the compiler or
+interpreter. Your Rails project is entirely dependent on the version of
+Ruby provided by the current environment, and similarly Maven depends on
+the version of javac and java available on the path.</p>
+
+<p>Unfortunately, this makes our code more fragile and dependent on the
+machine it was first created on. Someone cloning your code from a
+different machine must take care to ensure that their development
+environment is close to the original authors, and deployment must ship
+the correct compilers and interpeters for production to work well. We
+have created tools to help enforce the requirements of the code, but
+they are fragile and make upgrading dependencies a pain, as anyone who
+has had to fight with RVM can attest.</p>
+
+<p>The one exception to this I have found is Clojure. Clojure inverts the
+normal order making the build tool the central item, with the compiler
+provided by the project definition file.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defproject </span>foo <span style="color:#e6db74">&#34;0.1.0-SNAPSHOT&#34;</span>
+  <span style="color:#e6db74">:description</span> <span style="color:#e6db74">&#34;FIXME: write description&#34;</span>
+  <span style="color:#e6db74">:url</span> <span style="color:#e6db74">&#34;http://example.com/FIXME&#34;</span>
+  <span style="color:#e6db74">:license</span> {<span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;All Rights Reserved.&#34;</span>}
+  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]
+                 [org.clojure/clojure-contrib <span style="color:#e6db74">&#34;1.2.0&#34;</span>]
+                 [clj-time <span style="color:#e6db74">&#34;0.6.0&#34;</span>]]
+  <span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:dev</span> {<span style="color:#e6db74">:dependencies</span> [[midje <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]}})</code></pre></div>
+
+<p>The beauty of this change is that it makes setup trivial for another
+developer. All they need is the same build tool, and it will deal with
+the correct versions of both the compiler and any libraries for the
+project. Have other projects that depend on different versions of the
+compiler? The build tool only cares about the dependencies in front of
+it, and will call the correct version from the correct project.</p>
+
+<p>This also makes upgrading trivial. Want to try Clojure 1.6.0? Change
+&ldquo;1.5.1&rdquo; to &ldquo;1.6.0&rdquo; in the above snippet. Want to write a library that
+supports multiple versions of the compiler? The build tool supports
+profiles which allow you to swap out compilers trivially because it&rsquo;s
+just a dependency.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:1.3</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.3.0&#34;</span>]]}
+           <span style="color:#e6db74">:1.4</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.4.0-beta1&#34;</span>]]}}</code></pre></div>
+
+<p>Deployment gets easier as well. If you&rsquo;re deploying an uberjar, the core
+libraries you tested against are also shipped to production in the same
+jar. No need to upgrade your deployment scripts when a new version of
+Clojure comes out, as everything is included automatically.</p>
+
+<p>There is one catch to this wonderfulness, which is that Clojure depends
+on the JVM, and the build tool cannot change the JVM around. But Clojure
+has very simple requirements, Java 1.6 or greater, which
+makes it simple to deploy anywhere.</p>
+
+      </div>
+
+      <footer>
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-32325955-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

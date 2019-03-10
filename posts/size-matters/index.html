@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Ashton Kemerling">
+    <meta name="description" content="Ashton Kemerling&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="size matters"/>
+<meta name="twitter:description" content="About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:
+ Functional Good community Growing acceptance  This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM."/>
+
+    <meta property="og:title" content="size matters" />
+<meta property="og:description" content="About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:
+ Functional Good community Growing acceptance  This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://ashtonkemerling.com/posts/size-matters/" />
+<meta property="article:published_time" content="2013-04-23T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-09T16:00:34-08:00"/>
+
+
+    <base href="http://ashtonkemerling.com/posts/size-matters/">
+    <title>
+  size matters · Ashton Kemerling
+</title>
+
+    <link rel="canonical" href="http://ashtonkemerling.com/posts/size-matters/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.8881182b3ec36ffd9c735306f7e16ce9b1129ebc650e069e7c4114827e9d9b23.css" integrity="sha256-iIEYKz7Db/2cc1MG9&#43;Fs6bESnrxlDgaefEEUgn6dmyM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.54.0" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://ashtonkemerling.com/">
+      Ashton Kemerling
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://countersteer.co">Podcast</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/resume/">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">size matters</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2013-04-23T00:00:00Z'>
+                April 23, 2013
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              3 minutes read
+            </span>
+          </div>
+          
+          
+        </div>
+      </header>
+
+      <div>
+        <p>About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:</p>
+
+<ul>
+<li>Functional</li>
+<li>Good community</li>
+<li>Growing acceptance</li>
+</ul>
+
+<p>This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM. But while trying out Scala I realized that I had missed a huge criteria: language size.</p>
+
+<p>There&rsquo;s only so much information that a programmer can keep in their mind at a time. Every programmer needs to split their internal memory in at least 4 different ways, if not more. There are language details to remember, library or API interfaces to recall, domain knowledge to retain, and possibly coordination or social issues to be concerned about. Once this internal memory is exceeded details end up being forgotten, and recalling forgotten information involves an expensive round trip to documentation, code, or the internet.</p>
+
+<p>There&rsquo;s no escaping the need to recall language details, at least until someone invents a syntax free programming languages; similarly it&rsquo;s near impossible to write an application of any size without relying on libraries or APIs. Domain knowledge is often expensive to acquire and beneficial to have. And social issues cannot be resolved by programming language choice alone.</p>
+
+<p>So the real question is, what are you going to skimp on? Are you going to pay the price of memory &ldquo;cache misses&rdquo;? Are you going to forget portions of your language, or certain libraries? Or are you going to segregate domain knowledge among the team so that everyone knows their bit only?</p>
+
+<p>The real world answer is probably a bit of each. But I contend that reduction of language features in memory is the least damaging of all the outcomes. I doubt it&rsquo;s controversial to say that domain knowledge should be shared widely among developers, and should be as much in memory as possible; programmers who understand what they&rsquo;re programming for tend to program better on average. Similarly it&rsquo;s hard to eliminate a decently written library: that functionality has to come from somewhere, and it&rsquo;ll either be an external library, an internal one, or duplicated code.</p>
+
+<p>But language reduction is an interesting idea. Programmers long ago got away with previous few features, yet managed some amazing things. Don&rsquo;t believe me? Consider how small the Scheme spec is compared to say, Java. It reduces the need for fancy and hard to learn IDEs, allows the programmer to get more done between looking up function or class definitions, and increases the speed with which an engineer can fully understand a piece of code.</p>
+
+<p>It was actually this feature that finally drove me away from Scala to Clojure. After a few hours of Scala work I was turned off by the size of the language, and got tired of saying &ldquo;Why did it do that?&rdquo; Clojure on the other hand is relatively small, only a dozen &ldquo;special forms&rdquo; which have to be hard coded into the language, and then a 3-4 dozen core functions. This means that I can both keep the entire language in memory, and retain a large amount of library and domain knowledge to get work done.</p>
+
+      </div>
+
+      <footer>
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-32325955-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

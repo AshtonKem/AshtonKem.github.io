@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Ashton Kemerling">
+    <meta name="description" content="Ashton Kemerling&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="binding vs assignment"/>
+<meta name="twitter:description" content="A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.
+funs = [] for i in [&#34;a&#34; &#34;b&#34;]: def internal_function(): return i funs.append(internal_function) print funs[0]() print funs[1]() At first glance, one would expect this to print &ldquo;a&rdquo; then &ldquo;b&rdquo;. But much to my surprise (and my coworkers frustration), it was returning &ldquo;b&rdquo; both times."/>
+
+    <meta property="og:title" content="binding vs assignment" />
+<meta property="og:description" content="A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.
+funs = [] for i in [&#34;a&#34; &#34;b&#34;]: def internal_function(): return i funs.append(internal_function) print funs[0]() print funs[1]() At first glance, one would expect this to print &ldquo;a&rdquo; then &ldquo;b&rdquo;. But much to my surprise (and my coworkers frustration), it was returning &ldquo;b&rdquo; both times." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://ashtonkemerling.com/posts/binding-vs-assignment/" />
+<meta property="article:published_time" content="2013-04-30T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-09T16:26:37-08:00"/>
+
+
+    <base href="http://ashtonkemerling.com/posts/binding-vs-assignment/">
+    <title>
+  binding vs assignment · Ashton Kemerling
+</title>
+
+    <link rel="canonical" href="http://ashtonkemerling.com/posts/binding-vs-assignment/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.8881182b3ec36ffd9c735306f7e16ce9b1129ebc650e069e7c4114827e9d9b23.css" integrity="sha256-iIEYKz7Db/2cc1MG9&#43;Fs6bESnrxlDgaefEEUgn6dmyM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.54.0" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://ashtonkemerling.com/">
+      Ashton Kemerling
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://countersteer.co">Podcast</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/resume/">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">binding vs assignment</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2013-04-30T00:00:00Z'>
+                April 30, 2013
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              4 minutes read
+            </span>
+          </div>
+          
+          
+        </div>
+      </header>
+
+      <div>
+        <p>A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">funs <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span> <span style="color:#e6db74">&#34;b&#34;</span>]:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">internal_function</span>():
+        <span style="color:#66d9ef">return</span> i
+    funs<span style="color:#f92672">.</span>append(internal_function)
+<span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">0</span>]()
+<span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">1</span>]()</code></pre></div>
+
+<p>At first glance, one would expect this to print &ldquo;a&rdquo; then &ldquo;b&rdquo;. But much to my surprise (and my coworkers frustration), it was returning &ldquo;b&rdquo; both times.</p>
+
+<p>My first instinct was that Python was closing properly, but was messing up the namespacing. So I asked him to use lambdas instead, creating this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">funs <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>]:
+    funs<span style="color:#f92672">.</span>append(<span style="color:#66d9ef">lambda</span> : i)
+<span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">0</span>]()
+<span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">1</span>]()</code></pre></div>
+
+<p>Same result! So by this point we know that its not namespacing that is causing the problems, as you can&rsquo;t accidentally assign two lambdas the same name. So I began to suspect that the use of &ldquo;i&rdquo; was the issue. Perhaps we&rsquo;re closing around i, which is a mutable variable, and Python can&rsquo;t anticipate that we want a copy instead of the actual reference. Since i is mutable, both closures are having what i means changed from underneath them after closure creation time. (Coincidentally, Python 2.7.3 keeps i around even after the loop is completed, which I think is odd).</p>
+
+<p>So the solution here would be to use a temporary variable. Any variable first created inside a loop should theoretically only have a lifespan of one iteration through the loop. So let&rsquo;s try the following:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">funs <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>]:
+    temp <span style="color:#f92672">=</span> i
+    funs<span style="color:#f92672">.</span>append(<span style="color:#66d9ef">lambda</span> : temp)
+<span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">0</span>]()
+<span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">1</span>]()</code></pre></div>
+
+<p>Same result, again! So clearly python is mishandling variables by a large amount. So what&rsquo;s going on here? My fellow functional coworker was finally able to explain: the real problem here is that Python conflates binding and assignment. Binding is used to create a new variable <em>within the current context</em>, while assignment can only change the value of a given variable within the narrowest bound scope.</p>
+
+<p>Why is this an issue? Well, Python uses the same symbol &ldquo;=&rdquo;, to specify binding and assignment, while most other languages use two syntactic rules. For example Go apparently uses &ldquo;:=&rdquo; to bind, and &ldquo;=&rdquo; to assign. Java uses type declarations to denote bindings, and Clojure/Haskell more or less only have bindings underneath. Unfortunately there&rsquo;s an upper limit to how intelligent an imperative compiler can get, especially in interpreted languages where the compiler must be fairly quick. So Python doesn&rsquo;t do the leg work to realize that temp is only used inside the loop, and binds it only once <em>outside the loop</em>. The side effect of this is that anyone who closes over any local variable inside the loop will be surprised when it is mutated by further iterations, and said variables will be left laying around <strong>after the loop is done</strong>.</p>
+
+<p>So how do we get out of this? One obvious option is to pick a language that understands the difference. Short of that, use a separate function to force Python&rsquo;s hand.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_lambda</span>(x):
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> : x
+
+funs <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>]:
+    funs<span style="color:#f92672">.</span>append(create_lambda(i))
+
+funs[<span style="color:#ae81ff">0</span>]()
+funs[<span style="color:#ae81ff">1</span>]()</code></pre></div>
+
+<p>Which unfortunately is pretty ugly. Other languages will get you out of this bind though. Clojure has no concept of assigning variables, only binding. So the only way to create mutable state in Clojure is through successive binds, or via the special Software Transactional Memory functions, which are specially designed for concurrency.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span>funs
+     (for [i [<span style="color:#e6db74">&#34;a&#34;</span> <span style="color:#e6db74">&#34;b&#34;</span>]]
+         (<span style="color:#66d9ef">fn </span>[]
+             i)))
+
+(println ((first funs)))
+(println ((second funs))</code></pre></div>
+
+<p>And according to my Go enthused coworker, this also works:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span>&lt;<span style="color:#ae81ff">4</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">tmp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">i</span>
+
+        <span style="color:#a6e22e">funs</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#66d9ef">func</span> () <span style="color:#66d9ef">int</span> {
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">tmp</span>
+        }
+    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">funs</span>[<span style="color:#ae81ff">0</span>]())
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">funs</span>[<span style="color:#ae81ff">1</span>]())
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">funs</span>[<span style="color:#ae81ff">2</span>]())
+}</code></pre></div>
+
+<p>If you are currently working on a Python project, or are a Python enthusiast, the only hope is to be careful, and hope that Python 3&rsquo;s compiler might be more intelligent.</p>
+
+      </div>
+
+      <footer>
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-32325955-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

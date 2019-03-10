@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Ashton Kemerling">
+    <meta name="description" content="Ashton Kemerling&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="integrating test dot check and javascript"/>
+<meta name="twitter:description" content="Introduction I was recently on The Cognicast with Craig Andera where we discussed using Generative Testing on a large non-Clojure(script) codebase, in particular Ruby on Rails and Backbonejs. If you haven&rsquo;t listened to the show yet I highly recommend it first.
+As I promised on the show, I&rsquo;d like to share how we used Test.Check to test our Backbone.js code base. Our overall strategy for testing Javascript is going to be:"/>
+
+    <meta property="og:title" content="integrating test dot check and javascript" />
+<meta property="og:description" content="Introduction I was recently on The Cognicast with Craig Andera where we discussed using Generative Testing on a large non-Clojure(script) codebase, in particular Ruby on Rails and Backbonejs. If you haven&rsquo;t listened to the show yet I highly recommend it first.
+As I promised on the show, I&rsquo;d like to share how we used Test.Check to test our Backbone.js code base. Our overall strategy for testing Javascript is going to be:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://ashtonkemerling.com/posts/integrating-test-dot-check-and-javascript/" />
+<meta property="article:published_time" content="2014-09-25T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-09T16:26:37-08:00"/>
+
+
+    <base href="http://ashtonkemerling.com/posts/integrating-test-dot-check-and-javascript/">
+    <title>
+  integrating test dot check and javascript · Ashton Kemerling
+</title>
+
+    <link rel="canonical" href="http://ashtonkemerling.com/posts/integrating-test-dot-check-and-javascript/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.8881182b3ec36ffd9c735306f7e16ce9b1129ebc650e069e7c4114827e9d9b23.css" integrity="sha256-iIEYKz7Db/2cc1MG9&#43;Fs6bESnrxlDgaefEEUgn6dmyM=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.54.0" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://ashtonkemerling.com/">
+      Ashton Kemerling
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://countersteer.co">Podcast</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/resume/">Resume</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">integrating test dot check and javascript</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2014-09-25T00:00:00Z'>
+                September 25, 2014
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              7 minutes read
+            </span>
+          </div>
+          
+          
+        </div>
+      </header>
+
+      <div>
+        
+
+<h1 id="introduction">Introduction</h1>
+
+<p>I was recently on
+<a href="http://blog.cognitect.com/cognicast/ashton-kemerling-064">The Cognicast</a>
+with Craig Andera where we discussed using Generative Testing on a large
+non-Clojure(script) codebase, in particular Ruby on Rails and
+Backbonejs. If you haven&rsquo;t listened to the show yet I highly recommend
+it first.</p>
+
+<p>As I promised on the show, I&rsquo;d like to share how we used Test.Check to
+test our Backbone.js code base. Our overall strategy for testing
+Javascript is going to be:</p>
+
+<ol>
+<li>Compile JS into one file (just like prod).</li>
+<li>Compile tests into a single file.</li>
+<li>Combine them in a PhantomJS process.</li>
+<li>Let the tests do their thing.</li>
+</ol>
+
+<p>While we have been super pleased with the results of Generative Testing,
+there have been some hurdles for getting it to work for us. In this post
+I&rsquo;m going to go over how to setup Test.Check to work with your
+Javascript app, and how to dodge all the pitfalls I found.</p>
+
+<p>Here are the challenges that lie between us and Generative Testing bliss.</p>
+
+<ol>
+<li>Picking the right library</li>
+<li>Setting up Leiningen &amp; Cljsbuild</li>
+<li>Dodge PhantomJS issues</li>
+<li>Avoid mangling your app, and defeating dueling dependencies</li>
+</ol>
+
+<h1 id="picking-the-right-library">Picking the Right Library</h1>
+
+<p>First of all, there are two libraries that exist,
+<a href="https://github.com/clojure/test.check">Test.Check</a> and
+<a href="https://github.com/cemerick/double-check">DoubleCheck</a>. Because
+Test.Check is an official Clojure library it is Clojure (JVM) only, so I
+recommend DoubleCheck (maintained by Chas Emerick) which is capable of
+cross compiling to Clojure and Clojurescript.</p>
+
+<p>The only catch with DoubleCheck is that it&rsquo;s not currently possible to
+segregate tests via metadata for running in groups. But with the way we
+will be running these tests that won&rsquo;t be an issue.</p>
+
+<h1 id="setting-up-leiningen">Setting up Leiningen</h1>
+
+<p>First step, install <a href="http://leiningen.org/">Leiningen</a> and create a
+project.clj wherever you Javascript code is. We&rsquo;re going to use
+<a href="https://github.com/emezeske/lein-cljsbuild">Cljsbuild</a> to compile our
+testing code for execution. I in put my test code in test/cljs (because
+I have clj and cljs based tests), and send the compiled output to
+tmp/tracker-cljs.js. Note: this guide <em>only works for Clojurescript
+0.0-2234</em>, I need to figure out why the latest build of Clojurescript
+doesn&rsquo;t work.</p>
+
+<p>I highly recommend you send the output of the compilation process to
+either a temporary or gitignored location. The output will be fairly
+large, and it will bog down your repository with its size.</p>
+
+<p>I don&rsquo;t want to duplicate the Cljsbuild how-to, so if you don&rsquo;t know how
+to make it work, you should check their docs. Our project.clj is
+reproduced at the bottom of this post if you have issues.</p>
+
+<p>At this point, we can write the simplest test possible:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>tracker-cljs.simple-test
+  (<span style="color:#e6db74">:require</span> [clojure.test.check <span style="color:#e6db74">:as</span> core]
+            [clojure.test.check.generators <span style="color:#e6db74">:as</span> gen]
+            [clojure.test.check.properties <span style="color:#e6db74">:as</span> prop]
+            [cemerick.cljs.test <span style="color:#e6db74">:as</span> t])
+  (<span style="color:#e6db74">:require-macros</span> [clojure.test.check.clojure-test <span style="color:#e6db74">:refer</span> (defspec)]
+                   [clojure.test.check.properties <span style="color:#e6db74">:refer</span> (for-all)]
+                   [cemerick.cljs.test <span style="color:#e6db74">:refer</span> (is)]))
+
+(defspec simple-test <span style="color:#ae81ff">10</span>
+  (for-all [v (gen/such-that gen/not-empty (gen/vector gen/int))]
+    (println v)
+    true))</code></pre></div>
+
+<h1 id="phantomjs-issues">PhantomJS issues.</h1>
+
+<p>In order to run the tests, you would typically have a :tests section in
+:cljsbuild that looks like this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#e6db74">:test-commands</span> {<span style="color:#e6db74">&#34;unit-tests&#34;</span> [<span style="color:#e6db74">&#34;phantomjs&#34;</span> <span style="color:#e6db74">:runner</span>
+                                          <span style="color:#e6db74">&#34;compiled-application.js&#34;</span>
+                                          <span style="color:#e6db74">&#34;tmp/compiled-tests.js&#34;</span>]}</code></pre></div>
+
+<p>This will load our JS into the app, along with the tests, and then run
+them. But you might notice errors that look like this:</p>
+
+<p><code>SECURITY_ERR: DOM Exception 18: An attempt was made to break through the security policy of the user agent.</code></p>
+
+<p>That means that your app code is trying to access local storage, and
+PhantomJS does not like it when you do that without loading a
+webpage. The solution for this is to start a server so we have a page to
+visit, and visit it via PhantomJS. So on Tracker we use the following
+two bits of code.</p>
+
+<p>generative_runner.js, to visit the actual page:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// reusable PhantomJS script for running clojurescript.test tests
+</span><span style="color:#75715e">// see http://github.com/cemerick/clojurescript.test for more info
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">page</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpage&#39;</span>).<span style="color:#a6e22e">create</span>();
+<span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">onResourceError</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">resourceError</span>) {
+    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">reason</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resourceError</span>.<span style="color:#a6e22e">errorString</span>;
+    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">reason_url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resourceError</span>.<span style="color:#a6e22e">url</span>;
+};
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sys</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;system&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">success</span>;
+
+<span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">onConsoleMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">line</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">toString</span>();
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">line</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;[NEWLINE]&#34;</span>) {
+        <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">stdout</span>.<span style="color:#a6e22e">writeLine</span>(<span style="color:#a6e22e">line</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\[NEWLINE\]/g</span>, <span style="color:#e6db74">&#34;\n&#34;</span>));
+    }
+};
+
+<span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;http://localhost:4500&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">status</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;success&#34;</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Couldn&#39;t load page&#34;</span>);
+        <span style="color:#a6e22e">phantom</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+    }
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">exists</span>(<span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>])) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">injectJs</span>(<span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>])) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Failed to inject &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>]);
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluateJavaScript</span>(<span style="color:#e6db74">&#34;(function () { &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; })&#34;</span>);
+        }
+    }
+
+    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluate</span>(<span style="color:#66d9ef">function</span> () {
+        <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">set_print_fn_BANG_</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\n/g</span>, <span style="color:#e6db74">&#34;[NEWLINE]&#34;</span>)); <span style="color:#75715e">// since console.log *itself* adds a newline
+</span><span style="color:#75715e"></span>        });
+    });
+
+    <span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluate</span>(<span style="color:#66d9ef">function</span> () {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">run_all_tests</span>();
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">results</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">successful_QMARK_</span>(<span style="color:#a6e22e">results</span>);
+    });
+    <span style="color:#a6e22e">phantom</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#a6e22e">success</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>);
+});
+</code></pre></div>
+
+<p>And a rake task to stand up a server and run everything. If you don&rsquo;t
+use Rails for your Javascript code you might need to use different
+commands to compile, but the intention remains. The WEBrick server
+provides a blank page for us to visit and run our tests on, which
+prevents PhantomJS from raising security errors.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;fileutils&#39;</span>
+require <span style="color:#e6db74">&#39;webrick&#39;</span>
+
+namespace <span style="color:#e6db74">:test</span> <span style="color:#66d9ef">do</span>
+  desc <span style="color:#e6db74">&#34;Run ClojureScript generative tests&#34;</span>
+  task <span style="color:#e6db74">:generative</span> <span style="color:#66d9ef">do</span>
+    server <span style="color:#f92672">=</span> <span style="color:#66d9ef">WEBrick</span><span style="color:#f92672">::</span><span style="color:#66d9ef">HTTPServer</span><span style="color:#f92672">.</span>new({<span style="color:#e6db74">:Port</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">4500</span>, <span style="color:#e6db74">:DocumentRoot</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">:BindAddress</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>})
+    <span style="color:#66d9ef">Thread</span><span style="color:#f92672">.</span>new <span style="color:#66d9ef">do</span>
+      server<span style="color:#f92672">.</span>start
+    <span style="color:#66d9ef">end</span>
+    exitCode <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">begin</span>
+      <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;assets:clean&#39;</span><span style="color:#f92672">].</span>invoke
+      <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;assets:precompile&#39;</span><span style="color:#f92672">].</span>invoke
+      exitCode <span style="color:#f92672">=</span> system <span style="color:#e6db74">&#34;lein cljsbuild test&#34;</span>
+    <span style="color:#66d9ef">ensure</span>
+      server<span style="color:#f92672">.</span>shutdown
+    <span style="color:#66d9ef">end</span>
+    exit exitCode
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
+
+<p>To make all this work together, update project.clj to reference the
+generative_runner.js file instead of :runner, and use <code>rake
+test:generative</code> to kick off the run.</p>
+
+<h1 id="don-t-mangle-your-code">Don&rsquo;t Mangle Your Code</h1>
+
+<p>If your application is anything like Tracker, you might use some Google
+Closure dependencies without using the entire Closure compiler. And even
+if you don&rsquo;t need use Closure, you certainly have functions and classes
+in the global namespace that you don&rsquo;t want mangled.</p>
+
+<p>To get around this, I recommend the following settings:</p>
+
+<p>Add <code>:libs [ &quot;compiled-application.js&quot; &quot;&quot;]</code> to the cljsbuild section
+in project.clj. This prevents DoubleCheck compiler errors due to
+classpath issues, and it allows the Closure compiler to see everything
+that your application provides. So if your tests and applications have
+overlapping Closure dependencies you won&rsquo;t get double provide errors.</p>
+
+<p>Secondly I recommend that you only use the simple compilation mode. This
+will prevent Closure from mangling global names, which will make
+debugging easier and prevent your tests from being able to find the
+production code. The space saving and code elimination that advanced
+mode provides is more of a problem than a benefit for testing, so it&rsquo;s
+not worth fighting to get advanced to work.</p>
+
+<p>You can fiddle with source maps if you wish, but I
+haven&rsquo;t had much luck or use for them; simple compiled Clojurescript is
+easy to read, and most of the serious errors have come from the 43k
+application javascript file, not the test file.</p>
+
+<h1 id="have-fun-and-make-more-tests">Have Fun and Make More Tests</h1>
+
+<p>Once you have that going, it should be possible to open up and create
+increasingly complicated tests. As a teaser and a good example, the
+following code caught a tricky JS ordering bug.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>tracker-cljs.panel-items-test
+  (<span style="color:#e6db74">:require</span> [clojure.test.check <span style="color:#e6db74">:as</span> core]
+            [clojure.test.check.generators <span style="color:#e6db74">:as</span> gen]
+            [clojure.test.check.properties <span style="color:#e6db74">:as</span> prop]
+            [cemerick.cljs.test <span style="color:#e6db74">:as</span> t])
+  (<span style="color:#e6db74">:require-macros</span> [clojure.test.check.clojure-test <span style="color:#e6db74">:refer</span> (defspec)]
+                   [clojure.test.check.properties <span style="color:#e6db74">:refer</span> (for-all)]
+                   [cemerick.cljs.test <span style="color:#e6db74">:refer</span> (is)]))
+
+(<span style="color:#66d9ef">defn </span>ids [items]
+  (<span style="color:#66d9ef">if </span>(seq? items)
+    (map (<span style="color:#66d9ef">fn </span>[item] (.get item <span style="color:#e6db74">:id</span>))
+         items)
+    (map (<span style="color:#66d9ef">fn </span>[item] (.get item <span style="color:#e6db74">:id</span>))
+         (.-models items))))
+
+(<span style="color:#66d9ef">defn </span>create-models [ids]
+  (map (<span style="color:#66d9ef">fn </span>[x] (Backbone.Model. (js-obj <span style="color:#e6db74">:id</span> x)))
+       ids))
+
+
+(defspec sort-check <span style="color:#ae81ff">100</span>
+  (for-all [v (gen/such-that gen/not-empty (gen/vector gen/int))]
+           (<span style="color:#66d9ef">let </span>[models (create-models v)
+                 sorted (sort v)
+                 subject (tracker.PanelItems.)]
+             (.reset subject (apply array models))
+             (.refresh subject (apply array (sort-by <span style="color:#f92672">#</span>(.get % <span style="color:#e6db74">:id</span>) models)))
+             (is (= sorted
+                    (ids subject))))))</code></pre></div>
+
+<p>And the following is our project.clj, with unnecessary details elided
+for readability.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defproject </span>generative-testing <span style="color:#e6db74">&#34;0.0.1-SNAPSHOT&#34;</span>
+  <span style="color:#e6db74">:plugins</span> [[lein-cljsbuild <span style="color:#e6db74">&#34;1.0.3&#34;</span>]
+            [com.cemerick/clojurescript.test <span style="color:#e6db74">&#34;0.2.2&#34;</span>]]
+  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojurescript <span style="color:#e6db74">&#34;0.0-2234&#34;</span>]
+                 [com.cemerick/clojurescript.test <span style="color:#e6db74">&#34;0.3.1&#34;</span>]
+                 [com.cemerick/double-check <span style="color:#e6db74">&#34;0.5.8-SNAPSHOT&#34;</span>]
+                 [org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]
+  <span style="color:#e6db74">:cljsbuild</span> {<span style="color:#e6db74">:builds</span> [{<span style="color:#e6db74">:source-paths</span> [<span style="color:#e6db74">&#34;test/cljs&#34;</span>]
+                        <span style="color:#e6db74">:compiler</span> {<span style="color:#e6db74">:output-to</span> <span style="color:#e6db74">&#34;tmp/tracker-cljs.js&#34;</span>
+                                   <span style="color:#e6db74">:libs</span> [ <span style="color:#e6db74">&#34;public/web/assets/application.js&#34;</span> <span style="color:#e6db74">&#34;&#34;</span>]
+                                   <span style="color:#e6db74">:optimizations</span> <span style="color:#e6db74">:simple</span>
+                                   <span style="color:#e6db74">:pretty-print</span> true}}]
+              <span style="color:#e6db74">:test-commands</span> {<span style="color:#e6db74">&#34;unit-tests&#34;</span> [<span style="color:#e6db74">&#34;phantomjs&#34;</span> <span style="color:#e6db74">&#34;lib/generative_runner.js&#34;</span>
+                                            <span style="color:#e6db74">&#34;public/next/assets/next/next.js&#34;</span>
+                                            <span style="color:#e6db74">&#34;tmp/tracker-cljs.js&#34;</span>]}})</code></pre></div>
+
+<p>Also, the following function is helpful for converting from Cljs data
+structures to pure Javascript ones. It causes some compiler warnings,
+but they appear to be harmless.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defn </span>clj-&gt;js
+  <span style="color:#e6db74">&#34;Recursively transforms ClojureScript maps into Javascript objects,
+</span><span style="color:#e6db74">   other ClojureScript colls into JavaScript arrays, and ClojureScript
+</span><span style="color:#e6db74">   keywords into JavaScript strings.&#34;</span>
+  [x]
+  (cond
+    (string? x) x
+    (keyword? x) (name x)
+    (map? x) (apply js-obj (flatten (map (<span style="color:#66d9ef">fn </span>[[key val]] [(clj-&gt;js key) (clj-&gt;js val)]) x)))
+    (coll? x) (apply array (map clj-&gt;js x))
+    <span style="color:#e6db74">:else</span> x))</code></pre></div>
+
+<p>Good luck, and don&rsquo;t hesitate to reach out to me on Twitter if you have
+any questions!</p>
+
+      </div>
+
+      <footer>
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-32325955-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>
