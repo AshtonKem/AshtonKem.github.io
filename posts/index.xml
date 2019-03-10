@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Ashton Kemerling</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 16:49:54 -0800</lastBuildDate>
     
 	<atom:link href="http://ashtonkemerling.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>I Don&#39;t Like Slack</title>
+      <link>http://ashtonkemerling.com/posts/i-dont-like-slack/</link>
+      <pubDate>Sat, 09 Mar 2019 16:49:54 -0800</pubDate>
+      
+      <guid>http://ashtonkemerling.com/posts/i-dont-like-slack/</guid>
+      <description>Introduction Ready for a bit of tech heresy? I really don&amp;rsquo;t like Slack.
+I know that I&amp;rsquo;m going to get some blow-back on this one. Slack is extremely popular, to the point of near religious devotion at times. To give you an idea of how popular Slack tends to be, the main complaint that I have noticed around is about the quality of their desktop client, not the service itself.</description>
+    </item>
     
     <item>
       <title>false novelty</title>
