@@ -19,8 +19,8 @@ This post is not going to be a compare and contrast between the two, nor am I go
 This post is not going to be a compare and contrast between the two, nor am I going to bash Clojure. Language compare and contrast posts always descend into flame wars, and it&rsquo;s very easy to confuse the result of hard lessons learned with the benefits of a new language." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://ashtonkemerling.com/posts/java-without-if/" />
-<meta property="article:published_time" content="2017-01-26T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-03-09T18:53:40-08:00"/>
+<meta property="article:published_time" content="2017-01-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-03-09T18:53:40-08:00" />
 
 
     <base href="http://ashtonkemerling.com/posts/java-without-if/">
@@ -49,7 +49,7 @@ This post is not going to be a compare and contrast between the two, nor am I go
     <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.54.0" />
+    <meta name="generator" content="Hugo 0.56.3" />
   </head>
 
   <body class=" ">
@@ -70,10 +70,6 @@ This post is not going to be a compare and contrast between the two, nor am I go
         
           <li class="navigation-item">
             <a class="navigation-link" href="/posts/">Blog</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://countersteer.co">Podcast</a>
           </li>
         
           <li class="navigation-item">
@@ -145,67 +141,68 @@ recognize such as Either types, function utilities, coproducts, etc. etc.</p>
 the vast majority of our explicit <code>if</code> calls. Either is the logical
 successor to the Java
 8 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">Optional</a>
-type. Optional represents the presence of a value of type <code>T</code> with
- <code>Optional::of</code>, or it&rsquo;s absence with <code>Optional::empty</code>. Either on the
-other hand is parameterized to two values, L and R, and represents the presence
-of either a value of type L, <em>or</em> a value of type R.</p>
+type. Optional represents the presence of a value of type <code>T</code> with</p>
 
-<p>Why is this a logical extension of <code>Optional</code>? Because while Optional is
+<pre><code class="language-Optional::of```,">other hand is parameterized to two values, L and R, and represents the presence
+of either a value of type L, *or* a value of type R.
+
+Why is this a logical extension of ```Optional```? Because while Optional is
 used to represent a result that may have no value (replacing a null), Either is
 used to represent a result that might have been a failure, replacing a thrown
 exception, with convention being that left side values represent failure and
-right side values representing success.</p>
+right side values representing success.
 
-<p>So, what does that buy us? Well, consider what Optional gets us in the following code snippets.</p>
+So, what does that buy us? Well, consider what Optional gets us in the following code snippets.
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">();</span>
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionTwo</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
-  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionThree</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#f92672">...</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> Helper.<span style="color:#a6e22e">functionOne</span>();
+<span style="color:#66d9ef">if</span> (x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+  x <span style="color:#f92672">=</span> Helper.<span style="color:#a6e22e">functionTwo</span>(x);
+  x <span style="color:#f92672">=</span> Helper.<span style="color:#a6e22e">functionThree</span>(x);
+  <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+    ...
+  }
+}</code></pre></div>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Optional<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">()</span>
-                           <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>Helper:<span style="color:#f92672">:</span>functionTwo<span style="color:#f92672">)</span>
-                           <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Helper:<span style="color:#f92672">:</span>functionThree<span style="color:#f92672">);</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Optional<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> Helper.<span style="color:#a6e22e">functionOne</span>()
+                           .<span style="color:#a6e22e">map</span>(Helper<span style="color:#f92672">::</span>functionTwo)
+                           .<span style="color:#a6e22e">flatMap</span>(Helper<span style="color:#f92672">::</span>functionThree);</code></pre></div>
 
-<p>Optional gives us the ability to say &ldquo;if a value exists, apply this function to
-it&rdquo; repeatedly. It also gives us the ability to chain successive calls that
-return Optionals together with the <code>flatMap</code> function, eliminating the need
-for unsightly and error prone manual null checks. It&rsquo;s also safe for <code>map</code>
-and <code>flatMap</code> to go from <code>Optional&lt;A&gt;</code> to <code>Optional&lt;B&gt;</code>, which might
-eliminate the need for intermediate variables in your code.</p>
 
-<p>Either give us much of the same, but with the ability to represent <strong>why</strong> the
+Optional gives us the ability to say &quot;if a value exists, apply this function to
+it&quot; repeatedly. It also gives us the ability to chain successive calls that
+return Optionals together with the ```flatMap``` function, eliminating the need
+for unsightly and error prone manual null checks. It's also safe for ```map```
+and ```flatMap``` to go from ```Optional&lt;A&gt;``` to ```Optional&lt;B&gt;```, which might
+eliminate the need for intermediate variables in your code.
+
+Either give us much of the same, but with the ability to represent **why** the
 computation failed with left values, along with the ability to chain together
 functions working on an Either type. All of the greatest hits of functional
-programming are provided for Either, including <code>map</code>, <code>flatMap</code>, and <code>filter</code>.</p>
+programming are provided for Either, including ```map```, ```flatMap```, and ```filter```.
 
-<p>As a concrete example, imagine a hypothetical JSON parsing library. Parsing is
-tricky business, you&rsquo;re all but guaranteed that a failure will happen at
-runtime. So how do you handle it? Previously you had 4 choices.</p>
+As a concrete example, imagine a hypothetical JSON parsing library. Parsing is
+tricky business, you're all but guaranteed that a failure will happen at
+runtime. So how do you handle it? Previously you had 4 choices.
 
-<ul>
-<li>return null</li>
-<li>return Optional&lt;ParsedType&gt;</li>
-<li>checked exception</li>
-<li>unchecked exception</li>
-</ul>
+* return null
+* return Optional\&lt;ParsedType\&gt;
+* checked exception
+* unchecked exception
 
-<p>Null is obviously bad, and unchecked exceptions are also risky. Checked
+Null is obviously bad, and unchecked exceptions are also risky. Checked
 exceptions guarantee that someone will deal with the issue, but they are
 extremely annoying, and might result in disparate and different exception
-handlers all over the place. Optional is nice, it&rsquo;s safer than null and marks in
-the type signature that failure is an option, but it&rsquo;s a bit lacking on
-explaining <strong>why</strong> a failure occurred.</p>
+handlers all over the place. Optional is nice, it's safer than null and marks in
+the type signature that failure is an option, but it's a bit lacking on
+explaining **why** a failure occurred.
 
-<p>What if instead this library returned <code>Either&lt;Exception, JsonNode&gt;</code>, or even
- <code>Either&lt;Set&lt;String&gt;, JsonNode&gt;</code>? The potential for failure is in the type
-signature again, we don&rsquo;t need a try/catch, but if we want the unwrapped
+What if instead this library returned ```Either&lt;Exception, JsonNode&gt;```, or even
+</code></pre>
+
+<p>Either<Set<String>, JsonNode&gt;<code>? The potential for failure is in the type
+signature again, we don't need a try/catch, but if we want the unwrapped
 JsonNode we have to deal with the potential for a left value. And any functions
-we have that operate only on JsonNode can be passed in using the <code>map</code>
+we have that operate only on JsonNode can be passed in using the</code>map```
 function, making chaining a breeze.</p>
 
 <p>Better still we can write other functions that might fail in this form, such as
@@ -218,14 +215,14 @@ value.</p>
 <p>As a result of all this, you can easily imagine a JSON API endpoint looking
 something like this:</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> HttpResponse <span style="color:#a6e22e">handle</span><span style="color:#f92672">(</span>HttpRequest request<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> JsonParser<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span><span style="color:#f92672">())</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Validator:<span style="color:#f92672">:</span>validate<span style="color:#f92672">)</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>ServiceObject:<span style="color:#f92672">:</span>businessLogic<span style="color:#f92672">)</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>JsonGenerator:<span style="color:#f92672">:</span>generate<span style="color:#f92672">)</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>l <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">internalServerError</span><span style="color:#f92672">(</span>l<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">()),</span>
-                            r <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">(</span>l<span style="color:#f92672">));</span>
-<span style="color:#f92672">}</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">HttpResponse</span> handle(HttpRequest <span style="color:#a6e22e">request</span>) {
+    <span style="color:#66d9ef">return</span> JsonParser.<span style="color:#a6e22e">parse</span>(request.<span style="color:#a6e22e">getBody</span>())
+                     .<span style="color:#a6e22e">flatMap</span>(Validator<span style="color:#f92672">::</span>validate)
+                     .<span style="color:#a6e22e">map</span>(ServiceObject<span style="color:#f92672">::</span>businessLogic)
+                     .<span style="color:#a6e22e">flatMap</span>(JsonGenerator<span style="color:#f92672">::</span>generate)
+                     .<span style="color:#a6e22e">match</span>(l <span style="color:#f92672">-&gt;</span> HttpResponse.<span style="color:#a6e22e">internalServerError</span>(l.<span style="color:#a6e22e">getMessage</span>()),
+                            r <span style="color:#f92672">-&gt;</span> HttpResponse.<span style="color:#a6e22e">ok</span>(l));
+}</code></pre></div>
 
 <p>All the potential failure cases are covered by returning an Either rather than
 throwing an exception. The very last step is <code>match</code>, which takes two
@@ -274,7 +271,7 @@ Lambda to get a taste of it in Java.</p>
       <footer class="footer">
   <section class="container">
     
-     © 2019
+     © 2020
     
        · 
       Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
