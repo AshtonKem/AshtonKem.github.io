@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Ashton Kemerling</title>
@@ -17,8 +17,8 @@
       <pubDate>Sat, 09 Mar 2019 16:49:54 -0800</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/i-dont-like-slack/</guid>
-      <description>Introduction Ready for a bit of tech heresy? I really don&amp;rsquo;t like Slack.
-I know that I&amp;rsquo;m going to get some blow-back on this one. Slack is extremely popular, to the point of near religious devotion at times. To give you an idea of how popular Slack tends to be, the main complaint that I have noticed around is about the quality of their desktop client, not the service itself.</description>
+      <description>Introduction Ready for a bit of tech heresy? I really don&#39;t like Slack.
+I know that I&#39;m going to get some blow-back on this one. Slack is extremely popular, to the point of near religious devotion at times. To give you an idea of how popular Slack tends to be, the main complaint that I have noticed around is about the quality of their desktop client, not the service itself. And while I too like to complaint about Slack memory usage, I have more bones to pick with the service itself than I do with their desktop client.</description>
     </item>
     
     <item>
@@ -28,7 +28,7 @@ I know that I&amp;rsquo;m going to get some blow-back on this one. Slack is extr
       
       <guid>http://ashtonkemerling.com/posts/false-novelty/</guid>
       <description>Introduction The internet is starting to worry me.
-This is a problem for me. I make my money on the internet, and I also spend a lot of time on it for entertainment. Beginning to worry about the internet is a bit like looking at your pet kitten and realizing that those tiger stripes are real and not merely an adorable coloration. It&amp;rsquo;s a slow growing fear that you might be living with something much more dangerous than you thought.</description>
+This is a problem for me. I make my money on the internet, and I also spend a lot of time on it for entertainment. Beginning to worry about the internet is a bit like looking at your pet kitten and realizing that those tiger stripes are real and not merely an adorable coloration. It&#39;s a slow growing fear that you might be living with something much more dangerous than you thought.</description>
     </item>
     
     <item>
@@ -37,8 +37,8 @@ This is a problem for me. I make my money on the internet, and I also spend a lo
       <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/no-you-probably-dont-need-a-blockchain/</guid>
-      <description>On Bitcoins and Blockchains Oh Bitcoin, the darling of everyone&amp;rsquo;s economic dreams. Some think it&amp;rsquo;ll destroy the fed, others hope it&amp;rsquo;ll kill off the big banks. Some just think it&amp;rsquo;s going to make them rich, others go as far as hoping it&amp;rsquo;ll kill off governments completely. Whatever you happen to hate, Bitcoin is coming to destroy it!
-All of this is complete nonsense, of course. There are enough mutually exclusive dreams about Bitcoin that it&amp;rsquo;s clear that not all of them can come true, possibly even the hopes of easy riches given its unpredictable volatility.</description>
+      <description>On Bitcoins and Blockchains Oh Bitcoin, the darling of everyone&#39;s economic dreams. Some think it&#39;ll destroy the fed, others hope it&#39;ll kill off the big banks. Some just think it&#39;s going to make them rich, others go as far as hoping it&#39;ll kill off governments completely. Whatever you happen to hate, Bitcoin is coming to destroy it!
+All of this is complete nonsense, of course. There are enough mutually exclusive dreams about Bitcoin that it&#39;s clear that not all of them can come true, possibly even the hopes of easy riches given its unpredictable volatility.</description>
     </item>
     
     <item>
@@ -57,8 +57,8 @@ A common goal of application logs is to tie a given log line to a specific reque
       <pubDate>Thu, 26 Jan 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/java-without-if/</guid>
-      <description>Over the past year my team has been doing something shocking to a lot of engineers: we&amp;rsquo;re favoring pure Java over Clojure. We aren&amp;rsquo;t rewriting all our Clojure code, but we definitely prefer Java for green field projects.
-This post is not going to be a compare and contrast between the two, nor am I going to bash Clojure. Language compare and contrast posts always descend into flame wars, and it&amp;rsquo;s very easy to confuse the result of hard lessons learned with the benefits of a new language.</description>
+      <description>Over the past year my team has been doing something shocking to a lot of engineers: we&#39;re favoring pure Java over Clojure. We aren&#39;t rewriting all our Clojure code, but we definitely prefer Java for green field projects.
+This post is not going to be a compare and contrast between the two, nor am I going to bash Clojure. Language compare and contrast posts always descend into flame wars, and it&#39;s very easy to confuse the result of hard lessons learned with the benefits of a new language.</description>
     </item>
     
     <item>
@@ -67,8 +67,8 @@ This post is not going to be a compare and contrast between the two, nor am I go
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/</guid>
-      <description>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&amp;rsquo;ve seen.
-First off, this is not a &amp;ldquo;I&amp;rsquo;m quiting in disgust&amp;rdquo; post. Those are childish and a waste of everyone&amp;rsquo;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.
+      <description>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&#39;ve seen.
+First off, this is not a &amp;ldquo;I&#39;m quiting in disgust&amp;rdquo; post. Those are childish and a waste of everyone&#39;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.
 First off, some history. My first job out of College was in Common Lisp, and I love/hated it.</description>
     </item>
     
@@ -78,8 +78,8 @@ First off, some history. My first job out of College was in Common Lisp, and I l
       <pubDate>Thu, 25 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/integrating-test-dot-check-and-javascript/</guid>
-      <description>Introduction I was recently on The Cognicast with Craig Andera where we discussed using Generative Testing on a large non-Clojure(script) codebase, in particular Ruby on Rails and Backbonejs. If you haven&amp;rsquo;t listened to the show yet I highly recommend it first.
-As I promised on the show, I&amp;rsquo;d like to share how we used Test.Check to test our Backbone.js code base. Our overall strategy for testing Javascript is going to be:</description>
+      <description>Introduction I was recently on The Cognicast with Craig Andera where we discussed using Generative Testing on a large non-Clojure(script) codebase, in particular Ruby on Rails and Backbonejs. If you haven&#39;t listened to the show yet I highly recommend it first.
+As I promised on the show, I&#39;d like to share how we used Test.Check to test our Backbone.js code base. Our overall strategy for testing Javascript is going to be:</description>
     </item>
     
     <item>
@@ -88,7 +88,7 @@ As I promised on the show, I&amp;rsquo;d like to share how we used Test.Check to
       <pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/unusual-productivity-hacks/</guid>
-      <description>The internet is lousy with productivity ideas, mostly about how to work harder or longer. I personally believe that good productivity is about maximizing per hour results, not working harder. And the fastest way to improve your productivity is to eliminate some of the things slowing you down. So rather than going over the usual suspects, let&amp;rsquo;s take a look at eliminating some of the low hanging fruit.
+      <description>The internet is lousy with productivity ideas, mostly about how to work harder or longer. I personally believe that good productivity is about maximizing per hour results, not working harder. And the fastest way to improve your productivity is to eliminate some of the things slowing you down. So rather than going over the usual suspects, let&#39;s take a look at eliminating some of the low hanging fruit.
 1. Conquer Your Diet.</description>
     </item>
     
@@ -108,8 +108,8 @@ For every language there needs to be one central item upon which every other too
       <pubDate>Tue, 14 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/managing-is-a-craft-too/</guid>
-      <description>I&amp;rsquo;m getting a little tired of seeing posts saying that the best managers must be an ex-engineer or a current one. I think coding skill is a very narrow minded way to judge both a human and a professional, and a terrible way to run a business.
-Here&amp;rsquo;s the simple truth, a manager is a craftsperson just like a designer or engineer. The only difference is that their craft is organizing people, not designs or code.</description>
+      <description>I&#39;m getting a little tired of seeing posts saying that the best managers must be an ex-engineer or a current one. I think coding skill is a very narrow minded way to judge both a human and a professional, and a terrible way to run a business.
+Here&#39;s the simple truth, a manager is a craftsperson just like a designer or engineer. The only difference is that their craft is organizing people, not designs or code.</description>
     </item>
     
     <item>
@@ -128,7 +128,7 @@ My first job out of college was working on a Common Lisp (CL) web application. T
       <pubDate>Fri, 20 Dec 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/thoughts-on-rubymine/</guid>
-      <description>As part of my new job at Pivotal Labs I&amp;rsquo;ve been pair programming almost every day. The obvious challenge with pair programming, especially in a popular language like ruby, is in choosing what tools to work with. Vim, Emacs, RubyMine, TextMate, the choices are various and divisive.
+      <description>As part of my new job at Pivotal Labs I&#39;ve been pair programming almost every day. The obvious challenge with pair programming, especially in a popular language like ruby, is in choosing what tools to work with. Vim, Emacs, RubyMine, TextMate, the choices are various and divisive.
 To make peace among the engineers, it makes sense to dictate one set of tools to make peace among all your employees, and to make provisioning the machines easier.</description>
     </item>
     
@@ -138,8 +138,8 @@ To make peace among the engineers, it makes sense to dictate one set of tools to
       <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/org-mode/</guid>
-      <description>Recently I&amp;rsquo;ve taken interest in making myself more productive, and at least so far it&amp;rsquo;s going well. I personally attribute part of my current productivity to a new &amp;ldquo;shut up and get back to work&amp;rdquo; mentality, and partly to a new (to me) organization system.
-The problem I&amp;rsquo;ve had is that every single organization app is broken in some way. The only truly flexible system uses paper and pen, and I don&amp;rsquo;t really want to deal with that.</description>
+      <description>Recently I&#39;ve taken interest in making myself more productive, and at least so far it&#39;s going well. I personally attribute part of my current productivity to a new &amp;ldquo;shut up and get back to work&amp;rdquo; mentality, and partly to a new (to me) organization system.
+The problem I&#39;ve had is that every single organization app is broken in some way. The only truly flexible system uses paper and pen, and I don&#39;t really want to deal with that.</description>
     </item>
     
     <item>
@@ -148,8 +148,8 @@ The problem I&amp;rsquo;ve had is that every single organization app is broken i
       <pubDate>Fri, 01 Nov 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/the-best-of-lisp/</guid>
-      <description>Edit: Dan Benjamin himself informed me that I missed the sarcasm boat here. I&amp;rsquo;m leaving the relevant bits, and cutting out the now irrelevant criticism.
-I&amp;rsquo;m slowly working my way through the Back to Work podcast. I&amp;rsquo;m way behind, so please excuse that this post references an episode over 2 years old at this point.
+      <description>Edit: Dan Benjamin himself informed me that I missed the sarcasm boat here. I&#39;m leaving the relevant bits, and cutting out the now irrelevant criticism.
+I&#39;m slowly working my way through the Back to Work podcast. I&#39;m way behind, so please excuse that this post references an episode over 2 years old at this point.
 Episode 11 was about &amp;ldquo;future proofing your passion&amp;rdquo;, among other things. In it, Merlin mentions that one thing you can do as a low risk investment in a programming career is to maintain current on new languages.</description>
     </item>
     
@@ -159,7 +159,7 @@ Episode 11 was about &amp;ldquo;future proofing your passion&amp;rdquo;, among o
       <pubDate>Wed, 30 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/advanced-existential-dread/</guid>
-      <description>One of the most scary moments in most young adults&amp;rsquo; life is the realization of mortality. Teenagers and younger children often understand on an intellectual level that people die, but emotionally that&amp;rsquo;s something that happens to other people. There&amp;rsquo;s very few things quite like the moment when an adult realizes that they must die, there&amp;rsquo;s nothing they can do to stop it, and there&amp;rsquo;s not a lot they can do to delay it.</description>
+      <description>One of the most scary moments in most young adults&amp;rsquo; life is the realization of mortality. Teenagers and younger children often understand on an intellectual level that people die, but emotionally that&#39;s something that happens to other people. There&#39;s very few things quite like the moment when an adult realizes that they must die, there&#39;s nothing they can do to stop it, and there&#39;s not a lot they can do to delay it.</description>
     </item>
     
     <item>
@@ -168,7 +168,7 @@ Episode 11 was about &amp;ldquo;future proofing your passion&amp;rdquo;, among o
       <pubDate>Sat, 26 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/time-attention-and-pairing/</guid>
-      <description>Merlin Mann gives a great talk about Time and Attention. The gist of his talk is that in order to create great work, you need to balance time vs. attention. Without using your time, you&amp;rsquo;ll never create. But you must use your attention to determine if you&amp;rsquo;re creating something great. Great producers balance between these two to both produce, and produce good work.
+      <description>Merlin Mann gives a great talk about Time and Attention. The gist of his talk is that in order to create great work, you need to balance time vs. attention. Without using your time, you&#39;ll never create. But you must use your attention to determine if you&#39;re creating something great. Great producers balance between these two to both produce, and produce good work.
 Part of my new job at Pivotal Tracker involves pair programming.</description>
     </item>
     
@@ -178,7 +178,7 @@ Part of my new job at Pivotal Tracker involves pair programming.</description>
       <pubDate>Fri, 25 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/moving-to-denver/</guid>
-      <description>You know those hilarious &amp;ldquo;pranks&amp;rdquo; where someone posts something embarrassing someone else&amp;rsquo;s Facebook account? Apparently in the improv community of Chicago the standard prank is to post something saying that they&amp;rsquo;ve accepted a lead role, and that they&amp;rsquo;re moving to Denver, Colorado. We found this out when some improv actors at our going away party took some convincing that we were actually moving, and that it wasn&amp;rsquo;t an elaborate prank.</description>
+      <description>You know those hilarious &amp;ldquo;pranks&amp;rdquo; where someone posts something embarrassing someone else&#39;s Facebook account? Apparently in the improv community of Chicago the standard prank is to post something saying that they&#39;ve accepted a lead role, and that they&#39;re moving to Denver, Colorado. We found this out when some improv actors at our going away party took some convincing that we were actually moving, and that it wasn&#39;t an elaborate prank.</description>
     </item>
     
     <item>
@@ -187,8 +187,8 @@ Part of my new job at Pivotal Tracker involves pair programming.</description>
       <pubDate>Mon, 15 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/the-dangers-of-partisanship/</guid>
-      <description>Anyone who knows me personally knows that I am a huge Clojure fan. I could go on and on about why it&amp;rsquo;s the best; the regularity, the macros, ClojureScript, core.logic, etc. etc.
-But last week I attended LambdaJam, which was awesome by the way, and I came back with a different opinion. No, I don&amp;rsquo;t think Haskell or Erlang tops out Clojure, I&amp;rsquo;m still probably going to reach for Leiningen for all my personal projects.</description>
+      <description>Anyone who knows me personally knows that I am a huge Clojure fan. I could go on and on about why it&#39;s the best; the regularity, the macros, ClojureScript, core.logic, etc. etc.
+But last week I attended LambdaJam, which was awesome by the way, and I came back with a different opinion. No, I don&#39;t think Haskell or Erlang tops out Clojure, I&#39;m still probably going to reach for Leiningen for all my personal projects.</description>
     </item>
     
     <item>
@@ -197,7 +197,7 @@ But last week I attended LambdaJam, which was awesome by the way, and I came bac
       <pubDate>Tue, 02 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/stealing-terminology/</guid>
-      <description>One of my favorite tricks is to borrow terminology from other walks in life. This is particularly important for me, since it&amp;rsquo;s all too easy for engineers to end up living and talking in pure engineering speak. Looking to other careers for the correct words to describe something allows one to express ideas that might not be easily communicated otherwise.
+      <description>One of my favorite tricks is to borrow terminology from other walks in life. This is particularly important for me, since it&#39;s all too easy for engineers to end up living and talking in pure engineering speak. Looking to other careers for the correct words to describe something allows one to express ideas that might not be easily communicated otherwise.
 If you look carefully, you can see examples of this in engineering blog posts.</description>
     </item>
     
@@ -207,7 +207,7 @@ If you look carefully, you can see examples of this in engineering blog posts.</
       <pubDate>Wed, 05 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/fast-cheap-good/</guid>
-      <description>In the distant past (1950&amp;rsquo;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.
+      <description>In the distant past (1950&#39;s or so), project managers and engineers came up with what is known as the project management triangle: fast, cheap, or good; pick two.
 While software engineering can be very different from mechanical, it does at least share the same project management setup. Quality software designed cheaply will be late, cheap software released early will be poor in quality, and quality software released on time will be expensive.</description>
     </item>
     
@@ -217,7 +217,7 @@ While software engineering can be very different from mechanical, it does at lea
       <pubDate>Tue, 04 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/stop-surprising-me-ubuntu/</guid>
-      <description>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&amp;rsquo;t Gonna Need It.
+      <description>There are almost as many design principles as there are articles about them. But my two favorites are the Principle of Least Surprise, and You Ain&#39;t Gonna Need It.
 The Principle of Least Surprise, is one of the design principles of the language Ruby, specifically in the context of &amp;ldquo;the principle of least surprise after you learn Ruby very well.&amp;rdquo; And all good systems have the property that they do not surprise experienced users, but great systems do not even surprise inexperienced users.</description>
     </item>
     
@@ -227,7 +227,7 @@ The Principle of Least Surprise, is one of the design principles of the language
       <pubDate>Fri, 03 May 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/introducing-butler-dot-el/</guid>
-      <description>I&amp;rsquo;m a big fan of reducing barriers to increase adoption and compliance. One of the largest examples for me in the past few months was when I tried out Eclipse for Python Development. The most important plugins for me (other than Python and Git) were the Jenkins and Jira plugins. Quick access to my tasks and instantaneous in-editor feedback about job status increased the likelihood that I would respond to failed builds or fill out tickets correctly.</description>
+      <description>I&#39;m a big fan of reducing barriers to increase adoption and compliance. One of the largest examples for me in the past few months was when I tried out Eclipse for Python Development. The most important plugins for me (other than Python and Git) were the Jenkins and Jira plugins. Quick access to my tasks and instantaneous in-editor feedback about job status increased the likelihood that I would respond to failed builds or fill out tickets correctly.</description>
     </item>
     
     <item>
@@ -236,8 +236,8 @@ The Principle of Least Surprise, is one of the design principles of the language
       <pubDate>Tue, 30 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/a-new-addiction/</guid>
-      <description>Well, I have officially started collecting watches. My first decent purchase was a few months ago, but I&amp;rsquo;m counting it as a collection now because I have more pieces than is functionally required, which arguably is 1 in the cell phone era.
-Why collect watches? Well, first of all they&amp;rsquo;re modern Mens jewelry. Mens fashion has changed remarkably little in the century, especially compared to Womens&amp;rsquo;. So with suits that may stay &amp;ldquo;in style&amp;rdquo; for 2-6 years depending on the cut, men only have a few places to go to express their style: shoes, watches, ties, and cuff links.</description>
+      <description>Well, I have officially started collecting watches. My first decent purchase was a few months ago, but I&#39;m counting it as a collection now because I have more pieces than is functionally required, which arguably is 1 in the cell phone era.
+Why collect watches? Well, first of all they&#39;re modern Mens jewelry. Mens fashion has changed remarkably little in the century, especially compared to Womens&amp;rsquo;. So with suits that may stay &amp;ldquo;in style&amp;rdquo; for 2-6 years depending on the cut, men only have a few places to go to express their style: shoes, watches, ties, and cuff links.</description>
     </item>
     
     <item>
@@ -266,8 +266,8 @@ funs = [] for i in [&amp;#34;a&amp;#34; &amp;#34;b&amp;#34;]: def internal_funct
       <pubDate>Mon, 22 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://ashtonkemerling.com/posts/octopress/</guid>
-      <description>I&amp;rsquo;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.
-Wordpress is fine if you are either a big PHP afficianado, or are afraid of web programming in general. It&amp;rsquo;s quite easy to install themes and plugins without any knowledge of what this means. However, this only is true if you&amp;rsquo;re self-hosting Wordpress.</description>
+      <description>I&#39;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.
+Wordpress is fine if you are either a big PHP afficianado, or are afraid of web programming in general. It&#39;s quite easy to install themes and plugins without any knowledge of what this means. However, this only is true if you&#39;re self-hosting Wordpress.</description>
     </item>
     
     <item>

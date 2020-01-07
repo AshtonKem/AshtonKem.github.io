@@ -11,11 +11,11 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Thoughts on Rubymine"/>
-<meta name="twitter:description" content="As part of my new job at Pivotal Labs I&rsquo;ve been pair programming almost every day. The obvious challenge with pair programming, especially in a popular language like ruby, is in choosing what tools to work with. Vim, Emacs, RubyMine, TextMate, the choices are various and divisive.
+<meta name="twitter:description" content="As part of my new job at Pivotal Labs I&#39;ve been pair programming almost every day. The obvious challenge with pair programming, especially in a popular language like ruby, is in choosing what tools to work with. Vim, Emacs, RubyMine, TextMate, the choices are various and divisive.
 To make peace among the engineers, it makes sense to dictate one set of tools to make peace among all your employees, and to make provisioning the machines easier."/>
 
     <meta property="og:title" content="Thoughts on Rubymine" />
-<meta property="og:description" content="As part of my new job at Pivotal Labs I&rsquo;ve been pair programming almost every day. The obvious challenge with pair programming, especially in a popular language like ruby, is in choosing what tools to work with. Vim, Emacs, RubyMine, TextMate, the choices are various and divisive.
+<meta property="og:description" content="As part of my new job at Pivotal Labs I&#39;ve been pair programming almost every day. The obvious challenge with pair programming, especially in a popular language like ruby, is in choosing what tools to work with. Vim, Emacs, RubyMine, TextMate, the choices are various and divisive.
 To make peace among the engineers, it makes sense to dictate one set of tools to make peace among all your employees, and to make provisioning the machines easier." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://ashtonkemerling.com/posts/thoughts-on-rubymine/" />
@@ -49,7 +49,7 @@ To make peace among the engineers, it makes sense to dictate one set of tools to
     <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.56.3" />
+    <meta name="generator" content="Hugo 0.62.0" />
   </head>
 
   <body class=" ">
@@ -110,74 +110,57 @@ To make peace among the engineers, it makes sense to dictate one set of tools to
       </header>
 
       <div>
-        
-
-<p>As part of my new job at Pivotal Labs I&rsquo;ve been pair programming almost
+        <p>As part of my new job at Pivotal Labs I've been pair programming almost
 every day. The obvious challenge with pair programming, especially in a
 popular language like ruby, is in choosing what tools to work with. Vim,
 Emacs, RubyMine, TextMate, the choices are various and divisive.</p>
-
 <p>To make peace among the engineers, it makes sense to dictate one set of
 tools to make peace among all your employees, and to make provisioning
 the machines easier. Pivotal has decided to standardize on RubyMine with
 a dark color scheme and a few custom configurations.</p>
-
 <h1 id="the-good">The Good</h1>
-
 <p>RubyMine, being set up for ruby in particular, works very well with
 navigating, indenting, and colorizing ruby code. With the exception of
 setting a variable as the result of an if expression, I have never seen
 RubyMine indent code incorrectly or get confused on coloration.</p>
-
 <p>It also does a decent job of navigating to ruby classes and functions,
 something that is quite hard since ruby lacks explicit import
 semantics. It definitely makes hunting down odd test harness functions
 down a breeze, and has saved me in the past. It also is good at
 identifying the view that cooresponds to a controller method, but due to
-the way that tracker is laid out, I haven&rsquo;t had a chance to use this
+the way that tracker is laid out, I haven't had a chance to use this
 feature often.</p>
-
 <p>And as the cherry on top RubyMine includes a &ldquo;Textmate like&rdquo; quick find
 feature. In large code bases this will save you about a minute trying to
-find a particular file, so ling as you have an idea of what it&rsquo;s called!</p>
-
+find a particular file, so ling as you have an idea of what it's called!</p>
 <h1 id="the-bad">The Bad</h1>
-
 <p>If you only have unique controllers and models, you will absolutely love
 the ability to jump to a class definition. Since we use a lot of
 similarly named controllers inside namespaces to control API versions,
 it often gets confused about what version I want. The quick find feature
 sometimes ignores the path if you provide it, which makes copying files
 from stacktraces occasionally unreliable.</p>
-
 <p>Javascript and less support is mediocre. No real complaints, but nothing
 to set it apart from other environments in my opinion. Maybe my
 colleagues who work on the front end would have a more nuanced opinion.</p>
-
 <p>Also sometimes with large files the coloring or error checking can lag
 behind. This usually kicks in at files longer than 3000 lines, which is
 not unusual for test files. For the most part this is just an annoyance
-which doesn&rsquo;t affect editing in any serious way.</p>
-
+which doesn't affect editing in any serious way.</p>
 <p>It has git integration, which lags behind the offerings from Emacs, Vim,
 and Eclipse in my opinion. I end up using the command line instead of
 the built in tools.</p>
-
 <h1 id="the-ugly">The Ugly</h1>
-
 <p>RubyMine is incredibly dim witted when it comes to parenthesis and
 quotes. If you wish to put an escaped quote at the end of a string,
 RubyMine will let you escape your ending quote, then insert a matching
 pair right afterwords when you try and fix the mistake! To add insult to
 injury, you must move the cursor before fixing the issue lest RubyMine
 delete both of the extra quotes. Very frustrating.</p>
-
 <p>RubyMine is also one of the most memory consuming programs I use. At
 least once a week it will grind my machine to a halt due to memory
 usage, which is impressive on a machine with 16G in memory.</p>
-
-<h1 id="conclusions">Conclusions</h1>
-
+<h1 id="conclusions">Conclusions </h1>
 <p>Out of the box, RubyMine works very well. I think it is a good
 compromise for large teams. But if you have time to learn some more
 complicated tools, I believe you would be way better off learning a more
