@@ -1,189 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>http://ashtonkemerling.com/</loc>
-    <lastmod>2020-01-07T09:13:08-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/i-dont-like-slack/</loc>
-    <lastmod>2019-03-09T18:43:23-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/resume/</loc>
-    <lastmod>2020-01-07T09:13:08-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/about/</loc>
-    <lastmod>2019-03-09T15:28:08-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/false-novelty/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/no-you-probably-dont-need-a-blockchain/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/mdc-and-threadpools/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/java-without-if/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/integrating-test-dot-check-and-javascript/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/unusual-productivity-hacks/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/the-primacy-of-the-build-tool/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/managing-is-a-craft-too/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/internationalization-golf/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/thoughts-on-rubymine/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/org-mode/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/the-best-of-lisp/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/advanced-existential-dread/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/time-attention-and-pairing/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/moving-to-denver/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/the-dangers-of-partisanship/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/stealing-terminology/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/fast-cheap-good/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/stop-surprising-me-ubuntu/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/introducing-butler-dot-el/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/a-new-addiction/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/binding-vs-assignment/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/size-matters/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/octopress/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/java-doesnt-deserve-half-the-shit-we-give-it/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/right-vs-useful/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/learn-what-you-dont-like/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/hands-and-feet/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/reaction-to-kill-your-heroes-and-comments/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/posts/the-myth-of-the-lone-hacker/</loc>
-    <lastmod>2019-03-09T18:53:40-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ashtonkemerling.com/series/</loc>
-  </url>
-  
-</urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
+    <loc>http://ashtonkemerling.com/</loc><lastmod>2020-01-06T13:21:59-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/i-dont-like-slack/</loc><lastmod>2019-03-09T18:43:23-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/resume/</loc><lastmod>2020-01-06T13:21:59-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/about/</loc><lastmod>2019-03-09T15:28:08-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/false-novelty/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/no-you-probably-dont-need-a-blockchain/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/mdc-and-threadpools/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/java-without-if/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/integrating-test-dot-check-and-javascript/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/unusual-productivity-hacks/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/the-primacy-of-the-build-tool/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/managing-is-a-craft-too/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/internationalization-golf/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/thoughts-on-rubymine/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/org-mode/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/the-best-of-lisp/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/advanced-existential-dread/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/time-attention-and-pairing/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/moving-to-denver/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/the-dangers-of-partisanship/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/stealing-terminology/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/fast-cheap-good/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/stop-surprising-me-ubuntu/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/introducing-butler-dot-el/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/a-new-addiction/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/binding-vs-assignment/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/size-matters/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/octopress/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/java-doesnt-deserve-half-the-shit-we-give-it/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/right-vs-useful/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/learn-what-you-dont-like/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/hands-and-feet/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/reaction-to-kill-your-heroes-and-comments/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/posts/the-myth-of-the-lone-hacker/</loc><lastmod>2019-03-09T18:53:40-08:00</lastmod></url><url>
+    <loc>http://ashtonkemerling.com/series/</loc></url></urlset>

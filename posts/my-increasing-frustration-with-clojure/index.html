@@ -1,214 +1,83 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="author" content="Ashton Kemerling">
-    <meta name="description" content="Ashton Kemerling&#39;s personal website">
-    <meta name="keywords" content="blog,developer,personal">
-
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="My Increasing Frustration With Clojure"/>
-<meta name="twitter:description" content="Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&#39;ve seen.
-First off, this is not a &ldquo;I&#39;m quiting in disgust&rdquo; post. Those are childish and a waste of everyone&#39;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.
-First off, some history. My first job out of College was in Common Lisp, and I love/hated it."/>
-
-    <meta property="og:title" content="My Increasing Frustration With Clojure" />
-<meta property="og:description" content="Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&#39;ve seen.
-First off, this is not a &ldquo;I&#39;m quiting in disgust&rdquo; post. Those are childish and a waste of everyone&#39;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.
-First off, some history. My first job out of College was in Common Lisp, and I love/hated it." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/" />
-<meta property="article:published_time" content="2016-06-11T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-03-09T18:53:40-08:00" />
-
-
-    <base href="http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/">
-    <title>
-  My Increasing Frustration With Clojure · Ashton Kemerling
-</title>
-
-    <link rel="canonical" href="http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
-
-    
-      
-      
-      <link rel="stylesheet" href="/css/coder.min.8881182b3ec36ffd9c735306f7e16ce9b1129ebc650e069e7c4114827e9d9b23.css" integrity="sha256-iIEYKz7Db/2cc1MG9&#43;Fs6bESnrxlDgaefEEUgn6dmyM=" crossorigin="anonymous" media="screen" />
-    
-
-    
-
-    
-
-    
-
-    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
-
-    <meta name="generator" content="Hugo 0.62.0" />
-  </head>
-
-  <body class=" ">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="http://ashtonkemerling.com/">
-      Ashton Kemerling
-    </a>
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">About</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">Blog</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/resume/">Resume</a>
-          </li>
-        
-      
-      
-    </ul>
-  </section>
-</nav>
-
-
-      <div class="content">
-        
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">My Increasing Frustration With Clojure</h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2016-06-11T00:00:00Z'>
-                June 11, 2016
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              11 minutes read
-            </span>
-          </div>
-          
-          
-        </div>
-      </header>
-
-      <div>
-        <p><strong>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I've seen.</strong></p>
-<p>First off, this is not a &ldquo;I'm quiting in disgust&rdquo; post. Those are childish and a waste of everyone's time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.</p>
-<p>First off, some history. My first job out of College was in Common Lisp, and I love/hated it. The power it brought and the pain it brought were both one and the same. No modern libraries, no modern build tools (this was before <a href="https://www.quicklisp.org/beta/">QuickLisp</a>). One on hand, I <em>loved</em> working with paredit and Emacs, being able to quickly fly about my code and manipulate it in blocks rather than line by line. On the other, I couldn't help but be envious of those who could actually ask for help from a functioning open source community.</p>
-<p>A few years of Python, Ruby, and Javascript later, I found Clojure. And I thought I'd found the solution to literally all of the things. Paredit works again? Check. A thriving open source community? You got it. Deploy as a Jar rather than CL's hilarious &ldquo;dump the state of a running program and call it good&rdquo; setup? Fuck. Yes.</p>
-<p>And beyond the superficial things, there was a lot to love, especially coming from a more recent brush with Ruby on Rails. Clojure makes it very easy to make things <a href="https://en.wikipedia.org/wiki/Referential_transparency">referentially transparent</a>, and it tends to favor explicit calling semantics over convention (or more derisively, &ldquo;magic&rdquo;). This means that a Clojure code base will require more plumbing code, but that also means it's possible to navigate to the code that does routing and understand how it works, no more having to search through your framework's codebase just because they do dynamic method creation and method_missing magic.</p>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.63.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>My Increasing Frustration With Clojure&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">My Increasing Frustration With Clojure</h1><p class="article date">June 11, 2016<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p><strong>Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&rsquo;ve seen.</strong></p>
+<p>First off, this is not a &ldquo;I&rsquo;m quiting in disgust&rdquo; post. Those are childish and a waste of everyone&rsquo;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.</p>
+<p>First off, some history. My first job out of College was in Common Lisp, and I love/hated it. The power it brought and the pain it brought were both one and the same. No modern libraries, no modern build tools (this was before <a href="https://www.quicklisp.org/beta/"target="_blank">QuickLisp</a>). One on hand, I <em>loved</em> working with paredit and Emacs, being able to quickly fly about my code and manipulate it in blocks rather than line by line. On the other, I couldn&rsquo;t help but be envious of those who could actually ask for help from a functioning open source community.</p>
+<p>A few years of Python, Ruby, and Javascript later, I found Clojure. And I thought I&rsquo;d found the solution to literally all of the things. Paredit works again? Check. A thriving open source community? You got it. Deploy as a Jar rather than CL&rsquo;s hilarious &ldquo;dump the state of a running program and call it good&rdquo; setup? Fuck. Yes.</p>
+<p>And beyond the superficial things, there was a lot to love, especially coming from a more recent brush with Ruby on Rails. Clojure makes it very easy to make things <a href="https://en.wikipedia.org/wiki/Referential_transparency"target="_blank">referentially transparent</a>, and it tends to favor explicit calling semantics over convention (or more derisively, &ldquo;magic&rdquo;). This means that a Clojure code base will require more plumbing code, but that also means it&rsquo;s possible to navigate to the code that does routing and understand how it works, no more having to search through your framework&rsquo;s codebase just because they do dynamic method creation and method_missing magic.</p>
 <p>As far as I was concerned, the editor was the only weak point for Clojure. Back when I got into Clojure Cursive was still brand new, Emacs really was the only editor that was worth using and even it had some stability and usability issues. But I assumed that continued interest would stabilize Emacs, bring Vim up to speed, and improve Cursive to the point where it would be competitive with Emacs/Vim.</p>
-<p>But all was not well, and if I'd paid attention I might have noticed a few places where the core Clojure's teams priorities didn't seem to make much sense to me. And now that I work in Clojure professionally, I really cannot ignore them or remain silent about them any more.</p>
-<p>The core Clojure team prefers green field development over improvements and bug fixes to existing code to a degree that deeply worries me. I no longer trust that any issues I find stand a chance of getting fixed, as all the bugs we've posted are either in limbo, or flat out rejected. Multiple members of my team have given up on posting new bugs because they have no faith that it'll help anyone.</p>
-<p>These are pretty heavy and vague accusations, so I'm gonna break this down a bit to make it clearer and easier to digest.</p>
+<p>But all was not well, and if I&rsquo;d paid attention I might have noticed a few places where the core Clojure&rsquo;s teams priorities didn&rsquo;t seem to make much sense to me. And now that I work in Clojure professionally, I really cannot ignore them or remain silent about them any more.</p>
+<p>The core Clojure team prefers green field development over improvements and bug fixes to existing code to a degree that deeply worries me. I no longer trust that any issues I find stand a chance of getting fixed, as all the bugs we&rsquo;ve posted are either in limbo, or flat out rejected. Multiple members of my team have given up on posting new bugs because they have no faith that it&rsquo;ll help anyone.</p>
+<p>These are pretty heavy and vague accusations, so I&rsquo;m gonna break this down a bit to make it clearer and easier to digest.</p>
 <h2 id="ignorance-or-apathy-of-underlying-principles">Ignorance or Apathy of Underlying Principles</h2>
-<p>Programming isn't math per-se, especially in a language that's not explicitly based on Category or Type theory. That said a lot of the things that we do are backed or defined by mathematics, and to ignore that is to guarantee bugs. This is most clear in clojure.set which contains functions that are supposed to mirror the definitions created by Set Theory like <code>union</code>, <code>difference</code>, <code>intersection</code>, etc.</p>
+<p>Programming isn&rsquo;t math per-se, especially in a language that&rsquo;s not explicitly based on Category or Type theory. That said a lot of the things that we do are backed or defined by mathematics, and to ignore that is to guarantee bugs. This is most clear in clojure.set which contains functions that are supposed to mirror the definitions created by Set Theory like <code>union</code>, <code>difference</code>, <code>intersection</code>, etc.</p>
 <p>And the namespace is completely riddled with bugs. <code>union</code> returns duplicates if some of the inputs are lists instead of sets <em>depending on their length</em>. <code>intersection</code> will either return nonsense values or throw a ClassCastException if you provide it anything other than sets, again dependent on data.</p>
-<p>On their own, this is no big deal. Bugs happen, there's really no point in berating people just because they made a mistake. Instead the bug gets fixed as best and as soon as reality allows and we all move on. In fact, for the above bugs there are two possible fixes: raise an IllegalArgumentException if anything other than sets are provided, or coerce lists and vectors to sets before continuing. Both of these approaches are valid due to the fact that this is a dynamic language that defaults to immutable collection semantics; which one you pick is then a matter of how you want to affect your downstream users.</p>
-<p>Oh wait, some of these bugs were filed in <em>2009</em>, 7 fucking years ago! Here comes the berating. These functions are <strong>tiny</strong>, a simple implementation of <code>union</code> is one line. And while they're heavily used, they're simple in usage and signature; no need to change a lot of call sites to fix this bug. There are only two reasons to explain why these bugs have not been fix; they either do not understand that this is an issue, or they do not care.</p>
-<p>Actually, their comments on the issues lets us know that they do not understand that this is an issue. Rich Hickey said in 2009 &ldquo;the fact that these functions happen to work when the second argument is not a set is an implementation artifact and not a promise of the interface&rdquo;. How you define getting the wrong type with nonsense values counts as &ldquo;working&rdquo; is beyond me. Is it just because it doesn't throw an Exception? Anyone here prefer bad data instead of exceptions when dealing with functions like this? I doubt it.</p>
+<p>On their own, this is no big deal. Bugs happen, there&rsquo;s really no point in berating people just because they made a mistake. Instead the bug gets fixed as best and as soon as reality allows and we all move on. In fact, for the above bugs there are two possible fixes: raise an IllegalArgumentException if anything other than sets are provided, or coerce lists and vectors to sets before continuing. Both of these approaches are valid due to the fact that this is a dynamic language that defaults to immutable collection semantics; which one you pick is then a matter of how you want to affect your downstream users.</p>
+<p>Oh wait, some of these bugs were filed in <em>2009</em>, 7 fucking years ago! Here comes the berating. These functions are <strong>tiny</strong>, a simple implementation of <code>union</code> is one line. And while they&rsquo;re heavily used, they&rsquo;re simple in usage and signature; no need to change a lot of call sites to fix this bug. There are only two reasons to explain why these bugs have not been fix; they either do not understand that this is an issue, or they do not care.</p>
+<p>Actually, their comments on the issues lets us know that they do not understand that this is an issue. Rich Hickey said in 2009 &ldquo;the fact that these functions happen to work when the second argument is not a set is an implementation artifact and not a promise of the interface&rdquo;. How you define getting the wrong type with nonsense values counts as &ldquo;working&rdquo; is beyond me. Is it just because it doesn&rsquo;t throw an Exception? Anyone here prefer bad data instead of exceptions when dealing with functions like this? I doubt it.</p>
 <h2 id="inconsistency-between-best-practices-and-clojure-implementation">Inconsistency Between Best Practices and Clojure Implementation</h2>
 <p>Clojure includes a pretty powerful concept called protocols. Basically a protocol is an interface that can be added to classes after the fact, and lets you dispatch to different behavior silently at run time.</p>
-<p>This is pretty neat, it lets you abstract over multiple data types and include Java classes in the fun. For example ISeq provides all the methods needed to iterate over a collection and it works with all the Clojure and Java data types. So you can use Clojure's <code>map</code> function over its own data types and Java's because it depends on the seq interface.</p>
-<p>As you can imagine, this is the recommended way to work with things. Rather than having to do <code>cond</code> or <code>if</code> logic on various classes, define and use an appropriate protocol and you're good to go!</p>
-<p>It sounds like a good theory doesn't it? But Clojure itself doesn't actually do this. Clojure.core contains 89 calls to <code>instance?</code> in order to check runtime type, instead of the helper methods to check for protocol implementation.</p>
-<p><a href="http://dev.clojure.org/jira/browse/CLJ-1944">Here</a> is a bug found by my colleague that highlights this issue. List and Vector are both seqs, but <code>into</code> for a map only accepts vectors, lists causes a ClassCastException. This is kind of nuts because an IllegalArgumentException makes more sense, and there's no practical reason to differentiate between a list of two elements and a vector of two elements. Actually, Clojure considers <code>[1 2]</code> and <code>(list 1 2)</code> to be equal, so this really makes no sense</p>
-<p>Even more obnoxious, it was closed as wontfix. Apparently a single sentence in the docs is good enough for the Clojure team, as well as a paper-thin argument about performance on a 2 element list. So not only is this just broken in a barely documented and very surprising way, Clojure itself ends up programmed in a way that isn't recommended by the Clojure docs.</p>
-<p>This has spread to other projects. <a href="https://github.com/omcljs/om">Om</a> has a bug where lists aren't acceptable in its data structures, only maps sets and vectors. To say that I was treated pretty <a href="https://github.com/omcljs/om/issues/246">shabbily</a> by David Nolen on this issue almost goes without saying. Naturally the intro <a href="https://github.com/omcljs/om/wiki/Basic-Tutorial">docs</a> barely call this out, and the docs <a href="https://github.com/omcljs/om/wiki/Cursors">dedicated</a> to the troubled component does not mention this at all. To be fair, the <a href="https://github.com/omcljs/om/wiki/Troubleshooting">troubleshooting guide</a> explains this, but in my opinion that's probably a clue that the bug is common enough that you should find a fix for it.</p>
+<p>This is pretty neat, it lets you abstract over multiple data types and include Java classes in the fun. For example ISeq provides all the methods needed to iterate over a collection and it works with all the Clojure and Java data types. So you can use Clojure&rsquo;s <code>map</code> function over its own data types and Java&rsquo;s because it depends on the seq interface.</p>
+<p>As you can imagine, this is the recommended way to work with things. Rather than having to do <code>cond</code> or <code>if</code> logic on various classes, define and use an appropriate protocol and you&rsquo;re good to go!</p>
+<p>It sounds like a good theory doesn&rsquo;t it? But Clojure itself doesn&rsquo;t actually do this. Clojure.core contains 89 calls to <code>instance?</code> in order to check runtime type, instead of the helper methods to check for protocol implementation.</p>
+<p><a href="http://dev.clojure.org/jira/browse/CLJ-1944"target="_blank">Here</a> is a bug found by my colleague that highlights this issue. List and Vector are both seqs, but <code>into</code> for a map only accepts vectors, lists causes a ClassCastException. This is kind of nuts because an IllegalArgumentException makes more sense, and there&rsquo;s no practical reason to differentiate between a list of two elements and a vector of two elements. Actually, Clojure considers <code>[1 2]</code> and <code>(list 1 2)</code> to be equal, so this really makes no sense</p>
+<p>Even more obnoxious, it was closed as wontfix. Apparently a single sentence in the docs is good enough for the Clojure team, as well as a paper-thin argument about performance on a 2 element list. So not only is this just broken in a barely documented and very surprising way, Clojure itself ends up programmed in a way that isn&rsquo;t recommended by the Clojure docs.</p>
+<p>This has spread to other projects. <a href="https://github.com/omcljs/om"target="_blank">Om</a> has a bug where lists aren&rsquo;t acceptable in its data structures, only maps sets and vectors. To say that I was treated pretty <a href="https://github.com/omcljs/om/issues/246"target="_blank">shabbily</a> by David Nolen on this issue almost goes without saying. Naturally the intro <a href="https://github.com/omcljs/om/wiki/Basic-Tutorial"target="_blank">docs</a> barely call this out, and the docs <a href="https://github.com/omcljs/om/wiki/Cursors"target="_blank">dedicated</a> to the troubled component does not mention this at all. To be fair, the <a href="https://github.com/omcljs/om/wiki/Troubleshooting"target="_blank">troubleshooting guide</a> explains this, but in my opinion that&rsquo;s probably a clue that the bug is common enough that you should find a fix for it.</p>
 <h2 id="show-stopping-bugs-remain-untouched">Show Stopping Bugs Remain Untouched</h2>
 <p>There are a shocking number of big, bad bugs hiding in the Clojure Jira, some really old</p>
 <ul>
-<li><a href="http://dev.clojure.org/jira/browse/CLJ-308">This one</a> about fixing with-open for Clojure defined stuff provided a patch 5 years ago.</li>
-<li><a href="http://dev.clojure.org/jira/browse/CLJ-440">Calling VarArgs Successfully</a> from 6 years ago.</li>
-<li><a href="http://dev.clojure.org/jira/browse/CLJ-700">Contains? broken for transient collections</a> from 5 years ago. But it's due for this version, so cross your fingers!</li>
-<li><a href="http://dev.clojure.org/jira/browse/CLJ-1463">Bizarrely Defensive Response</a> for a minor code review.</li>
-<li><a href="http://dev.clojure.org/jira/browse/CLJ-1741">Duelling ClassLoaders</a> first discovered last year. This one breaks our editors constantly. Not even assigned.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-308"target="_blank">This one</a> about fixing with-open for Clojure defined stuff provided a patch 5 years ago.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-440"target="_blank">Calling VarArgs Successfully</a> from 6 years ago.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-700"target="_blank">Contains? broken for transient collections</a> from 5 years ago. But it&rsquo;s due for this version, so cross your fingers!</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-1463"target="_blank">Bizarrely Defensive Response</a> for a minor code review.</li>
+<li><a href="http://dev.clojure.org/jira/browse/CLJ-1741"target="_blank">Duelling ClassLoaders</a> first discovered last year. This one breaks our editors constantly. Not even assigned.</li>
 </ul>
-<p>I could go on, but I feel that I've made my point. Bugs, even major ones are either closed as &ldquo;wontfix&rdquo;, or are ignored for years despite the pain felt by users. That's not even covering the dismissive and distrustful attitude given in some of the replies.</p>
+<p>I could go on, but I feel that I&rsquo;ve made my point. Bugs, even major ones are either closed as &ldquo;wontfix&rdquo;, or are ignored for years despite the pain felt by users. That&rsquo;s not even covering the dismissive and distrustful attitude given in some of the replies.</p>
 <h2 id="strange-priorities">Strange Priorities</h2>
 <p>The Clojure team appears to be super focused on new features, at the exclusion of existing namespaces. The big highlights from the past year or so have been Transit, Transducers, and Spec.</p>
-<p>These are okay, I guess. We use transit a bit, and it's kinda cool. But we really don't use 90% of its features, it's basically JSON for us that can convert numbers to BigDecimals.</p>
-<p>We have yet to find a place that Transducers would help us. They're neat enough, but the built in lazy sequences are working A-OK for us, so we don't really feel the need to change over.</p>
-<p>I'm not holding my breath for Spec. It doesn't fix anything for me that other libraries aren't already providing.</p>
-<p>Know what hasn't seen any major improvements in forever? Clojure.test. Clojure.Test is frankly sad. Fixtures are done via some global state, and you can't even setup fixtures to work across the entire test suite. Need a database to run functional tests? Well either you need to override the main test runner (good luck running individual tests now!) or you have to setup each namespace to open and close its own database connection (don't forget, or your DBA will wonder why Emacs has 1000+ database connections). I'm 100% behind the idea that I'll have to write a bit of glue code, but without anywhere to <em>put</em> that code I'm kind of screwed.</p>
-<p>And then there is the <code>is</code> function. It's literally the only assertion provided by clojure.test. It's this fancy little macro that grabs its body, evaluates it, then uses the body to produce a human readable message about the failure.</p>
-<p>And it's garbage. The fact that <a href="https://github.com/pjstadig/humane-test-output">plugins</a> exist to make this easier on the eyes should tell you everything you need to know. Oh but don't use that with Emacs/Cider! It'll crash the Cider plugin, which is trying to parse the default output.</p>
-<p>Back when I used Emacs, I had a stash on my box that disabled AOT, pedantic checking, and the humane-test-output plugin from my project.clj in order to use Cider. Without that stash applied Cider wouldn't start, couldn't reload code, and would crash when running tests. Now that I use Cursive that's less of an issue, but it's still kind of nuts I had to decide between a working editor and readable output when I ran <code>lein test</code></p>
-<p>Sorry, I didn't even highlight the craziest bit of that last paragraph, did you catch it? I had to disable humane-test-output from my <em>project.clj</em>. That's because you install it by injecting some code in project.clj that <strong>redefines</strong> some multi-methods, because there's no plugin architecture. How nuts is that?</p>
-<p>Now I might hear you say &ldquo;You don't have to use clojure.test!&quot;, and you're right. But clojure.test has clearly won in the Clojure testing namespace. The only real competitors for clojure.test are <a href="https://github.com/slagyr/speclj">Speclj</a> and <a href="https://github.com/marick/Midje">Midje</a>. I've literally never met someone in person that's used Speclj, and Midje is super polarizing because it's basically a collection of magic macros. The fact that the second entry for Midje is about CircleCI rewriting from Midje to clojure.test should tell you a lot.</p>
-<p>So why don't we have more creature comforts for clojure.test? I'm not really sure. As far as I can tell the change to it was the inclusion of <a href="https://github.com/clojure/test.check">test.check</a>, but that really was nothing more than simple-check getting renamed and transferred to Clojure ownership.</p>
+<p>These are okay, I guess. We use transit a bit, and it&rsquo;s kinda cool. But we really don&rsquo;t use 90% of its features, it&rsquo;s basically JSON for us that can convert numbers to BigDecimals.</p>
+<p>We have yet to find a place that Transducers would help us. They&rsquo;re neat enough, but the built in lazy sequences are working A-OK for us, so we don&rsquo;t really feel the need to change over.</p>
+<p>I&rsquo;m not holding my breath for Spec. It doesn&rsquo;t fix anything for me that other libraries aren&rsquo;t already providing.</p>
+<p>Know what hasn&rsquo;t seen any major improvements in forever? Clojure.test. Clojure.Test is frankly sad. Fixtures are done via some global state, and you can&rsquo;t even setup fixtures to work across the entire test suite. Need a database to run functional tests? Well either you need to override the main test runner (good luck running individual tests now!) or you have to setup each namespace to open and close its own database connection (don&rsquo;t forget, or your DBA will wonder why Emacs has 1000+ database connections). I&rsquo;m 100% behind the idea that I&rsquo;ll have to write a bit of glue code, but without anywhere to <em>put</em> that code I&rsquo;m kind of screwed.</p>
+<p>And then there is the <code>is</code> function. It&rsquo;s literally the only assertion provided by clojure.test. It&rsquo;s this fancy little macro that grabs its body, evaluates it, then uses the body to produce a human readable message about the failure.</p>
+<p>And it&rsquo;s garbage. The fact that <a href="https://github.com/pjstadig/humane-test-output"target="_blank">plugins</a> exist to make this easier on the eyes should tell you everything you need to know. Oh but don&rsquo;t use that with Emacs/Cider! It&rsquo;ll crash the Cider plugin, which is trying to parse the default output.</p>
+<p>Back when I used Emacs, I had a stash on my box that disabled AOT, pedantic checking, and the humane-test-output plugin from my project.clj in order to use Cider. Without that stash applied Cider wouldn&rsquo;t start, couldn&rsquo;t reload code, and would crash when running tests. Now that I use Cursive that&rsquo;s less of an issue, but it&rsquo;s still kind of nuts I had to decide between a working editor and readable output when I ran <code>lein test</code></p>
+<p>Sorry, I didn&rsquo;t even highlight the craziest bit of that last paragraph, did you catch it? I had to disable humane-test-output from my <em>project.clj</em>. That&rsquo;s because you install it by injecting some code in project.clj that <strong>redefines</strong> some multi-methods, because there&rsquo;s no plugin architecture. How nuts is that?</p>
+<p>Now I might hear you say &ldquo;You don&rsquo;t have to use clojure.test!&quot;, and you&rsquo;re right. But clojure.test has clearly won in the Clojure testing namespace. The only real competitors for clojure.test are <a href="https://github.com/slagyr/speclj"target="_blank">Speclj</a> and <a href="https://github.com/marick/Midje"target="_blank">Midje</a>. I&rsquo;ve literally never met someone in person that&rsquo;s used Speclj, and Midje is super polarizing because it&rsquo;s basically a collection of magic macros. The fact that the second entry for Midje is about CircleCI rewriting from Midje to clojure.test should tell you a lot.</p>
+<p>So why don&rsquo;t we have more creature comforts for clojure.test? I&rsquo;m not really sure. As far as I can tell the change to it was the inclusion of <a href="https://github.com/clojure/test.check"target="_blank">test.check</a>, but that really was nothing more than simple-check getting renamed and transferred to Clojure ownership.</p>
 <h1 id="okay-now-what">Okay, Now What?</h1>
-<p>As I stated before, this isn't a &ldquo;I'm quitting Clojure!&rdquo; post. Partly this is because I work in Clojure on a daily basis, and I both like my job and am professional enough to keep working despite my complaints. And partly this is because I do not have a replacement for Clojure in mind for my own personal projects. But off the top of my head, there are the things I'd like to see fixed in the Clojure areas.</p>
+<p>As I stated before, this isn&rsquo;t a &ldquo;I&rsquo;m quitting Clojure!&rdquo; post. Partly this is because I work in Clojure on a daily basis, and I both like my job and am professional enough to keep working despite my complaints. And partly this is because I do not have a replacement for Clojure in mind for my own personal projects. But off the top of my head, there are the things I&rsquo;d like to see fixed in the Clojure areas.</p>
 <ul>
 <li>More love for clojure.test.</li>
 <li>No tolerance for bugs that result in bad-data. Built in functions should either work, or throw an understandable exception.</li>
 <li>Friendlier responses in Jira. Someone who has gone to the work to sign up and try to help out should be treated with more respect.</li>
 <li>Fix underlying compiler bugs before adding features. The other way only codifies bad behavior and guarantees that it cannot be fixed.</li>
-<li>Understand that if enough people have the same issue, it's the codes fault and a FAQ entry is <strong>not</strong> good enough.</li>
+<li>Understand that if enough people have the same issue, it&rsquo;s the codes fault and a FAQ entry is <strong>not</strong> good enough.</li>
 </ul>
-<p>Basically I want Clojure to be a simple to use language backed by a friendly and active community. What I see now is drifting in the wrong direction, and I'd like to see that corrected.</p>
-
-      </div>
-
-      <footer>
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-      </div>
-
-      <footer class="footer">
-  <section class="container">
-    
-     © 2020
-    
-       · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-  </section>
-</footer>
-
-    </main>
-
-    
+<p>Basically I want Clojure to be a simple to use language backed by a friendly and active community. What I see now is drifting in the wrong direction, and I&rsquo;d like to see that corrected.</p>
+</article><section class="article navigation"><p><a class="link" href="/posts/java-without-if/"><span class="li">&larr;</span>Java Without If</a></p><p><a class="link" href="/posts/integrating-test-dot-check-and-javascript/"><span class="li">&rarr;</span>Integrating test.check and Javascript</a class="link">
+    </p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Ashton Kemerling</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 	ga('create', 'UA-32325955-1', 'auto');
 	
 	ga('send', 'pageview');
 }
 </script>
-
-
-  </body>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
 
 </html>

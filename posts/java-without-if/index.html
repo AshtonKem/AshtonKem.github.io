@@ -1,141 +1,36 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="author" content="Ashton Kemerling">
-    <meta name="description" content="Ashton Kemerling&#39;s personal website">
-    <meta name="keywords" content="blog,developer,personal">
-
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Java Without If"/>
-<meta name="twitter:description" content="Over the past year my team has been doing something shocking to a lot of engineers: we&#39;re favoring pure Java over Clojure. We aren&#39;t rewriting all our Clojure code, but we definitely prefer Java for green field projects.
-This post is not going to be a compare and contrast between the two, nor am I going to bash Clojure. Language compare and contrast posts always descend into flame wars, and it&#39;s very easy to confuse the result of hard lessons learned with the benefits of a new language."/>
-
-    <meta property="og:title" content="Java Without If" />
-<meta property="og:description" content="Over the past year my team has been doing something shocking to a lot of engineers: we&#39;re favoring pure Java over Clojure. We aren&#39;t rewriting all our Clojure code, but we definitely prefer Java for green field projects.
-This post is not going to be a compare and contrast between the two, nor am I going to bash Clojure. Language compare and contrast posts always descend into flame wars, and it&#39;s very easy to confuse the result of hard lessons learned with the benefits of a new language." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://ashtonkemerling.com/posts/java-without-if/" />
-<meta property="article:published_time" content="2017-01-26T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-03-09T18:53:40-08:00" />
-
-
-    <base href="http://ashtonkemerling.com/posts/java-without-if/">
-    <title>
-  Java Without If · Ashton Kemerling
-</title>
-
-    <link rel="canonical" href="http://ashtonkemerling.com/posts/java-without-if/">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
-
-    
-      
-      
-      <link rel="stylesheet" href="/css/coder.min.8881182b3ec36ffd9c735306f7e16ce9b1129ebc650e069e7c4114827e9d9b23.css" integrity="sha256-iIEYKz7Db/2cc1MG9&#43;Fs6bESnrxlDgaefEEUgn6dmyM=" crossorigin="anonymous" media="screen" />
-    
-
-    
-
-    
-
-    
-
-    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="http://ashtonkemerling.com/images/favicon-16x16.png" sizes="16x16">
-
-    <meta name="generator" content="Hugo 0.62.0" />
-  </head>
-
-  <body class=" ">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="http://ashtonkemerling.com/">
-      Ashton Kemerling
-    </a>
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">About</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">Blog</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/resume/">Resume</a>
-          </li>
-        
-      
-      
-    </ul>
-  </section>
-</nav>
-
-
-      <div class="content">
-        
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">Java Without If</h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2017-01-26T00:00:00Z'>
-                January 26, 2017
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              6 minutes read
-            </span>
-          </div>
-          
-          
-        </div>
-      </header>
-
-      <div>
-        <p>Over the past year my team has been doing something shocking to a lot of
-engineers: we're favoring pure Java over Clojure. We aren't rewriting all our
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.63.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Java Without If&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">Java Without If</h1><p class="article date">January 26, 2017<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p>Over the past year my team has been doing something shocking to a lot of
+engineers: we&rsquo;re favoring pure Java over Clojure. We aren&rsquo;t rewriting all our
 Clojure code, but we definitely prefer Java for green field projects.</p>
 <p>This post is not going to be a compare and contrast between the two, nor am I
 going to bash Clojure. Language compare and contrast posts always descend into
-flame wars, and it's very easy to confuse the result of hard lessons learned
+flame wars, and it&rsquo;s very easy to confuse the result of hard lessons learned
 with the benefits of a new language.</p>
-<p>Instead I'd like to highlight a very strange aspect of our new Java development,
-and I hope that you're sitting down for this. Except tests, I have fewer than a
+<p>Instead I&rsquo;d like to highlight a very strange aspect of our new Java development,
+and I hope that you&rsquo;re sitting down for this. Except tests, I have fewer than a
 dozen <code>if</code> statements currently committed in our Java codebase.</p>
-<p>It would be easy to assume that we're just using Java's method dispatch to
+<p>It would be easy to assume that we&rsquo;re just using Java&rsquo;s method dispatch to
 replace if statements; rather than inspecting data and calling if/else on it,
 you can use interfaces and count on the implementation to provide the difference
-in behavior. But such an explanation is insufficient: objects don't magically
+in behavior. But such an explanation is insufficient: objects don&rsquo;t magically
 construct themselves from unstructured data, and Clojure is not without its own
-dynamic dispatch <a href="https://clojure.org/reference/multimethods">facilities</a>.</p>
+dynamic dispatch <a href="https://clojure.org/reference/multimethods"target="_blank">facilities</a>.</p>
 <p>Ultimately the real explanation for this strange code design lies in my
-colleague's extremely exceptional <a href="https://github.com/palatable/lambda">Lambda</a>
+colleague&rsquo;s extremely exceptional <a href="https://github.com/palatable/lambda"target="_blank">Lambda</a>
 library. It contains a lot of things that a Haskell/Scala developer would
 recognize such as Either types, function utilities, coproducts, etc. etc.</p>
-<p>In particular I'd like to draw your eye to the Either type, which has replaced
+<p>In particular I&rsquo;d like to draw your eye to the Either type, which has replaced
 the vast majority of our explicit <code>if</code> calls. Either is the logical
 successor to the Java
-8 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">Optional</a>
+8 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"target="_blank">Optional</a>
 type. Optional represents the presence of a value of type <code>T</code> with
-<code>Optional::of</code>, or it's absence with <code>Optional::empty</code>. Either on the
+<code>Optional::of</code>, or it&rsquo;s absence with <code>Optional::empty</code>. Either on the
 other hand is parameterized to two values, L and R, and represents the presence
 of either a value of type L, <em>or</em> a value of type R.</p>
 <p>Why is this a logical extension of <code>Optional</code>? Because while Optional is
@@ -158,7 +53,7 @@ right side values representing success.</p>
 <p>Optional gives us the ability to say &ldquo;if a value exists, apply this function to
 it&rdquo; repeatedly. It also gives us the ability to chain successive calls that
 return Optionals together with the <code>flatMap</code> function, eliminating the need
-for unsightly and error prone manual null checks. It's also safe for <code>map</code>
+for unsightly and error prone manual null checks. It&rsquo;s also safe for <code>map</code>
 and <code>flatMap</code> to go from <code>Optional&lt;A&gt;</code> to <code>Optional&lt;B&gt;</code>, which might
 eliminate the need for intermediate variables in your code.</p>
 <p>Either give us much of the same, but with the ability to represent <strong>why</strong> the
@@ -166,7 +61,7 @@ computation failed with left values, along with the ability to chain together
 functions working on an Either type. All of the greatest hits of functional
 programming are provided for Either, including <code>map</code>, <code>flatMap</code>, and <code>filter</code>.</p>
 <p>As a concrete example, imagine a hypothetical JSON parsing library. Parsing is
-tricky business, you're all but guaranteed that a failure will happen at
+tricky business, you&rsquo;re all but guaranteed that a failure will happen at
 runtime. So how do you handle it? Previously you had 4 choices.</p>
 <ul>
 <li>return null</li>
@@ -177,12 +72,12 @@ runtime. So how do you handle it? Previously you had 4 choices.</p>
 <p>Null is obviously bad, and unchecked exceptions are also risky. Checked
 exceptions guarantee that someone will deal with the issue, but they are
 extremely annoying, and might result in disparate and different exception
-handlers all over the place. Optional is nice, it's safer than null and marks in
-the type signature that failure is an option, but it's a bit lacking on
+handlers all over the place. Optional is nice, it&rsquo;s safer than null and marks in
+the type signature that failure is an option, but it&rsquo;s a bit lacking on
 explaining <strong>why</strong> a failure occurred.</p>
 <p>What if instead this library returned <code>Either&lt;Exception, JsonNode&gt;</code>, or even
 <code>Either&lt;Set&lt;String&gt;, JsonNode&gt;</code>? The potential for failure is in the type
-signature again, we don't need a try/catch, but if we want the unwrapped
+signature again, we don&rsquo;t need a try/catch, but if we want the unwrapped
 JsonNode we have to deal with the potential for a left value. And any functions
 we have that operate only on JsonNode can be passed in using the <code>map</code>
 function, making chaining a breeze.</p>
@@ -207,68 +102,44 @@ throwing an exception. The very last step is <code>match</code>, which takes two
 functions to unify a potential left or right value to the exact same type, which
 in this case is <code>HttpResponse</code>.</p>
 <h3 id="what-does-this-get-me">What does this get me?</h3>
-<p>Well, first off I think it's beautiful. I know that's a subjective call, but the
+<p>Well, first off I think it&rsquo;s beautiful. I know that&rsquo;s a subjective call, but the
 data flowing neatly from top to bottom without huge nesting if cases and early
 return values is very aesthetically pleasing to me.</p>
-<p>More functionally it's easier to refactor with the help of the compiler. If I
+<p>More functionally it&rsquo;s easier to refactor with the help of the compiler. If I
 want to add different return status codes to match different scenarios, the
-compiler helps me out a lot more than if I'm adding an extra return case. If I
+compiler helps me out a lot more than if I&rsquo;m adding an extra return case. If I
 convert the left side to a HttpResponse early, the compiler will helpfully
 remind me that the later flatMap calls cannot change <code>Either&lt;HttpResponse, JsonNode&gt;</code> to <code>Either&lt;Exception, BusinessObject&gt;</code>. Such changes are easily
 fixed once the compiler has pointed it out, but extremely hard to find on your
 own.</p>
-<p>But most fundamentally is that we've encoded our code's states in the type
+<p>But most fundamentally is that we&rsquo;ve encoded our code&rsquo;s states in the type
 system, not variable states. The potential for JSON parsing to fail is encoded
 in its type, not in the potential for a variable to null, or false, or for an
-exception to have been thrown. You're leaning on the compiler to tell you if
-you've handled the failure cases properly, as the code won't compile otherwise.
+exception to have been thrown. You&rsquo;re leaning on the compiler to tell you if
+you&rsquo;ve handled the failure cases properly, as the code won&rsquo;t compile otherwise.
 Now instead of testing for runtime exceptions you only test to make sure that
 your business logic is correct.</p>
-<p>If you've ever been interested in what the Haskell or Scala developers have been
-talking about with functional type safety, I'd highly recommend taking a look at
+<p>If you&rsquo;ve ever been interested in what the Haskell or Scala developers have been
+talking about with functional type safety, I&rsquo;d highly recommend taking a look at
 Lambda to get a taste of it in Java.</p>
-
-      </div>
-
-      <footer>
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-      </div>
-
-      <footer class="footer">
-  <section class="container">
-    
-     © 2020
-    
-       · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-  </section>
-</footer>
-
-    </main>
-
-    
+</article><section class="article navigation"><p><a class="link" href="/posts/mdc-and-threadpools/"><span class="li">&larr;</span>MDC and Threadpools</a></p><p><a class="link" href="/posts/my-increasing-frustration-with-clojure/"><span class="li">&rarr;</span>My Increasing Frustration With Clojure</a class="link">
+    </p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Ashton Kemerling</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 	ga('create', 'UA-32325955-1', 'auto');
 	
 	ga('send', 'pageview');
 }
 </script>
-
-
-  </body>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
 
 </html>
