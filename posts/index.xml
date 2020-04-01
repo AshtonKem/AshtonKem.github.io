@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Ashton Kemerling</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Mar 2019 16:49:54 -0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 -0800</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New Series</title>
+      <link>/posts/new-series/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 -0800</pubDate>
+      
+      <guid>/posts/new-series/</guid>
+      <description>Today I’m going to start a new series of blog posts unrelated to my typical programming affair. This is actually an out-growth of a prior failed attempt to create a podcast, and if this series proves popular enough I might try again.
+So, why am I doing this? Well, obviously this is partly a response to being quarantined 24/7 during the Coronavirus pandemic in early 2020. Without the ability to leave the house, there is only so many video games that a given person can play without slowly losing their mind.</description>
+    </item>
     
     <item>
       <title>I Don&#39;t Like Slack</title>

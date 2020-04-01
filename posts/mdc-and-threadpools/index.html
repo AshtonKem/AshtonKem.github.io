@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.63.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.65.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>MDC and Threadpools&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
     <div class="base-body"><section id="header" class="site header">
@@ -22,35 +22,35 @@
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Logger logger<span style="color:#f92672">;</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepOne</span><span style="color:#f92672">(</span>String correlationId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
-            MDC<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CORRELATION_ID<span style="color:#f92672">,</span> correlationId<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step One&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            MDC<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CORRELATION_ID<span style="color:#f92672">,</span> correlationId<span style="color:#f92672">);</span>
+            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step One&#34;</span><span style="color:#f92672">);</span>
             <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Foo&#34;</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepTwo</span><span style="color:#f92672">(</span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> previous<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
-            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Two&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Two&#34;</span><span style="color:#f92672">);</span>
             <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Bar&#34;</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepThree</span><span style="color:#f92672">(</span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> previous<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
-            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Three&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Three&#34;</span><span style="color:#f92672">);</span>
             <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Baz&#34;</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">doAll</span><span style="color:#f92672">(</span>String correlationId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> stepThree<span style="color:#f92672">(</span>stepTwo<span style="color:#f92672">(</span>stepOne<span style="color:#f92672">(</span>correlationId<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> stepThree<span style="color:#f92672">(</span>stepTwo<span style="color:#f92672">(</span>stepOne<span style="color:#f92672">(</span>correlationId<span style="color:#f92672">))).</span><span style="color:#a6e22e">join</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
-        logger <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>Main<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-one&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-two&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+        logger <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>Main<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-one&#34;</span><span style="color:#f92672">);</span>
+        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-two&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span></code></pre></div>
 <p>This code is using the new <code>CompletableFuture</code> class from Java 8, which is <em>roughly</em> analogous to Javascript promises. What we do is set the correlation-id, then execute a sequence of asynchronous actions and log the output. If you run this code enough times, you will eventually get the output below:</p>

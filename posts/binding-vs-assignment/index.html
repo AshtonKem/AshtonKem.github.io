@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.63.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.65.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Binding vs Assignment&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
     <div class="base-body"><section id="header" class="site header">
@@ -7,7 +7,7 @@
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
     <h1 class="article title">Binding vs Assignment</h1><p class="article date">April 30, 2013<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p>A coworker of mine was recently running into problems with the following snippet of Python code, and turned to another functionally oriented developer and myself for help.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">funs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>]:
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span> <span style="color:#e6db74">&#34;b&#34;</span>]:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">internal_function</span>():
         <span style="color:#66d9ef">return</span> i
     funs<span style="color:#f92672">.</span>append(internal_function)
@@ -16,14 +16,14 @@
 <p>At first glance, one would expect this to print &ldquo;a&rdquo; then &ldquo;b&rdquo;. But much to my surprise (and my coworkers frustration), it was returning &ldquo;b&rdquo; both times.</p>
 <p>My first instinct was that Python was closing properly, but was messing up the namespacing. So I asked him to use lambdas instead, creating this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">funs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>]:
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>]:
     funs<span style="color:#f92672">.</span>append(<span style="color:#66d9ef">lambda</span> : i)
 <span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">0</span>]()
 <span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">1</span>]()</code></pre></div>
 <p>Same result! So by this point we know that its not namespacing that is causing the problems, as you can&rsquo;t accidentally assign two lambdas the same name. So I began to suspect that the use of &ldquo;i&rdquo; was the issue. Perhaps we&rsquo;re closing around i, which is a mutable variable, and Python can&rsquo;t anticipate that we want a copy instead of the actual reference. Since i is mutable, both closures are having what i means changed from underneath them after closure creation time. (Coincidentally, Python 2.7.3 keeps i around even after the loop is completed, which I think is odd).</p>
 <p>So the solution here would be to use a temporary variable. Any variable first created inside a loop should theoretically only have a lifespan of one iteration through the loop. So let&rsquo;s try the following:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">funs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>]:
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>]:
     temp <span style="color:#f92672">=</span> i
     funs<span style="color:#f92672">.</span>append(<span style="color:#66d9ef">lambda</span> : temp)
 <span style="color:#66d9ef">print</span> funs[<span style="color:#ae81ff">0</span>]()
@@ -35,7 +35,7 @@
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> : x
 
 funs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span>]:
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>]:
     funs<span style="color:#f92672">.</span>append(create_lambda(i))
 
 funs[<span style="color:#ae81ff">0</span>]()
