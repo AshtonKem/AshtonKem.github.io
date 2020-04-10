@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Ashton Kemerling</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 -0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2020 06:23:27 -0700</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Two Open Source Models</title>
+      <link>/posts/two-open-source-models/</link>
+      <pubDate>Fri, 10 Apr 2020 06:23:27 -0700</pubDate>
+      
+      <guid>/posts/two-open-source-models/</guid>
+      <description>Two Open Source Models I have repeatedly seen clashes between users and maintainers of open source projects over who “owes” whom what, and I believe that these clashes come from a difference in mental models that are not explicitly stated. These clashes result in hurt feelings and the occasional accusation of entitlement or elitism, exacerbating the problem.
+The heart of this disagreement can be simplified as such: are open source maintainers giving a free gift to the community, or are they fulfilling a role that comes with privileges and expectations?</description>
+    </item>
     
     <item>
       <title>New Series</title>
