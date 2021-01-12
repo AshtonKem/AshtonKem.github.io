@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Ashton Kemerling</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Jan 2021 01:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jan 2021 01:00:00 -0700</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Parler, AWS, and the ACLU</title>
       <link>/posts/parler-aws-aclu/</link>
-      <pubDate>Mon, 11 Jan 2021 01:00:00 -0700</pubDate>
+      <pubDate>Tue, 12 Jan 2021 01:00:00 -0700</pubDate>
       
       <guid>/posts/parler-aws-aclu/</guid>
       <description>Parler, AWS, and the ACLU Parler was recently kicked off AWS, and as of this writing is currently offline. I would be fairly surprised if we see it come back online anytime soon.
