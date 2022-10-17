@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.77.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.100.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Internationalization Golf&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
+<meta name="supported-color-schemes" content="light dark"><title>Internationalization Golf&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
@@ -13,7 +13,7 @@
 <p>There was no way I was going to explain the (non-technical) translator how to deal with format directives like this: &ldquo;~#[NONE~;~a~;~a and ~a~:;~a, ~a~]~#[~; and ~a~:;, ~a, etc~].&rdquo;, and I didn&rsquo;t want to dig through 500kloc and unroll all the directives. So any translation system I made would need to support at least a subset of the CL formatting directives while hiding them for the translator&rsquo;s sanity.</p>
 <p>Worse still, CL&rsquo;s formatter accepts positional arguments only, to my knowledge. Thus there&rsquo;s no particular way to convince the formatter to modify the order of the parameters if the target language has different language structure than English. So my system would need to deal with that.</p>
 <p>The final format I settled on would look something like this. The programmer (me) would change (format nil &ldquo;~a&rdquo; var) to (jibberish:format &ldquo;&lt;~a:variable-name&gt;&rdquo; &ldquo;Descriptive sentence for translator&rdquo; :variable-name var). We could then convince our code to print out a file for a language like this:</p>
-<pre><code>####################################
+<pre tabindex="0"><code>####################################
 File: filename.cl
 ####################################
 

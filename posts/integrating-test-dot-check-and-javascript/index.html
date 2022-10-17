@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.77.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.100.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Integrating test.check and Javascript&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
+<meta name="supported-color-schemes" content="light dark"><title>Integrating test.check and Javascript&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
@@ -58,25 +58,25 @@ large, and it will bog down your repository with its size.</p>
 to make it work, you should check their docs. Our project.clj is
 reproduced at the bottom of this post if you have issues.</p>
 <p>At this point, we can write the simplest test possible:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>tracker-cljs.simple-test
-  (<span style="color:#e6db74">:require</span> [clojure.test.check <span style="color:#e6db74">:as</span> core]
-            [clojure.test.check.generators <span style="color:#e6db74">:as</span> gen]
-            [clojure.test.check.properties <span style="color:#e6db74">:as</span> prop]
-            [cemerick.cljs.test <span style="color:#e6db74">:as</span> t])
-  (<span style="color:#e6db74">:require-macros</span> [clojure.test.check.clojure-test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">defspec</span>)]
-                   [clojure.test.check.properties <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">for-all</span>)]
-                   [cemerick.cljs.test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">is</span>)]))
-
-(<span style="color:#a6e22e">defspec</span> simple-test <span style="color:#ae81ff">10</span>
-  (<span style="color:#a6e22e">for-all</span> [v (<span style="color:#a6e22e">gen/such-that</span> gen/not-empty (<span style="color:#a6e22e">gen/vector</span> gen/int))]
-    (println v)
-    true))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">ns </span>tracker-cljs.simple-test
+</span></span><span style="display:flex;"><span>  (<span style="color:#e6db74">:require</span> [clojure.test.check <span style="color:#e6db74">:as</span> core]
+</span></span><span style="display:flex;"><span>            [clojure.test.check.generators <span style="color:#e6db74">:as</span> gen]
+</span></span><span style="display:flex;"><span>            [clojure.test.check.properties <span style="color:#e6db74">:as</span> prop]
+</span></span><span style="display:flex;"><span>            [cemerick.cljs.test <span style="color:#e6db74">:as</span> t])
+</span></span><span style="display:flex;"><span>  (<span style="color:#e6db74">:require-macros</span> [clojure.test.check.clojure-test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">defspec</span>)]
+</span></span><span style="display:flex;"><span>                   [clojure.test.check.properties <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">for-all</span>)]
+</span></span><span style="display:flex;"><span>                   [cemerick.cljs.test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">is</span>)]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">defspec</span> simple-test <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">for-all</span> [v (<span style="color:#a6e22e">gen/such-that</span> gen/not-empty (<span style="color:#a6e22e">gen/vector</span> gen/int))]
+</span></span><span style="display:flex;"><span>    (println v)
+</span></span><span style="display:flex;"><span>    true))</span></span></code></pre></div>
 <h1 id="phantomjs-issues">PhantomJS issues.</h1>
 <p>In order to run the tests, you would typically have a :tests section in
 :cljsbuild that looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#e6db74">:test-commands</span> {<span style="color:#e6db74">&#34;unit-tests&#34;</span> [<span style="color:#e6db74">&#34;phantomjs&#34;</span> <span style="color:#e6db74">:runner</span>
-                                          <span style="color:#e6db74">&#34;compiled-application.js&#34;</span>
-                                          <span style="color:#e6db74">&#34;tmp/compiled-tests.js&#34;</span>]}</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#e6db74">:test-commands</span> {<span style="color:#e6db74">&#34;unit-tests&#34;</span> [<span style="color:#e6db74">&#34;phantomjs&#34;</span> <span style="color:#e6db74">:runner</span>
+</span></span><span style="display:flex;"><span>                                          <span style="color:#e6db74">&#34;compiled-application.js&#34;</span>
+</span></span><span style="display:flex;"><span>                                          <span style="color:#e6db74">&#34;tmp/compiled-tests.js&#34;</span>]}</span></span></code></pre></div>
 <p>This will load our JS into the app, along with the tests, and then run
 them. But you might notice errors that look like this:</p>
 <p><code>SECURITY_ERR: DOM Exception 18: An attempt was made to break through the security policy of the user agent.</code></p>
@@ -86,79 +86,78 @@ webpage. The solution for this is to start a server so we have a page to
 visit, and visit it via PhantomJS. So on Tracker we use the following
 two bits of code.</p>
 <p>generative_runner.js, to visit the actual page:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// reusable PhantomJS script for running clojurescript.test tests
-</span><span style="color:#75715e">// see http://github.com/cemerick/clojurescript.test for more info
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">page</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpage&#39;</span>).<span style="color:#a6e22e">create</span>();
-<span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">onResourceError</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">resourceError</span>) {
-    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">reason</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resourceError</span>.<span style="color:#a6e22e">errorString</span>;
-    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">reason_url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resourceError</span>.<span style="color:#a6e22e">url</span>;
-};
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sys</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;system&#39;</span>);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">success</span>;
-
-<span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">onConsoleMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">line</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">toString</span>();
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">line</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;[NEWLINE]&#34;</span>) {
-        <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">stdout</span>.<span style="color:#a6e22e">writeLine</span>(<span style="color:#a6e22e">line</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\[NEWLINE\]/g</span>, <span style="color:#e6db74">&#34;\n&#34;</span>));
-    }
-};
-
-<span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;http://localhost:4500&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">status</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;success&#34;</span>) {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Couldn&#39;t load page&#34;</span>);
-        <span style="color:#a6e22e">phantom</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
-    }
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">exists</span>(<span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>])) {
-            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">injectJs</span>(<span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>])) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Failed to inject &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>]);
-        } <span style="color:#66d9ef">else</span> {
-            <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluateJavaScript</span>(<span style="color:#e6db74">&#34;(function () { &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; })&#34;</span>);
-        }
-    }
-
-    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluate</span>(<span style="color:#66d9ef">function</span> () {
-        <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">set_print_fn_BANG_</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
-            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\n/g</span>, <span style="color:#e6db74">&#34;[NEWLINE]&#34;</span>)); <span style="color:#75715e">// since console.log *itself* adds a newline
-</span><span style="color:#75715e"></span>        });
-    });
-
-    <span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluate</span>(<span style="color:#66d9ef">function</span> () {
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">run_all_tests</span>();
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">results</span>);
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">successful_QMARK_</span>(<span style="color:#a6e22e">results</span>);
-    });
-    <span style="color:#a6e22e">phantom</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#a6e22e">success</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>);
-});
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// reusable PhantomJS script for running clojurescript.test tests
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// see http://github.com/cemerick/clojurescript.test for more info
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">page</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpage&#39;</span>).<span style="color:#a6e22e">create</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">onResourceError</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">resourceError</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">reason</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resourceError</span>.<span style="color:#a6e22e">errorString</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">reason_url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resourceError</span>.<span style="color:#a6e22e">url</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sys</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;system&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">success</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">onConsoleMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">line</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">line</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;[NEWLINE]&#34;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">stdout</span>.<span style="color:#a6e22e">writeLine</span>(<span style="color:#a6e22e">line</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\[NEWLINE\]/g</span>, <span style="color:#e6db74">&#34;\n&#34;</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;http://localhost:4500&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">status</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;success&#34;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Couldn&#39;t load page&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">phantom</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">exists</span>(<span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>])) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">injectJs</span>(<span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>])) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Failed to inject &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>]);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluateJavaScript</span>(<span style="color:#e6db74">&#34;(function () { &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sys</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; })&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluate</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">set_print_fn_BANG_</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\n/g</span>, <span style="color:#e6db74">&#34;[NEWLINE]&#34;</span>)); <span style="color:#75715e">// since console.log *itself* adds a newline
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">evaluate</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">run_all_tests</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">results</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cemerick</span>.<span style="color:#a6e22e">cljs</span>.<span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">successful_QMARK_</span>(<span style="color:#a6e22e">results</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">phantom</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#a6e22e">success</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
 <p>And a rake task to stand up a server and run everything. If you don&rsquo;t
 use Rails for your Javascript code you might need to use different
 commands to compile, but the intention remains. The WEBrick server
 provides a blank page for us to visit and run our tests on, which
 prevents PhantomJS from raising security errors.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;fileutils&#39;</span>
-require <span style="color:#e6db74">&#39;webrick&#39;</span>
-
-namespace <span style="color:#e6db74">:test</span> <span style="color:#66d9ef">do</span>
-  desc <span style="color:#e6db74">&#34;Run ClojureScript generative tests&#34;</span>
-  task <span style="color:#e6db74">:generative</span> <span style="color:#66d9ef">do</span>
-    server <span style="color:#f92672">=</span> <span style="color:#66d9ef">WEBrick</span><span style="color:#f92672">::</span><span style="color:#66d9ef">HTTPServer</span><span style="color:#f92672">.</span>new({<span style="color:#e6db74">:Port</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">4500</span>, <span style="color:#e6db74">:DocumentRoot</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">:BindAddress</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>})
-    <span style="color:#66d9ef">Thread</span><span style="color:#f92672">.</span>new <span style="color:#66d9ef">do</span>
-      server<span style="color:#f92672">.</span>start
-    <span style="color:#66d9ef">end</span>
-    exitCode <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-
-    <span style="color:#66d9ef">begin</span>
-      <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;assets:clean&#39;</span><span style="color:#f92672">].</span>invoke
-      <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;assets:precompile&#39;</span><span style="color:#f92672">].</span>invoke
-      exitCode <span style="color:#f92672">=</span> system <span style="color:#e6db74">&#34;lein cljsbuild test&#34;</span>
-    <span style="color:#66d9ef">ensure</span>
-      server<span style="color:#f92672">.</span>shutdown
-    <span style="color:#66d9ef">end</span>
-    exit exitCode
-  <span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;fileutils&#39;</span>
+</span></span><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;webrick&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>namespace <span style="color:#e6db74">:test</span> <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  desc <span style="color:#e6db74">&#34;Run ClojureScript generative tests&#34;</span>
+</span></span><span style="display:flex;"><span>  task <span style="color:#e6db74">:generative</span> <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    server <span style="color:#f92672">=</span> <span style="color:#66d9ef">WEBrick</span><span style="color:#f92672">::</span><span style="color:#66d9ef">HTTPServer</span><span style="color:#f92672">.</span>new({<span style="color:#e6db74">:Port</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">4500</span>, <span style="color:#e6db74">:DocumentRoot</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">:BindAddress</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Thread</span><span style="color:#f92672">.</span>new <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>      server<span style="color:#f92672">.</span>start
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    exitCode <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;assets:clean&#39;</span><span style="color:#f92672">].</span>invoke
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">Rake</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Task</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;assets:precompile&#39;</span><span style="color:#f92672">].</span>invoke
+</span></span><span style="display:flex;"><span>      exitCode <span style="color:#f92672">=</span> system <span style="color:#e6db74">&#34;lein cljsbuild test&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ensure</span>
+</span></span><span style="display:flex;"><span>      server<span style="color:#f92672">.</span>shutdown
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    exit exitCode
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span></span></span></code></pre></div>
 <p>To make all this work together, update project.clj to reference the
 generative_runner.js file instead of :runner, and use <code>rake test:generative</code> to kick off the run.</p>
 <h1 id="dont-mangle-your-code">Don&rsquo;t Mangle Your Code</h1>
@@ -186,67 +185,67 @@ application javascript file, not the test file.</p>
 <p>Once you have that going, it should be possible to open up and create
 increasingly complicated tests. As a teaser and a good example, the
 following code caught a tricky JS ordering bug.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>tracker-cljs.panel-items-test
-  (<span style="color:#e6db74">:require</span> [clojure.test.check <span style="color:#e6db74">:as</span> core]
-            [clojure.test.check.generators <span style="color:#e6db74">:as</span> gen]
-            [clojure.test.check.properties <span style="color:#e6db74">:as</span> prop]
-            [cemerick.cljs.test <span style="color:#e6db74">:as</span> t])
-  (<span style="color:#e6db74">:require-macros</span> [clojure.test.check.clojure-test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">defspec</span>)]
-                   [clojure.test.check.properties <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">for-all</span>)]
-                   [cemerick.cljs.test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">is</span>)]))
-
-(<span style="color:#66d9ef">defn </span>ids [items]
-  (<span style="color:#66d9ef">if </span>(seq? items)
-    (map (<span style="color:#66d9ef">fn </span>[item] (<span style="color:#a6e22e">.get</span> item <span style="color:#e6db74">:id</span>))
-         items)
-    (map (<span style="color:#66d9ef">fn </span>[item] (<span style="color:#a6e22e">.get</span> item <span style="color:#e6db74">:id</span>))
-         (<span style="color:#a6e22e">.-models</span> items))))
-
-(<span style="color:#66d9ef">defn </span>create-models [ids]
-  (map (<span style="color:#66d9ef">fn </span>[x] (<span style="color:#a6e22e">Backbone.Model.</span> (<span style="color:#a6e22e">js-obj</span> <span style="color:#e6db74">:id</span> x)))
-       ids))
-
-
-(<span style="color:#a6e22e">defspec</span> sort-check <span style="color:#ae81ff">100</span>
-  (<span style="color:#a6e22e">for-all</span> [v (<span style="color:#a6e22e">gen/such-that</span> gen/not-empty (<span style="color:#a6e22e">gen/vector</span> gen/int))]
-           (<span style="color:#66d9ef">let </span>[models (<span style="color:#a6e22e">create-models</span> v)
-                 sorted (sort v)
-                 subject (<span style="color:#a6e22e">tracker.PanelItems.</span>)]
-             (<span style="color:#a6e22e">.reset</span> subject (apply array models))
-             (<span style="color:#a6e22e">.refresh</span> subject (apply array (sort-by <span style="color:#f92672">#</span>(<span style="color:#a6e22e">.get</span> % <span style="color:#e6db74">:id</span>) models)))
-             (<span style="color:#a6e22e">is</span> (= sorted
-                    (<span style="color:#a6e22e">ids</span> subject))))))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">ns </span>tracker-cljs.panel-items-test
+</span></span><span style="display:flex;"><span>  (<span style="color:#e6db74">:require</span> [clojure.test.check <span style="color:#e6db74">:as</span> core]
+</span></span><span style="display:flex;"><span>            [clojure.test.check.generators <span style="color:#e6db74">:as</span> gen]
+</span></span><span style="display:flex;"><span>            [clojure.test.check.properties <span style="color:#e6db74">:as</span> prop]
+</span></span><span style="display:flex;"><span>            [cemerick.cljs.test <span style="color:#e6db74">:as</span> t])
+</span></span><span style="display:flex;"><span>  (<span style="color:#e6db74">:require-macros</span> [clojure.test.check.clojure-test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">defspec</span>)]
+</span></span><span style="display:flex;"><span>                   [clojure.test.check.properties <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">for-all</span>)]
+</span></span><span style="display:flex;"><span>                   [cemerick.cljs.test <span style="color:#e6db74">:refer</span> (<span style="color:#a6e22e">is</span>)]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>ids [items]
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">if </span>(seq? items)
+</span></span><span style="display:flex;"><span>    (map (<span style="color:#66d9ef">fn </span>[item] (<span style="color:#a6e22e">.get</span> item <span style="color:#e6db74">:id</span>))
+</span></span><span style="display:flex;"><span>         items)
+</span></span><span style="display:flex;"><span>    (map (<span style="color:#66d9ef">fn </span>[item] (<span style="color:#a6e22e">.get</span> item <span style="color:#e6db74">:id</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">.-models</span> items))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>create-models [ids]
+</span></span><span style="display:flex;"><span>  (map (<span style="color:#66d9ef">fn </span>[x] (<span style="color:#a6e22e">Backbone.Model.</span> (<span style="color:#a6e22e">js-obj</span> <span style="color:#e6db74">:id</span> x)))
+</span></span><span style="display:flex;"><span>       ids))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">defspec</span> sort-check <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">for-all</span> [v (<span style="color:#a6e22e">gen/such-that</span> gen/not-empty (<span style="color:#a6e22e">gen/vector</span> gen/int))]
+</span></span><span style="display:flex;"><span>           (<span style="color:#66d9ef">let </span>[models (<span style="color:#a6e22e">create-models</span> v)
+</span></span><span style="display:flex;"><span>                 sorted (sort v)
+</span></span><span style="display:flex;"><span>                 subject (<span style="color:#a6e22e">tracker.PanelItems.</span>)]
+</span></span><span style="display:flex;"><span>             (<span style="color:#a6e22e">.reset</span> subject (apply array models))
+</span></span><span style="display:flex;"><span>             (<span style="color:#a6e22e">.refresh</span> subject (apply array (sort-by <span style="color:#f92672">#</span>(<span style="color:#a6e22e">.get</span> % <span style="color:#e6db74">:id</span>) models)))
+</span></span><span style="display:flex;"><span>             (<span style="color:#a6e22e">is</span> (= sorted
+</span></span><span style="display:flex;"><span>                    (<span style="color:#a6e22e">ids</span> subject))))))</span></span></code></pre></div>
 <p>And the following is our project.clj, with unnecessary details elided
 for readability.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defproject </span>generative-testing <span style="color:#e6db74">&#34;0.0.1-SNAPSHOT&#34;</span>
-  <span style="color:#e6db74">:plugins</span> [[lein-cljsbuild <span style="color:#e6db74">&#34;1.0.3&#34;</span>]
-            [com.cemerick/clojurescript.test <span style="color:#e6db74">&#34;0.2.2&#34;</span>]]
-  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojurescript <span style="color:#e6db74">&#34;0.0-2234&#34;</span>]
-                 [com.cemerick/clojurescript.test <span style="color:#e6db74">&#34;0.3.1&#34;</span>]
-                 [com.cemerick/double-check <span style="color:#e6db74">&#34;0.5.8-SNAPSHOT&#34;</span>]
-                 [org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]
-  <span style="color:#e6db74">:cljsbuild</span> {<span style="color:#e6db74">:builds</span> [{<span style="color:#e6db74">:source-paths</span> [<span style="color:#e6db74">&#34;test/cljs&#34;</span>]
-                        <span style="color:#e6db74">:compiler</span> {<span style="color:#e6db74">:output-to</span> <span style="color:#e6db74">&#34;tmp/tracker-cljs.js&#34;</span>
-                                   <span style="color:#e6db74">:libs</span> [ <span style="color:#e6db74">&#34;public/web/assets/application.js&#34;</span> <span style="color:#e6db74">&#34;&#34;</span>]
-                                   <span style="color:#e6db74">:optimizations</span> <span style="color:#e6db74">:simple</span>
-                                   <span style="color:#e6db74">:pretty-print</span> true}}]
-              <span style="color:#e6db74">:test-commands</span> {<span style="color:#e6db74">&#34;unit-tests&#34;</span> [<span style="color:#e6db74">&#34;phantomjs&#34;</span> <span style="color:#e6db74">&#34;lib/generative_runner.js&#34;</span>
-                                            <span style="color:#e6db74">&#34;public/next/assets/next/next.js&#34;</span>
-                                            <span style="color:#e6db74">&#34;tmp/tracker-cljs.js&#34;</span>]}})</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defproject </span>generative-testing <span style="color:#e6db74">&#34;0.0.1-SNAPSHOT&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:plugins</span> [[lein-cljsbuild <span style="color:#e6db74">&#34;1.0.3&#34;</span>]
+</span></span><span style="display:flex;"><span>            [com.cemerick/clojurescript.test <span style="color:#e6db74">&#34;0.2.2&#34;</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojurescript <span style="color:#e6db74">&#34;0.0-2234&#34;</span>]
+</span></span><span style="display:flex;"><span>                 [com.cemerick/clojurescript.test <span style="color:#e6db74">&#34;0.3.1&#34;</span>]
+</span></span><span style="display:flex;"><span>                 [com.cemerick/double-check <span style="color:#e6db74">&#34;0.5.8-SNAPSHOT&#34;</span>]
+</span></span><span style="display:flex;"><span>                 [org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:cljsbuild</span> {<span style="color:#e6db74">:builds</span> [{<span style="color:#e6db74">:source-paths</span> [<span style="color:#e6db74">&#34;test/cljs&#34;</span>]
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">:compiler</span> {<span style="color:#e6db74">:output-to</span> <span style="color:#e6db74">&#34;tmp/tracker-cljs.js&#34;</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#e6db74">:libs</span> [ <span style="color:#e6db74">&#34;public/web/assets/application.js&#34;</span> <span style="color:#e6db74">&#34;&#34;</span>]
+</span></span><span style="display:flex;"><span>                                   <span style="color:#e6db74">:optimizations</span> <span style="color:#e6db74">:simple</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#e6db74">:pretty-print</span> true}}]
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">:test-commands</span> {<span style="color:#e6db74">&#34;unit-tests&#34;</span> [<span style="color:#e6db74">&#34;phantomjs&#34;</span> <span style="color:#e6db74">&#34;lib/generative_runner.js&#34;</span>
+</span></span><span style="display:flex;"><span>                                            <span style="color:#e6db74">&#34;public/next/assets/next/next.js&#34;</span>
+</span></span><span style="display:flex;"><span>                                            <span style="color:#e6db74">&#34;tmp/tracker-cljs.js&#34;</span>]}})</span></span></code></pre></div>
 <p>Also, the following function is helpful for converting from Cljs data
 structures to pure Javascript ones. It causes some compiler warnings,
 but they appear to be harmless.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defn </span>clj-&gt;js
-  <span style="color:#e6db74">&#34;Recursively transforms ClojureScript maps into Javascript objects,
-</span><span style="color:#e6db74">   other ClojureScript colls into JavaScript arrays, and ClojureScript
-</span><span style="color:#e6db74">   keywords into JavaScript strings.&#34;</span>
-  [x]
-  (<span style="color:#a6e22e">cond</span>
-    (string? x) x
-    (keyword? x) (name x)
-    (map? x) (apply js-obj (<span style="color:#a6e22e">flatten</span> (map (<span style="color:#66d9ef">fn </span>[[key val]] [(<span style="color:#a6e22e">clj-&gt;js</span> key) (<span style="color:#a6e22e">clj-&gt;js</span> val)]) x)))
-    (<span style="color:#a6e22e">coll?</span> x) (apply array (map clj-&gt;js x))
-    <span style="color:#e6db74">:else</span> x))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>clj-&gt;js
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Recursively transforms ClojureScript maps into Javascript objects,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   other ClojureScript colls into JavaScript arrays, and ClojureScript
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   keywords into JavaScript strings.&#34;</span>
+</span></span><span style="display:flex;"><span>  [x]
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">cond</span>
+</span></span><span style="display:flex;"><span>    (string? x) x
+</span></span><span style="display:flex;"><span>    (keyword? x) (name x)
+</span></span><span style="display:flex;"><span>    (map? x) (apply js-obj (<span style="color:#a6e22e">flatten</span> (map (<span style="color:#66d9ef">fn </span>[[key val]] [(<span style="color:#a6e22e">clj-&gt;js</span> key) (<span style="color:#a6e22e">clj-&gt;js</span> val)]) x)))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">coll?</span> x) (apply array (map clj-&gt;js x))
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">:else</span> x))</span></span></code></pre></div>
 <p>Good luck, and don&rsquo;t hesitate to reach out to me on Twitter if you have
 any questions!</p>
 </article><section class="article navigation"><p><a class="link" href="/posts/my-increasing-frustration-with-clojure/"><span class="li">&larr;</span>My Increasing Frustration With Clojure</a></p><p><a class="link" href="/posts/unusual-productivity-hacks/"><span class="li">&rarr;</span>Unusual Productivity Hacks</a class="link">

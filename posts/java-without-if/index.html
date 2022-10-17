@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.77.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.100.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Java Without If&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
+<meta name="supported-color-schemes" content="light dark"><title>Java Without If&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
@@ -39,17 +39,17 @@ used to represent a result that might have been a failure, replacing a thrown
 exception, with convention being that left side values represent failure and
 right side values representing success.</p>
 <p>So, what does that buy us? Well, consider what Optional gets us in the following code snippets.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">();</span>
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionTwo</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
-  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionThree</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#f92672">...</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Optional<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">()</span>
-                           <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionTwo<span style="color:#f92672">)</span>
-                           <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionThree<span style="color:#f92672">);</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionTwo</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionThree</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Optional<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>                           <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionTwo<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                           <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionThree<span style="color:#f92672">);</span></span></span></code></pre></div>
 <p>Optional gives us the ability to say &ldquo;if a value exists, apply this function to
 it&rdquo; repeatedly. It also gives us the ability to chain successive calls that
 return Optionals together with the <code>flatMap</code> function, eliminating the need
@@ -89,14 +89,14 @@ complicated state checking during exception handling to return the correct
 value.</p>
 <p>As a result of all this, you can easily imagine a JSON API endpoint looking
 something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> HttpResponse <span style="color:#a6e22e">handle</span><span style="color:#f92672">(</span>HttpRequest request<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> JsonParser<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span><span style="color:#f92672">())</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Validator<span style="color:#f92672">::</span>validate<span style="color:#f92672">)</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>ServiceObject<span style="color:#f92672">::</span>businessLogic<span style="color:#f92672">)</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>JsonGenerator<span style="color:#f92672">::</span>generate<span style="color:#f92672">)</span>
-                     <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>l <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">internalServerError</span><span style="color:#f92672">(</span>l<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">()),</span>
-                            r <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">(</span>l<span style="color:#f92672">));</span>
-<span style="color:#f92672">}</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> HttpResponse <span style="color:#a6e22e">handle</span><span style="color:#f92672">(</span>HttpRequest request<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> JsonParser<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Validator<span style="color:#f92672">::</span>validate<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>ServiceObject<span style="color:#f92672">::</span>businessLogic<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>JsonGenerator<span style="color:#f92672">::</span>generate<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>l <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">internalServerError</span><span style="color:#f92672">(</span>l<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">()),</span>
+</span></span><span style="display:flex;"><span>                            r <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">(</span>l<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
 <p>All the potential failure cases are covered by returning an Either rather than
 throwing an exception. The very last step is <code>match</code>, which takes two
 functions to unify a potential left or right value to the exact same type, which

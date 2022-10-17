@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.77.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.100.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>The Primacy of the Build Tool&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.109480a9cb1a377258b47d340009f15ee3693595e3cecfc28c7213190c58e8548efa8edb1c6610953e1fdb900d4df7c1.css" integrity="sha384-EJSAqcsaN3JYtH00AAnxXuNpNZXjzs/CjHITGQxY6FSO&#43;o7bHGYQlT4f25ANTffB"><body>
+<meta name="supported-color-schemes" content="light dark"><title>The Primacy of the Build Tool&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
@@ -25,14 +25,14 @@ has had to fight with RVM can attest.</p>
 <p>The one exception to this I have found is Clojure. Clojure inverts the
 normal order making the build tool the central item, with the compiler
 provided by the project definition file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defproject </span>foo <span style="color:#e6db74">&#34;0.1.0-SNAPSHOT&#34;</span>
-  <span style="color:#e6db74">:description</span> <span style="color:#e6db74">&#34;FIXME: write description&#34;</span>
-  <span style="color:#e6db74">:url</span> <span style="color:#e6db74">&#34;http://example.com/FIXME&#34;</span>
-  <span style="color:#e6db74">:license</span> {<span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;All Rights Reserved.&#34;</span>}
-  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]
-                 [org.clojure/clojure-contrib <span style="color:#e6db74">&#34;1.2.0&#34;</span>]
-                 [clj-time <span style="color:#e6db74">&#34;0.6.0&#34;</span>]]
-  <span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:dev</span> {<span style="color:#e6db74">:dependencies</span> [[midje <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]}})</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defproject </span>foo <span style="color:#e6db74">&#34;0.1.0-SNAPSHOT&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:description</span> <span style="color:#e6db74">&#34;FIXME: write description&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:url</span> <span style="color:#e6db74">&#34;http://example.com/FIXME&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:license</span> {<span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;All Rights Reserved.&#34;</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]
+</span></span><span style="display:flex;"><span>                 [org.clojure/clojure-contrib <span style="color:#e6db74">&#34;1.2.0&#34;</span>]
+</span></span><span style="display:flex;"><span>                 [clj-time <span style="color:#e6db74">&#34;0.6.0&#34;</span>]]
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:dev</span> {<span style="color:#e6db74">:dependencies</span> [[midje <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]}})</span></span></code></pre></div>
 <p>The beauty of this change is that it makes setup trivial for another
 developer. All they need is the same build tool, and it will deal with
 the correct versions of both the compiler and any libraries for the
@@ -44,8 +44,8 @@ it, and will call the correct version from the correct project.</p>
 supports multiple versions of the compiler? The build tool supports
 profiles which allow you to swap out compilers trivially because it&rsquo;s
 just a dependency.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:1.3</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.3.0&#34;</span>]]}
-           <span style="color:#e6db74">:1.4</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.4.0-beta1&#34;</span>]]}}</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:1.3</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.3.0&#34;</span>]]}
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">:1.4</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.4.0-beta1&#34;</span>]]}}</span></span></code></pre></div>
 <p>Deployment gets easier as well. If you&rsquo;re deploying an uberjar, the core
 libraries you tested against are also shipped to production in the same
 jar. No need to upgrade your deployment scripts when a new version of

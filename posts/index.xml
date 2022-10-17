@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Ashton Kemerling</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Jan 2021 01:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 17 Oct 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lets Talk About Trains</title>
+      <link>/posts/lets-talk-about-trains/</link>
+      <pubDate>Mon, 17 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/lets-talk-about-trains/</guid>
+      <description>Last week1 Casey had a blog about High Speed Rail (HSR), and it triggered my worst impulse: my need to argue on the Internet. Casey suggested that I write my own post rather than just being cranky in his comments, and while my initial instinct was to continue to be cranky, I must admit that he was right and I should be more contstructive.
+The starting point for all of this discussion is the continued boondoggle of trying to create a HSR between San Francisco and Los Angeles.</description>
+    </item>
     
     <item>
       <title>Parler, AWS, and the ACLU</title>
@@ -169,7 +179,7 @@ Episode 11 was about &amp;ldquo;future proofing your passion&amp;rdquo;, among o
       <pubDate>Wed, 30 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>/posts/advanced-existential-dread/</guid>
-      <description>One of the most scary moments in most young adults&#39; life is the realization of mortality. Teenagers and younger children often understand on an intellectual level that people die, but emotionally that&amp;rsquo;s something that happens to other people. There&amp;rsquo;s very few things quite like the moment when an adult realizes that they must die, there&amp;rsquo;s nothing they can do to stop it, and there&amp;rsquo;s not a lot they can do to delay it.</description>
+      <description>One of the most scary moments in most young adults&amp;rsquo; life is the realization of mortality. Teenagers and younger children often understand on an intellectual level that people die, but emotionally that&amp;rsquo;s something that happens to other people. There&amp;rsquo;s very few things quite like the moment when an adult realizes that they must die, there&amp;rsquo;s nothing they can do to stop it, and there&amp;rsquo;s not a lot they can do to delay it.</description>
     </item>
     
     <item>
@@ -247,7 +257,7 @@ The Principle of Least Surprise, is one of the design principles of the language
       
       <guid>/posts/a-new-addiction/</guid>
       <description>Well, I have officially started collecting watches. My first decent purchase was a few months ago, but I&amp;rsquo;m counting it as a collection now because I have more pieces than is functionally required, which arguably is 1 in the cell phone era.
-Why collect watches? Well, first of all they&amp;rsquo;re modern Mens jewelry. Mens fashion has changed remarkably little in the century, especially compared to Womens&#39;. So with suits that may stay &amp;ldquo;in style&amp;rdquo; for 2-6 years depending on the cut, men only have a few places to go to express their style: shoes, watches, ties, and cuff links.</description>
+Why collect watches? Well, first of all they&amp;rsquo;re modern Mens jewelry. Mens fashion has changed remarkably little in the century, especially compared to Womens&amp;rsquo;. So with suits that may stay &amp;ldquo;in style&amp;rdquo; for 2-6 years depending on the cut, men only have a few places to go to express their style: shoes, watches, ties, and cuff links.</description>
     </item>
     
     <item>
@@ -267,7 +277,7 @@ funs = [] for i in [&amp;#34;a&amp;#34; &amp;#34;b&amp;#34;]: def internal_funct
       
       <guid>/posts/size-matters/</guid>
       <description>About 6 months ago I started to look for a new language for hobby projects. I wanted something practical, yet fun. I managed to limit the criteria down to:
- Functional Good community Growing acceptance  This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM.</description>
+Functional Good community Growing acceptance This automatically eliminates a lot common languages, like Python, Ruby, and Java. After my Common Lisp job, I knew that a sane compilation system/target were an absolute must, so I looked at Scala first. On the surface Scala seemed a real winner: growing fan base, increasing commercial adoption, functional, and targeting the JVM.</description>
     </item>
     
     <item>
