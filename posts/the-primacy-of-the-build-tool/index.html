@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.105.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.85.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>The Primacy of the Build Tool&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
-    <div class="base-body"><section id="header" class="site header">
+<meta name="supported-color-schemes" content="light dark"><title>The Primacy of the Build Tool&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.63f706677e61b4ee62b8daf083358d3bbf8ac8ab03c7d171af3180fab3a3ebb83efb79fb98674f13dde6db11de2bf694.css" integrity="sha384-Y/cGZ35htO5iuNrwgzWNO7&#43;KyKsDx9FxrzGA&#43;rOj67g&#43;&#43;3n7mGdPE93m2xHeK/aU"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="The Primacy of the Build Tool" /><body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">The Primacy of the Build Tool</h1><p class="article date">March 31, 2014<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p>No programming language stands alone. Besides the compiler, every
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">The Primacy of the Build Tool</h1><p class="article date">March 31, 2014</p></section><article class="article markdown-body"><p>No programming language stands alone. Besides the compiler, every
 programming language includes an ecosystem of libraries, build tools,
 analyzers, debuggers, and other utilities. Languages often rise and fall
 depending on the quality of these tools and libraries.</p>
@@ -25,14 +25,14 @@ has had to fight with RVM can attest.</p>
 <p>The one exception to this I have found is Clojure. Clojure inverts the
 normal order making the build tool the central item, with the compiler
 provided by the project definition file.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defproject </span>foo <span style="color:#e6db74">&#34;0.1.0-SNAPSHOT&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:description</span> <span style="color:#e6db74">&#34;FIXME: write description&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:url</span> <span style="color:#e6db74">&#34;http://example.com/FIXME&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:license</span> {<span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;All Rights Reserved.&#34;</span>}
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]
-</span></span><span style="display:flex;"><span>                 [org.clojure/clojure-contrib <span style="color:#e6db74">&#34;1.2.0&#34;</span>]
-</span></span><span style="display:flex;"><span>                 [clj-time <span style="color:#e6db74">&#34;0.6.0&#34;</span>]]
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:dev</span> {<span style="color:#e6db74">:dependencies</span> [[midje <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]}})</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defproject </span>foo <span style="color:#e6db74">&#34;0.1.0-SNAPSHOT&#34;</span>
+  <span style="color:#e6db74">:description</span> <span style="color:#e6db74">&#34;FIXME: write description&#34;</span>
+  <span style="color:#e6db74">:url</span> <span style="color:#e6db74">&#34;http://example.com/FIXME&#34;</span>
+  <span style="color:#e6db74">:license</span> {<span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;All Rights Reserved.&#34;</span>}
+  <span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.5.1&#34;</span>]
+                 [org.clojure/clojure-contrib <span style="color:#e6db74">&#34;1.2.0&#34;</span>]
+                 [clj-time <span style="color:#e6db74">&#34;0.6.0&#34;</span>]]
+  <span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:dev</span> {<span style="color:#e6db74">:dependencies</span> [[midje <span style="color:#e6db74">&#34;1.5.1&#34;</span>]]}})</code></pre></div>
 <p>The beauty of this change is that it makes setup trivial for another
 developer. All they need is the same build tool, and it will deal with
 the correct versions of both the compiler and any libraries for the
@@ -44,8 +44,8 @@ it, and will call the correct version from the correct project.</p>
 supports multiple versions of the compiler? The build tool supports
 profiles which allow you to swap out compilers trivially because it&rsquo;s
 just a dependency.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:1.3</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.3.0&#34;</span>]]}
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">:1.4</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.4.0-beta1&#34;</span>]]}}</span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#e6db74">:profiles</span> {<span style="color:#e6db74">:1.3</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.3.0&#34;</span>]]}
+           <span style="color:#e6db74">:1.4</span> {<span style="color:#e6db74">:dependencies</span> [[org.clojure/clojure <span style="color:#e6db74">&#34;1.4.0-beta1&#34;</span>]]}}</code></pre></div>
 <p>Deployment gets easier as well. If you&rsquo;re deploying an uberjar, the core
 libraries you tested against are also shipped to production in the same
 jar. No need to upgrade your deployment scripts when a new version of
@@ -54,8 +54,9 @@ Clojure comes out, as everything is included automatically.</p>
 on the JVM, and the build tool cannot change the JVM around. But Clojure
 has very simple requirements, Java 1.6 or greater, which
 makes it simple to deploy anywhere.</p>
-</article><section class="article navigation"><p><a class="link" href="/posts/unusual-productivity-hacks/"><span class="li">&larr;</span>Unusual Productivity Hacks</a></p><p><a class="link" href="/posts/managing-is-a-craft-too/"><span class="li">&rarr;</span>Managing is a Craft Too</a class="link">
-    </p></section></div><section id="footer" class="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+</article>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/posts/unusual-productivity-hacks/"><span class="iconfont icon-article"></span>Unusual Productivity Hacks</a></p><p><a class="link" href="/posts/managing-is-a-craft-too/"><span class="iconfont icon-article"></span>Managing is a Craft Too</a></p></section></div></section><section id="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">Ashton Kemerling</p>
 <p><span>Powered by </span><a
     href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
@@ -71,7 +72,6 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-</div>
 </body>
 
 </html>

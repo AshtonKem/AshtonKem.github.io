@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.105.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.85.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Java Without If&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
-    <div class="base-body"><section id="header" class="site header">
+<meta name="supported-color-schemes" content="light dark"><title>Java Without If&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.63f706677e61b4ee62b8daf083358d3bbf8ac8ab03c7d171af3180fab3a3ebb83efb79fb98674f13dde6db11de2bf694.css" integrity="sha384-Y/cGZ35htO5iuNrwgzWNO7&#43;KyKsDx9FxrzGA&#43;rOj67g&#43;&#43;3n7mGdPE93m2xHeK/aU"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Java Without If" /><body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">Java Without If</h1><p class="article date">January 26, 2017<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p>Over the past year my team has been doing something shocking to a lot of
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Java Without If</h1><p class="article date">January 26, 2017</p></section><article class="article markdown-body"><p>Over the past year my team has been doing something shocking to a lot of
 engineers: we&rsquo;re favoring pure Java over Clojure. We aren&rsquo;t rewriting all our
 Clojure code, but we definitely prefer Java for green field projects.</p>
 <p>This post is not going to be a compare and contrast between the two, nor am I
@@ -20,15 +20,18 @@ replace if statements; rather than inspecting data and calling if/else on it,
 you can use interfaces and count on the implementation to provide the difference
 in behavior. But such an explanation is insufficient: objects don&rsquo;t magically
 construct themselves from unstructured data, and Clojure is not without its own
-dynamic dispatch <a href="https://clojure.org/reference/multimethods"target="_blank">facilities</a>.</p>
+dynamic dispatch <a href="https://clojure.org/reference/multimethods"target="_blank" rel="noopener noreferrer">facilities</a>
+.</p>
 <p>Ultimately the real explanation for this strange code design lies in my
-colleague&rsquo;s extremely exceptional <a href="https://github.com/palatable/lambda"target="_blank">Lambda</a>
+colleague&rsquo;s extremely exceptional <a href="https://github.com/palatable/lambda"target="_blank" rel="noopener noreferrer">Lambda</a>
+
 library. It contains a lot of things that a Haskell/Scala developer would
 recognize such as Either types, function utilities, coproducts, etc. etc.</p>
 <p>In particular I&rsquo;d like to draw your eye to the Either type, which has replaced
 the vast majority of our explicit <code>if</code> calls. Either is the logical
 successor to the Java
-8 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"target="_blank">Optional</a>
+8 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"target="_blank" rel="noopener noreferrer">Optional</a>
+
 type. Optional represents the presence of a value of type <code>T</code> with
 <code>Optional::of</code>, or it&rsquo;s absence with <code>Optional::empty</code>. Either on the
 other hand is parameterized to two values, L and R, and represents the presence
@@ -39,17 +42,17 @@ used to represent a result that might have been a failure, replacing a thrown
 exception, with convention being that left side values represent failure and
 right side values representing success.</p>
 <p>So, what does that buy us? Well, consider what Optional gets us in the following code snippets.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionTwo</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionThree</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Optional<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">()</span>
-</span></span><span style="display:flex;"><span>                           <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionTwo<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                           <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionThree<span style="color:#f92672">);</span></span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">();</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionTwo</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
+  x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionThree</span><span style="color:#f92672">(</span>x<span style="color:#f92672">);</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>x <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">...</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Optional<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> x <span style="color:#f92672">=</span> Helper<span style="color:#f92672">.</span><span style="color:#a6e22e">functionOne</span><span style="color:#f92672">()</span>
+                           <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionTwo<span style="color:#f92672">)</span>
+                           <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Helper<span style="color:#f92672">::</span>functionThree<span style="color:#f92672">);</span></code></pre></div>
 <p>Optional gives us the ability to say &ldquo;if a value exists, apply this function to
 it&rdquo; repeatedly. It also gives us the ability to chain successive calls that
 return Optionals together with the <code>flatMap</code> function, eliminating the need
@@ -89,14 +92,14 @@ complicated state checking during exception handling to return the correct
 value.</p>
 <p>As a result of all this, you can easily imagine a JSON API endpoint looking
 something like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> HttpResponse <span style="color:#a6e22e">handle</span><span style="color:#f92672">(</span>HttpRequest request<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> JsonParser<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span><span style="color:#f92672">())</span>
-</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Validator<span style="color:#f92672">::</span>validate<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>ServiceObject<span style="color:#f92672">::</span>businessLogic<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>JsonGenerator<span style="color:#f92672">::</span>generate<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>                     <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>l <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">internalServerError</span><span style="color:#f92672">(</span>l<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">()),</span>
-</span></span><span style="display:flex;"><span>                            r <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">(</span>l<span style="color:#f92672">));</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> HttpResponse <span style="color:#a6e22e">handle</span><span style="color:#f92672">(</span>HttpRequest request<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> JsonParser<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getBody</span><span style="color:#f92672">())</span>
+                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>Validator<span style="color:#f92672">::</span>validate<span style="color:#f92672">)</span>
+                     <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>ServiceObject<span style="color:#f92672">::</span>businessLogic<span style="color:#f92672">)</span>
+                     <span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>JsonGenerator<span style="color:#f92672">::</span>generate<span style="color:#f92672">)</span>
+                     <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>l <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">internalServerError</span><span style="color:#f92672">(</span>l<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">()),</span>
+                            r <span style="color:#f92672">-&gt;</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">(</span>l<span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>All the potential failure cases are covered by returning an Either rather than
 throwing an exception. The very last step is <code>match</code>, which takes two
 functions to unify a potential left or right value to the exact same type, which
@@ -122,8 +125,9 @@ your business logic is correct.</p>
 <p>If you&rsquo;ve ever been interested in what the Haskell or Scala developers have been
 talking about with functional type safety, I&rsquo;d highly recommend taking a look at
 Lambda to get a taste of it in Java.</p>
-</article><section class="article navigation"><p><a class="link" href="/posts/mdc-and-threadpools/"><span class="li">&larr;</span>MDC and Threadpools</a></p><p><a class="link" href="/posts/my-increasing-frustration-with-clojure/"><span class="li">&rarr;</span>My Increasing Frustration With Clojure</a class="link">
-    </p></section></div><section id="footer" class="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+</article>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/posts/mdc-and-threadpools/"><span class="iconfont icon-article"></span>MDC and Threadpools</a></p><p><a class="link" href="/posts/my-increasing-frustration-with-clojure/"><span class="iconfont icon-article"></span>My Increasing Frustration With Clojure</a></p></section></div></section><section id="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">Ashton Kemerling</p>
 <p><span>Powered by </span><a
     href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
@@ -139,7 +143,6 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-</div>
 </body>
 
 </html>

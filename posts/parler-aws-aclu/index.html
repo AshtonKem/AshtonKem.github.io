@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.105.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.85.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Parler, AWS, and the ACLU&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
-    <div class="base-body"><section id="header" class="site header">
+<meta name="supported-color-schemes" content="light dark"><title>Parler, AWS, and the ACLU&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.63f706677e61b4ee62b8daf083358d3bbf8ac8ab03c7d171af3180fab3a3ebb83efb79fb98674f13dde6db11de2bf694.css" integrity="sha384-Y/cGZ35htO5iuNrwgzWNO7&#43;KyKsDx9FxrzGA&#43;rOj67g&#43;&#43;3n7mGdPE93m2xHeK/aU"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Parler, AWS, and the ACLU" /><body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">Parler, AWS, and the ACLU</h1><p class="article date">January 12, 2021<span class="lastmod"> • edited March 8, 2021</span></p></section><article class="article markdown-body"><h1 id="parler-aws-and-the-aclu">Parler, AWS, and the ACLU</h1>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Parler, AWS, and the ACLU</h1><p class="article date">January 12, 2021</p></section><article class="article markdown-body"><h1 id="parler-aws-and-the-aclu">Parler, AWS, and the ACLU</h1>
 <p>Parler was recently kicked off AWS, and as of this writing is currently offline. I would be fairly surprised if we see it come back online anytime soon.</p>
 <p>I was only mildly surprised to see the ACLU step in to make arguments on Parler’s behalf, but not that surprised. Free Speech law and general advocacy almost universally involves defending speech that is either unpopular or said by repulsive people; popular speech is rarely first up to be banned. Usually suppressing unpopular speech is the first step to more general suppression, which is why groups like the ACLU often end up defending the speech of unpleasant people.</p>
 <p>But I was deeply irked to see this sentence from them:</p>
@@ -38,7 +38,8 @@
 <h1 id="what-actually-happened">What Actually Happened</h1>
 <p>What actually happened was a complete and utter failure of planning on Parler’s side. Well, multiple failures of planning<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup><sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>, but we’ll focus on one.</p>
 <p>Having a single hosting provider is a risk. Having one that requires deep integration into your technical stack is a bigger risk. Doing that while being aware that you’re controversial is foolhardy to a degree I can’t imagine. Sane businesses try to avoid risk as much as possible, or at least create contingency plans for cases where the risk is worth the reward.</p>
-<p>Knowing everything that we know about Parler, choosing to deploy on AWS was a huge risk. They should have known that they would be controversial, and they should have had a backup plan that doesn’t involve trying to sue one of the richest companies on the planet on <a href="https://twitter.com/questauthority/status/1348686562415042561"target="_blank">flimsy legal theories</a>. If I were them I wouldn’t have started off with AWS. Or, if I had I would&rsquo;ve migrated a few years ago as the heat began to rise. Or, at least I would&rsquo;ve written a plan and practied a migration at the very minimum. Literally <em>anything</em> other than letting an entirely predictable problem catch them flat footed.</p>
+<p>Knowing everything that we know about Parler, choosing to deploy on AWS was a huge risk. They should have known that they would be controversial, and they should have had a backup plan that doesn’t involve trying to sue one of the richest companies on the planet on <a href="https://twitter.com/questauthority/status/1348686562415042561"target="_blank" rel="noopener noreferrer">flimsy legal theories</a>
+. If I were them I wouldn’t have started off with AWS. Or, if I had I would&rsquo;ve migrated a few years ago as the heat began to rise. Or, at least I would&rsquo;ve written a plan and practied a migration at the very minimum. Literally <em>anything</em> other than letting an entirely predictable problem catch them flat footed.</p>
 <p>That they weren’t ready for such an obvious risk is their problem, not ours as a society. Companies far less controversial than Parler have contingency plans if they need to leave AWS; a failure of planning on their part does not create an emergency for the rest of us.</p>
 <h1 id="why-its-worrying">Why It’s Worrying</h1>
 <p>The ACLU’s comments leave open an interesting question: So what are they actually proposing?</p>
@@ -46,40 +47,42 @@
 <p>It’s also possible that they’re recommending that something be done, which is scary to me. It is not uncommon to hear calls for the government to step in here and force companies to do something for the sake of “free speech”. Given that the ACLU primarily deals with the government, I have a hard time not jumping to that assumption myself even if it’s not explicitly said.</p>
 <p>I don’t expect a lot of people to feel sympathy with the trampled rights of large corporations, but the idea that the government would step in and force companies to do business with someone against their will<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> is quite alarming. That is a wildly dangerous power to hand out to a government, and it is one that will be abused eventually. Where exactly does that power end? I’m not exactly sure, but I can&rsquo;t imagine it being good.</p>
 <p>To my eye, there isn’t anything here for the ACLU to weigh in on, and I’m disappointed that they’ve decided to come out so disastrously on this one.</p>
-<div class="footnotes" role="doc-endnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1">
+<li id="fn:1" role="doc-endnote">
 <p>I think engineers often underestimate how much the thought leadership of FAANG and other top tier companies affect perception far ahead of reality. Not everyone is on AWS, even though everyone <em>talks</em> about AWS. This is the exact same process that leads engineers to talk about Rust and act surprised at how much PHP is still being written.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2">
+<li id="fn:2" role="doc-endnote">
 <p>I found a list with &ldquo;101+ Hosting Providers to Try in 2021&rdquo; and decided that that was enough, thankyouverymuch.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3">
+<li id="fn:3" role="doc-endnote">
 <p>I sat down and counted how many jobs I&rsquo;d had that depended wholly on AWS, and I got 2/6. 3/6 if you raise the bar slightly to &ldquo;Depends heavily on AWS&rdquo;. Everything else used other hosting providers, other cloud providers, or on-premise servers. AWS doesn&rsquo;t even have a monopoly on my career, let alone the internet.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4">
+<li id="fn:4" role="doc-endnote">
 <p>I must admit that I was a bit baffled to find out that ZeroHedge got blocked by Australia during the Christchurch Mosque Shootings. I remember ZH as putting up a few nutball financial pieces that I found mildly interesting back when I worked in finance, but not something I cared to actually follow. I guess I should&rsquo;ve seen that turn coming, in retrospect.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5">
+<li id="fn:5" role="doc-endnote">
 <p>Pun absolutely intended.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:6">
+<li id="fn:6" role="doc-endnote">
 <p>Electricity is one of the more deregulated utilities in America. In some states consumers have the right to purchase their power from an independent provider, with green energy being a popular choice. This works by separating generation from transmission. If you use this option you end up separating your bill and paying part to the generator, and part to the local monopoly utility company for delivery into your house. It’s possible ISPs could work that way, I don’t know enough about ISP grade hardware to know.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:7">
+<li id="fn:7" role="doc-endnote">
 <p>I mean, they did get hacked. If anything else, I bet this hack prevents a comeback.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:8">
-<p>Getting caught using a <a href="https://twitter.com/okta/status/1348191370528256002"target="_blank"><em>trial</em></a> version of Okta was both stupid and hilarious.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:8" role="doc-endnote">
+<p>Getting caught using a <a href="https://twitter.com/okta/status/1348191370528256002"target="_blank" rel="noopener noreferrer"><em>trial</em></a>
+ version of Okta was both stupid and hilarious.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:9">
+<li id="fn:9" role="doc-endnote">
 <p>It’s common to hear a complaint about “but you made that baker make a gay wedding cake”. The theory for anti-discrimination law is that it is based on immutable characteristics, and that the government has a compelling interest to ensure that people aren’t discriminated against because of who they are. These laws apply to things that you can’t control, such as your race and sex, but not to things that you can control such as your political affiliation or speech. The case for state intervention is always weak when viewed individually, I’m sure there were other bakeries available, but strong when you consider the effect in aggregate. America has had periods of history where common prejudice among the majority can effectively lock out minorities from any kind of social or economic interaction or betterment. The state has a compelling interest in preventing that.&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
+</section>
+</article>
 </div>
-</article><section class="article navigation"><p><a class="link" href="/posts/lets-talk-about-trains/"><span class="li">&larr;</span>Lets Talk About Trains</a></p><p><a class="link" href="/posts/two-open-source-models/"><span class="li">&rarr;</span>Two Open Source Models</a class="link">
-    </p></section></div><section id="footer" class="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/posts/lets-talk-about-trains/"><span class="iconfont icon-article"></span>Lets Talk About Trains</a></p><p><a class="link" href="/posts/two-open-source-models/"><span class="iconfont icon-article"></span>Two Open Source Models</a></p></section></div></section><section id="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">Ashton Kemerling</p>
 <p><span>Powered by </span><a
     href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
@@ -95,7 +98,6 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-</div>
 </body>
 
 </html>

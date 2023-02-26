@@ -1,65 +1,67 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.105.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.85.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>MDC and Threadpools&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
-    <div class="base-body"><section id="header" class="site header">
+<meta name="supported-color-schemes" content="light dark"><title>MDC and Threadpools&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.63f706677e61b4ee62b8daf083358d3bbf8ac8ab03c7d171af3180fab3a3ebb83efb79fb98674f13dde6db11de2bf694.css" integrity="sha384-Y/cGZ35htO5iuNrwgzWNO7&#43;KyKsDx9FxrzGA&#43;rOj67g&#43;&#43;3n7mGdPE93m2xHeK/aU"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="MDC and Threadpools" /><body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">MDC and Threadpools</h1><p class="article date">September 1, 2017<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p>Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems that might arise. And while many systems will keep logs in their reverse proxy like Nginx, a well written system will also have application/domain specific logs written within the application itself.</p>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">MDC and Threadpools</h1><p class="article date">September 1, 2017</p></section><article class="article markdown-body"><p>Well written web services must have clear and easy to follow logs. Without good logs a programmer will be unable to diagnose or reproduce problems that might arise. And while many systems will keep logs in their reverse proxy like Nginx, a well written system will also have application/domain specific logs written within the application itself.</p>
 <p>A common goal of application logs is to tie a given log line to a specific request. Because modern servers are multi-threaded, it is possible for multiple requests to be serviced at the same time, resulting in log messages from different requests being intermingled in the log output.</p>
-<p>According to all the documentation I have found, the standard way to resolve this is to use the Mapped Diagnostic Context, or <a href="https://logback.qos.ch/manual/mdc.html"target="_blank">MDC</a>. The MDC wraps a thread local hashmap, whose values can be used in your log patterns. On paper you could generate a UUID per request, insert it into the MDC and presto you have a UUID per request in each log line! Since threads are created per request, the MDC will be empty each time.</p>
+<p>According to all the documentation I have found, the standard way to resolve this is to use the Mapped Diagnostic Context, or <a href="https://logback.qos.ch/manual/mdc.html"target="_blank" rel="noopener noreferrer">MDC</a>
+. The MDC wraps a thread local hashmap, whose values can be used in your log patterns. On paper you could generate a UUID per request, insert it into the MDC and presto you have a UUID per request in each log line! Since threads are created per request, the MDC will be empty each time.</p>
 <p>Except, that&rsquo;s not really how Java programming works these days. Threads are expensive, and so for the sake of efficiency modern Java aims to minimize the number of threads created. This means using non-blocking IO (NIO), or reusing threads via Thread Pools where possible, which avoids creating new threads. As such there are quite a few number of APIs in Java 8 and some modern web servers that make it trivial to make your code non-blocking and use a common thread pool.</p>
 <p>So, what happens to our MDC when we reuse threads? Well, we end up with the wrong MDC! Here&rsquo;s some code for Java 8 that shows the problem:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.Logger<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.LoggerFactory<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.MDC<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.CompletableFuture<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String CORRELATION_ID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;correlation-id&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Logger logger<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepOne</span><span style="color:#f92672">(</span>String correlationId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            MDC<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CORRELATION_ID<span style="color:#f92672">,</span> correlationId<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step One&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Foo&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">});</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepTwo</span><span style="color:#f92672">(</span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> previous<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Two&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Bar&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">});</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepThree</span><span style="color:#f92672">(</span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> previous<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Three&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Baz&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">});</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">doAll</span><span style="color:#f92672">(</span>String correlationId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> stepThree<span style="color:#f92672">(</span>stepTwo<span style="color:#f92672">(</span>stepOne<span style="color:#f92672">(</span>correlationId<span style="color:#f92672">))).</span><span style="color:#a6e22e">join</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        logger <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>Main<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-one&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-two&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> org.slf4j.Logger<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.slf4j.LoggerFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.slf4j.MDC<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.concurrent.CompletableFuture<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String CORRELATION_ID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;correlation-id&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Logger logger<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepOne</span><span style="color:#f92672">(</span>String correlationId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            MDC<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CORRELATION_ID<span style="color:#f92672">,</span> correlationId<span style="color:#f92672">);</span>
+            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step One&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Foo&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepTwo</span><span style="color:#f92672">(</span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> previous<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Two&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Bar&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">stepThree</span><span style="color:#f92672">(</span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> previous<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> previous<span style="color:#f92672">.</span><span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>x <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            logger<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Step Three&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Baz&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">doAll</span><span style="color:#f92672">(</span>String correlationId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> stepThree<span style="color:#f92672">(</span>stepTwo<span style="color:#f92672">(</span>stepOne<span style="color:#f92672">(</span>correlationId<span style="color:#f92672">))).</span><span style="color:#a6e22e">join</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+        logger <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>Main<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-one&#34;</span><span style="color:#f92672">);</span>
+        doAll<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;correlation-id-two&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>This code is using the new <code>CompletableFuture</code> class from Java 8, which is <em>roughly</em> analogous to Javascript promises. What we do is set the correlation-id, then execute a sequence of asynchronous actions and log the output. If you run this code enough times, you will eventually get the output below:</p>
-<pre tabindex="0"><code>12:13:55.465 [ForkJoinPool.commonPool-worker-1] INFO  correlation-id=correlation-id-one - Step One
+<pre><code>12:13:55.465 [ForkJoinPool.commonPool-worker-1] INFO  correlation-id=correlation-id-one - Step One
 12:13:55.466 [ForkJoinPool.commonPool-worker-1] INFO  correlation-id=correlation-id-one - Step Two
 12:13:55.466 [ForkJoinPool.commonPool-worker-1] INFO  correlation-id=correlation-id-one - Step Three
 12:13:55.467 [ForkJoinPool.commonPool-worker-1] INFO  correlation-id=correlation-id-two - Step One
 12:13:55.467 [ForkJoinPool.commonPool-worker-1] INFO  correlation-id=correlation-id-two - Step Two
 12:13:55.467 [ForkJoinPool.commonPool-worker-2] INFO  correlation-id=correlation-id-one - Step Three
+
 </code></pre><p>Pay attention to the last line, which should have a correlation-id of correlation-id-two. Instead we have an earlier correlation-id because we happened to reuse a thread from earlier. This is an unmitigated disaster, as now you don&rsquo;t have missing logs, you have misleading logs. In a less-simple scenario it would be absolutely impossible to tell whether or not that correlation-id was correct, and you might end up diagnosing bugs that don&rsquo;t exist within your system because of this.</p>
 <p>Java 8 and <code>CompletableFuture</code> make this much more plausible by making it very easy to use the <code>ForkJoinPool</code>. <code>CompletableFuture</code> provides a number of methods to create a new <code>CompletableFuture</code>, or to take one <code>CompletableFuture</code> and transform it into another. Most of these methods have at least two signatures: <code>x</code> and <code>xAsync</code>. The former will do all the work on the current thread, the latter will automatically use the <code>ForkJoinPool</code> to execute asynchronously. Optionally you can provide your own <code>Executor</code>, which might be backed by your own managed thread pool.</p>
 <p>From a performance standpoint, this is amazing. I can separate the business logic from the execution strategies completely. With very minor code changes, sometimes only a method name, I can turn synchronous code to asynchronous or back again. But from a logging stand point this is very fragile. Correctly using the MDC depends on staying on the current thread, and Java 8 makes it very easy to hop threads by design. Worse, the above incorrectness is subtle, so your logs could be left incorrect for years without any immediate impact.</p>
@@ -72,9 +74,11 @@
 <blockquote>
 <p>A copy of the mapped diagnostic context can not always be inherited by worker threads from the initiating thread. This is the case when java.util.concurrent.Executors is used for thread management. For instance, newCachedThreadPool method creates a ThreadPoolExecutor and like other thread pooling code, it has intricate thread creation logic.</p>
 </blockquote>
-<p>As it turns out, a copy of the mapped diagnostic context will <strong>never</strong> be inherited by a worker thread. <a href="https://github.com/qos-ch/logback/commit/aa7d584ecdb1638bfc4c7223f4a5ff92d5ee6273"target="_blank">This</a> change guarantees that each thread gets a new, empty MDC. This documentation is correct for older version of logback, but it is not correct anymore. I&rsquo;m sure the quote above was accidentally left in place, as the correct behavior is mentioned at the top of the document. It&rsquo;s just a good reminder to read documentation carefully, and understand that humans can make mistakes in the docs too.</p>
-</article><section class="article navigation"><p><a class="link" href="/posts/no-you-probably-dont-need-a-blockchain/"><span class="li">&larr;</span>No You Probably Don't Need a Blockchain</a></p><p><a class="link" href="/posts/java-without-if/"><span class="li">&rarr;</span>Java Without If</a class="link">
-    </p></section></div><section id="footer" class="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+<p>As it turns out, a copy of the mapped diagnostic context will <strong>never</strong> be inherited by a worker thread. <a href="https://github.com/qos-ch/logback/commit/aa7d584ecdb1638bfc4c7223f4a5ff92d5ee6273"target="_blank" rel="noopener noreferrer">This</a>
+ change guarantees that each thread gets a new, empty MDC. This documentation is correct for older version of logback, but it is not correct anymore. I&rsquo;m sure the quote above was accidentally left in place, as the correct behavior is mentioned at the top of the document. It&rsquo;s just a good reminder to read documentation carefully, and understand that humans can make mistakes in the docs too.</p>
+</article>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/posts/no-you-probably-dont-need-a-blockchain/"><span class="iconfont icon-article"></span>No You Probably Don't Need a Blockchain</a></p><p><a class="link" href="/posts/java-without-if/"><span class="iconfont icon-article"></span>Java Without If</a></p></section></div></section><section id="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">Ashton Kemerling</p>
 <p><span>Powered by </span><a
     href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
@@ -90,7 +94,6 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-</div>
 </body>
 
 </html>

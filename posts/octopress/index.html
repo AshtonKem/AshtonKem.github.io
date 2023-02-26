@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.105.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.85.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Octopress&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.9cded7cde8f32658b86da891563b3513bc434cca82e2cb9cf1ebab13066ec4d69b881ad981432a94534162e42a1a8cee.css" integrity="sha384-nN7XzejzJli4baiRVjs1E7xDTMqC4suc8eurEwZuxNabiBrZgUMqlFNBYuQqGozu"><body>
-    <div class="base-body"><section id="header" class="site header">
+<meta name="supported-color-schemes" content="light dark"><title>Octopress&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.63f706677e61b4ee62b8daf083358d3bbf8ac8ab03c7d171af3180fab3a3ebb83efb79fb98674f13dde6db11de2bf694.css" integrity="sha384-Y/cGZ35htO5iuNrwgzWNO7&#43;KyKsDx9FxrzGA&#43;rOj67g&#43;&#43;3n7mGdPE93m2xHeK/aU"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Octopress" /><body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">Octopress</h1><p class="article date">April 22, 2013<span class="lastmod"> • edited March 9, 2019</span></p></section><article class="article markdown-body"><p>I&rsquo;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.</p>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume/">Resume</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Octopress</h1><p class="article date">April 22, 2013</p></section><article class="article markdown-body"><p>I&rsquo;m currently in the process of changing my website over from Wordpress.com to Octopress on Github pages. There are two things driving me from Wordpress.com: control and price.</p>
 <p>Wordpress is fine if you are either a big PHP afficianado, or are afraid of web programming in general. It&rsquo;s quite easy to install themes and plugins without any knowledge of what this means. However, this only is true if you&rsquo;re self-hosting Wordpress.org (the project) and not using Wordpress.com (the commercial website using Wordpress.org). On Wordpress.org you&rsquo;re stuck using a limited number of (mostly for pay) themes and plugins, and are restricted from inserting HTML, JS, or CSS into your website.</p>
 <p>So if you want Google Analytics, you&rsquo;ll need to use a third party CDN who can inject the Google Analytics JS into the DOM. No thanks. If you want any social networking integration, you better hope that Wordpress.com supports it (sorry, app.net users!). And if you want pictures or other media, you&rsquo;ll have to manually control the links to a third party system or hope that you don&rsquo;t exceed the cheap data storage tier on wordpress.com.</p>
 <p>So what&rsquo;s so great about Octopress?</p>
@@ -16,8 +16,9 @@
 </ol>
 <p>Octopress uses Jekyll, which makes it really easy to separate content from presentation, and produces purely static webpages that can be tossed onto any webhost. It also has great integration for thid party systems, and adding your own is only a hop, skip, and a bit of JS away. Local development is super straightforward with the <code>rake generate</code> and <code>rake preview</code> commands, which produce static HTML and a testing webserver, respectively. And everything is stored in Git, so upgrading is only a matter of merging (!), and you can host on Github by pushing to the correct repo  (or use <code>rake deploy</code>). And since your side is code, you don&rsquo;t have to count on flimsy undo support, merely revert commits as needed to go back in history.</p>
 <p>So far the only hiccup is moving all of the comments over from Worpress to Disqus. All of the docs on this I&rsquo;ve seen are out of date, I&rsquo;ll report if I get this working.</p>
-</article><section class="article navigation"><p><a class="link" href="/posts/size-matters/"><span class="li">&larr;</span>Size Matters</a></p><p><a class="link" href="/posts/java-doesnt-deserve-half-the-shit-we-give-it/"><span class="li">&rarr;</span>Java Doesn't Deserve Half the Shit We Give It</a class="link">
-    </p></section></div><section id="footer" class="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+</article>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/posts/size-matters/"><span class="iconfont icon-article"></span>Size Matters</a></p><p><a class="link" href="/posts/java-doesnt-deserve-half-the-shit-we-give-it/"><span class="iconfont icon-article"></span>Java Doesn't Deserve Half the Shit We Give It</a></p></section></div></section><section id="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">Ashton Kemerling</p>
 <p><span>Powered by </span><a
     href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
@@ -33,7 +34,6 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-</div>
 </body>
 
 </html>
