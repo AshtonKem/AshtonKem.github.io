@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.85.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>So, you don&#39;t like a web platform proposal, a response&nbsp;&ndash;&nbsp;Ashton Kemerling</title><link rel="stylesheet" href="/css/core.min.63f706677e61b4ee62b8daf083358d3bbf8ac8ab03c7d171af3180fab3a3ebb83efb79fb98674f13dde6db11de2bf694.css" integrity="sha384-Y/cGZ35htO5iuNrwgzWNO7&#43;KyKsDx9FxrzGA&#43;rOj67g&#43;&#43;3n7mGdPE93m2xHeK/aU"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="So, you don&#39;t like a web platform proposal, a response" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Ashton Kemerling</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About</a><a class="nav item" href="/resume%2epdf">Resume</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">So, you don't like a web platform proposal, a response</h1><p class="article date">July 23, 2023</p></section><article class="article markdown-body"><h1 id="introduction">Introduction</h1>
+<p>I regret to inform you that I am once again, mad on the internet.</p>
+<p>There is a new Chromium proposal that&rsquo;s officially designed to cut out click fraud on the web by allowing the server to automatically inspect and validate the hardware, OS, and browser state of the client. Given Chrome&rsquo;s market dominance, it&rsquo;s expected that this feature would rapidly become an industry norm if released.</p>
+<p>The community freaked out. A lot of people had concerns about how this capability might be eventually abused to restrict competitive browsers and tools used to block ads. To the authors' credit they did include a section about risks, but the technical details were too light to be persuasive in my opinion<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Eventually Yoav, a high level Chromium contributor, stepped in to do crisis comms and it did not go well. As of this writing the repo is locked, always a sign things have gone from bad to worse<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>Yoav decided to provide some public <a href="https://blog.yoav.ws/posts/web_platform_change_you_do_not_like/"target="_blank" rel="noopener noreferrer">feedback</a>
+, and frankly it had me seeing a bit red. I think that this blog post was both counter productive to Yoav&rsquo;s goals, and presumes that the problem lies entirely with the way that the community interacts with Chromium project leaders, and does not even broach the possibility that the Chromium devs and the proposal authors might have opportunities to improve.</p>
+<p>While I obviously have my complaints about the proposal itself, I want to focus on what a failure in community communication and crisis management this blog post was. If Yoav wanted cooler heads to prevail and to guide the discussion back towards what he sees as productive, this was not the blog post to write.</p>
+<p>A bit more broader, this post seems to demonstrate a high handed attitude towards community feedback, which is worrying. I would implore Yoav and his peers to rethink how they interact with the community during these moments of crises, and reflect on whether or not the attitude he expresses how he wants to be seen by the community writ large.</p>
+<h1 id="the-post">The Post</h1>
+<h2 id="yoavs-introduction">Yoav&rsquo;s Introduction</h2>
+<blockquote>
+<p>You wake up one morning, scrolling the feeds while sipping your coffee, when all of the sudden you land on a post related to a web platform proposal that you really don&rsquo;t like. Worse, one that you believe would have significant negative consequences on the web if shipped?</p>
+</blockquote>
+<blockquote>
+<p>At the same time, there are some pitfalls you may want to avoid when engaging in those discussions.</p>
+</blockquote>
+<p>If I may offer some rhetorical critique, the paternalistic tone here does not work. Yoav is not a neutral party in this discussion, he&rsquo;s chairing this proposal to guide it through public criticism and the review process. Taking a high handed approach explaining what tone they should use to persuade you to stop doing the thing that you’re doing is not convincing.</p>
+<h2 id="its-just-a-proposal-we-swear">It’s just a proposal we swear</h2>
+<blockquote>
+<p>Often a proposal is just that - someone trying to solve a problem by proposing technical means to address it. Having a proposal sent out to public forums doesn&rsquo;t necessarily imply that the sender&rsquo;s employer is determined on pushing that proposal as is.</p>
+</blockquote>
+<p>Technically speaking, he&rsquo;s right. Creating a proposal does not at all imply that one&rsquo;s employer is intending to ram things through. But it&rsquo;s also not inconsistent with it either, so a wise person would be well suited to look at other evidence before jumping to conclusions.</p>
+<p>But wait, why are we talking about employers at all here? Isn&rsquo;t Chromium open source? Who wrote this proposal anyways?</p>
+<ul>
+<li>Ben Wiser (Google)</li>
+<li>Borbala Benko (Google)</li>
+<li>Philipp Pfeiffenberger (Google)</li>
+<li>Sergey Kataev (Google)</li>
+</ul>
+<p>So four Google employees wrote a proposal, a fifth employee is chairing<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> it, and they intend to add it to Google&rsquo;s majority market share browser and the community is concerned about the interoperability and privacy implications of this proposal, including concerns that the authors have not responded to<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. This obviously isn&rsquo;t proof of conspiracy or malicious intent, but it&rsquo;s not hard to see why someone might think so. I don&rsquo;t think that dismissing people&rsquo;s concerns about it being driven by Google out of hand is going to convince anyone.</p>
+<p>Saying something to the effect &ldquo;we weren&rsquo;t ordered by Google managers to do this&rdquo; is also to miss the point quite a bit. We have quite a bit of real world experience of how organizations can encourage employees to do unethical or outright illegal<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> things without giving them explicit orders. Humans are social creatures, peer pressure and prevailing norms are much more effective on us than we&rsquo;d often like to admit. Constant pressure to improve company metrics and a culture that devalues the concerns of those outside of the company is quite a powerful combination.</p>
+<blockquote>
+<p>It also doesn&rsquo;t mean that the proposal is &ldquo;done&rdquo; and the proposal authors won&rsquo;t appreciate constructive suggestions for improvement. Different proposals may be in <a href="https://blog.chromium.org/2019/11/intent-to-explain-demystifying-blink.html#:~:text=Step%201%20%2D%20Initial%20research"target="_blank" rel="noopener noreferrer">different stages</a>
+ of their development, and early stage proposals are often extremely malleable.</p>
+</blockquote>
+<p>They aren’t actually malleable though, at least not in a substantive way. I asked Yoav by what process the proposal might not be modified, but abandoned entirely. The answer was “Presenting unmitigated risks that outweigh the benefits of the anti-abuse use cases, and that go beyond the status-quo of device fingerprinting could be one way of convincing e.g. the <a href="https://blog.chromium.org/2019/11/intent-to-explain-demystifying-blink.html#:~:text=What%E2%80%99s%20an%20%E2%80%9CAPI%20owner%E2%80%9D%3F"target="_blank" rel="noopener noreferrer">Blink API owners</a>
+ not to approve this proposal when it reaches an Intent to Ship stage”.</p>
+<p>Again, you can swear up and down all you want that the proposal isn&rsquo;t final, but this sentence and the block quote are mutually incompatible in practice. Only if you provide &ldquo;unmitigated risks&rdquo; that outweigh the &ldquo;benefits&rdquo; of the use case<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> after the code has been implemented, tested,  shipped behind a feature flag, and beta tested by public users, only then do you get a chance that it might get rejected. The proposal might not be &ldquo;done&rdquo; in the most technical sense, but if you or the community thinks the proposal is fundamentally bad it&rsquo;s damn near a fait accompli.</p>
+<p>Oh, and the final step is it&rsquo;s enabled if 3 of the 10 Blink API Owners approve. Seven work for Google, including Yoav. If I was going to design a process designed to look open normally while also tipping the scales so that controversial proposals from Google usually make it through, it would look exactly like this.</p>
+<p>And the community <strong>knows</strong> this. People aren&rsquo;t dumb, especially since the process documents are public. Providing assurances that the community finds non-credible is a very bad strategy for calming things down.</p>
+<h2 id="on-occam-and-his-razor-company">On Occam and his razor company</h2>
+<blockquote>
+<p>When thinking about a new proposal, it&rsquo;s often safe to assume that <a href="https://en.wikipedia.org/wiki/Occam%27s_razor"target="_blank" rel="noopener noreferrer">Occam&rsquo;s razor</a>
+ is applicable and the reason it is being proposed is that the team proposing it is trying to tackle the use cases the proposal handles. While the full set of organizational motivations behind supporting certain use cases may not always public<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup> (e.g. a new device type not yet announced, legal obligations, etc), the use cases themselves should give a clear enough picture of what is being solved.</p>
+</blockquote>
+<p>That&rsquo;s not how Occam&rsquo;s razor works<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>. To be charitable I believe that Yoav was trying to reference the more general &ldquo;benefit of the doubt&rdquo;, where when something is unclear you assume good intent until proven otherwise.</p>
+<p>And in every day life offering individuals<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> the benefit of the doubt is certainly good advice. Most people mean well-ish most of the time, so assuming good intent is a good habit.</p>
+<p>But the &ldquo;benefit of the doubt&rdquo; does not require that we ignore past experiences. If some hypothetical individual repeatedly lied to you, you would stop offering them the benefit of the doubt. That&rsquo;s just how human relationships work; you can invoke the benefit of the doubt as a good principle all you want, nothing will require (or make) anyone trust someone they see as fundamentally untrustworthy.</p>
+<p>And as I&rsquo;ve written on this blog before, Google has spent a huge amount of its credibility with the public and the technical community itself. Obviously a lot of this centers around Google&rsquo;s troubled history with user privacy which is highly relevant in this context, but a lot of it comes down to Google just not being seen as keeping its word. Not only is this becoming a bit of a drag for some Google products<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup>, but it&rsquo;s relevant here. There are aspects<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup> of this proposal that depend on quite literally on trusting Google<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup> to do things like certify rival browsers <strong>and never ever stop doing that</strong>, with no mechanism in place to enforce continued good behavior.</p>
+<p>I can certainly see how the authors might be able to convince themselves that they&rsquo;ll never ever break this, but from the outside this is equivalent to asking end users to trust that Google will never change its mind in a way that might bring anti-competitive benefits to Google itself. This <em>might</em> work with a company that has more user trust around this area, but it won&rsquo;t work with Google.</p>
+<p>As a matter of practical public communication, there is nothing that Yoav (or any of the proposal writers) can do to instantly fix Google&rsquo;s trust issue. Trust is built slowly and destroyed quickly, and very few individuals in Google have enough power to meaningfully change this, and even those individuals will need to work for a very long time to repair the damage that is done. But for the time being, Yoav and his colleagues can do a couple of different things to make this go smoother.</p>
+<ol>
+<li>Do not appeal to the benefit of the doubt, or simply assert that no secret agenda exists. Those who don&rsquo;t trust Google will not believe you, those who are neutral will find it suspicious.</li>
+<li>Tread gently around community concerns about interoperability, openness, and privacy. There&rsquo;s not much you can do to fix the credibility issue, but you can certainly make it worse by acting high handed or dismissive of community concerns.</li>
+<li>Pre-prepare for push back on privacy and interoperability concerns
+<ol>
+<li>Very, very carefully locking out abuse potential in the mechanisms of the proposal. No &ldquo;we won&rsquo;t turn off holdback ever&rdquo; or &ldquo;we promise to always attest competitor browsers.</li>
+<li>Work with people outside Google, ideally ones that don&rsquo;t depend on selling ads so that proposals don&rsquo;t look like they come from Google and Google alone.</li>
+</ol>
+</li>
+</ol>
+<h1 id="legal-stuff">Legal Stuff</h1>
+<blockquote>
+<p>The fastest way to get someone working for a large corporation to disengage from a discussion is by using legal or quasi-legal language. Such language will prevent them from replying to your claims without talking to their corporate legal counsel, which will probably mean they will <em>not</em> reply to your claims. If you want to have a productive exchange with the folks making the proposal, it&rsquo;s best to not pretend you&rsquo;re a lawyer. (and if you are one, may be best to pretend you&rsquo;re not)</p>
+</blockquote>
+<p>Two takeaways from this paragraph.</p>
+<p>First, this is kind of giving the ball game away about this being a Google initiative, not one coincidentally written by Google employees. If Google employees working on an open source project are worried creating legal risk for Google the company and therefore said employees will not engage with discussions on the topic of legality<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup>, then perhaps the community is completely correct in viewing this as Google trying to force this through for their own benefit at the cost of everyone else.</p>
+<p>Second, as a matter of tone policing &ldquo;don&rsquo;t point out that what we&rsquo;re doing might be a crime&rdquo; is unpersuasive. You are not obligated to take anyone&rsquo;s specific interpretation of the law as true, of course, but whether or not it violates the law in relevant jurisdictions is extremely relevant and on topic. You should either just drop the pretense of this not being a Google initiative and involve Google lawyers<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup>, or you should build a stronger firewall between Google the company and Chromium the project so that individual proposals cannot pose a legal risk to Google the company.</p>
+<p>Personally, I&rsquo;d be privately thankful for the warning, being deposed sounds unpleasant, and have legal come up with a canned &ldquo;thanks for the feedback, I&rsquo;m running this past legal&rdquo; response. That or not work on proposals that create legal risk. Either or.</p>
+<h1 id="lalalalala-im-not-listening">Lalalalala I’m not listening</h1>
+<blockquote>
+<p>In cases where controversial browser proposals (or lack of adoption for features folks want, which is a related, but different, subject), it&rsquo;s not uncommon to see issues with dozens or even hundreds of comments from presumably well-intentioned folks, trying to influence the team working on the feature to change their minds.</p>
+</blockquote>
+<blockquote>
+<p>In the many years I&rsquo;ve been working on the web platform, I&rsquo;ve yet to see this work. Not even once.</p>
+</blockquote>
+<p>I&rsquo;m trying not to be snarky, but I am struggling how to interpret this as anything other than &ldquo;we do not listen to community feedback&rdquo;. Saying that you do not change your mind in the face of feedback as an individual is generally seen as a serious character flaw no matter how it&rsquo;s presented. If you&rsquo;ve never seen people in this project ever change their mind about a proposal’s goal is a sign that something is catastrophically wrong with the process and the culture of the project.</p>
+<p>I&rsquo;m not saying that Chromium proposal writers need to change their mind every single time there&rsquo;s large push back, but it literally never working is a sign that something is very, very wrong.</p>
+<blockquote>
+<p>On the receiving end, this creates a deluge of emails that&rsquo;s very hard to sort out.</p>
+</blockquote>
+<p>I can understand that this is frustrating but it seems like incredibly small potatoes when you&rsquo;re discussing features that impact this many people. A lot of people are worried about their privacy, their freedoms, and maybe their careers. Complaining about how this fills your inbox comes across as more than a tiny bit tone deaf.</p>
+<p>Let me say this as snark-free as I can<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup>; sometimes the consequence for power is more work. Nobody is forcing you to take such a prominent position at Google or Chromium or even on any given proposal. You volunteered for this, and you could easily stop doing it. Hell, you could probably keep your job at Google, with all the perks and compensation that includes. It&rsquo;s on you as someone with power and authority to learn how to deal with the pressure and noise of these moments, not on the rest of us to think about your inbox first.</p>
+<blockquote>
+<p>While some of those may be full of technical insights, it&rsquo;s very hard to find them in that pile and distinguish them from the other forms of commentary.</p>
+</blockquote>
+<p>I guess only technical insights matter?</p>
+<blockquote>
+<p>So while it may feel good to join a good old-fashioned internet pile-up, it&rsquo;s very unlikely to lead to the outcomes you actually want.</p>
+</blockquote>
+<p>Personally I think I’d take the large scale opprobrium of my peers as a sign I’m on the wrong path. This isn’t an internet pile on by random yahoos, but the expressed opinion of fellow engineers and IT professionals. Dismissing their outrage as a mere “internet pile on” is insulting.</p>
+<p>Also, in the strongest of terms possible, <strong>do not denigrate your angered peers and community as merely &ldquo;trolls&rdquo;<sup id="fnref:16"><a href="#fn:16" class="footnote-ref" role="doc-noteref">16</a></sup> or as participating in a pile on</strong>. It&rsquo;s offensive, it never calms people down, and it can make you look worse in the process. Even related to your own goals, such comments are extremely likely to make the noise of feedback louder, and not quieter. I promise you that you can find ways to reference controversy and spirited<sup id="fnref:17"><a href="#fn:17" class="footnote-ref" role="doc-noteref">17</a></sup> discussion on certain issues without dismissing everyone as doing something fundamentally invalid.</p>
+<h1 id="use-cases">Use Cases</h1>
+<blockquote>
+<p>In some cases, you may consider the use cases themselves to be ones you think shouldn&rsquo;t be supported on the web. If that&rsquo;s the case, if I&rsquo;m being honest, you&rsquo;re up for an uphill battle.</p>
+</blockquote>
+<p>If discussing whether or not the use case is soft off limits, then this is not an open process. Discussion about whether the problem needs to be solved at all should always be on the table<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup>. No honest comparison of benefits and costs can be honestly done if certain discussions about the proposed use case are framed as invalid or low utility.</p>
+<p>Presuming that the use case is valid and discouraging any discussion on the matter is a pretty nifty way to get unpopular proposals through the process. And people on the Github absolutely noticed this as well.</p>
+<blockquote>
+<p>If the proposal contains risks in terms of <a href="https://docs.Google.com/document/d/1RC-pBBvsazYfCNNUSkPqAVpSpNJ96U8trhNkfV0v9fk/edit"target="_blank" rel="noopener noreferrer">compatibility</a>
+, <a href="https://docs.Google.com/document/d/1romO1kHzpcwTwPsCzrkNWlh0bBXBwHfUsCt98-CNzkY/edit#heading=h.mxgkfxtgzxqs"target="_blank" rel="noopener noreferrer">interoperability</a>
+, or any other risks to the open and safe nature of the web platform, that&rsquo;s something worthwhile pointing out.</p>
+</blockquote>
+<p>The proposal we’re discussing is a fundamental risk to the open and safe nature of the internet, as well as having extremely obvious compatibility risks. Many people pointed that out quite eloquently, and the authors didn’t respond and then locked the repo<sup id="fnref:19"><a href="#fn:19" class="footnote-ref" role="doc-noteref">19</a></sup>. While I&rsquo;m sure that Yoav didn&rsquo;t intend it this way, it does feel a bit gas-lighty to suggest that people provide the feedback that they did provide, that thus far has been ignored, all to a forum that has since been locked.</p>
+<p>I mean, it’s good advice in general. But it tastes more than a bit bitter given the context. A single sentence along the lines of &ldquo;some people did provide high quality feedback about compatibility and interoperability risks, the proposal authors are getting to it I promise&rdquo; would have done wonders for this section.</p>
+<blockquote>
+<p>This should come without saying, but.. people are less likely to understand and internalize your constructive feedback when it&rsquo;s littered with distracting and unprofessional language.</p>
+</blockquote>
+<p>I certainly agree that some level of professionalism makes sense, as does banning people who behave way outside the acceptable bounds<sup id="fnref:20"><a href="#fn:20" class="footnote-ref" role="doc-noteref">20</a></sup><sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref">21</a></sup>. But in this discussion somehow &ldquo;professional conduct&rdquo; has somehow morphed into &ldquo;you cannot discuss if you feel mislead&rdquo;.</p>
+<p>To be blunt, no definition of civility or professional conduct has ever required that someone accept what they believe to be misleading statements or harmful proposals without honest comment. It might impose limits on evidence and the way they bring up the issue, but there is no requirement to self censor.</p>
+<p>“Everyone pushing this works for the same organization that has incentives misaligned against the end user, and has a history of both lying about privacy and abusing its control over chrome to erode privacy and bolster their profits. I do not believe promises that this feature will not be abused, and I think someone might be lying to us” is not unprofessional. You might not <em>like</em> it, but that’s a different matter altogether.</p>
+<h1 id="conclusion">Conclusion</h1>
+<blockquote>
+<p>Obviously, the above doesn&rsquo;t guarantee that the next point of feedback you provide on a proposal would be accepted and integrated. But at the same time, I think these guidelines can increase your chances of being heard and impacting the outcome of the discussions you&rsquo;re involved in. And after all, that&rsquo;s the point of getting involved, right?</p>
+</blockquote>
+<p>As I said at the beginning, the entire framing of this article is that the community is Doing Engagement Wrong, and at no point does Yoav engage with the possibility that maybe people are angry because they feel not heard. Aside from the technical merits of the proposal itself, I think that this is an counter productive way to respond to controversy and a destructive way to run a community. I encourage Yoav and his peers to find a way to listen to the community as readily as he&rsquo;s willing to talk at the community.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I might do a followup on this later, but I have my manager hat on right now. So it&rsquo;s time to think about people and process.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>&ldquo;For the weekend&rdquo;. I have never, ever seen locking a repository in this situation go well. Pruning non-constructive, abusive, or repetitive comments in these situations is a very fine art. Outright locking discussion, even temporarily, tends to piss people off and rarely results in cooler heads prevailing.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Yoav isn&rsquo;t an author for this proposal, but he&rsquo;s &ldquo;chairing&rdquo; it. Which means he&rsquo;s basically helping it through the process and doing public comms. This is almost certainly a necessary role for a controversial proposal, but the chair has a decent amount of influence so his employer matters even though he&rsquo;s not an author. As we’ll see in a bit, he also is one of the final gate keepers for these types of changes. His opinion matters a lot.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>I’ll get into it in another post but this proposal is very thin on details, and does not provide convincing controls to potential sources of abuse. There is a good reason people are suspicious of this already heading into the prototype stage.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>This is basically how Wells Fargo got its employees to <a href="https://en.wikipedia.org/wiki/Wells_Fargo_cross-selling_scandal"target="_blank" rel="noopener noreferrer">defraud customers</a>
+ without executives having to tell people to go do fraud. This kind of stuff happens all the time.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>And we&rsquo;ll soon see, arguing about the use case is explicitly called out as pointless.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>This sentence makes me feel like I&rsquo;m taking <a href="https://www.youtube.com/watch?v=ilcRS5eUpwk"target="_blank" rel="noopener noreferrer">crazy pills</a>
+. Doesn&rsquo;t this directly contradict an appeal to Occam&rsquo;s razor? Why even include this?&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>Occam is often invoked as a counter argument to conspiracy. This only really works for baroque, complicated ones. &ldquo;We actually built rockets and went to the moon&rdquo; is simpler than &ldquo;NASA has run a decades long conspiracy with thousands of people in order to fake the moon langing and humble the Soviets a tiny bit in 1969&rdquo;. Sometimes hidden motives are simple though; &ldquo;the ad company is modifying their browser to make it easier to sell ads&rdquo; is a rather simple hypothetical scenario.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p>I say individuals here deliberately. Over the years I&rsquo;ve come to the conclusion that it&rsquo;s much easier for large organizations to lie because responsibility and knowledge is diffused enough that nobody is truly responsible for an organizational lie. Therefore an organization is much more likely to be duplicitous than an individual is, at least in my experience.&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p>This is probably a large amount of what killed Stadia, as a lack of user trust around Google&rsquo;s commitment to the project became both a drag on adoption, and eventually a self fulfilling prophecy.&#160;<a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p>Again, there are more details than this. I will get into that in another post.&#160;<a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p><em>Technically</em> Google will not be the only one that can attest to a browser&rsquo;s validity. But of course they&rsquo;re going to be the default for a lot of websites, including their own properties. If Google stops attesting for a given browser, then enough of the web becomes off-limits to that browser to render it unusable.&#160;<a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p>In an era where GDPR is a thing, avoiding discussing legality at all seems completely unfeasible. This stuff is going to come up at some point, even in open source projects.&#160;<a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14" role="doc-endnote">
+<p>You should&rsquo;ve run this by legal already, actually. Even if you have no legal liability personally, being involved in major litigation is a bad experience.&#160;<a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:15" role="doc-endnote">
+<p>This paragraph went through a lot of rewrites.&#160;<a href="#fnref:15" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:16" role="doc-endnote">
+<p>Even the trolls, which there certainly will be. Prune trollish stuff away with a careful hand, of course, but even implying that the discussion is full of trolls is dangerous territory.&#160;<a href="#fnref:16" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:17" role="doc-endnote">
+<p>See? I did it just now!&#160;<a href="#fnref:17" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:18" role="doc-endnote">
+<p>That quote from Jurassic Park became a meme for a reason.&#160;<a href="#fnref:18" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:19" role="doc-endnote">
+<p>In all fairness, he wrote this before the repo was locked, and he was not the one who locked it. But he could acknowledge that some people did provide said feedback, just to be polite and fair.&#160;<a href="#fnref:19" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:20" role="doc-endnote">
+<p>Again, a <em>very</em> light hand is required here. Go too far and it tends to turn the temperature of the discussion up, not down. Not many people like trolls, even ones they agree with temporarily, but feeling like legitimate discussion is being shut down is a sure fire way to get lots more people seeing red.&#160;<a href="#fnref:20" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:21" role="doc-endnote">
+<p>Also, be even handed in moderation. As I write this some abusive comments <strong>supporting</strong> the proposal remain up. People have very fine tuned hypocrisy sensors in general, if they think you’re moderating dissent more than consent they will get angrier.&#160;<a href="#fnref:21" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</article>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/posts/go-telemetry/"><span class="iconfont icon-article"></span>Telemetry and Trust</a></p></section></div></section><section id="footer"><div style="display: none;"><a rel="me" href="https://hachyderm.io/@Ashton">Mastodon</a></div><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+<p style="flex-shrink: 0;">Ashton Kemerling</p>
+<p><span>Powered by </span><a
+    href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
+    href="https://themes.gohugo.io/hugo-notepadium/" target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

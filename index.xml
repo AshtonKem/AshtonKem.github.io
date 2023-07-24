@@ -5,10 +5,205 @@
     <description>Recent content on Ashton Kemerling</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Jul 2023 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ashtonkemerling.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>So, you don&#39;t like a web platform proposal, a response</title>
+      <link>http://ashtonkemerling.com/posts/so-you-dont-like-a-proposal-response/</link>
+      <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://ashtonkemerling.com/posts/so-you-dont-like-a-proposal-response/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;I regret to inform you that I am once again, mad on the internet.&lt;/p&gt;
+&lt;p&gt;There is a new Chromium proposal that&amp;rsquo;s officially designed to cut out click fraud on the web by allowing the server to automatically inspect and validate the hardware, OS, and browser state of the client. Given Chrome&amp;rsquo;s market dominance, it&amp;rsquo;s expected that this feature would rapidly become an industry norm if released.&lt;/p&gt;
+&lt;p&gt;The community freaked out. A lot of people had concerns about how this capability might be eventually abused to restrict competitive browsers and tools used to block ads. To the authors&#39; credit they did include a section about risks, but the technical details were too light to be persuasive in my opinion&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Eventually Yoav, a high level Chromium contributor, stepped in to do crisis comms and it did not go well. As of this writing the repo is locked, always a sign things have gone from bad to worse&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Yoav decided to provide some public &lt;a href=&#34;https://blog.yoav.ws/posts/web_platform_change_you_do_not_like/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;feedback&lt;/a&gt;
+, and frankly it had me seeing a bit red. I think that this blog post was both counter productive to Yoav&amp;rsquo;s goals, and presumes that the problem lies entirely with the way that the community interacts with Chromium project leaders, and does not even broach the possibility that the Chromium devs and the proposal authors might have opportunities to improve.&lt;/p&gt;
+&lt;p&gt;While I obviously have my complaints about the proposal itself, I want to focus on what a failure in community communication and crisis management this blog post was. If Yoav wanted cooler heads to prevail and to guide the discussion back towards what he sees as productive, this was not the blog post to write.&lt;/p&gt;
+&lt;p&gt;A bit more broader, this post seems to demonstrate a high handed attitude towards community feedback, which is worrying. I would implore Yoav and his peers to rethink how they interact with the community during these moments of crises, and reflect on whether or not the attitude he expresses how he wants to be seen by the community writ large.&lt;/p&gt;
+&lt;h1 id=&#34;the-post&#34;&gt;The Post&lt;/h1&gt;
+&lt;h2 id=&#34;yoavs-introduction&#34;&gt;Yoav&amp;rsquo;s Introduction&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You wake up one morning, scrolling the feeds while sipping your coffee, when all of the sudden you land on a post related to a web platform proposal that you really don&amp;rsquo;t like. Worse, one that you believe would have significant negative consequences on the web if shipped?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;At the same time, there are some pitfalls you may want to avoid when engaging in those discussions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If I may offer some rhetorical critique, the paternalistic tone here does not work. Yoav is not a neutral party in this discussion, he&amp;rsquo;s chairing this proposal to guide it through public criticism and the review process. Taking a high handed approach explaining what tone they should use to persuade you to stop doing the thing that you’re doing is not convincing.&lt;/p&gt;
+&lt;h2 id=&#34;its-just-a-proposal-we-swear&#34;&gt;It’s just a proposal we swear&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Often a proposal is just that - someone trying to solve a problem by proposing technical means to address it. Having a proposal sent out to public forums doesn&amp;rsquo;t necessarily imply that the sender&amp;rsquo;s employer is determined on pushing that proposal as is.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Technically speaking, he&amp;rsquo;s right. Creating a proposal does not at all imply that one&amp;rsquo;s employer is intending to ram things through. But it&amp;rsquo;s also not inconsistent with it either, so a wise person would be well suited to look at other evidence before jumping to conclusions.&lt;/p&gt;
+&lt;p&gt;But wait, why are we talking about employers at all here? Isn&amp;rsquo;t Chromium open source? Who wrote this proposal anyways?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ben Wiser (Google)&lt;/li&gt;
+&lt;li&gt;Borbala Benko (Google)&lt;/li&gt;
+&lt;li&gt;Philipp Pfeiffenberger (Google)&lt;/li&gt;
+&lt;li&gt;Sergey Kataev (Google)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So four Google employees wrote a proposal, a fifth employee is chairing&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; it, and they intend to add it to Google&amp;rsquo;s majority market share browser and the community is concerned about the interoperability and privacy implications of this proposal, including concerns that the authors have not responded to&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. This obviously isn&amp;rsquo;t proof of conspiracy or malicious intent, but it&amp;rsquo;s not hard to see why someone might think so. I don&amp;rsquo;t think that dismissing people&amp;rsquo;s concerns about it being driven by Google out of hand is going to convince anyone.&lt;/p&gt;
+&lt;p&gt;Saying something to the effect &amp;ldquo;we weren&amp;rsquo;t ordered by Google managers to do this&amp;rdquo; is also to miss the point quite a bit. We have quite a bit of real world experience of how organizations can encourage employees to do unethical or outright illegal&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; things without giving them explicit orders. Humans are social creatures, peer pressure and prevailing norms are much more effective on us than we&amp;rsquo;d often like to admit. Constant pressure to improve company metrics and a culture that devalues the concerns of those outside of the company is quite a powerful combination.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It also doesn&amp;rsquo;t mean that the proposal is &amp;ldquo;done&amp;rdquo; and the proposal authors won&amp;rsquo;t appreciate constructive suggestions for improvement. Different proposals may be in &lt;a href=&#34;https://blog.chromium.org/2019/11/intent-to-explain-demystifying-blink.html#:~:text=Step%201%20%2D%20Initial%20research&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;different stages&lt;/a&gt;
+ of their development, and early stage proposals are often extremely malleable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;They aren’t actually malleable though, at least not in a substantive way. I asked Yoav by what process the proposal might not be modified, but abandoned entirely. The answer was “Presenting unmitigated risks that outweigh the benefits of the anti-abuse use cases, and that go beyond the status-quo of device fingerprinting could be one way of convincing e.g. the &lt;a href=&#34;https://blog.chromium.org/2019/11/intent-to-explain-demystifying-blink.html#:~:text=What%E2%80%99s%20an%20%E2%80%9CAPI%20owner%E2%80%9D%3F&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Blink API owners&lt;/a&gt;
+ not to approve this proposal when it reaches an Intent to Ship stage”.&lt;/p&gt;
+&lt;p&gt;Again, you can swear up and down all you want that the proposal isn&amp;rsquo;t final, but this sentence and the block quote are mutually incompatible in practice. Only if you provide &amp;ldquo;unmitigated risks&amp;rdquo; that outweigh the &amp;ldquo;benefits&amp;rdquo; of the use case&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt; after the code has been implemented, tested,  shipped behind a feature flag, and beta tested by public users, only then do you get a chance that it might get rejected. The proposal might not be &amp;ldquo;done&amp;rdquo; in the most technical sense, but if you or the community thinks the proposal is fundamentally bad it&amp;rsquo;s damn near a fait accompli.&lt;/p&gt;
+&lt;p&gt;Oh, and the final step is it&amp;rsquo;s enabled if 3 of the 10 Blink API Owners approve. Seven work for Google, including Yoav. If I was going to design a process designed to look open normally while also tipping the scales so that controversial proposals from Google usually make it through, it would look exactly like this.&lt;/p&gt;
+&lt;p&gt;And the community &lt;strong&gt;knows&lt;/strong&gt; this. People aren&amp;rsquo;t dumb, especially since the process documents are public. Providing assurances that the community finds non-credible is a very bad strategy for calming things down.&lt;/p&gt;
+&lt;h2 id=&#34;on-occam-and-his-razor-company&#34;&gt;On Occam and his razor company&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When thinking about a new proposal, it&amp;rsquo;s often safe to assume that &lt;a href=&#34;https://en.wikipedia.org/wiki/Occam%27s_razor&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Occam&amp;rsquo;s razor&lt;/a&gt;
+ is applicable and the reason it is being proposed is that the team proposing it is trying to tackle the use cases the proposal handles. While the full set of organizational motivations behind supporting certain use cases may not always public&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt; (e.g. a new device type not yet announced, legal obligations, etc), the use cases themselves should give a clear enough picture of what is being solved.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That&amp;rsquo;s not how Occam&amp;rsquo;s razor works&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;. To be charitable I believe that Yoav was trying to reference the more general &amp;ldquo;benefit of the doubt&amp;rdquo;, where when something is unclear you assume good intent until proven otherwise.&lt;/p&gt;
+&lt;p&gt;And in every day life offering individuals&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; the benefit of the doubt is certainly good advice. Most people mean well-ish most of the time, so assuming good intent is a good habit.&lt;/p&gt;
+&lt;p&gt;But the &amp;ldquo;benefit of the doubt&amp;rdquo; does not require that we ignore past experiences. If some hypothetical individual repeatedly lied to you, you would stop offering them the benefit of the doubt. That&amp;rsquo;s just how human relationships work; you can invoke the benefit of the doubt as a good principle all you want, nothing will require (or make) anyone trust someone they see as fundamentally untrustworthy.&lt;/p&gt;
+&lt;p&gt;And as I&amp;rsquo;ve written on this blog before, Google has spent a huge amount of its credibility with the public and the technical community itself. Obviously a lot of this centers around Google&amp;rsquo;s troubled history with user privacy which is highly relevant in this context, but a lot of it comes down to Google just not being seen as keeping its word. Not only is this becoming a bit of a drag for some Google products&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt;, but it&amp;rsquo;s relevant here. There are aspects&lt;sup id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; of this proposal that depend on quite literally on trusting Google&lt;sup id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;12&lt;/a&gt;&lt;/sup&gt; to do things like certify rival browsers &lt;strong&gt;and never ever stop doing that&lt;/strong&gt;, with no mechanism in place to enforce continued good behavior.&lt;/p&gt;
+&lt;p&gt;I can certainly see how the authors might be able to convince themselves that they&amp;rsquo;ll never ever break this, but from the outside this is equivalent to asking end users to trust that Google will never change its mind in a way that might bring anti-competitive benefits to Google itself. This &lt;em&gt;might&lt;/em&gt; work with a company that has more user trust around this area, but it won&amp;rsquo;t work with Google.&lt;/p&gt;
+&lt;p&gt;As a matter of practical public communication, there is nothing that Yoav (or any of the proposal writers) can do to instantly fix Google&amp;rsquo;s trust issue. Trust is built slowly and destroyed quickly, and very few individuals in Google have enough power to meaningfully change this, and even those individuals will need to work for a very long time to repair the damage that is done. But for the time being, Yoav and his colleagues can do a couple of different things to make this go smoother.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Do not appeal to the benefit of the doubt, or simply assert that no secret agenda exists. Those who don&amp;rsquo;t trust Google will not believe you, those who are neutral will find it suspicious.&lt;/li&gt;
+&lt;li&gt;Tread gently around community concerns about interoperability, openness, and privacy. There&amp;rsquo;s not much you can do to fix the credibility issue, but you can certainly make it worse by acting high handed or dismissive of community concerns.&lt;/li&gt;
+&lt;li&gt;Pre-prepare for push back on privacy and interoperability concerns
+&lt;ol&gt;
+&lt;li&gt;Very, very carefully locking out abuse potential in the mechanisms of the proposal. No &amp;ldquo;we won&amp;rsquo;t turn off holdback ever&amp;rdquo; or &amp;ldquo;we promise to always attest competitor browsers.&lt;/li&gt;
+&lt;li&gt;Work with people outside Google, ideally ones that don&amp;rsquo;t depend on selling ads so that proposals don&amp;rsquo;t look like they come from Google and Google alone.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;legal-stuff&#34;&gt;Legal Stuff&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The fastest way to get someone working for a large corporation to disengage from a discussion is by using legal or quasi-legal language. Such language will prevent them from replying to your claims without talking to their corporate legal counsel, which will probably mean they will &lt;em&gt;not&lt;/em&gt; reply to your claims. If you want to have a productive exchange with the folks making the proposal, it&amp;rsquo;s best to not pretend you&amp;rsquo;re a lawyer. (and if you are one, may be best to pretend you&amp;rsquo;re not)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Two takeaways from this paragraph.&lt;/p&gt;
+&lt;p&gt;First, this is kind of giving the ball game away about this being a Google initiative, not one coincidentally written by Google employees. If Google employees working on an open source project are worried creating legal risk for Google the company and therefore said employees will not engage with discussions on the topic of legality&lt;sup id=&#34;fnref:13&#34;&gt;&lt;a href=&#34;#fn:13&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;13&lt;/a&gt;&lt;/sup&gt;, then perhaps the community is completely correct in viewing this as Google trying to force this through for their own benefit at the cost of everyone else.&lt;/p&gt;
+&lt;p&gt;Second, as a matter of tone policing &amp;ldquo;don&amp;rsquo;t point out that what we&amp;rsquo;re doing might be a crime&amp;rdquo; is unpersuasive. You are not obligated to take anyone&amp;rsquo;s specific interpretation of the law as true, of course, but whether or not it violates the law in relevant jurisdictions is extremely relevant and on topic. You should either just drop the pretense of this not being a Google initiative and involve Google lawyers&lt;sup id=&#34;fnref:14&#34;&gt;&lt;a href=&#34;#fn:14&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;14&lt;/a&gt;&lt;/sup&gt;, or you should build a stronger firewall between Google the company and Chromium the project so that individual proposals cannot pose a legal risk to Google the company.&lt;/p&gt;
+&lt;p&gt;Personally, I&amp;rsquo;d be privately thankful for the warning, being deposed sounds unpleasant, and have legal come up with a canned &amp;ldquo;thanks for the feedback, I&amp;rsquo;m running this past legal&amp;rdquo; response. That or not work on proposals that create legal risk. Either or.&lt;/p&gt;
+&lt;h1 id=&#34;lalalalala-im-not-listening&#34;&gt;Lalalalala I’m not listening&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In cases where controversial browser proposals (or lack of adoption for features folks want, which is a related, but different, subject), it&amp;rsquo;s not uncommon to see issues with dozens or even hundreds of comments from presumably well-intentioned folks, trying to influence the team working on the feature to change their minds.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In the many years I&amp;rsquo;ve been working on the web platform, I&amp;rsquo;ve yet to see this work. Not even once.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&amp;rsquo;m trying not to be snarky, but I am struggling how to interpret this as anything other than &amp;ldquo;we do not listen to community feedback&amp;rdquo;. Saying that you do not change your mind in the face of feedback as an individual is generally seen as a serious character flaw no matter how it&amp;rsquo;s presented. If you&amp;rsquo;ve never seen people in this project ever change their mind about a proposal’s goal is a sign that something is catastrophically wrong with the process and the culture of the project.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not saying that Chromium proposal writers need to change their mind every single time there&amp;rsquo;s large push back, but it literally never working is a sign that something is very, very wrong.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;On the receiving end, this creates a deluge of emails that&amp;rsquo;s very hard to sort out.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I can understand that this is frustrating but it seems like incredibly small potatoes when you&amp;rsquo;re discussing features that impact this many people. A lot of people are worried about their privacy, their freedoms, and maybe their careers. Complaining about how this fills your inbox comes across as more than a tiny bit tone deaf.&lt;/p&gt;
+&lt;p&gt;Let me say this as snark-free as I can&lt;sup id=&#34;fnref:15&#34;&gt;&lt;a href=&#34;#fn:15&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;15&lt;/a&gt;&lt;/sup&gt;; sometimes the consequence for power is more work. Nobody is forcing you to take such a prominent position at Google or Chromium or even on any given proposal. You volunteered for this, and you could easily stop doing it. Hell, you could probably keep your job at Google, with all the perks and compensation that includes. It&amp;rsquo;s on you as someone with power and authority to learn how to deal with the pressure and noise of these moments, not on the rest of us to think about your inbox first.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While some of those may be full of technical insights, it&amp;rsquo;s very hard to find them in that pile and distinguish them from the other forms of commentary.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I guess only technical insights matter?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;So while it may feel good to join a good old-fashioned internet pile-up, it&amp;rsquo;s very unlikely to lead to the outcomes you actually want.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Personally I think I’d take the large scale opprobrium of my peers as a sign I’m on the wrong path. This isn’t an internet pile on by random yahoos, but the expressed opinion of fellow engineers and IT professionals. Dismissing their outrage as a mere “internet pile on” is insulting.&lt;/p&gt;
+&lt;p&gt;Also, in the strongest of terms possible, &lt;strong&gt;do not denigrate your angered peers and community as merely &amp;ldquo;trolls&amp;rdquo;&lt;sup id=&#34;fnref:16&#34;&gt;&lt;a href=&#34;#fn:16&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;16&lt;/a&gt;&lt;/sup&gt; or as participating in a pile on&lt;/strong&gt;. It&amp;rsquo;s offensive, it never calms people down, and it can make you look worse in the process. Even related to your own goals, such comments are extremely likely to make the noise of feedback louder, and not quieter. I promise you that you can find ways to reference controversy and spirited&lt;sup id=&#34;fnref:17&#34;&gt;&lt;a href=&#34;#fn:17&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;17&lt;/a&gt;&lt;/sup&gt; discussion on certain issues without dismissing everyone as doing something fundamentally invalid.&lt;/p&gt;
+&lt;h1 id=&#34;use-cases&#34;&gt;Use Cases&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In some cases, you may consider the use cases themselves to be ones you think shouldn&amp;rsquo;t be supported on the web. If that&amp;rsquo;s the case, if I&amp;rsquo;m being honest, you&amp;rsquo;re up for an uphill battle.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If discussing whether or not the use case is soft off limits, then this is not an open process. Discussion about whether the problem needs to be solved at all should always be on the table&lt;sup id=&#34;fnref:18&#34;&gt;&lt;a href=&#34;#fn:18&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;18&lt;/a&gt;&lt;/sup&gt;. No honest comparison of benefits and costs can be honestly done if certain discussions about the proposed use case are framed as invalid or low utility.&lt;/p&gt;
+&lt;p&gt;Presuming that the use case is valid and discouraging any discussion on the matter is a pretty nifty way to get unpopular proposals through the process. And people on the Github absolutely noticed this as well.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If the proposal contains risks in terms of &lt;a href=&#34;https://docs.Google.com/document/d/1RC-pBBvsazYfCNNUSkPqAVpSpNJ96U8trhNkfV0v9fk/edit&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;compatibility&lt;/a&gt;
+, &lt;a href=&#34;https://docs.Google.com/document/d/1romO1kHzpcwTwPsCzrkNWlh0bBXBwHfUsCt98-CNzkY/edit#heading=h.mxgkfxtgzxqs&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;interoperability&lt;/a&gt;
+, or any other risks to the open and safe nature of the web platform, that&amp;rsquo;s something worthwhile pointing out.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The proposal we’re discussing is a fundamental risk to the open and safe nature of the internet, as well as having extremely obvious compatibility risks. Many people pointed that out quite eloquently, and the authors didn’t respond and then locked the repo&lt;sup id=&#34;fnref:19&#34;&gt;&lt;a href=&#34;#fn:19&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;19&lt;/a&gt;&lt;/sup&gt;. While I&amp;rsquo;m sure that Yoav didn&amp;rsquo;t intend it this way, it does feel a bit gas-lighty to suggest that people provide the feedback that they did provide, that thus far has been ignored, all to a forum that has since been locked.&lt;/p&gt;
+&lt;p&gt;I mean, it’s good advice in general. But it tastes more than a bit bitter given the context. A single sentence along the lines of &amp;ldquo;some people did provide high quality feedback about compatibility and interoperability risks, the proposal authors are getting to it I promise&amp;rdquo; would have done wonders for this section.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This should come without saying, but.. people are less likely to understand and internalize your constructive feedback when it&amp;rsquo;s littered with distracting and unprofessional language.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I certainly agree that some level of professionalism makes sense, as does banning people who behave way outside the acceptable bounds&lt;sup id=&#34;fnref:20&#34;&gt;&lt;a href=&#34;#fn:20&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;20&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&#34;fnref:21&#34;&gt;&lt;a href=&#34;#fn:21&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;21&lt;/a&gt;&lt;/sup&gt;. But in this discussion somehow &amp;ldquo;professional conduct&amp;rdquo; has somehow morphed into &amp;ldquo;you cannot discuss if you feel mislead&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;To be blunt, no definition of civility or professional conduct has ever required that someone accept what they believe to be misleading statements or harmful proposals without honest comment. It might impose limits on evidence and the way they bring up the issue, but there is no requirement to self censor.&lt;/p&gt;
+&lt;p&gt;“Everyone pushing this works for the same organization that has incentives misaligned against the end user, and has a history of both lying about privacy and abusing its control over chrome to erode privacy and bolster their profits. I do not believe promises that this feature will not be abused, and I think someone might be lying to us” is not unprofessional. You might not &lt;em&gt;like&lt;/em&gt; it, but that’s a different matter altogether.&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Obviously, the above doesn&amp;rsquo;t guarantee that the next point of feedback you provide on a proposal would be accepted and integrated. But at the same time, I think these guidelines can increase your chances of being heard and impacting the outcome of the discussions you&amp;rsquo;re involved in. And after all, that&amp;rsquo;s the point of getting involved, right?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As I said at the beginning, the entire framing of this article is that the community is Doing Engagement Wrong, and at no point does Yoav engage with the possibility that maybe people are angry because they feel not heard. Aside from the technical merits of the proposal itself, I think that this is an counter productive way to respond to controversy and a destructive way to run a community. I encourage Yoav and his peers to find a way to listen to the community as readily as he&amp;rsquo;s willing to talk at the community.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I might do a followup on this later, but I have my manager hat on right now. So it&amp;rsquo;s time to think about people and process.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&amp;ldquo;For the weekend&amp;rdquo;. I have never, ever seen locking a repository in this situation go well. Pruning non-constructive, abusive, or repetitive comments in these situations is a very fine art. Outright locking discussion, even temporarily, tends to piss people off and rarely results in cooler heads prevailing.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Yoav isn&amp;rsquo;t an author for this proposal, but he&amp;rsquo;s &amp;ldquo;chairing&amp;rdquo; it. Which means he&amp;rsquo;s basically helping it through the process and doing public comms. This is almost certainly a necessary role for a controversial proposal, but the chair has a decent amount of influence so his employer matters even though he&amp;rsquo;s not an author. As we’ll see in a bit, he also is one of the final gate keepers for these types of changes. His opinion matters a lot.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I’ll get into it in another post but this proposal is very thin on details, and does not provide convincing controls to potential sources of abuse. There is a good reason people are suspicious of this already heading into the prototype stage.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;This is basically how Wells Fargo got its employees to &lt;a href=&#34;https://en.wikipedia.org/wiki/Wells_Fargo_cross-selling_scandal&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;defraud customers&lt;/a&gt;
+ without executives having to tell people to go do fraud. This kind of stuff happens all the time.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;And we&amp;rsquo;ll soon see, arguing about the use case is explicitly called out as pointless.&amp;#160;&lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;This sentence makes me feel like I&amp;rsquo;m taking &lt;a href=&#34;https://www.youtube.com/watch?v=ilcRS5eUpwk&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;crazy pills&lt;/a&gt;
+. Doesn&amp;rsquo;t this directly contradict an appeal to Occam&amp;rsquo;s razor? Why even include this?&amp;#160;&lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Occam is often invoked as a counter argument to conspiracy. This only really works for baroque, complicated ones. &amp;ldquo;We actually built rockets and went to the moon&amp;rdquo; is simpler than &amp;ldquo;NASA has run a decades long conspiracy with thousands of people in order to fake the moon langing and humble the Soviets a tiny bit in 1969&amp;rdquo;. Sometimes hidden motives are simple though; &amp;ldquo;the ad company is modifying their browser to make it easier to sell ads&amp;rdquo; is a rather simple hypothetical scenario.&amp;#160;&lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I say individuals here deliberately. Over the years I&amp;rsquo;ve come to the conclusion that it&amp;rsquo;s much easier for large organizations to lie because responsibility and knowledge is diffused enough that nobody is truly responsible for an organizational lie. Therefore an organization is much more likely to be duplicitous than an individual is, at least in my experience.&amp;#160;&lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:10&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;This is probably a large amount of what killed Stadia, as a lack of user trust around Google&amp;rsquo;s commitment to the project became both a drag on adoption, and eventually a self fulfilling prophecy.&amp;#160;&lt;a href=&#34;#fnref:10&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:11&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Again, there are more details than this. I will get into that in another post.&amp;#160;&lt;a href=&#34;#fnref:11&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:12&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;em&gt;Technically&lt;/em&gt; Google will not be the only one that can attest to a browser&amp;rsquo;s validity. But of course they&amp;rsquo;re going to be the default for a lot of websites, including their own properties. If Google stops attesting for a given browser, then enough of the web becomes off-limits to that browser to render it unusable.&amp;#160;&lt;a href=&#34;#fnref:12&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:13&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;In an era where GDPR is a thing, avoiding discussing legality at all seems completely unfeasible. This stuff is going to come up at some point, even in open source projects.&amp;#160;&lt;a href=&#34;#fnref:13&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:14&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;You should&amp;rsquo;ve run this by legal already, actually. Even if you have no legal liability personally, being involved in major litigation is a bad experience.&amp;#160;&lt;a href=&#34;#fnref:14&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:15&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;This paragraph went through a lot of rewrites.&amp;#160;&lt;a href=&#34;#fnref:15&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:16&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Even the trolls, which there certainly will be. Prune trollish stuff away with a careful hand, of course, but even implying that the discussion is full of trolls is dangerous territory.&amp;#160;&lt;a href=&#34;#fnref:16&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:17&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See? I did it just now!&amp;#160;&lt;a href=&#34;#fnref:17&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:18&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;That quote from Jurassic Park became a meme for a reason.&amp;#160;&lt;a href=&#34;#fnref:18&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:19&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;In all fairness, he wrote this before the repo was locked, and he was not the one who locked it. But he could acknowledge that some people did provide said feedback, just to be polite and fair.&amp;#160;&lt;a href=&#34;#fnref:19&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:20&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Again, a &lt;em&gt;very&lt;/em&gt; light hand is required here. Go too far and it tends to turn the temperature of the discussion up, not down. Not many people like trolls, even ones they agree with temporarily, but feeling like legitimate discussion is being shut down is a sure fire way to get lots more people seeing red.&amp;#160;&lt;a href=&#34;#fnref:20&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:21&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Also, be even handed in moderation. As I write this some abusive comments &lt;strong&gt;supporting&lt;/strong&gt; the proposal remain up. People have very fine tuned hypocrisy sensors in general, if they think you’re moderating dissent more than consent they will get angrier.&amp;#160;&lt;a href=&#34;#fnref:21&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>Telemetry and Trust</title>
@@ -1452,87 +1647,6 @@ your business logic is correct.&lt;/p&gt;
 &lt;p&gt;If you&amp;rsquo;ve ever been interested in what the Haskell or Scala developers have been
 talking about with functional type safety, I&amp;rsquo;d highly recommend taking a look at
 Lambda to get a taste of it in Java.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>My Increasing Frustration With Clojure</title>
-      <link>http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/</link>
-      <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://ashtonkemerling.com/posts/my-increasing-frustration-with-clojure/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Edit: TL;DR: This is about how bugs in Clojure are handled by the Clojure Team, not just complaints about specific bugs I&amp;rsquo;ve seen.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;First off, this is not a &amp;ldquo;I&amp;rsquo;m quiting in disgust&amp;rdquo; post. Those are childish and a waste of everyone&amp;rsquo;s time. But this is a post of frustration as I watch something I really like being slowly allowed to get worse.&lt;/p&gt;
-&lt;p&gt;First off, some history. My first job out of College was in Common Lisp, and I love/hated it. The power it brought and the pain it brought were both one and the same. No modern libraries, no modern build tools (this was before &lt;a href=&#34;https://www.quicklisp.org/beta/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;QuickLisp&lt;/a&gt;
-). One on hand, I &lt;em&gt;loved&lt;/em&gt; working with paredit and Emacs, being able to quickly fly about my code and manipulate it in blocks rather than line by line. On the other, I couldn&amp;rsquo;t help but be envious of those who could actually ask for help from a functioning open source community.&lt;/p&gt;
-&lt;p&gt;A few years of Python, Ruby, and Javascript later, I found Clojure. And I thought I&amp;rsquo;d found the solution to literally all of the things. Paredit works again? Check. A thriving open source community? You got it. Deploy as a Jar rather than CL&amp;rsquo;s hilarious &amp;ldquo;dump the state of a running program and call it good&amp;rdquo; setup? Fuck. Yes.&lt;/p&gt;
-&lt;p&gt;And beyond the superficial things, there was a lot to love, especially coming from a more recent brush with Ruby on Rails. Clojure makes it very easy to make things &lt;a href=&#34;https://en.wikipedia.org/wiki/Referential_transparency&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;referentially transparent&lt;/a&gt;
-, and it tends to favor explicit calling semantics over convention (or more derisively, &amp;ldquo;magic&amp;rdquo;). This means that a Clojure code base will require more plumbing code, but that also means it&amp;rsquo;s possible to navigate to the code that does routing and understand how it works, no more having to search through your framework&amp;rsquo;s codebase just because they do dynamic method creation and method_missing magic.&lt;/p&gt;
-&lt;p&gt;As far as I was concerned, the editor was the only weak point for Clojure. Back when I got into Clojure Cursive was still brand new, Emacs really was the only editor that was worth using and even it had some stability and usability issues. But I assumed that continued interest would stabilize Emacs, bring Vim up to speed, and improve Cursive to the point where it would be competitive with Emacs/Vim.&lt;/p&gt;
-&lt;p&gt;But all was not well, and if I&amp;rsquo;d paid attention I might have noticed a few places where the core Clojure&amp;rsquo;s teams priorities didn&amp;rsquo;t seem to make much sense to me. And now that I work in Clojure professionally, I really cannot ignore them or remain silent about them any more.&lt;/p&gt;
-&lt;p&gt;The core Clojure team prefers green field development over improvements and bug fixes to existing code to a degree that deeply worries me. I no longer trust that any issues I find stand a chance of getting fixed, as all the bugs we&amp;rsquo;ve posted are either in limbo, or flat out rejected. Multiple members of my team have given up on posting new bugs because they have no faith that it&amp;rsquo;ll help anyone.&lt;/p&gt;
-&lt;p&gt;These are pretty heavy and vague accusations, so I&amp;rsquo;m gonna break this down a bit to make it clearer and easier to digest.&lt;/p&gt;
-&lt;h2 id=&#34;ignorance-or-apathy-of-underlying-principles&#34;&gt;Ignorance or Apathy of Underlying Principles&lt;/h2&gt;
-&lt;p&gt;Programming isn&amp;rsquo;t math per-se, especially in a language that&amp;rsquo;s not explicitly based on Category or Type theory. That said a lot of the things that we do are backed or defined by mathematics, and to ignore that is to guarantee bugs. This is most clear in clojure.set which contains functions that are supposed to mirror the definitions created by Set Theory like &lt;code&gt;union&lt;/code&gt;, &lt;code&gt;difference&lt;/code&gt;, &lt;code&gt;intersection&lt;/code&gt;, etc.&lt;/p&gt;
-&lt;p&gt;And the namespace is completely riddled with bugs. &lt;code&gt;union&lt;/code&gt; returns duplicates if some of the inputs are lists instead of sets &lt;em&gt;depending on their length&lt;/em&gt;. &lt;code&gt;intersection&lt;/code&gt; will either return nonsense values or throw a ClassCastException if you provide it anything other than sets, again dependent on data.&lt;/p&gt;
-&lt;p&gt;On their own, this is no big deal. Bugs happen, there&amp;rsquo;s really no point in berating people just because they made a mistake. Instead the bug gets fixed as best and as soon as reality allows and we all move on. In fact, for the above bugs there are two possible fixes: raise an IllegalArgumentException if anything other than sets are provided, or coerce lists and vectors to sets before continuing. Both of these approaches are valid due to the fact that this is a dynamic language that defaults to immutable collection semantics; which one you pick is then a matter of how you want to affect your downstream users.&lt;/p&gt;
-&lt;p&gt;Oh wait, some of these bugs were filed in &lt;em&gt;2009&lt;/em&gt;, 7 fucking years ago! Here comes the berating. These functions are &lt;strong&gt;tiny&lt;/strong&gt;, a simple implementation of &lt;code&gt;union&lt;/code&gt; is one line. And while they&amp;rsquo;re heavily used, they&amp;rsquo;re simple in usage and signature; no need to change a lot of call sites to fix this bug. There are only two reasons to explain why these bugs have not been fix; they either do not understand that this is an issue, or they do not care.&lt;/p&gt;
-&lt;p&gt;Actually, their comments on the issues lets us know that they do not understand that this is an issue. Rich Hickey said in 2009 &amp;ldquo;the fact that these functions happen to work when the second argument is not a set is an implementation artifact and not a promise of the interface&amp;rdquo;. How you define getting the wrong type with nonsense values counts as &amp;ldquo;working&amp;rdquo; is beyond me. Is it just because it doesn&amp;rsquo;t throw an Exception? Anyone here prefer bad data instead of exceptions when dealing with functions like this? I doubt it.&lt;/p&gt;
-&lt;h2 id=&#34;inconsistency-between-best-practices-and-clojure-implementation&#34;&gt;Inconsistency Between Best Practices and Clojure Implementation&lt;/h2&gt;
-&lt;p&gt;Clojure includes a pretty powerful concept called protocols. Basically a protocol is an interface that can be added to classes after the fact, and lets you dispatch to different behavior silently at run time.&lt;/p&gt;
-&lt;p&gt;This is pretty neat, it lets you abstract over multiple data types and include Java classes in the fun. For example ISeq provides all the methods needed to iterate over a collection and it works with all the Clojure and Java data types. So you can use Clojure&amp;rsquo;s &lt;code&gt;map&lt;/code&gt; function over its own data types and Java&amp;rsquo;s because it depends on the seq interface.&lt;/p&gt;
-&lt;p&gt;As you can imagine, this is the recommended way to work with things. Rather than having to do &lt;code&gt;cond&lt;/code&gt; or &lt;code&gt;if&lt;/code&gt; logic on various classes, define and use an appropriate protocol and you&amp;rsquo;re good to go!&lt;/p&gt;
-&lt;p&gt;It sounds like a good theory doesn&amp;rsquo;t it? But Clojure itself doesn&amp;rsquo;t actually do this. Clojure.core contains 89 calls to &lt;code&gt;instance?&lt;/code&gt; in order to check runtime type, instead of the helper methods to check for protocol implementation.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://dev.clojure.org/jira/browse/CLJ-1944&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Here&lt;/a&gt;
- is a bug found by my colleague that highlights this issue. List and Vector are both seqs, but &lt;code&gt;into&lt;/code&gt; for a map only accepts vectors, lists causes a ClassCastException. This is kind of nuts because an IllegalArgumentException makes more sense, and there&amp;rsquo;s no practical reason to differentiate between a list of two elements and a vector of two elements. Actually, Clojure considers &lt;code&gt;[1 2]&lt;/code&gt; and &lt;code&gt;(list 1 2)&lt;/code&gt; to be equal, so this really makes no sense&lt;/p&gt;
-&lt;p&gt;Even more obnoxious, it was closed as wontfix. Apparently a single sentence in the docs is good enough for the Clojure team, as well as a paper-thin argument about performance on a 2 element list. So not only is this just broken in a barely documented and very surprising way, Clojure itself ends up programmed in a way that isn&amp;rsquo;t recommended by the Clojure docs.&lt;/p&gt;
-&lt;p&gt;This has spread to other projects. &lt;a href=&#34;https://github.com/omcljs/om&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Om&lt;/a&gt;
- has a bug where lists aren&amp;rsquo;t acceptable in its data structures, only maps sets and vectors. To say that I was treated pretty &lt;a href=&#34;https://github.com/omcljs/om/issues/246&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;shabbily&lt;/a&gt;
- by David Nolen on this issue almost goes without saying. Naturally the intro &lt;a href=&#34;https://github.com/omcljs/om/wiki/Basic-Tutorial&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;docs&lt;/a&gt;
- barely call this out, and the docs &lt;a href=&#34;https://github.com/omcljs/om/wiki/Cursors&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;dedicated&lt;/a&gt;
- to the troubled component does not mention this at all. To be fair, the &lt;a href=&#34;https://github.com/omcljs/om/wiki/Troubleshooting&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;troubleshooting guide&lt;/a&gt;
- explains this, but in my opinion that&amp;rsquo;s probably a clue that the bug is common enough that you should find a fix for it.&lt;/p&gt;
-&lt;h2 id=&#34;show-stopping-bugs-remain-untouched&#34;&gt;Show Stopping Bugs Remain Untouched&lt;/h2&gt;
-&lt;p&gt;There are a shocking number of big, bad bugs hiding in the Clojure Jira, some really old&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://dev.clojure.org/jira/browse/CLJ-308&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;This one&lt;/a&gt;
- about fixing with-open for Clojure defined stuff provided a patch 5 years ago.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dev.clojure.org/jira/browse/CLJ-440&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Calling VarArgs Successfully&lt;/a&gt;
- from 6 years ago.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dev.clojure.org/jira/browse/CLJ-700&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Contains? broken for transient collections&lt;/a&gt;
- from 5 years ago. But it&amp;rsquo;s due for this version, so cross your fingers!&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dev.clojure.org/jira/browse/CLJ-1463&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Bizarrely Defensive Response&lt;/a&gt;
- for a minor code review.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dev.clojure.org/jira/browse/CLJ-1741&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Duelling ClassLoaders&lt;/a&gt;
- first discovered last year. This one breaks our editors constantly. Not even assigned.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I could go on, but I feel that I&amp;rsquo;ve made my point. Bugs, even major ones are either closed as &amp;ldquo;wontfix&amp;rdquo;, or are ignored for years despite the pain felt by users. That&amp;rsquo;s not even covering the dismissive and distrustful attitude given in some of the replies.&lt;/p&gt;
-&lt;h2 id=&#34;strange-priorities&#34;&gt;Strange Priorities&lt;/h2&gt;
-&lt;p&gt;The Clojure team appears to be super focused on new features, at the exclusion of existing namespaces. The big highlights from the past year or so have been Transit, Transducers, and Spec.&lt;/p&gt;
-&lt;p&gt;These are okay, I guess. We use transit a bit, and it&amp;rsquo;s kinda cool. But we really don&amp;rsquo;t use 90% of its features, it&amp;rsquo;s basically JSON for us that can convert numbers to BigDecimals.&lt;/p&gt;
-&lt;p&gt;We have yet to find a place that Transducers would help us. They&amp;rsquo;re neat enough, but the built in lazy sequences are working A-OK for us, so we don&amp;rsquo;t really feel the need to change over.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not holding my breath for Spec. It doesn&amp;rsquo;t fix anything for me that other libraries aren&amp;rsquo;t already providing.&lt;/p&gt;
-&lt;p&gt;Know what hasn&amp;rsquo;t seen any major improvements in forever? Clojure.test. Clojure.Test is frankly sad. Fixtures are done via some global state, and you can&amp;rsquo;t even setup fixtures to work across the entire test suite. Need a database to run functional tests? Well either you need to override the main test runner (good luck running individual tests now!) or you have to setup each namespace to open and close its own database connection (don&amp;rsquo;t forget, or your DBA will wonder why Emacs has 1000+ database connections). I&amp;rsquo;m 100% behind the idea that I&amp;rsquo;ll have to write a bit of glue code, but without anywhere to &lt;em&gt;put&lt;/em&gt; that code I&amp;rsquo;m kind of screwed.&lt;/p&gt;
-&lt;p&gt;And then there is the &lt;code&gt;is&lt;/code&gt; function. It&amp;rsquo;s literally the only assertion provided by clojure.test. It&amp;rsquo;s this fancy little macro that grabs its body, evaluates it, then uses the body to produce a human readable message about the failure.&lt;/p&gt;
-&lt;p&gt;And it&amp;rsquo;s garbage. The fact that &lt;a href=&#34;https://github.com/pjstadig/humane-test-output&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;plugins&lt;/a&gt;
- exist to make this easier on the eyes should tell you everything you need to know. Oh but don&amp;rsquo;t use that with Emacs/Cider! It&amp;rsquo;ll crash the Cider plugin, which is trying to parse the default output.&lt;/p&gt;
-&lt;p&gt;Back when I used Emacs, I had a stash on my box that disabled AOT, pedantic checking, and the humane-test-output plugin from my project.clj in order to use Cider. Without that stash applied Cider wouldn&amp;rsquo;t start, couldn&amp;rsquo;t reload code, and would crash when running tests. Now that I use Cursive that&amp;rsquo;s less of an issue, but it&amp;rsquo;s still kind of nuts I had to decide between a working editor and readable output when I ran &lt;code&gt;lein test&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Sorry, I didn&amp;rsquo;t even highlight the craziest bit of that last paragraph, did you catch it? I had to disable humane-test-output from my &lt;em&gt;project.clj&lt;/em&gt;. That&amp;rsquo;s because you install it by injecting some code in project.clj that &lt;strong&gt;redefines&lt;/strong&gt; some multi-methods, because there&amp;rsquo;s no plugin architecture. How nuts is that?&lt;/p&gt;
-&lt;p&gt;Now I might hear you say &amp;ldquo;You don&amp;rsquo;t have to use clojure.test!&amp;rdquo;, and you&amp;rsquo;re right. But clojure.test has clearly won in the Clojure testing namespace. The only real competitors for clojure.test are &lt;a href=&#34;https://github.com/slagyr/speclj&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Speclj&lt;/a&gt;
- and &lt;a href=&#34;https://github.com/marick/Midje&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Midje&lt;/a&gt;
-. I&amp;rsquo;ve literally never met someone in person that&amp;rsquo;s used Speclj, and Midje is super polarizing because it&amp;rsquo;s basically a collection of magic macros. The fact that the second entry for Midje is about CircleCI rewriting from Midje to clojure.test should tell you a lot.&lt;/p&gt;
-&lt;p&gt;So why don&amp;rsquo;t we have more creature comforts for clojure.test? I&amp;rsquo;m not really sure. As far as I can tell the change to it was the inclusion of &lt;a href=&#34;https://github.com/clojure/test.check&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;test.check&lt;/a&gt;
-, but that really was nothing more than simple-check getting renamed and transferred to Clojure ownership.&lt;/p&gt;
-&lt;h1 id=&#34;okay-now-what&#34;&gt;Okay, Now What?&lt;/h1&gt;
-&lt;p&gt;As I stated before, this isn&amp;rsquo;t a &amp;ldquo;I&amp;rsquo;m quitting Clojure!&amp;rdquo; post. Partly this is because I work in Clojure on a daily basis, and I both like my job and am professional enough to keep working despite my complaints. And partly this is because I do not have a replacement for Clojure in mind for my own personal projects. But off the top of my head, there are the things I&amp;rsquo;d like to see fixed in the Clojure areas.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;More love for clojure.test.&lt;/li&gt;
-&lt;li&gt;No tolerance for bugs that result in bad-data. Built in functions should either work, or throw an understandable exception.&lt;/li&gt;
-&lt;li&gt;Friendlier responses in Jira. Someone who has gone to the work to sign up and try to help out should be treated with more respect.&lt;/li&gt;
-&lt;li&gt;Fix underlying compiler bugs before adding features. The other way only codifies bad behavior and guarantees that it cannot be fixed.&lt;/li&gt;
-&lt;li&gt;Understand that if enough people have the same issue, it&amp;rsquo;s the codes fault and a FAQ entry is &lt;strong&gt;not&lt;/strong&gt; good enough.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Basically I want Clojure to be a simple to use language backed by a friendly and active community. What I see now is drifting in the wrong direction, and I&amp;rsquo;d like to see that corrected.&lt;/p&gt;
 </description>
     </item>
     
